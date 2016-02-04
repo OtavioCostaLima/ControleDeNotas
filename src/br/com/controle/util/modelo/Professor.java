@@ -1,0 +1,98 @@
+package br.com.controle.util.modelo;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Objects;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+/**
+ *
+ * @author Otavio Costa
+ */
+@Entity
+//@Table(name = "professor")
+public class Professor implements BeanBase, Serializable {
+
+    @Id
+    @Column(name = "matricula", nullable = false, unique = true)
+    private String matricula;
+
+    @Column(name = "nome")
+    private String nome;
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "professor")
+    private List<Nota> notas;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "ProfessorDisciplina", joinColumns = @JoinColumn(name = "matricula_professor", referencedColumnName = "matricula"),
+            inverseJoinColumns = @JoinColumn(name = "id_disciplina", referencedColumnName = "id"))
+    private List<Disciplina> disciplinas;
+
+    /**
+     * retorna o nome do Professor
+     *
+     * @return
+     */
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public List<Nota> getNotas() {
+        return notas;
+    }
+
+    public void setNotas(List<Nota> notas) {
+        this.notas = notas;
+    }
+
+    public List<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
+
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.matricula);
+        hash = 67 * hash + Objects.hashCode(this.nome);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Professor other = (Professor) obj;
+        if (!Objects.equals(this.matricula, other.matricula)) {
+            return false;
+        }
+        return true;
+    }
+
+}
