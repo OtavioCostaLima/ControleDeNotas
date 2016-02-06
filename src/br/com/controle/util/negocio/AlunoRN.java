@@ -53,7 +53,6 @@ public class AlunoRN implements RNgenerico<Aluno> {
     }
 
     public void remover(String matricula) {
-        System.out.println("remover");
         alunoDAO.remover(matricula);
     }
 

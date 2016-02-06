@@ -159,7 +159,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton1, jButton2, jButton3, jButton4, jButton5});
 
-        jMenu2.setBackground(new java.awt.Color(255, 255, 255));
         jMenu2.setText("Cadastro");
 
         jMenuItem1.setText("Aluno");
@@ -189,7 +188,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem4.setText("Usuario");
         jMenu2.add(jMenuItem4);
 
-        jMenuItem5.setBackground(new java.awt.Color(255, 255, 255));
         jMenuItem5.setText("Disciplina");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

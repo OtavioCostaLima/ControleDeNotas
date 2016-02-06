@@ -74,7 +74,6 @@ public abstract class DAOGenerico<T extends BeanBase> {
             em.getTransaction().begin();
             em.remove(t);
             em.getTransaction().commit();
-                  System.out.println("matricula: "+ matricula);
         } finally {
             em.close();
         }
