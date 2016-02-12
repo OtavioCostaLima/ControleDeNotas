@@ -1,5 +1,6 @@
 package br.com.controle.util.modelo;
 
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
