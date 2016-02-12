@@ -31,8 +31,14 @@ public class DisciplinaRN implements RNgenerico<Disciplina> {
     }
 
     @Override
-    public void remover(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean remover(Long id) {
+        disciplinaDAO = new DisciplinaDAO();
+        try {
+            return disciplinaDAO.remover(id);
+        } catch (Exception ex) {
+            Logger.getLogger(DisciplinaRN.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     @Override

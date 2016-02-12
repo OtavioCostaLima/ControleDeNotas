@@ -68,7 +68,7 @@ public class AlunoRN implements RNgenerico<Aluno> {
     }
 
     @Override
-    public void remover(Long id) {
+    public boolean remover(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

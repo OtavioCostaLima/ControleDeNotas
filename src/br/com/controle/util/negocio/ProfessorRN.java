@@ -32,8 +32,8 @@ public class ProfessorRN implements RNgenerico<Professor> {
     }
 
     @Override
-    public void remover(Long id) {
-
+    public boolean remover(Long id) {
+        return false;
     }
 
     public void remover(String matricula) {

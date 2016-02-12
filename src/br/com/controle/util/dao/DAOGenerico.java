@@ -55,13 +55,14 @@ public abstract class DAOGenerico<T extends BeanBase> {
         return !aux;
     }
 
-    public void remover(Long id) {
+    public boolean remover(Long id) {
         EntityManager em = ConexaoUtil.getEntityManager();
         T t = (T) em.find(getTypeClass(), id);
         try {
             em.getTransaction().begin();
             em.remove(t);
             em.getTransaction().commit();
+            return true;
         } finally {
             em.close();
         }

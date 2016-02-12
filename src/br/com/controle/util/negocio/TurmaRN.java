@@ -25,8 +25,8 @@ public class TurmaRN implements RNgenerico<Turma> {
     }
 
     @Override
-    public void remover(Long id) {
-        turmaDAO.remover(id);
+    public boolean remover(Long id) {
+        return turmaDAO.remover(id);
     }
 
     @Override

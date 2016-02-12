@@ -301,8 +301,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Nome: *");
 
-        jDateChooser1.setDateFormatString("dd/MM/yyyy");
-
         jLabel28.setText("Situação: *");
 
         comboSituacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CURSANDO", "DESISTENTE", "REPROVADO", "APROVADO" }));

@@ -78,6 +78,7 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableDisciplinas = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
 
@@ -160,6 +161,11 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
         jButton2.setText("DELETAR");
         jButton2.setContentAreaFilled(false);
         jButton2.setFocusable(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTableDisciplinas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -169,7 +175,23 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
 
             }
         ));
+        jTableDisciplinas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableDisciplinasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableDisciplinas);
+
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(158, 158, 158));
+        jButton4.setText("LIMPAR");
+        jButton4.setContentAreaFilled(false);
+        jButton4.setFocusable(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -182,24 +204,33 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton4)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
                 .addContainerGap())
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton2, jButton4});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton4)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(jButton2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton2, jButton4});
 
         jTabbedPane1.addTab("Cadastro", jPanel1);
 
@@ -252,14 +283,48 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
         Disciplina disciplina = encapsular();
         if (disciplinaRN.salvar(disciplina)) {
             tabelaDisciplina.addDisciplina(disciplina);
+            limparCampos();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (jTableDisciplinas.isRowSelected(jTableDisciplinas.getSelectedRow())) {
+            Disciplina disciplina = tabelaDisciplina.getDisciplina(jTableDisciplinas.getSelectedRow());
+            DisciplinaRN disciplinaRN = new DisciplinaRN();
+
+            if (disciplinaRN.remover(disciplina.getId())) {
+                limparCampos();
+            }
+
+        }
+
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTableDisciplinasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDisciplinasMouseClicked
+        if (jTableDisciplinas.isRowSelected(jTableDisciplinas.getSelectedRow())) {
+
+            Disciplina disciplina = tabelaDisciplina.getDisciplina(jTableDisciplinas.getSelectedRow());
+            nomeDiscplina.setText(disciplina.getDescricao());
+            if (disciplina.getTipo().equals("REPROVA")) {
+                jCheckBoxReprova.setSelected(true);
+            } else if (disciplina.getTipo().equals("NÃO REPROVA")) {
+                jCheckBoxReprova.setSelected(!true);
+            }
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableDisciplinasMouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+limparCampos();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JCheckBox jCheckBoxReprova;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -273,4 +338,10 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField nomeDiscplina;
     // End of variables declaration//GEN-END:variables
+
+    private void limparCampos() {
+        nomeDiscplina.setText(null);
+        jCheckBoxReprova.setSelected(false);
+        jTextField2.setText(null);
+    }
 }
