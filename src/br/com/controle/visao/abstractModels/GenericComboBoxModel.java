@@ -26,6 +26,7 @@ public class GenericComboBoxModel<T extends BeanBase> extends AbstractListModel 
 
     @Override
     public void setSelectedItem(Object newValue) {
+        fireContentsChanged(newValue, -1, listaGenerica.size());
         selectedItem = newValue;
     }
 
@@ -42,4 +43,6 @@ public class GenericComboBoxModel<T extends BeanBase> extends AbstractListModel 
     public T get(int selectedIndex) {
         return listaGenerica.get(selectedIndex);
     }
-}
+    
+    
+      }

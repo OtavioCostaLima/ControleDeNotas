@@ -20,7 +20,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
-//fazendo teste git
 
     public Aluno() {
     }
@@ -69,12 +68,7 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
         this.matricula = matricula;
     }
 
-    /**
-     * retorna o nome do Aluno
-     *
-     * @return
-     */
-    public String getNome() {
+        public String getNome() {
         return nome;
     }
 
@@ -124,10 +118,11 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 47 * hash + Objects.hashCode(this.matricula);
-        hash = 47 * hash + Objects.hashCode(this.nome);
-        hash = 47 * hash + Objects.hashCode(this.turma);
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.matricula);
+        hash = 83 * hash + Objects.hashCode(this.nome);
+        hash = 83 * hash + Objects.hashCode(this.turma);
+        hash = 83 * hash + this.numeroChamada;
         return hash;
     }
 
@@ -169,7 +164,6 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
     public void gerarMatriculaAluno() {
         if (this.getTurma() != null) {
             this.matricula = this.getTurma().getAno() + this.getTurma().getDescricao().replaceAll("[^0-9]", "") + this.turma.getSigla() + this.numeroChamada;
-            System.out.println("nova atricula: " + matricula);
         }
     }
 

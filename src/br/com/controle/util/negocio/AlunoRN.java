@@ -12,23 +12,9 @@ import java.util.logging.Logger;
  */
 public class AlunoRN implements RNgenerico<Aluno> {
 
-    AlunoDAO alunoDAO = new AlunoDAO();
+    AlunoDAO alunoDAO;
 
-    public void registrarEntrada() {
-
-    }
-
-    public void registrarSaida() {
-
-    }
-
-    public boolean validarAluno(String codBarras) {
-        //Se aluno for válido registrar entrada ou saída
-
-        return alunoDAO.pesquisarPorMatricula(codBarras) != null;
-    }
-
-    public boolean salvarTodos(List<Aluno> alunos) {
+    public boolean salvarAlunos(List<Aluno> alunos) {
         for (Aluno aluno : alunos) {
             if (!this.salvar(aluno)) {
                 return false;
@@ -40,6 +26,7 @@ public class AlunoRN implements RNgenerico<Aluno> {
     @Override
     public boolean salvar(Aluno aluno) {
         try {
+            alunoDAO = new AlunoDAO();
             if (aluno.equals(alunoDAO.buscarPorMatricula(aluno.getMatricula()))) {
                 return alunoDAO.atualizar(aluno);
             }
@@ -53,17 +40,19 @@ public class AlunoRN implements RNgenerico<Aluno> {
     }
 
     public boolean remover(String matricula) {
-      return alunoDAO.remover(matricula);
+        alunoDAO = new AlunoDAO();
+        return alunoDAO.remover(matricula);
     }
 
     @Override
     public Aluno buscarPorId(Long id) {
-
+        alunoDAO = new AlunoDAO();
         return alunoDAO.buscarPorId(id);
     }
 
     @Override
     public List<Aluno> buscarTodos() {
+        alunoDAO = new AlunoDAO();
         return alunoDAO.buscarTodos();
     }
 

@@ -491,7 +491,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelMatriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRemover)
                     .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
@@ -1135,19 +1135,22 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         Collections.sort(novosAlunos);
         AlunoRN alunoRN = new AlunoRN();
-        if (alunoRN.salvarTodos(novosAlunos)) {
+        if (alunoRN.salvarAlunos(novosAlunos)) {
             GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
             for (Aluno novoAluno : novosAlunos) {
-                gerenteDeArquivos.gravarImagem(novoAluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(), novoAluno.getMatricula());
+                if (novoAluno.getuRLImagem().trim() != null) {
+                    gerenteDeArquivos.gravarImagem(novoAluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(), novoAluno.getMatricula());
+                }
             }
         }
+        limparCampos();
         TABELA_ALUNO.inserirAlunos(alunoRN.buscarTodos());
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
-        if (tabelaCadastro.isRowSelected(tabelaCadastro.getSelectedRow())) {
-            String matricula = TABELA_ALUNO.getAluno(tabelaCadastro.getSelectedRow()).getMatricula();
-            if (new AlunoRN().remover(matricula)) {
+        if (!campoMatricula.getText().isEmpty() && tabelaCadastro.isRowSelected(tabelaCadastro.getSelectedRow())) {
+            AlunoRN alunoRN = new AlunoRN();
+            if (alunoRN.remover(campoMatricula.getText().trim())) {
                 TABELA_ALUNO.delAluno(tabelaCadastro.getSelectedRow());
             }
         }
@@ -1187,6 +1190,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
             Aluno aluno = encapsulaAluno();
             novosAlunos.add(aluno);
             TABELA_ALUNO.inserirAlunos(novosAlunos);
+            limparCampos();
         } else {
             JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios!");
         }
@@ -1320,7 +1324,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     void setAlunoDEnviado(Aluno aluno) {
         campoMatricula.setText(aluno.getMatricula());
         campoNomeAluno.setText(aluno.getNome());
-        comboTurma.setSelectedItem(aluno.getTurma().toString());
+        boxModelTurma.setSelectedItem(aluno.getTurma().toString());
         if (aluno.getuRLImagem() == null) {
             campoImagemAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/aluno.png")));
         } else {
@@ -1337,6 +1341,15 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
             return false;
         }
         return !campoNomeAluno.getText().isEmpty();
+    }
+
+    public void limparCampos() {
+        campoMatricula.setText(null);
+        campoNomeAluno.setText(null);
+        comboTurma.setSelectedIndex(-1);
+        urlfoto = null;
+        checkStatus.setSelected(false);
+        jDateChooser1.setDate(null);
     }
 
 }

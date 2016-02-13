@@ -192,7 +192,7 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="btnRemover" linkSize="9" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="btnRemover" linkSize="9" alignment="3" max="-2" attributes="0"/>
                                   <Component id="btnAdicionar" linkSize="9" alignment="3" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>

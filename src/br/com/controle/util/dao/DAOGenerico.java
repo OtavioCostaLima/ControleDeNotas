@@ -1,7 +1,6 @@
 package br.com.controle.util.dao;
 
 import br.com.controle.util.ConexaoUtil;
-import br.com.controle.util.modelo.Aluno;
 import br.com.controle.util.modelo.BeanBase;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -20,7 +19,6 @@ public abstract class DAOGenerico<T extends BeanBase> {
         boolean aux = false;
         try {
             em.getTransaction().begin();
-
             for (T t1 : buscarTodos()) {
                 if (t.equals(t1)) {
                     aux = true;
@@ -64,9 +62,13 @@ public abstract class DAOGenerico<T extends BeanBase> {
             em.remove(t);
             em.getTransaction().commit();
             return true;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            JOptionPane.showMessageDialog(null, "Erro na classe: " + getTypeClass().getSimpleName() + "\nErro: " + e.getMessage(), "INFORMAÇÃO", JOptionPane.ERROR_MESSAGE);
         } finally {
             em.close();
         }
+        return false;
     }
 
     public boolean remover(String matricula) {
@@ -77,9 +79,13 @@ public abstract class DAOGenerico<T extends BeanBase> {
             em.remove(t);
             em.getTransaction().commit();
             return true;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            JOptionPane.showMessageDialog(null, "Erro na classe: " + getTypeClass().getSimpleName() + "\nErro: " + e.getMessage(), "INFORMAÇÃO", JOptionPane.ERROR_MESSAGE);
         } finally {
-          //  em.close();
+            em.close();
         }
+        return false;
     }
 
     public T buscarPorId(Long id) {

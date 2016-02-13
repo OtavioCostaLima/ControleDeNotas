@@ -36,9 +36,9 @@ public class ProfessorRN implements RNgenerico<Professor> {
         return false;
     }
 
-    public void remover(String matricula) {
+    public boolean remover(String matricula) {
         professorDAO = new ProfessorDAO();
-        professorDAO.remover(matricula);
+        return professorDAO.remover(matricula);
     }
 
     @Override

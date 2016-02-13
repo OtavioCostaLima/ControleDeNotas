@@ -17,8 +17,10 @@ import javax.persistence.OneToMany;
  * @author Otavio Costa
  */
 @Entity
-//@Table(name = "professor")
 public class Professor implements BeanBase, Serializable {
+
+    public Professor() {
+    }
 
     @Id
     @Column(name = "matricula", nullable = false, unique = true)
