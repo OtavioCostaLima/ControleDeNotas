@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.otavio.teste;
+package br.com.controle.visao;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -179,24 +179,29 @@ public class TextPrompt extends JLabel
     }
 
 //  Implement FocusListener
+    @Override
     public void focusGained(FocusEvent e) {
         checkForPrompt();
     }
 
+    @Override
     public void focusLost(FocusEvent e) {
         focusLost++;
         checkForPrompt();
     }
 
 //  Implement DocumentListener
+    @Override
     public void insertUpdate(DocumentEvent e) {
         checkForPrompt();
     }
 
+    @Override
     public void removeUpdate(DocumentEvent e) {
         checkForPrompt();
     }
 
+    @Override
     public void changedUpdate(DocumentEvent e) {
     }
 }

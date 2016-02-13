@@ -78,7 +78,7 @@ public abstract class DAOGenerico<T extends BeanBase> {
             em.getTransaction().commit();
             return true;
         } finally {
-            em.close();
+          //  em.close();
         }
     }
 

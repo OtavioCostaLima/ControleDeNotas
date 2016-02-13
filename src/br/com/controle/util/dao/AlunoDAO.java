@@ -37,7 +37,7 @@ public class AlunoDAO extends DAOGenerico<Aluno> {
             em.getTransaction().commit();
             return true;
         } finally {
-            em.close();
+          //  em.close();
         }
     }
 
