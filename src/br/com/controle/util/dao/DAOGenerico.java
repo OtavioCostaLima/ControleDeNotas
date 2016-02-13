@@ -1,6 +1,7 @@
 package br.com.controle.util.dao;
 
 import br.com.controle.util.ConexaoUtil;
+import br.com.controle.util.modelo.Aluno;
 import br.com.controle.util.modelo.BeanBase;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -68,13 +69,14 @@ public abstract class DAOGenerico<T extends BeanBase> {
         }
     }
 
-    public void remover(String matricula) {
+    public boolean remover(String matricula) {
         EntityManager em = ConexaoUtil.getEntityManager();
         T t = (T) em.find(getTypeClass(), matricula);
         try {
             em.getTransaction().begin();
             em.remove(t);
             em.getTransaction().commit();
+            return true;
         } finally {
             em.close();
         }

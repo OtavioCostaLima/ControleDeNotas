@@ -26,8 +26,19 @@ public class AlunoDAO extends DAOGenerico<Aluno> {
     }
 
     @Override
-    public void remover(String id) {
-        super.remover(id);
+    public boolean remover(String id) {
+        EntityManager em = ConexaoUtil.getEntityManager();
+        Aluno aluno = em.find(Aluno.class, id);
+        try {
+            System.out.println("aluno " + aluno.getNome());
+
+            em.getTransaction().begin();
+            em.remove(aluno);
+            em.getTransaction().commit();
+            return true;
+        } finally {
+            em.close();
+        }
     }
 
     public Aluno buscarPorMatricula(String matricula) {

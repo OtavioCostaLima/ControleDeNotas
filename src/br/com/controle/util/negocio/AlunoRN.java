@@ -52,8 +52,8 @@ public class AlunoRN implements RNgenerico<Aluno> {
         return false;
     }
 
-    public void remover(String matricula) {
-        alunoDAO.remover(matricula);
+    public boolean remover(String matricula) {
+      return alunoDAO.remover(matricula);
     }
 
     @Override

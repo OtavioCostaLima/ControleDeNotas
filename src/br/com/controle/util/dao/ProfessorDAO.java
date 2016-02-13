@@ -15,6 +15,7 @@ import javax.persistence.EntityManager;
  */
 public class ProfessorDAO extends DAOGenerico<br.com.controle.util.modelo.Professor> {
 
+    @Override
     public boolean atualizar(Professor professor) {
         EntityManager em = ConexaoUtil.getEntityManager();
         em.getTransaction().begin();
@@ -27,5 +28,5 @@ public class ProfessorDAO extends DAOGenerico<br.com.controle.util.modelo.Profes
         EntityManager em = ConexaoUtil.getEntityManager();
         return em.find(Professor.class, id);
     }
-    
+     
 }

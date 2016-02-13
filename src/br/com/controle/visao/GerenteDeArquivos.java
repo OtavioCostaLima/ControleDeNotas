@@ -56,16 +56,15 @@ public class GerenteDeArquivos {
             ImageIcon icone = new ImageIcon(path);
             Image image = icone.getImage().getScaledInstance(jLabel.getWidth(), jLabel.getHeight(), Image.SCALE_DEFAULT);
             jLabel.setIcon(new ImageIcon(image));
-
+            return chooser.getSelectedFile().getAbsolutePath();
         }
-        return chooser.getSelectedFile().getAbsolutePath();
+        return "";
     }
 
     public void gravarImagem(String path, int width, int height, String nomeImagem) {
         ImageIcon icon = new ImageIcon(path);
-        System.out.println("path: "+icon);
         Image image = icon.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
-        File novaImagem = new File("./fotos/" + nomeImagem);
+        File novaImagem = new File("./fotos/" + nomeImagem+".JPG");
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics2D = bufferedImage.createGraphics();
         graphics2D.drawImage(image, null, null);

@@ -21,13 +21,13 @@ public final class SelecionarDisciplina extends javax.swing.JDialog {
     public SelecionarDisciplina(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        povoarTabela();
+
     }
 
-    public void povoarTabela() {
+    public void buscarDisciplinas(String matriculaprofessor) {
         tabelaDisciplina = TabelaDisciplina.getInstancia();
         DisciplinaRN disciplinaRN = new DisciplinaRN();
-        tabelaDisciplina.addListaDisciplina(disciplinaRN.buscarTodos());
+        tabelaDisciplina.addListaDisciplina(disciplinaRN.listarDisciplinasDisponiveis(matriculaprofessor));
         jTable1.setModel(tabelaDisciplina);
     }
 
@@ -109,6 +109,7 @@ public final class SelecionarDisciplina extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

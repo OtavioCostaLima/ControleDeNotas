@@ -22,7 +22,7 @@ public class TabelaAluno extends AbstractTableModel {
         this.alunos = alunos;
     }
 
-    public void insertNewAlunos(List<Aluno> alunos) {
+    public void inserirAlunos(List<Aluno> alunos) {
         limparLista();
         this.alunos.addAll(alunos);
 
