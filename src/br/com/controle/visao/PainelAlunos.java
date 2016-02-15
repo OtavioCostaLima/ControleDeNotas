@@ -22,7 +22,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private GenericComboBoxModel<Turma> boxModelTurma;
     private final TabelaAluno TABELA_ALUNO = new TabelaAluno();
     private static PainelAlunos CADASTRO_ALUNOS;
-    private String urlfoto;
+    private String urlfoto = "";
 
     /**
      * Creates new form CadastroAlunos
@@ -1138,7 +1138,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         if (alunoRN.salvarAlunos(novosAlunos)) {
             GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
             for (Aluno novoAluno : novosAlunos) {
-                if (novoAluno.getuRLImagem().trim() != null) {
+                if (novoAluno.getuRLImagem() != null && !novoAluno.getuRLImagem().trim().equals("")) {
                     gerenteDeArquivos.gravarImagem(novoAluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(), novoAluno.getMatricula());
                 }
             }
@@ -1346,7 +1346,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     public void limparCampos() {
         campoMatricula.setText(null);
         campoNomeAluno.setText(null);
-        comboTurma.setSelectedIndex(-1);
+        comboTurma.setSelectedIndex(0);
         urlfoto = null;
         checkStatus.setSelected(false);
         jDateChooser1.setDate(null);

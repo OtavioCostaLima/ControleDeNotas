@@ -49,7 +49,6 @@ public class TabelaAluno extends AbstractTableModel {
     public void limparLista() {
         alunos.clear();
         fireTableDataChanged();
-
     }
 
     @Override
