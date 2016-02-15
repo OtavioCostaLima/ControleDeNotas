@@ -45,16 +45,13 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
      */
     private String situacao;
 
-    /**
-     * ATIVO/INATIVO
-     */
+    /**   ATIVO/INATIVO     */
     private String status;
 
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "aluno")
-
     private List<Nota> notas;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "aluno")
@@ -68,7 +65,7 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
         this.matricula = matricula;
     }
 
-        public String getNome() {
+    public String getNome() {
         return nome;
     }
 
@@ -116,14 +113,12 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
         this.dataCadastro = dataCadastro;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.matricula);
-        hash = 83 * hash + Objects.hashCode(this.nome);
-        hash = 83 * hash + Objects.hashCode(this.turma);
-        hash = 83 * hash + this.numeroChamada;
-        return hash;
+    public int getNumeroChamada() {
+        return numeroChamada;
+    }
+
+    public void setNumeroChamada(int numeroChamada) {
+        this.numeroChamada = numeroChamada;
     }
 
     public List<Falta> getFaltas() {
@@ -132,6 +127,34 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
 
     public void setFaltas(List<Falta> faltas) {
         this.faltas = faltas;
+    }
+
+       public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void gerarMatriculaAluno() {
+        if (this.getTurma() != null) {
+            this.matricula = this.getTurma().getAno() + this.getTurma().getDescricao().replaceAll("[^0-9]", "") + this.turma.getSigla() + this.numeroChamada;
+        }
+    }
+    
+     public boolean isAtivo() {
+        return this.getStatus().equals("ATIVO");
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.matricula);
+        hash = 83 * hash + Objects.hashCode(this.nome);
+        hash = 83 * hash + Objects.hashCode(this.turma);
+        hash = 83 * hash + this.numeroChamada;
+        return hash;
     }
 
     @Override
@@ -153,35 +176,9 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
         return true;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void gerarMatriculaAluno() {
-        if (this.getTurma() != null) {
-            this.matricula = this.getTurma().getAno() + this.getTurma().getDescricao().replaceAll("[^0-9]", "") + this.turma.getSigla() + this.numeroChamada;
-        }
-    }
-
-    @Override
+     @Override
     public int compareTo(Aluno outro) {
         return this.nome.compareTo(outro.getNome());
     }
 
-    public boolean isAtivo() {
-        return this.getStatus().equals("ATIVO");
-    }
-
-    public int getNumeroChamada() {
-        return numeroChamada;
-    }
-
-    public void setNumeroChamada(int numeroChamada) {
-        this.numeroChamada = numeroChamada;
-    }
-
-}
+   }

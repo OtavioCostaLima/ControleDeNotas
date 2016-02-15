@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  */
 public class AlunoRN implements RNgenerico<Aluno> {
 
-    AlunoDAO alunoDAO;
+    private AlunoDAO alunoDAO;
 
     public boolean salvarAlunos(List<Aluno> alunos) {
         for (Aluno aluno : alunos) {

@@ -13,8 +13,8 @@ public interface RNgenerico<T extends BeanBase> {
     boolean salvar(T t);
 
     boolean remover(Long id);
-
-    T buscarPorId(Long id);
+    
+        T buscarPorId(Long id);
 
     List<T> buscarTodos();
 }
