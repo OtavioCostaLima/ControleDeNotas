@@ -3,7 +3,6 @@ package br.com.controle.util.dao;
 import br.com.controle.util.ConexaoUtil;
 import br.com.controle.util.modelo.Aluno;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 /**
@@ -11,19 +10,6 @@ import javax.persistence.TypedQuery;
  * @author Otavio Costa
  */
 public class AlunoDAO extends DAOGenerico<Aluno> {
-
-    public Aluno pesquisarPorMatricula(String matricula) {
-        EntityManager em = ConexaoUtil.getEntityManager();
-        String consulta = "select a from Aluno a where a.matricula = :matricula";
-        TypedQuery<Aluno> query = em.createQuery(consulta, Aluno.class);
-        query.setParameter("matricula", matricula);
-        Aluno aluno = null;
-        try {
-            return aluno = query.getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
-    }
 
     public Aluno buscarPorMatricula(String matricula) {
         EntityManager em = ConexaoUtil.getEntityManager();

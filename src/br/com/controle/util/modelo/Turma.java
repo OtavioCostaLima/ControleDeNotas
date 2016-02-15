@@ -38,10 +38,10 @@ public class Turma implements BeanBase, Serializable {
 
     private char sigla;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "turma")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "turma")
     private List<Aluno> alunos;
-
-    public Long getId() {
+    
+      public Long getId() {
         return id;
     }
 
@@ -127,6 +127,6 @@ public class Turma implements BeanBase, Serializable {
 
     @Override
     public String toString() {
-        return descricao + " " + turno + " - " + ano;
+        return descricao +" "+ sigla+" " + turno + " - " + ano;
     }
 }
