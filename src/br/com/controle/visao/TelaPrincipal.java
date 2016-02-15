@@ -227,22 +227,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         deJanelas.openInternalFrame(PainelTurmas.getInstancia());
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        deJanelas.openInternalFrame(PainelAlunos.getInstancia());
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        deJanelas.openInternalFrame(PainelTurmas.getInstancia());
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        deJanelas.openInternalFrame(PainelProfessor.getInstancia());   // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        deJanelas.openInternalFrame(PainelDisciplina.getInstancia());
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         deJanelas.openInternalFrame(PainelProfessor.getInstancia());
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -254,6 +238,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
        deJanelas.openInternalFrame(PainelNotas.getInstancia());  // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        deJanelas.openInternalFrame(PainelDisciplina.getInstancia());
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        deJanelas.openInternalFrame(PainelProfessor.getInstancia());   // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        deJanelas.openInternalFrame(PainelTurmas.getInstancia());
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        deJanelas.openInternalFrame(PainelAlunos.getInstancia());
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
