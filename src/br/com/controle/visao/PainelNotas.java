@@ -316,7 +316,7 @@ public class PainelNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField7CaretUpdate
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.exit(0);
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
