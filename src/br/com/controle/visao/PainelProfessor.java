@@ -129,6 +129,8 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
 
         jPanel1.setLayout(new java.awt.CardLayout());
 
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+
         painelCadastroProfessor.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
