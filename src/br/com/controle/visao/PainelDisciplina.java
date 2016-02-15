@@ -144,7 +144,7 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
         );
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(158, 158, 158));
+        jButton1.setForeground(new java.awt.Color(255, 0, 0));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/add64.png"))); // NOI18N
         jButton1.setText("ADICIONAR");
         jButton1.setContentAreaFilled(false);
@@ -156,7 +156,7 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
         });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(158, 158, 158));
+        jButton2.setForeground(new java.awt.Color(255, 0, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/line32.png"))); // NOI18N
         jButton2.setText("DELETAR");
         jButton2.setContentAreaFilled(false);
@@ -183,7 +183,7 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTableDisciplinas);
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(158, 158, 158));
+        jButton4.setForeground(new java.awt.Color(255, 0, 0));
         jButton4.setText("LIMPAR");
         jButton4.setContentAreaFilled(false);
         jButton4.setFocusable(false);
