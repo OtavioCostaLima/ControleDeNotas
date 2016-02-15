@@ -22,10 +22,10 @@ public class PainelTurmas extends javax.swing.JInternalFrame {
     //pensar em como vincular
     private PainelTurmas() {
         initComponents();
-       // ((BasicInternalFrameUI) getUI()).setNorthPane(null);
-       // List<Turma> turmas = TURMA_RN.buscarTodos();
-       // TABELA_TURMA.addListaTurma(turmas);
-       // tableTurma.setModel(TABELA_TURMA);
+        ((BasicInternalFrameUI) getUI()).setNorthPane(null);
+        List<Turma> turmas = TURMA_RN.buscarTodos();
+        TABELA_TURMA.addListaTurma(turmas);
+        tableTurma.setModel(TABELA_TURMA);
     }
 
     /**
