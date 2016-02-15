@@ -17,7 +17,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  */
 public class PainelProfessor extends javax.swing.JInternalFrame {
 
-    private TabelaProfessor tabelaProfessor = TabelaProfessor.getInstancia();
+    private final TabelaProfessor TABELA_PROFESSOR = new TabelaProfessor();
     private static PainelProfessor painelProfessor;
     private final DefaultListModel<Disciplina> listModel = new DefaultListModel<>();
     private String urlfoto;
@@ -57,8 +57,8 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     }
 
     private void tabelaPesquisarProfessor() {
-        tabelaProfessor.addListaProfessor(new ProfessorRN().buscarTodos());
-        tabelaPesquisaprofessor.setModel(tabelaProfessor);
+        TABELA_PROFESSOR.addListaProfessor(new ProfessorRN().buscarTodos());
+        tabelaPesquisaprofessor.setModel(TABELA_PROFESSOR);
     }
 
     /**
@@ -414,7 +414,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         ProfessorRN professorRN = new ProfessorRN();
         if (professorRN.salvar(encapsular())) {
             limparCampos();
-            tabelaPesquisarProfessor();
+            TABELA_PROFESSOR.inserirAlunos(professorRN.buscarTodos());
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -422,7 +422,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         if (!textoMatriculaProfessor.getText().isEmpty() && tabelaPesquisaprofessor.isRowSelected(tabelaPesquisaprofessor.getSelectedRow())) {
             ProfessorRN professorRN = new ProfessorRN();
             if (professorRN.remover(textoMatriculaProfessor.getText())) {
-                tabelaProfessor.delProfessor(tabelaPesquisaprofessor.getSelectedRow());
+                TABELA_PROFESSOR.delProfessor(tabelaPesquisaprofessor.getSelectedRow());
                 limparCampos();
             }
         }
@@ -456,7 +456,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
 
     private void tabelaPesquisaprofessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPesquisaprofessorMouseClicked
         if (tabelaPesquisaprofessor.isRowSelected(tabelaPesquisaprofessor.getSelectedRow())) {
-            Professor professor = tabelaProfessor.getProfessor(tabelaPesquisaprofessor.getSelectedRow());
+            Professor professor = TABELA_PROFESSOR.getProfessor(tabelaPesquisaprofessor.getSelectedRow());
             textoNomeProfessor.setText(professor.getNome());
             textoMatriculaProfessor.setText(professor.getMatricula());
             listModel.clear();

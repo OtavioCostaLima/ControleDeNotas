@@ -11,52 +11,50 @@ import javax.swing.table.AbstractTableModel;
  */
 public final class TabelaProfessor extends AbstractTableModel {
 
-    private static TabelaProfessor tabelaProfessor;
-    private List<Professor> alunos = new ArrayList<>();
+    private List<Professor> professores = new ArrayList<>();
     private final String colunas[] = {"Matricula", "Nome", "Data Nasc.", "Grau de Instrução"};
 
-    private TabelaProfessor() {
+    public TabelaProfessor() {
 
     }
 
-    public static TabelaProfessor getInstancia() {
-        if (tabelaProfessor == null) {
-            tabelaProfessor = new TabelaProfessor();
-        }
-        return tabelaProfessor;
+    public void addListaProfessor(List<Professor> professores) {
+        this.professores = professores;
     }
 
-    public void addListaProfessor(List<Professor> alunos) {
-        this.alunos = alunos;
+    public void inserirAlunos(List<Professor> professors) {
+        limparLista();
+        this.professores.addAll(professors);
+
     }
 
     public void addProfessor(Professor professor) {
-        if (alunos == null) {
-            alunos = new ArrayList<>();
+        if (professores == null) {
+            professores = new ArrayList<>();
         }
-        this.alunos.add(professor);
+        this.professores.add(professor);
         fireTableRowsInserted(getRowCount(), getRowCount() - 1);
     }
 
     public String delProfessor(int indicde) {
-        Professor professor = alunos.remove(indicde);
+        Professor professor = professores.remove(indicde);
         fireTableRowsDeleted(indicde, indicde);
         return professor.getMatricula();
     }
 
     public Professor getProfessor(int index) {
-        return alunos.get(index);
+        return professores.get(index);
     }
 
     public void limparLista() {
-        alunos.clear();
+        professores.clear();
         fireTableDataChanged();
 
     }
 
     @Override
     public int getRowCount() {
-        return alunos.size();
+        return professores.size();
     }
 
     @Override
@@ -66,7 +64,7 @@ public final class TabelaProfessor extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Professor professor = alunos.get(rowIndex);
+        Professor professor = professores.get(rowIndex);
         switch (columnIndex) {
             case 0:
                 return professor.getMatricula();
