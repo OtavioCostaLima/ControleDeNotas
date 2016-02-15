@@ -21,7 +21,7 @@ public class PainelNotas extends javax.swing.JInternalFrame {
     private PainelNotas() {
         initComponents();
         jPanel4.setVisible(false);
-        // ((BasicInternalFrameUI) getUI()).setNorthPane(null);
+         ((BasicInternalFrameUI) getUI()).setNorthPane(null);
     }
     
     public static PainelNotas getInstancia() {
