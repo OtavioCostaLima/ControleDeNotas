@@ -4,6 +4,7 @@ import br.com.controle.util.modelo.Disciplina;
 import br.com.controle.util.modelo.Professor;
 import br.com.controle.util.negocio.ProfessorRN;
 import br.com.controle.visao.abstractModels.TabelaProfessor;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -29,6 +30,8 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         ((BasicInternalFrameUI) getUI()).setNorthPane(null);
         jListDisciplinas.setModel(listModel);
         tabelaPesquisarProfessor();
+        TextPrompt prompt = new TextPrompt("Nome do Professor", textoNomeProfessor);
+        prompt.setForeground(Color.GRAY);
     }
 
     public static PainelProfessor getInstancia() {
