@@ -8,7 +8,6 @@
     <class>br.com.controle.util.modelo.Nota</class>
     <class>br.com.controle.util.modelo.Turma</class>
     <class>br.com.controle.util.modelo.Aluno</class>
-    <class>br.com.controle.util.modelo.Professor</class>
     <shared-cache-mode>ALL</shared-cache-mode>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/agenda?zeroDateTimeBehavior=convertToNull"/>

@@ -12,7 +12,7 @@ import javax.swing.table.AbstractTableModel;
 public final class TabelaProfessor extends AbstractTableModel {
 
     private List<Professor> professores = new ArrayList<>();
-    private final String colunas[] = {"Matricula", "Nome", "Data Nasc.", "Grau de Instrução"};
+    private final String colunas[] = {"Matricula", "Nome","Status" ,"Data Nasc.", "Grau de Instrução"};
 
     public TabelaProfessor() {
 
@@ -70,6 +70,8 @@ public final class TabelaProfessor extends AbstractTableModel {
                 return professor.getMatricula();
             case 1:
                 return professor.getNome();
+            case 2:
+                return professor.getSituacao();
             default:
                 return null;
         }

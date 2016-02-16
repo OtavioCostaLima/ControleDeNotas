@@ -45,6 +45,11 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         Professor professor = new Professor();
         professor.setMatricula(textoMatriculaProfessor.getText());
         professor.setNome(textoNomeProfessor.getText());
+        if (checkStatus.isSelected()) {
+            professor.setSituacao("ATIVO");
+        } else {
+            professor.setSituacao("INATIVO");
+        }
         List<Disciplina> disciplinas;
         if (!listModel.isEmpty()) {
             disciplinas = new ArrayList<>();
@@ -459,6 +464,11 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             Professor professor = TABELA_PROFESSOR.getProfessor(tabelaPesquisaprofessor.getSelectedRow());
             textoNomeProfessor.setText(professor.getNome());
             textoMatriculaProfessor.setText(professor.getMatricula());
+            if (professor.getSituacao().equals("ATIVO")) {
+                checkStatus.setSelected(true);
+            } else if (professor.getSituacao().equals("INATIVO")) {
+                  checkStatus.setSelected(false);
+            }
             listModel.clear();
             for (Disciplina disciplina : professor.getDisciplinas()) {
                 listModel.addElement(disciplina);
