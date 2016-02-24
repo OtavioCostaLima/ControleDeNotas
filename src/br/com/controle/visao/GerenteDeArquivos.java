@@ -31,7 +31,6 @@ public class GerenteDeArquivos {
             ImageIcon icone = new ImageIcon(path);
             Image image = icone.getImage().getScaledInstance(jLabel.getWidth(), jLabel.getHeight(), Image.SCALE_DEFAULT);
             jLabel.setIcon(new ImageIcon(image));
-
         }
     }
 
@@ -61,17 +60,17 @@ public class GerenteDeArquivos {
         return "";
     }
 
-    public void gravarImagem(String path, JLabel jLabel, String nomeImagem) {
-        String nomeNovaImagem = nomeImagem + ".jpg";
+    public void gravarImagem(String path, JLabel jLabel, String matricula) {
+        String nomeNovaImagem = matricula + ".jpg";
         File novaImagem = new File("./fotos/" + nomeNovaImagem);
         ImageIcon icone = new ImageIcon(path);
         Image image = icone.getImage().getScaledInstance(jLabel.getWidth(), jLabel.getHeight(), Image.SCALE_DEFAULT);
-
         BufferedImage bufferedImage = new BufferedImage(jLabel.getWidth(), jLabel.getHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics2D = bufferedImage.createGraphics();
         graphics2D.drawImage(image, null, null);
         graphics2D.dispose();
         try {
+            System.out.println("abs: "+novaImagem.getAbsolutePath());
             ImageIO.write(bufferedImage, "JPG", novaImagem);
         } catch (IOException ex) {
             Logger.getLogger(PainelAlunos.class.getName()).log(Level.SEVERE, null, ex);

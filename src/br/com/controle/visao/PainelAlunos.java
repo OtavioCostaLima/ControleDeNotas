@@ -18,7 +18,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  */
 public class PainelAlunos extends javax.swing.JInternalFrame {
 
-    List<Aluno> novosAlunos = new ArrayList<>();
+    private List<Aluno> novosAlunos = new ArrayList<>();
     private GenericComboBoxModel<Turma> boxModelTurma;
     private final TabelaAluno TABELA_ALUNO = new TabelaAluno();
     private static PainelAlunos CADASTRO_ALUNOS;
@@ -1149,7 +1149,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         if (alunoRN.salvarAlunos(novosAlunos)) {
             GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
             for (Aluno novoAluno : novosAlunos) {
-                if (novoAluno.getuRLImagem() != null || !novoAluno.getuRLImagem().trim().equals("")) {
+                if (novoAluno.getuRLImagem() != null && !novoAluno.getuRLImagem().trim().equals("")) {
                     gerenteDeArquivos.gravarImagem(novoAluno.getuRLImagem(), campoImagemAluno, novoAluno.getMatricula());
                 }
             }
@@ -1186,10 +1186,9 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
 
     private void campoImagemAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoImagemAlunoMouseClicked
         if (evt.getClickCount() == 2) {
-            
-            
-            /* GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
-            urlAtualfoto = gerenteDeArquivos.escolherImagem(campoImagemAluno);*/
+
+            GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
+            urlAtualfoto = gerenteDeArquivos.escolherImagem(campoImagemAluno);
         }           // TODO add your handling code here:
     }//GEN-LAST:event_campoImagemAlunoMouseClicked
 
@@ -1342,7 +1341,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         if (aluno.getuRLImagem() == null) {
             campoImagemAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/aluno.png")));
         } else {
-            GerenteDeArquivos.setImagemLabel("/fotos/".concat(aluno.getuRLImagem()), campoImagemAluno);
+            GerenteDeArquivos.setImagemLabel("./fotos/".concat(aluno.getuRLImagem()), campoImagemAluno);
         }
         checkStatus.setSelected(aluno.isAtivo());
         comboSituacao.setSelectedItem(aluno.getSituacao());
