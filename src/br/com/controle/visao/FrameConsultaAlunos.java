@@ -566,7 +566,7 @@ public class FrameConsultaAlunos extends javax.swing.JInternalFrame {
             if (nomeImagem == null) {
                 jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/aluno.png")));
             } else {
-                GerenteDeArquivos.setImagemLabel("./fotos/".concat(nomeImagem), jLabel4);
+//                GerenteDeArquivos.setImagemLabel("./fotos/".concat(nomeImagem), jLabel4);
             }
         }           // TODO add your handling code here:
     }//GEN-LAST:event_tabelaConsultaAlunosMouseClicked

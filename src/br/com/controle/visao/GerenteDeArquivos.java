@@ -24,7 +24,7 @@ import javax.swing.filechooser.FileFilter;
  */
 public class GerenteDeArquivos {
 
-    public static void setImagemLabel(String nomeImagem, JLabel jLabel) {
+    public void setImagemLabel(String nomeImagem, JLabel jLabel) {
         String path = nomeImagem;
         File file = new File(path);
         if (file.isFile()) {
@@ -60,21 +60,22 @@ public class GerenteDeArquivos {
         return "";
     }
 
-    public void gravarImagem(String path, JLabel jLabel, String matricula) {
+    public String gravarImagem(String path, int width, int height, String matricula) {
         String nomeNovaImagem = matricula + ".jpg";
         File novaImagem = new File("./fotos/" + nomeNovaImagem);
         ImageIcon icone = new ImageIcon(path);
-        Image image = icone.getImage().getScaledInstance(jLabel.getWidth(), jLabel.getHeight(), Image.SCALE_DEFAULT);
-        BufferedImage bufferedImage = new BufferedImage(jLabel.getWidth(), jLabel.getHeight(), BufferedImage.TYPE_INT_RGB);
+        Image image = icone.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
+        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics2D = bufferedImage.createGraphics();
         graphics2D.drawImage(image, null, null);
         graphics2D.dispose();
         try {
-            System.out.println("abs: "+novaImagem.getAbsolutePath());
             ImageIO.write(bufferedImage, "JPG", novaImagem);
+            return "./fotos/" + nomeNovaImagem;
         } catch (IOException ex) {
             Logger.getLogger(PainelAlunos.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return "";
     }
 
 }
