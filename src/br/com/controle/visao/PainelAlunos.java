@@ -1342,7 +1342,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         boxModelTurma.setSelectedItem(aluno.getTurma().toString());
 
         GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
-        if (!gerenteDeArquivos.setImagemLabel(aluno.getMatricula() + ".jpeg", campoImagemAluno)) {
+        if (!gerenteDeArquivos.setImagemLabel("./fotos/"+aluno.getMatricula().trim().concat(".jpg"), campoImagemAluno)) {
             campoImagemAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/aluno.png")));
         }
     }

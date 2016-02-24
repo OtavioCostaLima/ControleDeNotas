@@ -26,8 +26,9 @@ public class GerenteDeArquivos {
 
     public boolean setImagemLabel(String nomeImagem, JLabel jLabel) {
         File file = new File(nomeImagem);
-        System.out.println("nome: ");
+       
         if (file.isFile()) {
+             System.out.println("nome: "+nomeImagem);
             ImageIcon icone = new ImageIcon(nomeImagem);
             Image image = icone.getImage().getScaledInstance(jLabel.getWidth(), jLabel.getHeight(), Image.SCALE_DEFAULT);
             jLabel.setIcon(new ImageIcon(image));
