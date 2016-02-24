@@ -196,7 +196,7 @@
                                   <Component id="btnAdicionar" linkSize="9" alignment="3" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane3" pref="296" max="32767" attributes="0"/>
+                              <Component id="jScrollPane3" pref="287" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jPanel14" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -318,7 +318,7 @@
                                                   <Component id="comboTurma" alignment="0" pref="662" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="38" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -480,7 +480,9 @@
                                   <Component id="btnDeletar" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jButton3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="590" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -492,6 +494,7 @@
                                       <Component id="btnDeletar" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jButton3" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                                      <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                               </Group>
@@ -546,6 +549,22 @@
                               <Color blue="0" green="0" red="ff" type="rgb"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="IMPORTAR"/>
+                            <Property name="contentAreaFilled" type="boolean" value="false"/>
+                            <Property name="focusable" type="boolean" value="false"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="jButton5">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="11" style="1"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="0" green="0" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/br/com/controle/visao/icones/carteirinha.png"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="GERAR CARTEIRINHA"/>
                             <Property name="contentAreaFilled" type="boolean" value="false"/>
                             <Property name="focusable" type="boolean" value="false"/>
                           </Properties>
