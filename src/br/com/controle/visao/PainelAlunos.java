@@ -22,7 +22,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private GenericComboBoxModel<Turma> boxModelTurma;
     private final TabelaAluno TABELA_ALUNO = new TabelaAluno();
     private static PainelAlunos CADASTRO_ALUNOS;
-    private String urlfoto = "";
+    private String urlAtualfoto = "";
 
     /**
      * Creates new form CadastroAlunos
@@ -57,7 +57,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         aluno.setMatricula(campoMatricula.getText());
         aluno.setNome(campoNomeAluno.getText());
         aluno.setTurma(boxModelTurma.get(comboTurma.getSelectedIndex()));
-        aluno.setuRLImagem(urlfoto);
+        aluno.setuRLImagem(urlAtualfoto);
         aluno.setSituacao(comboSituacao.getSelectedItem().toString());
         aluno.setDataCadastro(jDateChooser1.getDate());
 
@@ -1149,8 +1149,8 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         if (alunoRN.salvarAlunos(novosAlunos)) {
             GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
             for (Aluno novoAluno : novosAlunos) {
-                if (novoAluno.getuRLImagem() != null && !novoAluno.getuRLImagem().trim().equals("")) {
-                    gerenteDeArquivos.gravarImagem(novoAluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(), novoAluno.getMatricula());
+                if (novoAluno.getuRLImagem() != null || !novoAluno.getuRLImagem().trim().equals("")) {
+                    gerenteDeArquivos.gravarImagem(novoAluno.getuRLImagem(), campoImagemAluno, novoAluno.getMatricula());
                 }
             }
         }
@@ -1186,8 +1186,10 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
 
     private void campoImagemAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoImagemAlunoMouseClicked
         if (evt.getClickCount() == 2) {
-            GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
-            urlfoto = gerenteDeArquivos.escolherImagem(campoImagemAluno);
+            
+            
+            /* GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
+            urlAtualfoto = gerenteDeArquivos.escolherImagem(campoImagemAluno);*/
         }           // TODO add your handling code here:
     }//GEN-LAST:event_campoImagemAlunoMouseClicked
 
@@ -1359,7 +1361,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         campoMatricula.setText(null);
         campoNomeAluno.setText(null);
         comboTurma.setSelectedIndex(0);
-        urlfoto = null;
+        urlAtualfoto = null;
         checkStatus.setSelected(false);
         jDateChooser1.setDate(null);
     }

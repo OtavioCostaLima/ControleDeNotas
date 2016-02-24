@@ -29,6 +29,8 @@ public class Professor implements BeanBase, Serializable {
     @Column(name = "nome")
     private String nome;
 
+    private String situacao;
+
     public String getMatricula() {
         return matricula;
     }
@@ -72,6 +74,14 @@ public class Professor implements BeanBase, Serializable {
 
     public void setDisciplinas(List<Disciplina> disciplinas) {
         this.disciplinas = disciplinas;
+    }
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
     @Override
