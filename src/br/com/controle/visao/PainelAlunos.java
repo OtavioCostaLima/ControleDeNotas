@@ -57,7 +57,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         aluno.setMatricula(campoMatricula.getText());
         aluno.setNome(campoNomeAluno.getText());
         aluno.setTurma(boxModelTurma.get(comboTurma.getSelectedIndex()));
-       //alterar o link dps
+        //alterar o link dps
         aluno.setuRLImagem(urlAtualfoto);
         aluno.setSituacao(comboSituacao.getSelectedItem().toString());
         aluno.setDataCadastro(jDateChooser1.getDate());
@@ -1152,7 +1152,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
             for (Aluno novoAluno : novosAlunos) {
                 if (novoAluno.getuRLImagem() != null && !novoAluno.getuRLImagem().trim().equals("")) {
                     System.out.println("aluno: " + novoAluno.getuRLImagem());
-                   gerenteDeArquivos.gravarImagem(novoAluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(), novoAluno.getMatricula());
+                    gerenteDeArquivos.gravarImagem(novoAluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(), novoAluno.getMatricula());
                 }
             }
         }
@@ -1340,17 +1340,11 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         campoMatricula.setText(aluno.getMatricula());
         campoNomeAluno.setText(aluno.getNome());
         boxModelTurma.setSelectedItem(aluno.getTurma().toString());
-        if (aluno.getuRLImagem() == null) {
-            campoImagemAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/aluno.png")));
-        } else {
-            GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
-            gerenteDeArquivos.setImagemLabel(aluno.getuRLImagem(), campoImagemAluno);
-            System.out.println(aluno.getuRLImagem());
-        }
-        checkStatus.setSelected(aluno.isAtivo());
-        comboSituacao.setSelectedItem(aluno.getSituacao());
-        jDateChooser1.setDate(aluno.getDataCadastro());
 
+        GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
+        if (!gerenteDeArquivos.setImagemLabel(aluno.getMatricula() + ".jpeg", campoImagemAluno)) {
+            campoImagemAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/aluno.png")));
+        }
     }
 
     private boolean verificaCampos() {
