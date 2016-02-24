@@ -24,14 +24,16 @@ import javax.swing.filechooser.FileFilter;
  */
 public class GerenteDeArquivos {
 
-    public void setImagemLabel(String nomeImagem, JLabel jLabel) {
-        String path = nomeImagem;
-        File file = new File(path);
+    public boolean setImagemLabel(String nomeImagem, JLabel jLabel) {
+        File file = new File(nomeImagem);
+        System.out.println("nome: ");
         if (file.isFile()) {
-            ImageIcon icone = new ImageIcon(path);
+            ImageIcon icone = new ImageIcon(nomeImagem);
             Image image = icone.getImage().getScaledInstance(jLabel.getWidth(), jLabel.getHeight(), Image.SCALE_DEFAULT);
             jLabel.setIcon(new ImageIcon(image));
+            return true;
         }
+          return false;
     }
 
     public String escolherImagem(JLabel jLabel) {
