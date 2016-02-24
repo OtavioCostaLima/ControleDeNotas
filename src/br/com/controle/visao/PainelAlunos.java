@@ -1340,7 +1340,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         if (aluno.getuRLImagem() == null) {
             campoImagemAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/aluno.png")));
         } else {
-            GerenteDeArquivos.setImagemLabel("./fotos/".concat(aluno.getuRLImagem()), campoImagemAluno);
+            GerenteDeArquivos.setImagemLabel("/fotos/".concat(aluno.getuRLImagem()), campoImagemAluno);
         }
         checkStatus.setSelected(aluno.isAtivo());
         comboSituacao.setSelectedItem(aluno.getSituacao());
