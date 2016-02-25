@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.controle.visao;
 
 import java.awt.Graphics2D;
@@ -59,24 +54,20 @@ public class GerenteDeArquivos {
         return "";
     }
 
-    public String gravarImagem(String path, int width, int height, String matricula) {
-        String nomeNovaImagem = matricula + ".jpg";
+    public Image gravarImagem(String path, int width, int height, String matricula) {
+        File novaImagem = new File("./fotos/" + matricula + ".jpg");
 
-        File novaImagem = new File("./fotos/" + nomeNovaImagem);
-
-        ImageIcon icone = new ImageIcon(path);
-        Image image = icone.getImage().getScaledInstance(width - 2, height - 2, Image.SCALE_SMOOTH);
+        Image image = new ImageIcon(path).getImage().getScaledInstance(width - 2, height - 2, Image.SCALE_SMOOTH);
         BufferedImage bufferedImage = new BufferedImage(width - 2, height - 2, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics2D = bufferedImage.createGraphics();
-        graphics2D.drawImage(image, 0, 0,null);
+        graphics2D.drawImage(image, 0, 0, null);
         graphics2D.dispose();
         try {
             ImageIO.write(bufferedImage, "JPG", novaImagem);
-            return "./fotos/" + nomeNovaImagem;
         } catch (IOException ex) {
             Logger.getLogger(PainelAlunos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "";
+        return image;
     }
 
 }

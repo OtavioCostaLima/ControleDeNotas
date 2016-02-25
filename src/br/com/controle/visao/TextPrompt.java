@@ -25,6 +25,7 @@ public class TextPrompt extends JLabel
         implements FocusListener, DocumentListener {
 
     public enum Show {
+
         ALWAYS,
         FOCUS_GAINED,
         FOCUS_LOST;
@@ -154,7 +155,6 @@ public class TextPrompt extends JLabel
             setVisible(false);
             return;
         }
-
         //  Prompt has already been shown once, remove it
         if (showPromptOnce && focusLost > 0) {
             setVisible(false);

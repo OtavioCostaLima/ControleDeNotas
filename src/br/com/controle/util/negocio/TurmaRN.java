@@ -39,4 +39,8 @@ public class TurmaRN implements RNgenerico<Turma> {
         return turmaDAO.buscarTodos();
     }
 
+    public List<String> listarAnos() {
+        return turmaDAO.listarAnos();
+    }
+
 }

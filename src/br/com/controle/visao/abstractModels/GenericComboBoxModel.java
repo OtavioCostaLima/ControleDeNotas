@@ -10,7 +10,7 @@ import javax.swing.ComboBoxModel;
  * @author Otavio Costa
  * @param <T>
  */
-public class GenericComboBoxModel<T extends BeanBase> extends AbstractListModel implements ComboBoxModel {
+public class GenericComboBoxModel<T> extends AbstractListModel implements ComboBoxModel {
 
     private Object selectedItem;
     private final ArrayList<T> listaGenerica;
