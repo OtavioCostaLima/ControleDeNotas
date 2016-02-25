@@ -1169,8 +1169,8 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         if (!campoMatricula.getText().isEmpty() && tabelaCadastro.isRowSelected(tabelaCadastro.getSelectedRow())) {
             AlunoRN alunoRN = new AlunoRN();
             if (alunoRN.remover(campoMatricula.getText().trim())) {
-                GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
                 Aluno aluno = TABELA_ALUNO.delAluno(tabelaCadastro.getSelectedRow());
+                GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
                 gerenteDeArquivos.removerImagem("./fotos/" + aluno.getMatricula().trim().concat(".jpg"));
             }
         }

@@ -20,7 +20,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     private final TabelaProfessor TABELA_PROFESSOR = new TabelaProfessor();
     private static PainelProfessor painelProfessor;
     private final DefaultListModel<Disciplina> listModel = new DefaultListModel<>();
-    private String urlfoto;
+    private String urlfoto = "";
 
     /**
      * Creates new form PainelProfessor
@@ -221,16 +221,16 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campoImagemProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(campoImagemProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(13, 13, 13)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textoMatriculaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
@@ -239,14 +239,19 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(textoNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
                                 .addComponent(jButton9)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton8))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(campoImagemProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButton8)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(campoImagemProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -417,9 +422,16 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         ProfessorRN professorRN = new ProfessorRN();
-        if (professorRN.salvar(encapsular())) {
+        Professor professor = encapsular();
+        if (professorRN.salvar(professor)) {
+             GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
+            if (urlfoto != null && !urlfoto.trim().equals("")) {
+                gerenteDeArquivos.gravarImagem(urlfoto, campoImagemProfessor.getWidth(),campoImagemProfessor.getHeight(), "./fotos/" + professor.getMatricula().trim().concat(".jpg"));
+            }
             limparCampos();
             TABELA_PROFESSOR.inserirAlunos(professorRN.buscarTodos());
+           
+
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -427,7 +439,9 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         if (!textoMatriculaProfessor.getText().isEmpty() && tabelaPesquisaprofessor.isRowSelected(tabelaPesquisaprofessor.getSelectedRow())) {
             ProfessorRN professorRN = new ProfessorRN();
             if (professorRN.remover(textoMatriculaProfessor.getText())) {
-                TABELA_PROFESSOR.delProfessor(tabelaPesquisaprofessor.getSelectedRow());
+                Professor professor = TABELA_PROFESSOR.delProfessor(tabelaPesquisaprofessor.getSelectedRow());
+                GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
+                gerenteDeArquivos.removerImagem("./fotos/" + professor.getMatricula().trim().concat(".jpg"));
                 limparCampos();
             }
         }
@@ -464,10 +478,16 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             Professor professor = TABELA_PROFESSOR.getProfessor(tabelaPesquisaprofessor.getSelectedRow());
             textoNomeProfessor.setText(professor.getNome());
             textoMatriculaProfessor.setText(professor.getMatricula());
+            GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
+
+            if (!gerenteDeArquivos.setImagemJlabel("./fotos/" + professor.getMatricula().trim().concat(".jpg"), campoImagemProfessor)) {
+                campoImagemProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/professor.png")));
+            }
+
             if (professor.getSituacao().equals("ATIVO")) {
                 checkStatus.setSelected(true);
             } else if (professor.getSituacao().equals("INATIVO")) {
-                  checkStatus.setSelected(false);
+                checkStatus.setSelected(false);
             }
             listModel.clear();
             for (Disciplina disciplina : professor.getDisciplinas()) {
@@ -518,5 +538,6 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         textoMatriculaProfessor.setText(null);
         textoNomeProfessor.setText(null);
         listModel.clear();
+        urlfoto = "";
     }
 }

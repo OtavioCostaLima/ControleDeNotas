@@ -12,7 +12,7 @@ import javax.swing.table.AbstractTableModel;
 public final class TabelaProfessor extends AbstractTableModel {
 
     private List<Professor> professores = new ArrayList<>();
-    private final String colunas[] = {"Matricula", "Nome","Status" ,"Data Nasc.", "Grau de Instrução"};
+    private final String colunas[] = {"Matricula", "Nome", "Status", "Data Nasc.", "Grau de Instrução"};
 
     public TabelaProfessor() {
 
@@ -36,10 +36,10 @@ public final class TabelaProfessor extends AbstractTableModel {
         fireTableRowsInserted(getRowCount(), getRowCount() - 1);
     }
 
-    public String delProfessor(int indicde) {
+    public Professor delProfessor(int indicde) {
         Professor professor = professores.remove(indicde);
         fireTableRowsDeleted(indicde, indicde);
-        return professor.getMatricula();
+        return professor;
     }
 
     public Professor getProfessor(int index) {
