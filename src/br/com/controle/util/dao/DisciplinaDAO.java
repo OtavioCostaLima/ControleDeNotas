@@ -12,11 +12,11 @@ import javax.persistence.TypedQuery;
  */
 public class DisciplinaDAO extends DAOGenerico<Disciplina> {
 
-    public List<Disciplina> listarDisciplinasDisponiveis(String matricula) {
+        public List<Disciplina> listarDisciplinasDisponiveis(String matricula) {
         EntityManager entityManager = ConexaoUtil.getEntityManager();
         String consulta = "SELECT d FROM Disciplina d WHERE d not in (SELECT ds FROM Professor p join p.disciplinas ds WHERE p.matricula= :idProfessor)";
         TypedQuery<Disciplina> query = entityManager.createQuery(consulta, Disciplina.class);
         query.setParameter("idProfessor", matricula);
         return query.getResultList();
     }
-}
+   }

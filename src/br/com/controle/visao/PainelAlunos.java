@@ -56,7 +56,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         Aluno aluno = new Aluno();
         aluno.setMatricula(campoMatricula.getText());
         aluno.setNome(campoNomeAluno.getText());
-        aluno.setTurma(boxModelTurma.get(comboTurma.getSelectedIndex()));
+        aluno.setTurma((Turma) boxModelTurma.get(comboTurma.getSelectedIndex()));
         //alterar o link dps
         aluno.setuRLImagem(urlAtualfoto);
         aluno.setSituacao(comboSituacao.getSelectedItem().toString());
@@ -266,6 +266,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         campoImagemAluno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         campoImagemAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/aluno.png"))); // NOI18N
         campoImagemAluno.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        campoImagemAluno.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         campoImagemAluno.setFocusable(false);
         campoImagemAluno.setOpaque(true);
         campoImagemAluno.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -281,6 +282,11 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
 
         campoMatricula.setEditable(false);
         campoMatricula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        campoMatricula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoMatriculaActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Data Cadastro: *");
 
@@ -331,10 +337,10 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                         .addComponent(comboSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel11Layout.createSequentialGroup()
                                 .addComponent(campoMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(186, 186, 186)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -342,10 +348,9 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel29)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(checkStatus))
-                            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(campoNomeAluno)
-                                .addComponent(comboTurma, javax.swing.GroupLayout.Alignment.LEADING, 0, 662, Short.MAX_VALUE)))
-                        .addGap(0, 38, Short.MAX_VALUE))))
+                            .addComponent(campoNomeAluno)
+                            .addComponent(comboTurma, javax.swing.GroupLayout.Alignment.LEADING, 0, 662, Short.MAX_VALUE))
+                        .addGap(0, 52, Short.MAX_VALUE))))
         );
 
         jPanel11Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel28, jLabel3});
@@ -488,7 +493,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelMatriculaLayout.createSequentialGroup()
                         .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoImagemAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(campoImagemAluno)))
                 .addContainerGap())
             .addComponent(jScrollPane3)
         );
@@ -507,7 +512,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                     .addComponent(btnRemover)
                     .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1151,8 +1156,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
             GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
             for (Aluno novoAluno : novosAlunos) {
                 if (novoAluno.getuRLImagem() != null && !novoAluno.getuRLImagem().trim().equals("")) {
-                    System.out.println("aluno: " + novoAluno.getuRLImagem());
-                    gerenteDeArquivos.escreverImagem(novoAluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(), "./fotos/"+novoAluno.getMatricula().trim().concat(".jpg"));
+                    gerenteDeArquivos.escreverImagem(novoAluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(), "./fotos/" + novoAluno.getMatricula().trim().concat(".jpg"));
                 }
             }
         }
@@ -1226,6 +1230,10 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
 
         }         // TODO add your handling code here:
     }//GEN-LAST:event_tabelaCadastroMouseClicked
+
+    private void campoMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoMatriculaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoMatriculaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1342,7 +1350,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         boxModelTurma.setSelectedItem(aluno.getTurma().toString());
 
         GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
-        if (!gerenteDeArquivos.setImagemLabel("./fotos/"+aluno.getMatricula().trim().concat(".jpg"), campoImagemAluno)) {
+        if (!gerenteDeArquivos.setImagemLabel("./fotos/" + aluno.getMatricula().trim().concat(".jpg"), campoImagemAluno)) {
             campoImagemAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/aluno.png")));
         }
     }
