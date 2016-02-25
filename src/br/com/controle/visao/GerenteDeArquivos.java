@@ -26,19 +26,29 @@ public class GerenteDeArquivos {
 
     public boolean setImagemLabel(String nomeImagem, JLabel jLabel) {
         File file = new File(nomeImagem);
-       
+
         if (file.isFile()) {
-             System.out.println("nome: "+nomeImagem);
-            ImageIcon icone = new ImageIcon(nomeImagem);
-            Image image = icone.getImage().getScaledInstance(jLabel.getWidth(), jLabel.getHeight(), Image.SCALE_DEFAULT);
+            System.out.println("nome: " + nomeImagem);
+            ImageIcon image1 = new ImageIcon(file.getAbsolutePath());
+            Image image = image1.getImage().getScaledInstance(jLabel.getWidth(), jLabel.getHeight(), Image.SCALE_REPLICATE);
             jLabel.setIcon(new ImageIcon(image));
+
             return true;
         }
-          return false;
+        return false;
+    }
+
+    public void escreverImagem(String path, int width, int height, String novoCaminho) {
+        try {
+            BufferedImage image = ImageIO.read(new File(path));
+            ImageIO.write(image, "JPG", new File(novoCaminho));
+        } catch (IOException iOException) {
+            System.err.println("Erro? "+iOException.getMessage());
+        }
     }
 
     public String escolherImagem(JLabel jLabel) {
-        JFileChooser chooser = new JFileChooser();
+        JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
         chooser.setFileFilter(new FileFilter() {
 
             @Override
