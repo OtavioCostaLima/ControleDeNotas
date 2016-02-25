@@ -17,7 +17,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author Otavio Costa
  */
 public class PainelAlunos extends javax.swing.JInternalFrame {
-
+    
     private final List<Aluno> novosAlunos = new ArrayList<>();
     private GenericComboBoxModel<Turma> boxModelTurma;
     private final TabelaAluno TABELA_ALUNO = new TabelaAluno();
@@ -33,25 +33,25 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         povoartabelaAluno();
         povoarComboboxTurma();
     }
-
+    
     private void povoarComboboxTurma() {
         ArrayList<Turma> turma = (ArrayList<Turma>) new TurmaRN().buscarTodos();
         boxModelTurma = new GenericComboBoxModel(turma);
         comboTurma.setModel(boxModelTurma);
     }
-
+    
     public static synchronized PainelAlunos getInstancia() {
         if (CADASTRO_ALUNOS == null) {
             CADASTRO_ALUNOS = new PainelAlunos();
         }
         return CADASTRO_ALUNOS;
     }
-
+    
     private void povoartabelaAluno() {
         TABELA_ALUNO.addListaAluno(new AlunoRN().buscarTodos());
         tabelaCadastro.setModel(TABELA_ALUNO);
     }
-
+    
     private Aluno encapsulaAluno() {
         Aluno aluno = new Aluno();
         aluno.setMatricula(campoMatricula.getText());
@@ -60,8 +60,8 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         //alterar o link dps
         aluno.setuRLImagem(urlAtualfoto);
         aluno.setSituacao(comboSituacao.getSelectedItem().toString());
-        aluno.setDataCadastro(jDateChooser1.getDate());
-
+        aluno.setDataCadastro(campoDataCadastro.getDate());
+        
         if (checkStatus.isSelected()) {
             aluno.setStatus("ATIVO");
         } else {
@@ -69,7 +69,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         }
         return aluno;
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -98,7 +98,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         campoNomeAluno = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        campoDataCadastro = new com.toedter.calendar.JDateChooser();
         jLabel28 = new javax.swing.JLabel();
         comboSituacao = new javax.swing.JComboBox();
         checkStatus = new javax.swing.JCheckBox();
@@ -343,7 +343,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(campoDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel29)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -366,7 +366,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                             .addComponent(jLabel1)
                             .addComponent(campoMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)))
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(campoDataCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(checkStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -1192,7 +1192,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
 
     private void campoImagemAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoImagemAlunoMouseClicked
         if (evt.getClickCount() == 2) {
-
+            
             GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
             urlAtualfoto = gerenteDeArquivos.escolherImagem(campoImagemAluno);
         }           // TODO add your handling code here:
@@ -1227,7 +1227,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private void tabelaCadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaCadastroMouseClicked
         if (tabelaCadastro.isRowSelected(tabelaCadastro.getSelectedRow())) {
             setAlunoDEnviado(TABELA_ALUNO.getAluno(tabelaCadastro.getSelectedRow()));
-
+            
         }         // TODO add your handling code here:
     }//GEN-LAST:event_tabelaCadastroMouseClicked
 
@@ -1241,6 +1241,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnSalvar;
+    private com.toedter.calendar.JDateChooser campoDataCadastro;
     private javax.swing.JLabel campoImagemAluno;
     private javax.swing.JTextField campoMatricula;
     private javax.swing.JTextField campoNomeAluno;
@@ -1265,7 +1266,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JFormattedTextField jFormattedTextField1;
@@ -1345,30 +1345,32 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     void setAlunoDEnviado(Aluno aluno) {
+        campoDataCadastro.setDate(aluno.getDataCadastro());
         campoMatricula.setText(aluno.getMatricula());
         campoNomeAluno.setText(aluno.getNome());
-        boxModelTurma.setSelectedItem(aluno.getTurma().toString());
-
+        //  boxModelTurma.setSelectedItem(aluno.getTurma().toString());
+        comboTurma.setSelectedItem(aluno.getTurma().toString());
+        checkStatus.setSelected(aluno.isAtivo());
         GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
         if (!gerenteDeArquivos.setImagemLabel("./fotos/" + aluno.getMatricula().trim().concat(".jpg"), campoImagemAluno)) {
             campoImagemAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/aluno.png")));
         }
     }
-
+    
     private boolean verificaCampos() {
         if (comboTurma.getSelectedIndex() == -1) {
             return false;
         }
         return !campoNomeAluno.getText().isEmpty();
     }
-
+    
     public void limparCampos() {
         campoMatricula.setText(null);
         campoNomeAluno.setText(null);
         comboTurma.setSelectedIndex(0);
         urlAtualfoto = null;
         checkStatus.setSelected(false);
-        jDateChooser1.setDate(null);
+        campoDataCadastro.setDate(null);
     }
-
+    
 }

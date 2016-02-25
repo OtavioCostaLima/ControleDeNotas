@@ -308,7 +308,7 @@
                                                   <EmptySpace max="32767" attributes="0"/>
                                                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jDateChooser1" min="-2" pref="104" max="-2" attributes="0"/>
+                                                  <Component id="campoDataCadastro" min="-2" pref="104" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
@@ -336,7 +336,7 @@
                                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Component id="jDateChooser1" max="32767" attributes="0"/>
+                                      <Component id="campoDataCadastro" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel29" alignment="3" max="32767" attributes="0"/>
                                           <Component id="checkStatus" alignment="3" max="32767" attributes="0"/>
@@ -425,7 +425,7 @@
                             <Property name="text" type="java.lang.String" value="Nome: *"/>
                           </Properties>
                         </Component>
-                        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+                        <Component class="com.toedter.calendar.JDateChooser" name="campoDataCadastro">
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel28">
                           <Properties>

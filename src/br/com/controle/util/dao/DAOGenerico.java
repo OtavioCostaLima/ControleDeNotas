@@ -81,6 +81,7 @@ public abstract class DAOGenerico<T extends BeanBase> {
             return true;
         } catch (Exception e) {
             em.getTransaction().rollback();
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro na classe: " + getTypeClass().getSimpleName() + "\nErro: " + e.getMessage(), "INFORMAÇÃO", JOptionPane.ERROR_MESSAGE);
         } finally {
             em.close();
