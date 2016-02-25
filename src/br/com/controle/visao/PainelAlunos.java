@@ -17,7 +17,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author Otavio Costa
  */
 public class PainelAlunos extends javax.swing.JInternalFrame {
-    
+
     private final List<Aluno> novosAlunos = new ArrayList<>();
     private GenericComboBoxModel<Turma> boxModelTurma;
     private final TabelaAluno TABELA_ALUNO = new TabelaAluno();
@@ -33,25 +33,25 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         povoartabelaAluno();
         povoarComboboxTurma();
     }
-    
+
     private void povoarComboboxTurma() {
         ArrayList<Turma> turma = (ArrayList<Turma>) new TurmaRN().buscarTodos();
         boxModelTurma = new GenericComboBoxModel(turma);
         comboTurma.setModel(boxModelTurma);
     }
-    
+
     public static synchronized PainelAlunos getInstancia() {
         if (CADASTRO_ALUNOS == null) {
             CADASTRO_ALUNOS = new PainelAlunos();
         }
         return CADASTRO_ALUNOS;
     }
-    
+
     private void povoartabelaAluno() {
         TABELA_ALUNO.addListaAluno(new AlunoRN().buscarTodos());
         tabelaCadastro.setModel(TABELA_ALUNO);
     }
-    
+
     private Aluno encapsulaAluno() {
         Aluno aluno = new Aluno();
         aluno.setMatricula(campoMatricula.getText());
@@ -61,7 +61,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         aluno.setuRLImagem(urlAtualfoto);
         aluno.setSituacao(comboSituacao.getSelectedItem().toString());
         aluno.setDataCadastro(campoDataCadastro.getDate());
-        
+
         if (checkStatus.isSelected()) {
             aluno.setStatus("ATIVO");
         } else {
@@ -69,7 +69,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         }
         return aluno;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -266,6 +266,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         campoImagemAluno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         campoImagemAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/aluno.png"))); // NOI18N
         campoImagemAluno.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        campoImagemAluno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         campoImagemAluno.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         campoImagemAluno.setFocusable(false);
         campoImagemAluno.setOpaque(true);
@@ -1156,7 +1157,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
             GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
             for (Aluno novoAluno : novosAlunos) {
                 if (novoAluno.getuRLImagem() != null && !novoAluno.getuRLImagem().trim().equals("")) {
-                    gerenteDeArquivos.escreverImagem(novoAluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(), "./fotos/" + novoAluno.getMatricula().trim().concat(".jpg"));
+                    gerenteDeArquivos.gravarImagem(novoAluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(), "./fotos/" + novoAluno.getMatricula().trim().concat(".jpg"));
                 }
             }
         }
@@ -1168,7 +1169,9 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         if (!campoMatricula.getText().isEmpty() && tabelaCadastro.isRowSelected(tabelaCadastro.getSelectedRow())) {
             AlunoRN alunoRN = new AlunoRN();
             if (alunoRN.remover(campoMatricula.getText().trim())) {
-                TABELA_ALUNO.delAluno(tabelaCadastro.getSelectedRow());
+                GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
+                Aluno aluno = TABELA_ALUNO.delAluno(tabelaCadastro.getSelectedRow());
+                gerenteDeArquivos.removerImagem("./fotos/" + aluno.getMatricula().trim().concat(".jpg"));
             }
         }
 // TODO add your handling code here:
@@ -1192,7 +1195,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
 
     private void campoImagemAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoImagemAlunoMouseClicked
         if (evt.getClickCount() == 2) {
-            
             GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
             urlAtualfoto = gerenteDeArquivos.escolherImagem(campoImagemAluno);
         }           // TODO add your handling code here:
@@ -1227,7 +1229,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private void tabelaCadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaCadastroMouseClicked
         if (tabelaCadastro.isRowSelected(tabelaCadastro.getSelectedRow())) {
             setAlunoDEnviado(TABELA_ALUNO.getAluno(tabelaCadastro.getSelectedRow()));
-            
+
         }         // TODO add your handling code here:
     }//GEN-LAST:event_tabelaCadastroMouseClicked
 
@@ -1352,18 +1354,18 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         comboTurma.setSelectedItem(aluno.getTurma().toString());
         checkStatus.setSelected(aluno.isAtivo());
         GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
-        if (!gerenteDeArquivos.setImagemLabel("./fotos/" + aluno.getMatricula().trim().concat(".jpg"), campoImagemAluno)) {
+        if (!gerenteDeArquivos.setImagemJlabel("./fotos/" + aluno.getMatricula().trim().concat(".jpg"), campoImagemAluno)) {
             campoImagemAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/aluno.png")));
         }
     }
-    
+
     private boolean verificaCampos() {
         if (comboTurma.getSelectedIndex() == -1) {
             return false;
         }
         return !campoNomeAluno.getText().isEmpty();
     }
-    
+
     public void limparCampos() {
         campoMatricula.setText(null);
         campoNomeAluno.setText(null);
@@ -1372,5 +1374,5 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         checkStatus.setSelected(false);
         campoDataCadastro.setDate(null);
     }
-    
+
 }

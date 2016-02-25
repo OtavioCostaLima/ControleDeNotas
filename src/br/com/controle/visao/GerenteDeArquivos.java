@@ -17,7 +17,7 @@ import javax.swing.filechooser.FileFilter;
  */
 public class GerenteDeArquivos {
 
-    public boolean setImagemLabel(String path, JLabel jLabel) {
+    public boolean setImagemJlabel(String path, JLabel jLabel) {
         File file = new File(path);
         if (file.isFile()) {
             jLabel.setIcon(new ImageIcon(path));
@@ -26,12 +26,12 @@ public class GerenteDeArquivos {
         return false;
     }
 
-    public void escreverImagem(String path, int width, int height, String novoCaminho) {
+    public void gravarImagem(String path, int width, int height, String novoCaminho) {
         try {
             BufferedImage image = ImageIO.read(new File(path));
             BufferedImage new_img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
             Graphics2D g = new_img.createGraphics();
-            g.drawImage(image, 0, 0, width, height, null);
+            g.drawImage(image, 0, 0, width - 2, height - 2, null);
             ImageIO.write(new_img, "JPG", new File(novoCaminho));
 
         } catch (IOException iOException) {
@@ -63,5 +63,12 @@ public class GerenteDeArquivos {
             return chooser.getSelectedFile().getAbsolutePath();
         }
         return "";
+    }
+
+    public void removerImagem(String path) {
+        File f = new File(path);
+        if (f.isFile()) {
+            f.delete();
+        }
     }
 }
