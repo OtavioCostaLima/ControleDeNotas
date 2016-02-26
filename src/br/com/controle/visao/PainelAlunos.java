@@ -110,6 +110,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         jButton5 = new javax.swing.JButton();
         btnAdicionar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanelAluno = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
@@ -266,7 +267,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         campoImagemAluno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         campoImagemAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/aluno.png"))); // NOI18N
         campoImagemAluno.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        campoImagemAluno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        campoImagemAluno.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         campoImagemAluno.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         campoImagemAluno.setFocusable(false);
         campoImagemAluno.setOpaque(true);
@@ -478,6 +479,17 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 0, 0));
+        jButton1.setText("LIMPAR");
+        jButton1.setContentAreaFilled(false);
+        jButton1.setFocusable(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelMatriculaLayout = new javax.swing.GroupLayout(jPanelMatricula);
         jPanelMatricula.setLayout(jPanelMatriculaLayout);
         jPanelMatriculaLayout.setHorizontalGroup(
@@ -490,6 +502,8 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                         .addComponent(btnAdicionar)
                         .addGap(10, 10, 10)
                         .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelMatriculaLayout.createSequentialGroup()
                         .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -499,7 +513,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
             .addComponent(jScrollPane3)
         );
 
-        jPanelMatriculaLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdicionar, btnRemover});
+        jPanelMatriculaLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdicionar, btnRemover, jButton1});
 
         jPanelMatriculaLayout.setVerticalGroup(
             jPanelMatriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -511,14 +525,15 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelMatriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRemover)
-                    .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanelMatriculaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdicionar, btnRemover});
+        jPanelMatriculaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdicionar, btnRemover, jButton1});
 
         jPanelMatriculaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {campoImagemAluno, jPanel11});
 
@@ -1161,8 +1176,9 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                 }
             }
         }
-        limparCampos();
         TABELA_ALUNO.inserirAlunos(alunoRN.buscarTodos());
+        limparCampos();
+        novosAlunos.clear();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
@@ -1172,6 +1188,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                 Aluno aluno = TABELA_ALUNO.delAluno(tabelaCadastro.getSelectedRow());
                 GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
                 gerenteDeArquivos.removerImagem("./fotos/" + aluno.getMatricula().trim().concat(".jpg"));
+                limparCampos();
             }
         }
 // TODO add your handling code here:
@@ -1223,6 +1240,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
             int index = tabelaCadastro.getSelectedRow();
             novosAlunos.remove(index);
             TABELA_ALUNO.delAluno(tabelaCadastro.getSelectedRow());
+            limparCampos();
         }
     }//GEN-LAST:event_btnRemoverActionPerformed
 
@@ -1236,6 +1254,10 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private void campoMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoMatriculaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoMatriculaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        limparCampos();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1257,6 +1279,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup grupoQuestao5;
     private javax.swing.ButtonGroup grupoQuestao6;
     private javax.swing.ButtonGroup grupoSexo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -1373,6 +1396,8 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         urlAtualfoto = null;
         checkStatus.setSelected(false);
         campoDataCadastro.setDate(null);
+        campoImagemAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/aluno.png")));
+
     }
 
 }
