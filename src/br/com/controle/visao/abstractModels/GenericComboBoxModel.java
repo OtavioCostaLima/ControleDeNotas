@@ -1,6 +1,5 @@
 package br.com.controle.visao.abstractModels;
 
-import br.com.controle.util.modelo.BeanBase;
 import java.util.ArrayList;
 import javax.swing.AbstractListModel;
 import javax.swing.ComboBoxModel;

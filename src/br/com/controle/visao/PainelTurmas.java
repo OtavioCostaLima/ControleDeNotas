@@ -13,7 +13,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 public class PainelTurmas extends javax.swing.JInternalFrame {
 
     private final TurmaRN TURMA_RN = new TurmaRN();
-    private final TabelaTurma TABELA_TURMA = TabelaTurma.getInstancia();
+    private final TabelaTurma TABELA_TURMA = new TabelaTurma();
     private static PainelTurmas PAINEL_TURMAS = new PainelTurmas();
 
     /**
@@ -24,7 +24,7 @@ public class PainelTurmas extends javax.swing.JInternalFrame {
         initComponents();
         ((BasicInternalFrameUI) getUI()).setNorthPane(null);
         List<Turma> turmas = TURMA_RN.buscarTodos();
-        TABELA_TURMA.addListaTurma(turmas);
+        TABELA_TURMA.inserirTurmas(turmas);
         tableTurma.setModel(TABELA_TURMA);
     }
 
@@ -232,7 +232,7 @@ public class PainelTurmas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-         TURMA_RN.remover(TABELA_TURMA.delTurma(tableTurma.getSelectedRow()));
+        TURMA_RN.remover(TABELA_TURMA.delTurma(tableTurma.getSelectedRow()));
     }//GEN-LAST:event_jButton5ActionPerformed
 
 

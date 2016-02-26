@@ -11,22 +11,15 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TabelaTurma extends AbstractTableModel {
 
-    private static TabelaTurma tabelaTurma;
-    private List<Turma> turmas = new ArrayList<>();
+    private final List<Turma> turmas = new ArrayList<>();
     private final String colunas[] = {"Id", "Turma", "Turno", "Ano"};
 
-    private TabelaTurma() {
+    public TabelaTurma() {
     }
 
-    public static TabelaTurma getInstancia() {
-        if (tabelaTurma == null) {
-            tabelaTurma = new TabelaTurma();
-        }
-        return tabelaTurma;
-    }
-
-    public void addListaTurma(List<Turma> turmas) {
-        this.turmas = turmas;
+    public void inserirTurmas(List<Turma> turmas) {
+        limparLista();
+        this.turmas.addAll(turmas);
     }
 
     public void addTurma(Turma turma) {

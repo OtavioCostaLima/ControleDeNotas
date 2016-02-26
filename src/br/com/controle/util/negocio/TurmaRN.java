@@ -42,5 +42,8 @@ public class TurmaRN implements RNgenerico<Turma> {
     public List<String> listarAnos() {
         return turmaDAO.listarAnos();
     }
+    public List<Turma> listarTurmaPorAno(String ano) {
+        return turmaDAO.listarTurmasPorAno(ano);
+    }
 
 }

@@ -19,4 +19,12 @@ public class TurmaDAO extends DAOGenerico<Turma> {
         return query.getResultList();
     }
 
+    public List<Turma> listarTurmasPorAno(String ano) {
+        EntityManager entityManager = ConexaoUtil.getEntityManager();
+        String consulta = "SELECT t FROM Turma t WHERE t.ano=:anoTurma";
+        TypedQuery<Turma> query = entityManager.createQuery(consulta, Turma.class);
+        query.setParameter("anoTurma", ano);
+        return query.getResultList();
+    }
+
 }
