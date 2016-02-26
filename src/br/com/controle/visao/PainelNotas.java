@@ -104,16 +104,6 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         comboBimestre.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         comboBimestre.setForeground(new java.awt.Color(255, 0, 51));
         comboBimestre.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1° BIMESTRE", "2° BIMESTRE", "3° BIMESTRE", "4° BIMESTRE" }));
-        comboBimestre.addHierarchyListener(new java.awt.event.HierarchyListener() {
-            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
-                comboBimestreHierarchyChanged(evt);
-            }
-        });
-        comboBimestre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBimestreActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
@@ -224,7 +214,7 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "TURMA", "ALUNO", "BIMESTRE", "QUALITATIVO", "EXTRA", "MENSAL", "BIMESTRAL", "MÉDIA"
+                "MATRICULA", "ALUNO", "BIMESTRE", "QUALITATIVO", "EXTRA", "MENSAL", "BIMESTRAL", "MÉDIA"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -373,21 +363,6 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         painelNotas = null;
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void comboBimestreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBimestreActionPerformed
-        /*    if (comboAno.getSelectedIndex() == -1) {
-         jScrollPaneTurma.setVisible(false);
-         JOptionPane.showMessageDialog(null, "Selecione um Ano.");
-         } else {
-         jScrollPaneTurma.setVisible(true);
-         revalidate();
-         repaint();
-         }      */        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBimestreActionPerformed
-
-    private void comboBimestreHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_comboBimestreHierarchyChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBimestreHierarchyChanged
 
     private void comboAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAnoActionPerformed
         listarTurmasPorAno();        // TODO add your handling code here:

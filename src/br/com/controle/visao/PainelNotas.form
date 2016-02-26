@@ -201,10 +201,6 @@
                   </StringArray>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="hierarchyChanged" listener="java.awt.event.HierarchyListener" parameters="java.awt.event.HierarchyEvent" handler="comboBimestreHierarchyChanged"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBimestreActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
@@ -390,7 +386,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="8" rowCount="4">
-                        <Column editable="false" title="TURMA" type="java.lang.Object"/>
+                        <Column editable="false" title="MATRICULA" type="java.lang.Object"/>
                         <Column editable="false" title="ALUNO" type="java.lang.Object"/>
                         <Column editable="false" title="BIMESTRE" type="java.lang.Object"/>
                         <Column editable="false" title="QUALITATIVO" type="java.lang.Object"/>
