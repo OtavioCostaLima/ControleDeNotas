@@ -329,6 +329,9 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                     .addComponent(btnSalvar1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnSalvar, jButton3, jButton5});
+
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
@@ -424,13 +427,12 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         ProfessorRN professorRN = new ProfessorRN();
         Professor professor = encapsular();
         if (professorRN.salvar(professor)) {
-             GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
+            GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
             if (urlfoto != null && !urlfoto.trim().equals("")) {
-                gerenteDeArquivos.gravarImagem(urlfoto, campoImagemProfessor.getWidth(),campoImagemProfessor.getHeight(), "./fotos/" + professor.getMatricula().trim().concat(".jpg"));
+                gerenteDeArquivos.gravarImagem(urlfoto, campoImagemProfessor.getWidth(), campoImagemProfessor.getHeight(), "./fotos/" + professor.getMatricula().trim().concat(".jpg"));
             }
             limparCampos();
             TABELA_PROFESSOR.inserirAlunos(professorRN.buscarTodos());
-           
 
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
@@ -539,5 +541,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         textoNomeProfessor.setText(null);
         listModel.clear();
         urlfoto = "";
+        checkStatus.setSelected(false);
+        campoImagemProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/professor.png")));
     }
 }
