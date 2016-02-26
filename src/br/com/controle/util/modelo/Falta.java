@@ -13,7 +13,6 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Falta implements BeanBase, Serializable {
 
-    private int faltas;
     @Id
     @ManyToOne
     @JoinColumn(name = "id_disciplina")
@@ -22,6 +21,13 @@ public class Falta implements BeanBase, Serializable {
     @ManyToOne
     @JoinColumn(name = "id_aluno")
     private Aluno aluno;
+    
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "id_turma")
+    private Turma turma;
+
+    private int faltas;
 
     public int getFaltas() {
         return faltas;

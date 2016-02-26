@@ -40,8 +40,11 @@ public class Turma implements BeanBase, Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "turma")
     private List<Aluno> alunos;
-    
-      public Long getId() {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "turma")
+    private List<Falta> faltas;
+
+    public Long getId() {
         return id;
     }
 
@@ -89,7 +92,6 @@ public class Turma implements BeanBase, Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        System.out.println("oi");
         if (obj == null) {
             return false;
         }
@@ -115,8 +117,6 @@ public class Turma implements BeanBase, Serializable {
         return true;
     }
 
-  
-
     public char getSigla() {
         return sigla;
     }
@@ -125,8 +125,16 @@ public class Turma implements BeanBase, Serializable {
         this.sigla = sigla;
     }
 
+    public List<Falta> getFaltas() {
+        return faltas;
+    }
+
+    public void setFaltas(List<Falta> faltas) {
+        this.faltas = faltas;
+    }
+
     @Override
     public String toString() {
-        return descricao +" "+ sigla+" " + turno + " - " + ano;
+        return descricao + " " + sigla + " " + turno + " - " + ano;
     }
 }
