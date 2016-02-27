@@ -56,7 +56,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             for (int i = 0; i < listModel.getSize(); i++) {
                 disciplinas.add(listModel.get(i));
             }
-            professor.setDisciplinas(disciplinas);
+           // professor.setDisciplinas(disciplinas);
         }
         return professor;
     }
@@ -219,9 +219,9 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                                 .addComponent(textoMatriculaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(checkStatus)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(textoNomeProfessor)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -503,9 +503,9 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                 checkStatus.setSelected(false);
             }
             listModel.clear();
-            for (Disciplina disciplina : professor.getDisciplinas()) {
-                listModel.addElement(disciplina);
-            }
+            /*  for (Disciplina disciplina : professor.getDisciplinas()) {
+            listModel.addElement(disciplina);
+            }*/
         }        // TODO add your handling code here:
     }//GEN-LAST:event_tabelaPesquisaprofessorMouseClicked
 

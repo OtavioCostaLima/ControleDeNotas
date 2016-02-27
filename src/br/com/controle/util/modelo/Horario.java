@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -17,8 +18,8 @@ public class Horario implements Serializable, BeanBase {
 
     private String diaDaSemana;
 
-    @Temporal(javax.persistence.TemporalType.TIME)
-    private Date date;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date hora;
 
     @Id
     @ManyToOne
@@ -43,12 +44,12 @@ public class Horario implements Serializable, BeanBase {
         this.diaDaSemana = diaDaSemana;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getHora() {
+        return hora;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setHora(Date hora) {
+        this.hora = hora;
     }
 
     public Professor getProfessor() {

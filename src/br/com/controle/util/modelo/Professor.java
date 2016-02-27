@@ -45,10 +45,10 @@ public class Professor implements BeanBase, Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "professor")
     private List<Horario> horarios;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    /*  @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "ProfessorDisciplina", joinColumns = @JoinColumn(name = "matricula_professor", referencedColumnName = "matricula"),
-            inverseJoinColumns = @JoinColumn(name = "id_disciplina", referencedColumnName = "id"))
-    private List<Disciplina> disciplinas;
+    inverseJoinColumns = @JoinColumn(name = "id_disciplina", referencedColumnName = "id"))
+    private List<Disciplina> disciplinas;*/
 
     /**
      * retorna o nome do Professor
@@ -71,15 +71,7 @@ public class Professor implements BeanBase, Serializable {
         this.notas = notas;
     }
 
-    public List<Disciplina> getDisciplinas() {
-        return disciplinas;
-    }
-
-    public void setDisciplinas(List<Disciplina> disciplinas) {
-        this.disciplinas = disciplinas;
-    }
-
-    public String getSituacao() {
+     public String getSituacao() {
         return situacao;
     }
 

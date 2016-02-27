@@ -39,9 +39,8 @@ public class Disciplina implements BeanBase, Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "disciplina")
     private List<Falta> faltas;
 
-    @ManyToMany(mappedBy = "disciplinas")
-    private List<Professor> professores;
-
+    // @ManyToMany(mappedBy = "disciplinas")
+    //private List<Professor> professores;
     public List<Falta> getFaltas() {
         return faltas;
     }
@@ -79,14 +78,13 @@ public class Disciplina implements BeanBase, Serializable {
         return descricao;
     }
 
-    public List<Professor> getProfessores() {
-        return professores;
-    }
-
-    public void setProfessores(List<Professor> professores) {
-        this.professores = professores;
-    }
-
+    /* public List<Professor> getProfessores() {
+     return professores;
+     }
+    
+     public void setProfessores(List<Professor> professores) {
+     this.professores = professores;
+     }*/
     public List<Horario> getHorarios() {
         return horarios;
     }
