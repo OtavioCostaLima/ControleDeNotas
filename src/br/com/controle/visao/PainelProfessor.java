@@ -2,7 +2,10 @@ package br.com.controle.visao;
 
 import br.com.controle.util.modelo.Disciplina;
 import br.com.controle.util.modelo.Professor;
+import br.com.controle.util.modelo.Turma;
 import br.com.controle.util.negocio.ProfessorRN;
+import br.com.controle.util.negocio.TurmaRN;
+import br.com.controle.visao.abstractModels.GenericComboBoxModel;
 import br.com.controle.visao.abstractModels.TabelaProfessor;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -17,6 +20,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  */
 public class PainelProfessor extends javax.swing.JInternalFrame {
 
+    private GenericComboBoxModel<Turma> boxModelTurma;
     private final TabelaProfessor TABELA_PROFESSOR = new TabelaProfessor();
     private static PainelProfessor painelProfessor;
     private final DefaultListModel<Disciplina> listModel = new DefaultListModel<>();
@@ -30,7 +34,8 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         ((BasicInternalFrameUI) getUI()).setNorthPane(null);
         jListDisciplinas.setModel(listModel);
         tabelaPesquisarProfessor();
-        TextPrompt prompt = new TextPrompt("Nome do Professor", textoNomeProfessor);
+        povoarComboboxTurma();
+        TextPrompt prompt = new TextPrompt("DIGITE O NOME AQUI", textoNomeProfessor);
         prompt.setForeground(Color.GRAY);
     }
 
@@ -39,6 +44,12 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             painelProfessor = new PainelProfessor();
         }
         return painelProfessor;
+    }
+
+    private void povoarComboboxTurma() {
+        ArrayList<Turma> turma = (ArrayList<Turma>) new TurmaRN().buscarTodos();
+        boxModelTurma = new GenericComboBoxModel(turma);
+        comboTurma.setModel(boxModelTurma);
     }
 
     private Professor encapsular() {
@@ -56,7 +67,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             for (int i = 0; i < listModel.getSize(); i++) {
                 disciplinas.add(listModel.get(i));
             }
-           // professor.setDisciplinas(disciplinas);
+            // professor.setDisciplinas(disciplinas);
         }
         return professor;
     }
@@ -92,7 +103,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         jListDisciplinas = new javax.swing.JList();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
+        comboTurma = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         btnSalvar = new javax.swing.JButton();
@@ -198,8 +209,8 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setText("Turma:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -219,10 +230,10 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                                 .addComponent(textoMatriculaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(checkStatus)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(textoNomeProfessor)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
@@ -244,7 +255,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                             .addComponent(textoMatriculaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addComponent(checkStatus)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -504,8 +515,8 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             }
             listModel.clear();
             /*  for (Disciplina disciplina : professor.getDisciplinas()) {
-            listModel.addElement(disciplina);
-            }*/
+             listModel.addElement(disciplina);
+             }*/
         }        // TODO add your handling code here:
     }//GEN-LAST:event_tabelaPesquisaprofessorMouseClicked
 
@@ -524,13 +535,13 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel campoImagemProfessor;
     private javax.swing.JCheckBox checkStatus;
+    private javax.swing.JComboBox comboTurma;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

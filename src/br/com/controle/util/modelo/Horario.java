@@ -23,17 +23,17 @@ public class Horario implements Serializable, BeanBase {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "id_professor")
+    @JoinColumn(name = "id_professor",nullable = false)
     private Professor professor;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "id_disciplina")
+    @JoinColumn(name = "id_disciplina",nullable = true)
     private Disciplina disciplina;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "id_turma")
+    @JoinColumn(name = "id_turma",nullable = true)
     private Turma turma;
 
     public String getDiaDaSemana() {

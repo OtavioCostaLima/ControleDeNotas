@@ -45,7 +45,9 @@ public class PainelTurmas extends javax.swing.JInternalFrame {
         turma.setDescricao(textoTurma.getText());
         turma.setTurno(comboTurno.getSelectedItem().toString());
         turma.setAno(String.valueOf(campoAnoTurma.getYear()));
-        turma.setSigla(campoSigla.getText().charAt(0));
+        if (!campoSigla.getText().trim().equals("")) {
+            turma.setSigla(campoSigla.getText().charAt(0));
+        }
         return turma;
 
     }
