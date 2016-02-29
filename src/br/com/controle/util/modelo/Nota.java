@@ -1,9 +1,8 @@
 package br.com.controle.util.modelo;
 
 import java.io.Serializable;
-import java.util.Objects;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -16,6 +15,9 @@ import javax.persistence.Table;
 @Table(name = "nota")
 public class Nota implements BeanBase, Serializable {
 
+    @EmbeddedId
+    private NotaPK notaPK;
+
     private String bimestre;
     private double provaMensal;
     private double provaBimestral;
@@ -23,20 +25,25 @@ public class Nota implements BeanBase, Serializable {
     private double qualitativo;
     private double media;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "id_disciplina")
+    @JoinColumn(name = "id_disciplina", insertable = false, updatable = false, nullable = false)
     private Disciplina disciplina;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "matricula_aluno")
+    @JoinColumn(name = "matricula_aluno", insertable = false, updatable = false, nullable = false)
     private Aluno aluno;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "matricula_professor")
+    @JoinColumn(name = "matricula_professor", insertable = false, updatable = false, nullable = false)
     private Professor professor;
+
+    public NotaPK getNotaPK() {
+        return notaPK;
+    }
+
+    public void setNotaPK(NotaPK notaPK) {
+        this.notaPK = notaPK;
+    }
 
     public String getBimestre() {
         return bimestre;
@@ -108,36 +115,6 @@ public class Nota implements BeanBase, Serializable {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.disciplina);
-        hash = 37 * hash + Objects.hashCode(this.aluno);
-        hash = 37 * hash + Objects.hashCode(this.professor);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Nota other = (Nota) obj;
-        if (!Objects.equals(this.disciplina, other.disciplina)) {
-            return false;
-        }
-        if (!Objects.equals(this.aluno, other.aluno)) {
-            return false;
-        }
-        if (!Objects.equals(this.professor, other.professor)) {
-            return false;
-        }
-        return true;
     }
 
 }
