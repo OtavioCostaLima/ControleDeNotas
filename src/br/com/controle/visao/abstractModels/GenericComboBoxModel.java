@@ -16,6 +16,7 @@ public class GenericComboBoxModel<T> extends AbstractListModel implements ComboB
 
     public GenericComboBoxModel(ArrayList<T> arrayList) {
         listaGenerica = arrayList;
+
     }
 
     @Override

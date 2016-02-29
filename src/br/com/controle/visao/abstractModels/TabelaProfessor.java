@@ -22,7 +22,9 @@ public final class TabelaProfessor extends AbstractTableModel {
         this.professores = professores;
     }
 
-    public void inserirAlunos(List<Professor> professors) {
+   /**Limpa a Lista atual de Professores e adiciona uma nova Lista
+     * @param professors */
+    public void inserirProfessores(List<Professor> professors) {
         limparLista();
         this.professores.addAll(professors);
 

@@ -1,6 +1,7 @@
 package br.com.controle.util.modelo;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -107,6 +108,36 @@ public class Nota implements BeanBase, Serializable {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.disciplina);
+        hash = 37 * hash + Objects.hashCode(this.aluno);
+        hash = 37 * hash + Objects.hashCode(this.professor);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Nota other = (Nota) obj;
+        if (!Objects.equals(this.disciplina, other.disciplina)) {
+            return false;
+        }
+        if (!Objects.equals(this.aluno, other.aluno)) {
+            return false;
+        }
+        if (!Objects.equals(this.professor, other.professor)) {
+            return false;
+        }
+        return true;
     }
 
 }

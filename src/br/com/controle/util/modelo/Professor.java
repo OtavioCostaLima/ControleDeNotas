@@ -104,7 +104,12 @@ public class Professor implements BeanBase, Serializable {
         if (!Objects.equals(this.matricula, other.matricula)) {
             return false;
         }
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
         return true;
     }
+
+    
 
 }

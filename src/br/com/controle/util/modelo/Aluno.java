@@ -35,8 +35,7 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
     @JoinColumn(name = "id_turma")
     private Turma turma;
 
-    @Column(name = "url_imagem")
-    private String uRLImagem;
+    private transient String uRLImagem;
 
     @Column(name = "numero_chamada")
     private int numeroChamada;
@@ -45,7 +44,9 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
      */
     private String situacao;
 
-    /**   ATIVO/INATIVO     */
+    /**
+     * ATIVO/INATIVO
+     */
     private String status;
 
     @Temporal(TemporalType.DATE)
@@ -129,7 +130,7 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
         this.faltas = faltas;
     }
 
-       public String getStatus() {
+    public String getStatus() {
         return status;
     }
 
@@ -142,11 +143,11 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
             this.matricula = this.getTurma().getAno() + this.getTurma().getDescricao().replaceAll("[^0-9]", "") + this.turma.getSigla() + this.numeroChamada;
         }
     }
-    
-     public boolean isAtivo() {
+
+    public boolean isAtivo() {
         return this.getStatus().equals("ATIVO");
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -176,9 +177,9 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
         return true;
     }
 
-     @Override
+    @Override
     public int compareTo(Aluno outro) {
         return this.nome.compareTo(outro.getNome());
     }
 
-   }
+}

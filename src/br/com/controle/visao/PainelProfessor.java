@@ -1,13 +1,15 @@
 package br.com.controle.visao;
 
 import br.com.controle.util.modelo.Disciplina;
+import br.com.controle.util.modelo.Horario;
+import br.com.controle.util.modelo.HorarioPK;
 import br.com.controle.util.modelo.Professor;
 import br.com.controle.util.modelo.Turma;
+import br.com.controle.util.negocio.HorarioRN;
 import br.com.controle.util.negocio.ProfessorRN;
 import br.com.controle.util.negocio.TurmaRN;
 import br.com.controle.visao.abstractModels.GenericComboBoxModel;
 import br.com.controle.visao.abstractModels.TabelaProfessor;
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -35,8 +37,6 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         jListDisciplinas.setModel(listModel);
         tabelaPesquisarProfessor();
         povoarComboboxTurma();
-        TextPrompt prompt = new TextPrompt("DIGITE O NOME AQUI", textoNomeProfessor);
-        prompt.setForeground(Color.GRAY);
     }
 
     public static PainelProfessor getInstancia() {
@@ -54,21 +54,39 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
 
     private Professor encapsular() {
         Professor professor = new Professor();
+        List<Disciplina> disciplinas;
+        List<Horario> horarios;
         professor.setMatricula(textoMatriculaProfessor.getText());
         professor.setNome(textoNomeProfessor.getText());
+
         if (checkStatus.isSelected()) {
             professor.setSituacao("ATIVO");
         } else {
             professor.setSituacao("INATIVO");
         }
-        List<Disciplina> disciplinas;
+
         if (!listModel.isEmpty()) {
             disciplinas = new ArrayList<>();
+            horarios = new ArrayList<>();
             for (int i = 0; i < listModel.getSize(); i++) {
                 disciplinas.add(listModel.get(i));
             }
-            // professor.setDisciplinas(disciplinas);
+
+            for (Disciplina disciplina : disciplinas) {
+                Horario horario = new Horario();
+                HorarioPK pK = new HorarioPK(professor.getMatricula(), disciplina.getId());
+                horario.setHorarioPK(pK);
+                System.out.println("dis: " + disciplina.getId());
+                horario.setDisciplina(disciplina);
+                horario.setProfessor(professor);
+                if (comboTurma.getSelectedIndex() > -1) {
+                    horario.setTurma(boxModelTurma.get(comboTurma.getSelectedIndex()));
+                }
+                horarios.add(horario);
+            }
+            professor.setHorarios(horarios);
         }
+
         return professor;
     }
 
@@ -263,11 +281,11 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                             .addComponent(textoNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
+                                .addGap(19, 19, 19)
                                 .addComponent(jButton9)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton8)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 7, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
@@ -454,7 +472,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                 gerenteDeArquivos.gravarImagem(urlfoto, campoImagemProfessor.getWidth(), campoImagemProfessor.getHeight(), "./fotos/" + professor.getMatricula().trim().concat(".jpg"));
             }
             limparCampos();
-            TABELA_PROFESSOR.inserirAlunos(professorRN.buscarTodos());
+            TABELA_PROFESSOR.inserirProfessores(professorRN.buscarTodos());
 
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
@@ -485,7 +503,13 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         if (jListDisciplinas.getSelectedIndex() > -1) {
+            Disciplina disciplina = listModel.get(jListDisciplinas.getSelectedIndex());
+            System.out.println("d: "+disciplina.getId());
+            HorarioRN horario = new HorarioRN();
+            HorarioPK pK = new HorarioPK(textoMatriculaProfessor.getText().trim(), disciplina.getId());
+            horario.removerHorario(pK);
             listModel.remove(jListDisciplinas.getSelectedIndex());
+
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -514,9 +538,12 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                 checkStatus.setSelected(false);
             }
             listModel.clear();
-            /*  for (Disciplina disciplina : professor.getDisciplinas()) {
-             listModel.addElement(disciplina);
-             }*/
+            if (professor.getHorarios() != null) {
+                for (Horario horario : professor.getHorarios()) {
+                    listModel.addElement(horario.getDisciplina());
+                }
+            }
+
         }        // TODO add your handling code here:
     }//GEN-LAST:event_tabelaPesquisaprofessorMouseClicked
 

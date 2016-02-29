@@ -291,8 +291,8 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
         if (jTableDisciplinas.isRowSelected(jTableDisciplinas.getSelectedRow())) {
             Disciplina disciplina = tabelaDisciplina.getDisciplina(jTableDisciplinas.getSelectedRow());
             DisciplinaRN disciplinaRN = new DisciplinaRN();
-
             if (disciplinaRN.remover(disciplina.getId())) {
+                tabelaDisciplina.delDisciplina(jTableDisciplinas.getSelectedRow());
                 limparCampos();
             }
 
@@ -316,7 +316,7 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTableDisciplinasMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-limparCampos();        // TODO add your handling code here:
+        limparCampos();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
 
