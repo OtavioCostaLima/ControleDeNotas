@@ -51,10 +51,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         areaPrincipal.setLayout(new java.awt.CardLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Impact", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("SISTEMA");
+        jLabel1.setText("SISTEMA IMPACTO");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         areaPrincipal.add(jLabel1, "card2");
 
