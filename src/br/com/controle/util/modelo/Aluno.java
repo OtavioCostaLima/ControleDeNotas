@@ -32,12 +32,12 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name = "id_turma")
+    @JoinColumn(name = "id_turma",nullable = false)
     private Turma turma;
 
     private transient String uRLImagem;
 
-    @Column(name = "numero_chamada")
+    @Column(name = "numero_chamada",nullable = false)
     private int numeroChamada;
     /**
      * o Aluno pode está cursando, desistente, reprovado, aprovado"

@@ -23,7 +23,7 @@ public class Professor implements BeanBase, Serializable {
     @Column(name = "matricula", nullable = false, unique = true)
     private String matricula;
 
-    @Column(name = "nome")
+    @Column(name = "nome", nullable = false)
     private String nome;
 
     private String situacao;
@@ -42,17 +42,7 @@ public class Professor implements BeanBase, Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "professor")
     private List<Horario> horarios;
 
-    /*  @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "ProfessorDisciplina", joinColumns = @JoinColumn(name = "matricula_professor", referencedColumnName = "matricula"),
-    inverseJoinColumns = @JoinColumn(name = "id_disciplina", referencedColumnName = "id"))
-    private List<Disciplina> disciplinas;*/
-
-    /**
-     * retorna o nome do Professor
-     *
-     * @return
-     */
-    public String getNome() {
+     public String getNome() {
         return nome;
     }
 
@@ -68,7 +58,7 @@ public class Professor implements BeanBase, Serializable {
         this.notas = notas;
     }
 
-     public String getSituacao() {
+    public String getSituacao() {
         return situacao;
     }
 
@@ -109,7 +99,5 @@ public class Professor implements BeanBase, Serializable {
         }
         return true;
     }
-
-    
 
 }
