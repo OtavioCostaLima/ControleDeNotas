@@ -20,14 +20,14 @@ public class GerenciadorDeJanelas<T extends JInternalFrame> {
 
     }
 
-    public void openInternalFrame(T t) {
-        this.t = t;
-        if (t.isVisible()) {
-            t.toFront();
-            t.requestFocus();
+    public void openInternalFrame(T janela) {
+        this.t = janela;
+        if (janela.isVisible()) {
+            janela.toFront();
+            janela.requestFocus();
         } else {
-            DESKTOP_PANE.add(t);
-            t.setVisible(true);
+            DESKTOP_PANE.add(janela);
+            janela.setVisible(true);
         }
     }
 
