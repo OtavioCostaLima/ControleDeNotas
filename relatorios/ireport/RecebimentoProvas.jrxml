@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d59a853d-252a-4303-9c84-88e9cd1f073d">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.6105100000000008"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
@@ -20,23 +20,23 @@ join aluno a on a.id_turma = t.id]]>
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="184" splitType="Stretch">
+		<band height="151" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="0" width="555" height="162" uuid="76c86d33-faae-42f8-b56f-8788f591227f"/>
+				<reportElement x="21" y="0" width="534" height="148" uuid="76c86d33-faae-42f8-b56f-8788f591227f"/>
 			</rectangle>
-			<image>
-				<reportElement x="0" y="0" width="92" height="72" uuid="9a8e2ed0-ec8e-4df5-b4e4-9c6f5e7d7e18"/>
+			<image scaleImage="FillFrame">
+				<reportElement x="21" y="0" width="92" height="58" uuid="9a8e2ed0-ec8e-4df5-b4e4-9c6f5e7d7e18"/>
 				<imageExpression><![CDATA["C:\\Users\\Suporte Técnico\\Documents\\NetBeansProjects\\ControleDeNotas\\relatorios\\ireport\\Logo_Atual.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="92" y="0" width="168" height="23" uuid="ffc676b7-c55f-4f98-933b-8d3d59f1615a"/>
+				<reportElement x="113" y="0" width="147" height="23" uuid="ffc676b7-c55f-4f98-933b-8d3d59f1615a"/>
 				<textElement textAlignment="Center">
 					<font fontName="Impact" size="18" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Colégio Impacto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="72" width="260" height="30" uuid="24a6170e-3cb4-44b9-bd41-e34283275153"/>
+				<reportElement x="21" y="58" width="239" height="30" uuid="24a6170e-3cb4-44b9-bd41-e34283275153"/>
 				<textElement textAlignment="Center">
 					<font size="11" isBold="true"/>
 				</textElement>
@@ -45,25 +45,28 @@ Ensino Médio
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="122" width="54" height="20" uuid="fb2dc8dc-bb1f-40bf-87ac-272497c18e42"/>
-				<textElement>
-					<font size="12" isBold="true"/>
+				<reportElement x="21" y="108" width="52" height="20" uuid="fb2dc8dc-bb1f-40bf-87ac-272497c18e42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ALUNO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2" y="102" width="52" height="20" uuid="824fca3a-ad93-4cfc-9d41-890983d08d68"/>
-				<textElement>
-					<font size="12" isBold="true"/>
+				<reportElement x="21" y="88" width="52" height="20" uuid="824fca3a-ad93-4cfc-9d41-890983d08d68"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TURMA:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3" y="142" width="260" height="20" uuid="705a7662-0f0b-4bee-bdba-37aaae9c24ce"/>
+				<reportElement x="21" y="128" width="242" height="20" uuid="705a7662-0f0b-4bee-bdba-37aaae9c24ce"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[Obs: Comprovante de entrega de provas para o aluno.]]></text>
 			</staticText>
 			<line>
-				<reportElement x="262" y="0" width="1" height="162" uuid="f4ae28c9-7150-40c6-9e46-40b0bf12d392"/>
+				<reportElement x="262" y="0" width="1" height="148" uuid="f4ae28c9-7150-40c6-9e46-40b0bf12d392"/>
 			</line>
 			<rectangle>
 				<reportElement x="263" y="3" width="292" height="20" uuid="d3aa5af3-6315-487e-bb52-f9c0633d4ffa"/>
@@ -76,23 +79,23 @@ Ensino Médio
 				<text><![CDATA[DISCIPLINA:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="263" y="37" width="44" height="20" uuid="37dc3fd9-a3a1-4800-a047-b6696faafab6"/>
+				<reportElement x="263" y="23" width="44" height="20" uuid="37dc3fd9-a3a1-4800-a047-b6696faafab6"/>
 				<textElement verticalAlignment="Bottom"/>
 				<text><![CDATA[ALUNO:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="263" y="57" width="292" height="1" uuid="e00c868b-31d9-4c03-bb4e-71d030fabd95"/>
+				<reportElement x="263" y="43" width="292" height="1" uuid="e00c868b-31d9-4c03-bb4e-71d030fabd95"/>
 			</line>
 			<staticText>
-				<reportElement x="263" y="82" width="100" height="20" uuid="ebc8a1d1-7397-4a35-b9a2-d3af2d7b1bd4"/>
+				<reportElement x="263" y="58" width="100" height="20" uuid="ebc8a1d1-7397-4a35-b9a2-d3af2d7b1bd4"/>
 				<textElement verticalAlignment="Bottom"/>
 				<text><![CDATA[Rubrica do Professor:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="263" y="102" width="292" height="1" uuid="01b8dca0-c7b6-4e05-ba84-8eb6c716939a"/>
+				<reportElement x="263" y="78" width="292" height="1" uuid="01b8dca0-c7b6-4e05-ba84-8eb6c716939a"/>
 			</line>
 			<staticText>
-				<reportElement x="409" y="142" width="146" height="20" uuid="69bb1c6b-ab6d-48cb-9095-0c78dacbe0cd"/>
+				<reportElement x="409" y="128" width="146" height="20" uuid="69bb1c6b-ab6d-48cb-9095-0c78dacbe0cd"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[DATA:____/_____/_________]]></text>
 			</staticText>
@@ -102,7 +105,10 @@ Ensino Médio
 				<text><![CDATA[NOTA:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="54" y="123" width="206" height="20" uuid="8f0cdd20-9506-4f16-bd20-6c4538b1e491"/>
+				<reportElement x="73" y="108" width="187" height="20" uuid="8f0cdd20-9506-4f16-bd20-6c4538b1e491"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{nome_aluno}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -113,23 +119,19 @@ Ensino Médio
 				<textFieldExpression><![CDATA[$F{nomeDisciplina}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="54" y="102" width="206" height="20" uuid="67dcd538-09e9-483c-a8ab-8ede499dd140"/>
+				<reportElement x="73" y="88" width="187" height="20" uuid="67dcd538-09e9-483c-a8ab-8ede499dd140"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{nomeTurma}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="262" y="103" width="293" height="20" uuid="1690697d-279b-41b3-aebe-5d4a5fded6a9"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="263" y="79" width="293" height="20" uuid="1690697d-279b-41b3-aebe-5d4a5fded6a9"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nomeProfessor}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="3" y="162" width="552" height="20" uuid="a0b31520-2281-4ced-a196-e8be8db6a2ca"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial"/>
-				</textElement>
-				<text><![CDATA[--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------]]></text>
-			</staticText>
 		</band>
 	</detail>
 </jasperReport>
