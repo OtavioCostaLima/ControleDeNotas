@@ -26,7 +26,7 @@ join aluno a on a.id_turma = t.id]]>
 			</rectangle>
 			<image scaleImage="FillFrame">
 				<reportElement x="21" y="0" width="92" height="58" uuid="9a8e2ed0-ec8e-4df5-b4e4-9c6f5e7d7e18"/>
-				<imageExpression><![CDATA["C:\\Users\\Suporte Técnico\\Documents\\NetBeansProjects\\ControleDeNotas\\relatorios\\ireport\\Logo_Atual.png"]]></imageExpression>
+				<imageExpression><![CDATA["/relatorios/ireport/Logo_Atual.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="113" y="0" width="147" height="23" uuid="ffc676b7-c55f-4f98-933b-8d3d59f1615a"/>
