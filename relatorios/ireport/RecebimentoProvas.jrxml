@@ -3,30 +3,40 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select d.descricao as nomeDisciplina,a.nome_aluno,t.descricao as nomeTurma, p.nome as nomeProfessor from horario h
+join professor p on h.id_professor=p.matricula
+join disciplina d on h.id_disciplina= d.id
+join turma t on  t.id=h.id_turma 
+join aluno a on a.id_turma = t.id]]>
+	</queryString>
+	<field name="nomeDisciplina" class="java.lang.String"/>
+	<field name="nome_aluno" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomeTurma" class="java.lang.String"/>
+	<field name="nomeProfessor" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<title>
-		<band height="27" splitType="Stretch"/>
-	</title>
 	<detail>
-		<band height="188" splitType="Stretch">
+		<band height="184" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="17" width="555" height="162" uuid="76c86d33-faae-42f8-b56f-8788f591227f"/>
+				<reportElement x="0" y="0" width="555" height="162" uuid="76c86d33-faae-42f8-b56f-8788f591227f"/>
 			</rectangle>
 			<image>
-				<reportElement x="0" y="17" width="92" height="72" uuid="9a8e2ed0-ec8e-4df5-b4e4-9c6f5e7d7e18"/>
+				<reportElement x="0" y="0" width="92" height="72" uuid="9a8e2ed0-ec8e-4df5-b4e4-9c6f5e7d7e18"/>
 				<imageExpression><![CDATA["C:\\Users\\Suporte Técnico\\Documents\\NetBeansProjects\\ControleDeNotas\\relatorios\\ireport\\Logo_Atual.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="92" y="17" width="168" height="23" uuid="ffc676b7-c55f-4f98-933b-8d3d59f1615a"/>
+				<reportElement x="92" y="0" width="168" height="23" uuid="ffc676b7-c55f-4f98-933b-8d3d59f1615a"/>
 				<textElement textAlignment="Center">
 					<font fontName="Impact" size="18" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Colégio Impacto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="89" width="260" height="30" uuid="24a6170e-3cb4-44b9-bd41-e34283275153"/>
+				<reportElement x="0" y="72" width="260" height="30" uuid="24a6170e-3cb4-44b9-bd41-e34283275153"/>
 				<textElement textAlignment="Center">
 					<font size="11" isBold="true"/>
 				</textElement>
@@ -35,52 +45,91 @@ Ensino Médio
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="139" width="54" height="20" uuid="fb2dc8dc-bb1f-40bf-87ac-272497c18e42"/>
+				<reportElement x="0" y="122" width="54" height="20" uuid="fb2dc8dc-bb1f-40bf-87ac-272497c18e42"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ALUNO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2" y="119" width="52" height="20" uuid="824fca3a-ad93-4cfc-9d41-890983d08d68"/>
+				<reportElement x="2" y="102" width="52" height="20" uuid="824fca3a-ad93-4cfc-9d41-890983d08d68"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TURMA:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3" y="159" width="260" height="20" uuid="705a7662-0f0b-4bee-bdba-37aaae9c24ce"/>
+				<reportElement x="3" y="142" width="260" height="20" uuid="705a7662-0f0b-4bee-bdba-37aaae9c24ce"/>
 				<text><![CDATA[Obs: Comprovante de entrega de provas para o aluno.]]></text>
 			</staticText>
 			<line>
-				<reportElement x="262" y="17" width="1" height="162" uuid="f4ae28c9-7150-40c6-9e46-40b0bf12d392"/>
+				<reportElement x="262" y="0" width="1" height="162" uuid="f4ae28c9-7150-40c6-9e46-40b0bf12d392"/>
 			</line>
 			<rectangle>
-				<reportElement x="263" y="20" width="292" height="20" uuid="d3aa5af3-6315-487e-bb52-f9c0633d4ffa"/>
+				<reportElement x="263" y="3" width="292" height="20" uuid="d3aa5af3-6315-487e-bb52-f9c0633d4ffa"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="263" y="20" width="100" height="20" uuid="47cbf438-c2db-4f8d-aeef-cd09320b5926"/>
+				<reportElement x="263" y="3" width="66" height="20" uuid="47cbf438-c2db-4f8d-aeef-cd09320b5926"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[DISCIPLINA:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="263" y="54" width="44" height="20" uuid="37dc3fd9-a3a1-4800-a047-b6696faafab6"/>
+				<reportElement x="263" y="37" width="44" height="20" uuid="37dc3fd9-a3a1-4800-a047-b6696faafab6"/>
 				<textElement verticalAlignment="Bottom"/>
 				<text><![CDATA[ALUNO:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="263" y="74" width="292" height="1" uuid="e00c868b-31d9-4c03-bb4e-71d030fabd95"/>
+				<reportElement x="263" y="57" width="292" height="1" uuid="e00c868b-31d9-4c03-bb4e-71d030fabd95"/>
 			</line>
 			<staticText>
-				<reportElement x="263" y="99" width="100" height="20" uuid="ebc8a1d1-7397-4a35-b9a2-d3af2d7b1bd4"/>
+				<reportElement x="263" y="82" width="100" height="20" uuid="ebc8a1d1-7397-4a35-b9a2-d3af2d7b1bd4"/>
 				<textElement verticalAlignment="Bottom"/>
 				<text><![CDATA[Rubrica do Professor:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="263" y="119" width="292" height="1" uuid="01b8dca0-c7b6-4e05-ba84-8eb6c716939a"/>
+				<reportElement x="263" y="102" width="292" height="1" uuid="01b8dca0-c7b6-4e05-ba84-8eb6c716939a"/>
 			</line>
+			<staticText>
+				<reportElement x="409" y="142" width="146" height="20" uuid="69bb1c6b-ab6d-48cb-9095-0c78dacbe0cd"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[DATA:____/_____/_________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="452" y="3" width="39" height="20" uuid="ecb3505b-0ae6-4a7e-842a-65f77a251c8d"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[NOTA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="54" y="123" width="206" height="20" uuid="8f0cdd20-9506-4f16-bd20-6c4538b1e491"/>
+				<textFieldExpression><![CDATA[$F{nome_aluno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="329" y="3" width="123" height="20" uuid="05503efb-05c6-45b2-b23a-f54d3a423422"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeDisciplina}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="54" y="102" width="206" height="20" uuid="67dcd538-09e9-483c-a8ab-8ede499dd140"/>
+				<textFieldExpression><![CDATA[$F{nomeTurma}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="262" y="103" width="293" height="20" uuid="1690697d-279b-41b3-aebe-5d4a5fded6a9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeProfessor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="162" width="552" height="20" uuid="a0b31520-2281-4ced-a196-e8be8db6a2ca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------]]></text>
+			</staticText>
 		</band>
 	</detail>
 </jasperReport>

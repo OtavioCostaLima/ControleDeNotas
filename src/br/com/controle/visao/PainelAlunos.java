@@ -1190,6 +1190,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                 GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
                 gerenteDeArquivos.removerImagem("./fotos/" + aluno.getMatricula().trim().concat(".jpg"));
                 limparCampos();
+                
             }
         }
 // TODO add your handling code here:
