@@ -6,6 +6,7 @@ import br.com.controle.util.negocio.AlunoRN;
 import br.com.controle.util.negocio.TurmaRN;
 import br.com.controle.visao.abstractModels.GenericComboBoxModel;
 import br.com.controle.visao.abstractModels.TabelaAluno;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,6 +30,9 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
      */
     private PainelAlunos() {
         initComponents();
+        TextPrompt textPrompt = new TextPrompt("DIGITE O NOME DO ALUNO", jTextField12);
+     textPrompt.changeAlpha(0.5f);
+     textPrompt.setForeground(Color.GRAY);
         ((BasicInternalFrameUI) getUI()).setNorthPane(null);
         povoartabelaAluno();
         povoarComboboxTurma();
@@ -111,6 +115,9 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         btnAdicionar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jTextField12 = new javax.swing.JTextField();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jLabel31 = new javax.swing.JLabel();
         jPanelAluno = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
@@ -457,7 +464,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
 
         btnAdicionar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAdicionar.setForeground(new java.awt.Color(255, 0, 0));
-        btnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/add64.png"))); // NOI18N
         btnAdicionar.setText("ADICIONAR");
         btnAdicionar.setContentAreaFilled(false);
         btnAdicionar.setFocusable(false);
@@ -469,7 +475,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
 
         btnRemover.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnRemover.setForeground(new java.awt.Color(255, 0, 0));
-        btnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/line32.png"))); // NOI18N
         btnRemover.setText("REMOVER");
         btnRemover.setContentAreaFilled(false);
         btnRemover.setFocusable(false);
@@ -490,6 +495,8 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel31.setText("Turma:");
+
         javax.swing.GroupLayout jPanelMatriculaLayout = new javax.swing.GroupLayout(jPanelMatricula);
         jPanelMatricula.setLayout(jPanelMatriculaLayout);
         jPanelMatriculaLayout.setHorizontalGroup(
@@ -497,23 +504,27 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
             .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMatriculaLayout.createSequentialGroup()
                 .addGroup(jPanelMatriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelMatriculaLayout.createSequentialGroup()
+                    .addGroup(jPanelMatriculaLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnAdicionar)
                         .addGap(10, 10, 10)
                         .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelMatriculaLayout.createSequentialGroup()
-                        .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel31)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoImagemAluno)))
+                        .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(campoImagemAluno)
                 .addContainerGap())
             .addComponent(jScrollPane3)
         );
 
-        jPanelMatriculaLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdicionar, btnRemover, jButton1});
+        jPanelMatriculaLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdicionar, btnRemover});
 
         jPanelMatriculaLayout.setVerticalGroup(
             jPanelMatriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -527,9 +538,13 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                     .addComponent(jButton1)
                     .addGroup(jPanelMatriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnRemover)
-                        .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnAdicionar))
+                    .addGroup(jPanelMatriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel31)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -537,6 +552,8 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         jPanelMatriculaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdicionar, btnRemover, jButton1});
 
         jPanelMatriculaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {campoImagemAluno, jPanel11});
+
+        jPanelMatriculaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jComboBox3, jTextField12});
 
         javax.swing.GroupLayout subJPanelMatriculaLayout = new javax.swing.GroupLayout(subJPanelMatricula);
         subJPanelMatricula.setLayout(subJPanelMatriculaLayout);
@@ -1138,7 +1155,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                     .addComponent(jRadioButton14))
                 .addGap(104, 104, 104)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelQuestionarioLayout = new javax.swing.GroupLayout(jPanelQuestionario);
@@ -1293,6 +1310,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JFormattedTextField jFormattedTextField1;
@@ -1319,6 +1337,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1359,6 +1378,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
+    private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
