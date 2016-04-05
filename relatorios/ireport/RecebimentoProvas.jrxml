@@ -8,7 +8,7 @@
 join professor p on h.id_professor=p.matricula
 join disciplina d on h.id_disciplina= d.id
 join turma t on  t.id=h.id_turma 
-join aluno a on a.id_turma = t.id]]>
+join aluno a on a.id_turma = t.id order by nomeProfessor]]>
 	</queryString>
 	<field name="nomeDisciplina" class="java.lang.String"/>
 	<field name="nome_aluno" class="java.lang.String">
@@ -26,7 +26,7 @@ join aluno a on a.id_turma = t.id]]>
 			</rectangle>
 			<image scaleImage="FillFrame">
 				<reportElement x="21" y="0" width="92" height="58" uuid="9a8e2ed0-ec8e-4df5-b4e4-9c6f5e7d7e18"/>
-				<imageExpression><![CDATA["/relatorios/ireport/Logo_Atual.png"]]></imageExpression>
+				<imageExpression><![CDATA["Logo_Atual.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="113" y="0" width="147" height="23" uuid="ffc676b7-c55f-4f98-933b-8d3d59f1615a"/>
@@ -74,7 +74,7 @@ Ensino Médio
 			<staticText>
 				<reportElement x="263" y="3" width="66" height="20" uuid="47cbf438-c2db-4f8d-aeef-cd09320b5926"/>
 				<textElement verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="false"/>
 				</textElement>
 				<text><![CDATA[DISCIPLINA:]]></text>
 			</staticText>
