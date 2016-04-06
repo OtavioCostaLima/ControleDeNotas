@@ -123,9 +123,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         jButton6.setForeground(new java.awt.Color(255, 0, 0));
-        jButton6.setText("horario");
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/horarioMenor.png"))); // NOI18N
         jButton6.setContentAreaFilled(false);
         jButton6.setFocusable(false);
+        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -267,6 +273,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         deJanelas.openInternalFrame(PainelAlunos.getInstancia());
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        deJanelas.openInternalFrame(PainelHorario.getInstancia());  // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
