@@ -21,7 +21,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author Otavio Costa
  */
 public class PainelProfessor extends javax.swing.JInternalFrame {
-
+    
     private GenericComboBoxModel<Turma> boxModelTurma;
     private final TabelaProfessor TABELA_PROFESSOR = new TabelaProfessor();
     private static PainelProfessor painelProfessor;
@@ -38,45 +38,44 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         tabelaPesquisarProfessor();
         povoarComboboxTurma();
     }
-
+    
     public static PainelProfessor getInstancia() {
         if (painelProfessor == null) {
             painelProfessor = new PainelProfessor();
         }
         return painelProfessor;
     }
-
+    
     private void povoarComboboxTurma() {
         ArrayList<Turma> turma = (ArrayList<Turma>) new TurmaRN().buscarTodos();
         boxModelTurma = new GenericComboBoxModel(turma);
         comboTurma.setModel(boxModelTurma);
     }
-
+    
     private Professor encapsular() {
         Professor professor = new Professor();
         List<Disciplina> disciplinas;
         List<Horario> horarios;
         professor.setMatricula(textoMatriculaProfessor.getText());
         professor.setNome(textoNomeProfessor.getText());
-
+        
         if (checkStatus.isSelected()) {
             professor.setSituacao("ATIVO");
         } else {
             professor.setSituacao("INATIVO");
         }
-
+        
         if (!listModel.isEmpty()) {
             disciplinas = new ArrayList<>();
             horarios = new ArrayList<>();
             for (int i = 0; i < listModel.getSize(); i++) {
                 disciplinas.add(listModel.get(i));
             }
-
+            
             for (Disciplina disciplina : disciplinas) {
                 Horario horario = new Horario();
                 HorarioPK pK = new HorarioPK(professor.getMatricula(), disciplina.getId());
                 horario.setHorarioPK(pK);
-                System.out.println("dis: " + disciplina.getId());
                 horario.setDisciplina(disciplina);
                 horario.setProfessor(professor);
                 if (comboTurma.getSelectedIndex() > -1) {
@@ -86,10 +85,10 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             }
             professor.setHorarios(horarios);
         }
-
+        
         return professor;
     }
-
+    
     private void tabelaPesquisarProfessor() {
         TABELA_PROFESSOR.addListaProfessor(new ProfessorRN().buscarTodos());
         tabelaPesquisaprofessor.setModel(TABELA_PROFESSOR);
@@ -123,6 +122,10 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         jButton9 = new javax.swing.JButton();
         comboTurma = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jButton2 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         btnSalvar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -200,7 +203,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(0, 925, Short.MAX_VALUE)
+                .addGap(0, 980, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -277,6 +280,13 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setText("Turma:");
 
+        jList1.setBorder(javax.swing.BorderFactory.createTitledBorder("Turmas"));
+        jScrollPane3.setViewportView(jList1);
+
+        jButton2.setText("ADD");
+
+        jButton6.setText("DEL");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -294,17 +304,24 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                                 .addComponent(textoMatriculaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(checkStatus)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton6)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(textoNomeProfessor)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(campoImagemProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -312,33 +329,34 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textoMatriculaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(checkStatus)
-                            .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(textoNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jButton9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton8)
-                                .addGap(0, 7, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(campoImagemProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(campoImagemProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textoMatriculaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(checkStatus)
+                    .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton6))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(textoNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton8)
+                        .addContainerGap())))
         );
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -461,7 +479,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 932, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 987, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         painelCadastroProfessorLayout.setVerticalGroup(
@@ -470,7 +488,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -706,7 +724,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField11, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                        .addComponent(jTextField11, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -764,9 +782,8 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                         .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jTextField13, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
+                    .addComponent(jTextField13)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -825,7 +842,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             }
             limparCampos();
             TABELA_PROFESSOR.inserirProfessores(professorRN.buscarTodos());
-
+            
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -856,12 +873,12 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         if (jListDisciplinas.getSelectedIndex() > -1) {
             Disciplina disciplina = listModel.get(jListDisciplinas.getSelectedIndex());
-            System.out.println("d: "+disciplina.getId());
+            System.out.println("d: " + disciplina.getId());
             HorarioRN horario = new HorarioRN();
             HorarioPK pK = new HorarioPK(textoMatriculaProfessor.getText().trim(), disciplina.getId());
             horario.removerHorario(pK);
             listModel.remove(jListDisciplinas.getSelectedIndex());
-
+            
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -879,11 +896,11 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             textoNomeProfessor.setText(professor.getNome());
             textoMatriculaProfessor.setText(professor.getMatricula());
             GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
-
+            
             if (!gerenteDeArquivos.setImagemJlabel("./fotos/" + professor.getMatricula().trim().concat(".jpg"), campoImagemProfessor)) {
                 campoImagemProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/professor.png")));
             }
-
+            
             if (professor.getSituacao().equals("ATIVO")) {
                 checkStatus.setSelected(true);
             } else if (professor.getSituacao().equals("INATIVO")) {
@@ -895,7 +912,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                     listModel.addElement(horario.getDisciplina());
                 }
             }
-
+           
         }        // TODO add your handling code here:
     }//GEN-LAST:event_tabelaPesquisaprofessorMouseClicked
 
@@ -916,9 +933,11 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox checkStatus;
     private javax.swing.JComboBox comboTurma;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox jComboBox1;
@@ -953,6 +972,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JList jListDisciplinas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -963,6 +983,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
