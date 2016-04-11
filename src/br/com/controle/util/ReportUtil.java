@@ -5,6 +5,7 @@
  */
 package br.com.controle.util;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JDialog;
@@ -30,5 +31,12 @@ public class ReportUtil {
         JDialog dialog = new JDialog();
         dialog.getContentPane().add(view);
         dialog.setVisible(true);
+    }
+
+    public static void main(String[] args) throws JRException {
+        ReportUtil reportUtil = new ReportUtil();
+        Map parametros = new HashMap();
+        parametros.put("matriculaP", "1");
+        reportUtil.imprimeRelatorio("relatorios/ireport/RecebimentoProvas", null, parametros);
     }
 }
