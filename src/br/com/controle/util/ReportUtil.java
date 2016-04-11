@@ -8,6 +8,12 @@ package br.com.controle.util;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JDialog;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.swing.JRViewer;
 
 /**
  *
@@ -16,11 +22,9 @@ import javax.swing.JDialog;
 public class ReportUtil {
     //mandando para o Jasper
 
-    public void imprimeRelatorioJasper(String arquivo, List list, Map parametros) 
-        JRException, SQLException{
-               java.io.InputStream file = getClass().getClassLoader().getResourceAsStream(arquivo);
-
-        JRDataSource dados = new JRBeanCollectionDataSource(list);
+    public void imprimeRelatorio(String caminho, List lista, Map parametros) throws JRException {
+        java.io.InputStream file = getClass().getClassLoader().getResourceAsStream(caminho);
+        JRDataSource dados = new JRBeanCollectionDataSource(lista);
         JasperPrint printer = JasperFillManager.fillReport(file, parametros, dados);
         JRViewer view = new JRViewer(printer);
         JDialog dialog = new JDialog();
