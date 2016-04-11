@@ -116,3 +116,10 @@ nbproject/build-impl.xml
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 >>>>>>> 843610e724e774dedcc12c3bc3b0f7d3f6ce65e7
+!/src/br/com/controle/libs/ireport/jasperreports-5.5.0.jar
+!/src/br/com/controle/libs/ireport/commons-beanutils-1.8.2.jar
+!/src/br/com/controle/libs/ireport/commons-digester-2.1.jar
+!/src/br/com/controle/libs/ireport/commons-logging-1.1.jar
+!/src/br/com/controle/libs/ireport/groovy-all-2.0.1.jar
+!/src/br/com/controle/libs/ireport/commons-collections-3.2.1.jar
+!/src/br/com/controle/libs/ireport/iText-2.1.7.js2.jar
