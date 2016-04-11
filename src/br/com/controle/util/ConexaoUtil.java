@@ -15,8 +15,7 @@ public class ConexaoUtil {
     private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 
     public static EntityManager getEntityManager() {
-        
-        return entityManagerFactory.createEntityManager();
+                return entityManagerFactory.createEntityManager();
     }
 
     
