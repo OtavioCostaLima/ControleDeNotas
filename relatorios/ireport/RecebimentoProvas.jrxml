@@ -3,12 +3,15 @@
 	<property name="ireport.zoom" value="1.6105100000000008"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="matriculaP" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{matricula}]]></defaultValueExpression>
+	</parameter>
 	<queryString>
-		<![CDATA[select d.descricao as nomeDisciplina,a.nome_aluno,t.descricao as nomeTurma, p.nome as nomeProfessor from horario h
+		<![CDATA[select d.descricao as nomeDisciplina,a.nome_aluno,t.descricao as nomeTurma, p.nome as nomeProfessor, p.matricula from horario h
 join professor p on h.id_professor=p.matricula
 join disciplina d on h.id_disciplina= d.id
 join turma t on  t.id=h.id_turma 
-join aluno a on a.id_turma = t.id order by nomeProfessor]]>
+join aluno a on a.id_turma = t.id where p.matricula=matriculap order by nomeProfessor]]>
 	</queryString>
 	<field name="nomeDisciplina" class="java.lang.String"/>
 	<field name="nome_aluno" class="java.lang.String">
@@ -16,6 +19,9 @@ join aluno a on a.id_turma = t.id order by nomeProfessor]]>
 	</field>
 	<field name="nomeTurma" class="java.lang.String"/>
 	<field name="nomeProfessor" class="java.lang.String"/>
+	<field name="matricula" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
