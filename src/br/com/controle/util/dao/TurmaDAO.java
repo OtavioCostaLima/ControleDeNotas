@@ -27,4 +27,11 @@ public class TurmaDAO extends DAOGenerico<Turma> {
         return query.getResultList();
     }
 
+    public List<Turma> tumasProfessor() {
+        EntityManager em = ConexaoUtil.getEntityManager();
+        String consulta = "select t from Turma t where t.id in (SELECT h.turma FROM horario h where h.id_professor=1)";
+        TypedQuery<Turma> query = em.createQuery(consulta, Turma.class);
+        return query.getResultList();
+    }
+
 }
