@@ -1,6 +1,7 @@
 package br.com.controle.util.dao;
 
 import br.com.controle.util.ConexaoUtil;
+import br.com.controle.util.modelo.Horario;
 import br.com.controle.util.modelo.Turma;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -27,11 +28,12 @@ public class TurmaDAO extends DAOGenerico<Turma> {
         return query.getResultList();
     }
 
-    public List<Turma> tumasProfessor() {
+    public List<Turma> tumasProfessor(String matricula) {
         EntityManager em = ConexaoUtil.getEntityManager();
-        String consulta = "select t from Turma t where t.id in (SELECT h.turma FROM horario h where h.id_professor=1)";
+        String consulta = "SELECT DISTINCT t FROM Horario h JOIN h.professor p JOIN h.turma t WHERE p.matricula=:matriculaP";
         TypedQuery<Turma> query = em.createQuery(consulta, Turma.class);
+        query.setParameter("matriculaP", matricula);
         return query.getResultList();
     }
 
-}
+   }

@@ -6,8 +6,14 @@
 package br.com.controle.visao;
 
 import br.com.controle.util.ReportUtil;
+import br.com.controle.util.dao.DisciplinaDAO;
 import br.com.controle.util.dao.ProfessorDAO;
+import br.com.controle.util.dao.TurmaDAO;
+import br.com.controle.util.modelo.Disciplina;
+import br.com.controle.util.modelo.Turma;
+import br.com.controle.visao.abstractModels.GenericComboBoxModel;
 import br.com.controle.visao.abstractModels.TabelaProfessor;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,11 +22,15 @@ import java.util.Map;
  * @author Otavio Costa
  */
 public class RelatoriosP extends javax.swing.JDialog {
-
+    
     TabelaProfessor tabelaProfessor = new TabelaProfessor();
+    GenericComboBoxModel<Turma> comboBoxModel;
 
     /**
      * Creates new form RelatoriosP
+     *
+     * @param parent
+     * @param modal
      */
     public RelatoriosP(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -38,13 +48,31 @@ public class RelatoriosP extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox();
+        jCTurma = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jCDisciplina = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jCTurma.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCTurmaItemStateChanged(evt);
+            }
+        });
+        jCTurma.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                jCTurmaHierarchyChanged(evt);
+            }
+        });
+        jCTurma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCTurmaActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("TURMA");
 
@@ -63,7 +91,14 @@ public class RelatoriosP extends javax.swing.JDialog {
 
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
+
+        jLabel1.setText("DISCIPLINA");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,14 +109,21 @@ public class RelatoriosP extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jCDisciplina, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jCTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
+                        .addGap(7, 7, 7)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -93,8 +135,12 @@ public class RelatoriosP extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                        .addComponent(jCTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)))
                 .addContainerGap())
         );
@@ -113,6 +159,34 @@ public class RelatoriosP extends javax.swing.JDialog {
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int index = jTable1.getSelectedRow();
+        if (jTable1.isRowSelected(index)) {
+            ArrayList<Turma> turmas = (ArrayList<Turma>) new TurmaDAO().tumasProfessor(tabelaProfessor.getProfessor(index).getMatricula());
+            comboBoxModel = new GenericComboBoxModel<>(turmas);
+            jCTurma.setModel(comboBoxModel);
+            jCTurma.setSelectedIndex(0);
+        }   // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jCTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCTurmaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCTurmaActionPerformed
+
+    private void jCTurmaHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jCTurmaHierarchyChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCTurmaHierarchyChanged
+
+    private void jCTurmaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCTurmaItemStateChanged
+        if (jCTurma.getSelectedIndex() >= 0) {
+            int index = jTable1.getSelectedRow();
+            ArrayList<Disciplina> disciplinas = (ArrayList<Disciplina>) new DisciplinaDAO().getdDsciplinaTurmaProfessor(tabelaProfessor.getProfessor(index).getMatricula(), comboBoxModel.get(jCTurma.getSelectedIndex()).getId());
+            GenericComboBoxModel<Disciplina> comboBoxModel1 = new GenericComboBoxModel<>(disciplinas);
+            jCDisciplina.setModel(comboBoxModel1);
+            jCDisciplina.setSelectedIndex(0);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jCTurmaItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -158,7 +232,9 @@ public class RelatoriosP extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox<String> jCDisciplina;
+    private javax.swing.JComboBox jCTurma;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

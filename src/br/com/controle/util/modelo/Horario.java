@@ -15,7 +15,6 @@ import javax.persistence.TemporalType;
  * @author Otavio Costa
  */
 @Entity
-
 public class Horario implements Serializable, BeanBase {
 
     @EmbeddedId

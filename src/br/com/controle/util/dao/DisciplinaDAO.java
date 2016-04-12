@@ -19,4 +19,14 @@ public class DisciplinaDAO extends DAOGenerico<Disciplina> {
         query.setParameter("idProfessor", matricula);
         return query.getResultList();
     }
+
+    public List<Disciplina> getdDsciplinaTurmaProfessor(String matriculaProfessor, long idTurma) {
+        EntityManager em = ConexaoUtil.getEntityManager();
+        String consulta = "SELECT d FROM Horario h JOIN h.professor p JOIN h.turma t JOIN h.disciplina d WHERE p.matricula=:matriculaP and t.id=:idTurma";
+        TypedQuery<Disciplina> query = em.createQuery(consulta, Disciplina.class);
+        query.setParameter("matriculaP", matriculaProfessor);
+        query.setParameter("idTurma", idTurma);
+        return query.getResultList();
+    }
+
 }
