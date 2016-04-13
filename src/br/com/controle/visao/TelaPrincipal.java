@@ -289,7 +289,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        PainelProtocolo painelProtocolo = new PainelProtocolo(this, false);
+        PainelProtocolo painelProtocolo = new PainelProtocolo(this, true);
         painelProtocolo.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem6ActionPerformed

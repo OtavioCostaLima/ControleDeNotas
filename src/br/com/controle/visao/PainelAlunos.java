@@ -31,8 +31,8 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private PainelAlunos() {
         initComponents();
         TextPrompt textPrompt = new TextPrompt("DIGITE O NOME DO ALUNO", jTextField12);
-     textPrompt.changeAlpha(0.5f);
-     textPrompt.setForeground(Color.GRAY);
+        textPrompt.changeAlpha(0.5f);
+        textPrompt.setForeground(Color.GRAY);
         ((BasicInternalFrameUI) getUI()).setNorthPane(null);
         povoartabelaAluno();
         povoarComboboxTurma();
@@ -1261,19 +1261,29 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        Collections.sort(novosAlunos);
-        AlunoRN alunoRN = new AlunoRN();
-        if (alunoRN.salvarAlunos(novosAlunos)) {
-            GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
-            for (Aluno novoAluno : novosAlunos) {
-                if (novoAluno.getuRLImagem() != null && !novoAluno.getuRLImagem().trim().equals("")) {
-                    gerenteDeArquivos.gravarImagem(novoAluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(), "./fotos/" + novoAluno.getMatricula().trim().concat(".jpg"));
+
+        if (tabelaCadastro.isRowSelected(tabelaCadastro.getSelectedRow())
+                && !campoMatricula.getText().trim().isEmpty()) {
+            Aluno aluno = TABELA_ALUNO.getAluno(tabelaCadastro.getSelectedRow());
+            AlunoRN alunoRN = new AlunoRN();
+            alunoRN.salvar(aluno);
+            TABELA_ALUNO.inserirAlunos(alunoRN.buscarTodos());
+                   } else {
+            Collections.sort(novosAlunos);
+            AlunoRN alunoRN = new AlunoRN();
+            if (alunoRN.salvarAlunos(novosAlunos)) {
+                GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
+                for (Aluno novoAluno : novosAlunos) {
+                    if (novoAluno.getuRLImagem() != null && !novoAluno.getuRLImagem().trim().equals("")) {
+                        gerenteDeArquivos.gravarImagem(novoAluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(), "./fotos/" + novoAluno.getMatricula().trim().concat(".jpg"));
+                    }
                 }
             }
+            TABELA_ALUNO.inserirAlunos(alunoRN.buscarTodos());
+           
+            novosAlunos.clear();
         }
-        TABELA_ALUNO.inserirAlunos(alunoRN.buscarTodos());
-        limparCampos();
-        novosAlunos.clear();
+         limparCampos();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
@@ -1324,6 +1334,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
             novosAlunos.add(aluno);
             TABELA_ALUNO.inserirAlunos(novosAlunos);
             limparCampos();
+
         } else {
             JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios!");
         }

@@ -9,9 +9,7 @@ import javax.persistence.Persistence;
  * @author Otavio Costa
  */
 public class ConexaoUtil {
-
     private static final String PERSISTENCE_UNIT_NAME = "ControleDeNotas2PU";
-
     private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 
     public static EntityManager getEntityManager() {
