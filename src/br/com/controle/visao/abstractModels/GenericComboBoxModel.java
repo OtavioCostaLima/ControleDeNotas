@@ -43,5 +43,5 @@ public class GenericComboBoxModel<T> extends AbstractListModel implements ComboB
     public T get(int selectedIndex) {
         return listaGenerica.get(selectedIndex);
     }
-
+ 
 }

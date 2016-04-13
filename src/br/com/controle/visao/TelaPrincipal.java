@@ -10,7 +10,7 @@ package br.com.controle.visao;
  * @author Otavio Costa
  */
 public class TelaPrincipal extends javax.swing.JFrame {
-
+    
     private final GerenciadorDeJanelas deJanelas;
 
     /**
@@ -19,7 +19,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
         deJanelas = new GerenciadorDeJanelas(areaPrincipal);
-
+        
     }
 
     /**
@@ -48,6 +48,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -215,6 +216,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu1.setText("Relatórios");
+
+        jMenuItem6.setText("Protocólo de recebimento de Provas");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem6);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -255,7 +265,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       deJanelas.openInternalFrame(PainelNotas.getInstancia());  // TODO add your handling code here:
+        deJanelas.openInternalFrame(PainelNotas.getInstancia());  // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -277,6 +287,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         deJanelas.openInternalFrame(PainelHorario.getInstancia());  // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        PainelProtocolo painelProtocolo = new PainelProtocolo(this, false);
+        painelProtocolo.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -327,6 +343,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 

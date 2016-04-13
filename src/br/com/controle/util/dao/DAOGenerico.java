@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public abstract class DAOGenerico<T extends BeanBase> {
 
-    public boolean salvar(T t) throws Exception {
+    public boolean salvar(T t) {
         EntityManager em = ConexaoUtil.getEntityManager();
         boolean aux = false;
         try {
