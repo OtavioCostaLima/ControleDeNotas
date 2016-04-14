@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dae9a760-250f-4a30-98da-8dc0769d4f10">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="15"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Crosstab Data Text" hAlign="Center"/>
 	<queryString>
@@ -120,15 +120,76 @@ join turma t on a.id_turma=t.id]]>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="76" splitType="Stretch">
+			<staticText>
+				<reportElement x="235" y="0" width="34" height="76" uuid="958c3a40-eee4-47e9-ab46-4670bdfe2b9b"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BIMESTRAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="269" y="0" width="30" height="76" uuid="0f69ac78-9802-4cb2-a448-68b257a251d2"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXTRA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="299" y="0" width="43" height="76" uuid="e2f6b358-c951-441b-a875-8de6db9c5a95"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QUALITATIVO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="0" width="43" height="76" uuid="50c1a402-4659-40db-8445-02c92d8d6289"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[1° MÉDIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="35" height="76" uuid="6bed4551-0dac-4f09-9aff-abca4c7cfa3c"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MENSAL]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="100" height="20" uuid="cf92eb44-1e06-418d-915a-00b6e7cc27a7"/>
 				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="35" height="20" uuid="8fbe5570-2400-451a-bd83-36d880ffc3d4"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{provaMensal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="242" y="0" width="27" height="20" uuid="b3090079-9b0c-43cf-97ec-21c330268fd1"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{provaBimestral}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="269" y="0" width="30" height="20" uuid="cfed0688-d788-4382-bf4c-a6d4ce41345b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{extra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="299" y="0" width="43" height="20" uuid="b8161ee9-694d-4c6a-8ef8-815b68820d10"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{qualitativo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="342" y="0" width="43" height="20" uuid="27d3ff9e-e128-4e95-b1cd-6d52cf7a4dbf"/>
+				<textFieldExpression><![CDATA[$F{media}]]></textFieldExpression>
+			</textField>
 		</band>
+		<band height="97" splitType="Immediate"/>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>

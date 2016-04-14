@@ -1,14 +1,13 @@
 package br.com.controle.util;
 
 import java.awt.Dialog;
-import java.io.File;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -29,20 +28,24 @@ public class ReportUtil {
         } catch (SQLException sQLException) {
             sQLException.printStackTrace();
         }
+        String caminho = System.getProperty("user.dir").concat(nomeArquivo);
         try {
-            //    JRDataSource dados = new JRBeanCollectionDataSource(new HorarioDAO().buscarTodos());
-            String caminho = "relatorios/ireport/".concat(nomeArquivo).concat(".jasper");
             JasperPrint printer = JasperFillManager.fillReport(caminho, parametros, conn);
-            System.out.println("caminho: "+caminho);
-            JasperExportManager.exportReportToPdfFile(printer, caminho);
-        } catch (JRException jRException) {
-            jRException.printStackTrace();
+            JasperExportManager.exportReportToPdfFile(printer, System.getProperty("user.dir").concat("o.pdf"));
+            JasperViewer view = new JasperViewer(printer, false);
+            if (!(printer.getPages().size() <= 0)) {
+                JDialog dialog = new JDialog(new javax.swing.JFrame(), "Visualização do Relatório", true);
+                dialog.setSize(view.getWidth(), view.getHeight());
+                dialog.setLocationRelativeTo(null);
+                dialog.getContentPane().add(view.getContentPane());
+                dialog.setVisible(true);
+            } else {
+                System.out.println("sem paginas");
+            }
+
+        } catch (JRException ex) {
+            Logger.getLogger(ReportUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-        //JasperViewer view = new JasperViewer(printer, false);
-        //  view.setVisible(true);
-        // view.toFront();
-        // view.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
 
     }
 }

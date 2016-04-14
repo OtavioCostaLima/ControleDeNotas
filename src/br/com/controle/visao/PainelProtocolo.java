@@ -172,7 +172,7 @@ public class PainelProtocolo extends javax.swing.JDialog {
             parametros.put("matriculaP", tabelaProfessor.getProfessor(index).getMatricula());
             parametros.put("idTurma", comboBoxModelTurma.get(jCTurma.getSelectedIndex()).getId());
             parametros.put("idDisciplina", comboBoxDisciplina.get(jCDisciplina.getSelectedIndex()).getId());
-            reportUtil.imprimeRelatorio("RecebimentoProvas", parametros);
+            reportUtil.imprimeRelatorio("/relatorios/ireport/RecebimentoProvas.jasper", parametros);
             
         }
         // TODO add your handling code here:

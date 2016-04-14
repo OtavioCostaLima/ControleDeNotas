@@ -10,7 +10,7 @@ package br.com.controle.visao;
  * @author Otavio Costa
  */
 public class TelaPrincipal extends javax.swing.JFrame {
-    
+
     private final GerenciadorDeJanelas deJanelas;
 
     /**
@@ -19,7 +19,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
         deJanelas = new GerenciadorDeJanelas(areaPrincipal);
-        
+
     }
 
     /**
