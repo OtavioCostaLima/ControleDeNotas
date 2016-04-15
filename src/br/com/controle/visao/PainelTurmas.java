@@ -11,7 +11,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author Otavio Costa
  */
 public class PainelTurmas extends javax.swing.JInternalFrame {
-
+    
     private final TurmaRN TURMA_RN = new TurmaRN();
     private final TabelaTurma TABELA_TURMA = new TabelaTurma();
     private static PainelTurmas PAINEL_TURMAS = new PainelTurmas();
@@ -39,7 +39,7 @@ public class PainelTurmas extends javax.swing.JInternalFrame {
         }
         return PAINEL_TURMAS;
     }
-
+    
     private Turma encapsularTurma() {
         Turma turma = new Turma();
         turma.setDescricao(textoTurma.getText());
@@ -49,9 +49,9 @@ public class PainelTurmas extends javax.swing.JInternalFrame {
             turma.setSigla(campoSigla.getText().charAt(0));
         }
         return turma;
-
+        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -234,7 +234,9 @@ public class PainelTurmas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        TURMA_RN.remover(TABELA_TURMA.delTurma(tableTurma.getSelectedRow()));
+        if (tableTurma.isRowSelected(tableTurma.getSelectedRow())) {
+            TURMA_RN.remover(TABELA_TURMA.delTurma(tableTurma.getSelectedRow()));
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
 

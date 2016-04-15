@@ -15,16 +15,16 @@ public class Falta implements BeanBase, Serializable {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "id_disciplina",nullable = false)
+    @JoinColumn(name = "idDisciplina",nullable = false)
     private Disciplina disciplina;
     @Id
     @ManyToOne
-    @JoinColumn(name = "id_aluno",nullable = false)
+    @JoinColumn(name = "idAluno",nullable = false)
     private Aluno aluno;
     
     @Id
     @ManyToOne
-    @JoinColumn(name = "id_turma",nullable = false)
+    @JoinColumn(name = "idTurma",nullable = false)
     private Turma turma;
 
     private int faltas;

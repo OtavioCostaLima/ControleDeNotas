@@ -15,7 +15,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author Otavio Costa
  */
 public class PainelDisciplina extends javax.swing.JInternalFrame {
-
+    
     private static PainelDisciplina painelDisciplina = null;
     private TabelaDisciplina tabelaDisciplina;
 
@@ -29,31 +29,31 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
         } else {
             disciplina.setTipo("NÃO REPROVA");
         }
-
+        disciplina.setComentario(jTextField2.getText());
         disciplina.setDescricao(nomeDiscplina.getText());
         return disciplina;
         //Joao Paulo Bueno
     }
-
+    
     private PainelDisciplina() {
         initComponents();
         ((BasicInternalFrameUI) getUI()).setNorthPane(null);
         povoarTabelaDisciplina();
     }
-
+    
     public static PainelDisciplina getInstancia() {
         if (painelDisciplina == null) {
             painelDisciplina = new PainelDisciplina();
         }
         return painelDisciplina;
     }
-
+    
     private void povoarTabelaDisciplina() {
         DisciplinaRN disciplinaRN = new DisciplinaRN();
         tabelaDisciplina = TabelaDisciplina.getInstancia();
         tabelaDisciplina.addListaDisciplina(disciplinaRN.buscarTodos());
         jTableDisciplinas.setModel(tabelaDisciplina);
-
+        
     }
 
     /**
@@ -100,6 +100,7 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
         jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
 
         jCheckBoxReprova.setBackground(new java.awt.Color(255, 255, 255));
+        jCheckBoxReprova.setSelected(true);
         jCheckBoxReprova.setText("Reprovativa: *");
         jCheckBoxReprova.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
         jCheckBoxReprova.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -295,17 +296,18 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
                 tabelaDisciplina.delDisciplina(jTableDisciplinas.getSelectedRow());
                 limparCampos();
             }
-
+            
         }
-
+        
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTableDisciplinasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDisciplinasMouseClicked
         if (jTableDisciplinas.isRowSelected(jTableDisciplinas.getSelectedRow())) {
-
+            
             Disciplina disciplina = tabelaDisciplina.getDisciplina(jTableDisciplinas.getSelectedRow());
             nomeDiscplina.setText(disciplina.getDescricao());
+            jTextField2.setText(disciplina.getComentario());
             if (disciplina.getTipo().equals("REPROVA")) {
                 jCheckBoxReprova.setSelected(true);
             } else if (disciplina.getTipo().equals("NÃO REPROVA")) {
@@ -341,7 +343,7 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
 
     private void limparCampos() {
         nomeDiscplina.setText(null);
-        jCheckBoxReprova.setSelected(false);
+        jCheckBoxReprova.setSelected(true);
         jTextField2.setText(null);
     }
 }

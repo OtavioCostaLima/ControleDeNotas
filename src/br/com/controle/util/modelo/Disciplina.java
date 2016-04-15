@@ -24,11 +24,21 @@ public class Disciplina implements BeanBase, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idDisciplina")
     private long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String descricao;
 
+    /**
+     * Pode-se adicionar comentários à disciplina através desse campo por meio
+     * de seu <b>Get</b> e <b>Set</b>
+     */
+    private String comentario;
+
+    /**
+     * O tipo indica se a Disciplina é reprovativa ou não!
+     */
     private String tipo;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "disciplina")
@@ -40,8 +50,6 @@ public class Disciplina implements BeanBase, Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "disciplina")
     private List<Falta> faltas;
 
-    // @ManyToMany(mappedBy = "disciplinas")
-    //private List<Professor> professores;
     public List<Falta> getFaltas() {
         return faltas;
     }
@@ -79,13 +87,14 @@ public class Disciplina implements BeanBase, Serializable {
         return descricao;
     }
 
-    /* public List<Professor> getProfessores() {
-     return professores;
-     }
-    
-     public void setProfessores(List<Professor> professores) {
-     this.professores = professores;
-     }*/
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
     public List<Horario> getHorarios() {
         return horarios;
     }

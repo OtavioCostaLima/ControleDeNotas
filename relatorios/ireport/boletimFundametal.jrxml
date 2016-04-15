@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dae9a760-250f-4a30-98da-8dc0769d4f10">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="15"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Crosstab Data Text" hAlign="Center"/>
 	<queryString>
@@ -103,7 +103,7 @@ join turma t on a.id_turma=t.id]]>
 		<band height="56" splitType="Stretch">
 			<textField>
 				<reportElement x="68" y="36" width="274" height="20" uuid="84dee3b1-47a4-4c1b-ad7f-e8793ccac0ff"/>
-				<textFieldExpression><![CDATA[$F{nome_aluno}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nomeAluno}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="68" y="16" width="274" height="20" uuid="09c9ec6a-5672-4c36-9d25-bc34c6c7d233"/>

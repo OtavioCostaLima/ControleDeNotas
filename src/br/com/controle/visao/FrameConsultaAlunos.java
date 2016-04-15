@@ -560,7 +560,7 @@ public class FrameConsultaAlunos extends javax.swing.JInternalFrame {
     private void tabelaConsultaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaConsultaAlunosMouseClicked
         if (tabelaConsultaAlunos.isRowSelected(tabelaConsultaAlunos.getSelectedRow())) {
             campoNomeAluno.setText(tabelaAluno.getAluno(tabelaConsultaAlunos.getSelectedRow()).getNome());
-            campoSituacao.setText(tabelaAluno.getAluno(tabelaConsultaAlunos.getSelectedRow()).getSituacao());
+            campoSituacao.setText(tabelaAluno.getAluno(tabelaConsultaAlunos.getSelectedRow()).getSituacaoAluno());
             campoTurma.setText(tabelaAluno.getAluno(tabelaConsultaAlunos.getSelectedRow()).getTurma().toString());
             String nomeImagem = tabelaAluno.getAluno(tabelaConsultaAlunos.getSelectedRow()).getuRLImagem();
             if (nomeImagem == null) {

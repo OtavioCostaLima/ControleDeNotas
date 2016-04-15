@@ -78,7 +78,7 @@ public class TabelaAluno extends AbstractTableModel {
             case 3:
                 return aluno.getStatus();
             case 4:
-                return aluno.getSituacao();
+                return aluno.getSituacaoAluno();
             default:
                 return null;
         }

@@ -3,7 +3,10 @@ package br.com.controle.util.modelo;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 /**
@@ -14,10 +17,13 @@ import javax.persistence.OneToOne;
 public class Boletim implements BeanBase, Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idAluno")
     private Aluno aluno;
+    
     private long provaRecuperacao;
     private long notaFiinal;
     private long mediaGlobal;
@@ -70,6 +76,10 @@ public class Boletim implements BeanBase, Serializable {
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
+    }
+
+    public long getId() {
+        return id;
     }
 
 }

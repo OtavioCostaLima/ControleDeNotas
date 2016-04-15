@@ -29,15 +29,15 @@ public class Horario implements Serializable, BeanBase {
     private Date horaTermino;
 
     @ManyToOne
-    @JoinColumn(name = "id_professor", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "idProfessor", nullable = false, insertable = false, updatable = false)
     private Professor professor;
 
     @ManyToOne
-    @JoinColumn(name = "id_disciplina", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "idDisciplina", nullable = false, insertable = false, updatable = false)
     private Disciplina disciplina;
 
     @ManyToOne
-    @JoinColumn(name = "id_turma")
+    @JoinColumn(name = "idTurma")
     private Turma turma;
 
     public HorarioPK getHorarioPK() {

@@ -63,7 +63,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         aluno.setTurma((Turma) boxModelTurma.get(comboTurma.getSelectedIndex()));
         //alterar o link dps
         aluno.setuRLImagem(urlAtualfoto);
-        aluno.setSituacao(comboSituacao.getSelectedItem().toString());
+        aluno.setSituacaoAluno(comboSituacao.getSelectedItem().toString());
         aluno.setDataCadastro(campoDataCadastro.getDate());
 
         if (checkStatus.isSelected()) {

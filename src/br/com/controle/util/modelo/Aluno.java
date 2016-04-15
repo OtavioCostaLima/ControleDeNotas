@@ -28,21 +28,21 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
     @Column(name = "matricula", nullable = false, unique = true)
     private String matricula;
 
-    @Column(name = "nome_aluno")
+    @Column(name = "nomeAluno")
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name = "id_turma",nullable = false)
+    @JoinColumn(name = "idTurma",nullable = false)
     private Turma turma;
 
     private transient String uRLImagem;
 
-    @Column(name = "numero_chamada",nullable = false)
+    @Column(name = "numeroChamada",nullable = false)
     private int numeroChamada;
     /**
      * o Aluno pode está cursando, desistente, reprovado, aprovado"
      */
-    private String situacao;
+    private String situacaoAluno;
 
     /**
      * ATIVO/INATIVO
@@ -98,12 +98,12 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
         this.notas = notas;
     }
 
-    public String getSituacao() {
-        return situacao;
+    public String getSituacaoAluno() {
+        return situacaoAluno;
     }
 
-    public void setSituacao(String situacao) {
-        this.situacao = situacao;
+    public void setSituacaoAluno(String situacaoAluno) {
+        this.situacaoAluno = situacaoAluno;
     }
 
     public Date getDataCadastro() {

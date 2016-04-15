@@ -1,8 +1,8 @@
 package br.com.controle.util.modelo;
 
 import java.io.Serializable;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -15,9 +15,8 @@ import javax.persistence.Table;
 @Table(name = "nota")
 public class Nota implements BeanBase, Serializable {
 
-    @EmbeddedId
-    private NotaPK notaPK;
-
+    @Id
+    private long id;
     private String bimestre;
     private double provaMensal;
     private double provaBimestral;
@@ -26,23 +25,19 @@ public class Nota implements BeanBase, Serializable {
     private double media;
 
     @ManyToOne
-    @JoinColumn(name = "id_disciplina", insertable = false, updatable = false, nullable = false)
+    @JoinColumn(name = "idDisciplina", nullable = false)
     private Disciplina disciplina;
 
     @ManyToOne
-    @JoinColumn(name = "matricula_aluno", insertable = false, updatable = false, nullable = false)
+    @JoinColumn(name = "matriculaAluno", nullable = false)
     private Aluno aluno;
 
     @ManyToOne
-    @JoinColumn(name = "matricula_professor", insertable = false, updatable = false, nullable = false)
+    @JoinColumn(name = "matriculaProfessor", nullable = false)
     private Professor professor;
 
-    public NotaPK getNotaPK() {
-        return notaPK;
-    }
-
-    public void setNotaPK(NotaPK notaPK) {
-        this.notaPK = notaPK;
+    public long getId() {
+        return id;
     }
 
     public String getBimestre() {

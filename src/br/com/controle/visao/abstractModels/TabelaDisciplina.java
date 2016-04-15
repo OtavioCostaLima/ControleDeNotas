@@ -18,7 +18,7 @@ public class TabelaDisciplina extends AbstractTableModel {
 
     private static TabelaDisciplina tabelaDisciplina;
     private List<Disciplina> disciplinas = new ArrayList<>();
-    private final String colunas[] = {"id", "Descrição", "Tipo"};
+    private final String colunas[] = {"id", "Descrição", "Tipo","Comentário"};
 
     private TabelaDisciplina() {
 
@@ -79,6 +79,8 @@ public class TabelaDisciplina extends AbstractTableModel {
                 return disciplina.getDescricao();
             case 2:
                 return disciplina.getTipo();
+            case 3:
+                return disciplina.getComentario();
             default:
                 return null;
         }
