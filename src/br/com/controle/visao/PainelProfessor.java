@@ -25,7 +25,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     private GenericComboBoxModel<Turma> boxModelTurma;
     private final TabelaProfessor TABELA_PROFESSOR = new TabelaProfessor();
     private static PainelProfessor painelProfessor;
-    private final DefaultListModel<Disciplina> listModel = new DefaultListModel<>();
+    private final DefaultListModel<Disciplina> listModelDiscipinas = new DefaultListModel<>();
     DefaultListModel<Turma> listModelTurma = new DefaultListModel<>();
     private String urlfoto = "";
 
@@ -35,7 +35,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     private PainelProfessor() {
         initComponents();
         ((BasicInternalFrameUI) getUI()).setNorthPane(null);
-        jListDisciplinas.setModel(listModel);
+        jListDisciplinas.setModel(listModelDiscipinas);
         jLTurma.setModel(listModelTurma);
         tabelaPesquisarProfessor();
         povoarComboboxTurma();
@@ -58,7 +58,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         Professor professor = new Professor();
         List<Disciplina> disciplinas;
         List<Horario> horarios;
-        professor.setMatricula(textoMatriculaProfessor.getText());
+        professor.setMatricula(Long.valueOf(textoMatriculaProfessor.getText()));
         professor.setNome(textoNomeProfessor.getText());
 
         if (checkStatus.isSelected()) {
@@ -67,11 +67,11 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             professor.setSituacao("INATIVO");
         }
 
-        if (!listModel.isEmpty()) {
+        if (!listModelDiscipinas.isEmpty()) {
             disciplinas = new ArrayList<>();
             horarios = new ArrayList<>();
-            for (int i = 0; i < listModel.getSize(); i++) {
-                disciplinas.add(listModel.get(i));
+            for (int i = 0; i < listModelDiscipinas.getSize(); i++) {
+                disciplinas.add(listModelDiscipinas.get(i));
             }
 
             for (Disciplina disciplina : disciplinas) {
@@ -80,6 +80,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                 horario.setHorarioPK(pK);
                 horario.setDisciplina(disciplina);
                 horario.setProfessor(professor);
+
                 if (comboTurma.getSelectedIndex() > -1) {
                     horario.setTurma(boxModelTurma.get(comboTurma.getSelectedIndex()));
                 }
@@ -232,6 +233,8 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Matrícula: *");
 
+        textoMatriculaProfessor.setEditable(false);
+        textoMatriculaProfessor.setBackground(new java.awt.Color(255, 255, 255));
         textoMatriculaProfessor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
 
         checkStatus.setBackground(new java.awt.Color(255, 255, 255));
@@ -850,7 +853,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         if (professorRN.salvar(professor)) {
             GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
             if (urlfoto != null && !urlfoto.trim().equals("")) {
-                gerenteDeArquivos.gravarImagem(urlfoto, campoImagemProfessor.getWidth(), campoImagemProfessor.getHeight(), "./fotos/" + professor.getMatricula().trim().concat(".jpg"));
+                gerenteDeArquivos.gravarImagem(urlfoto, campoImagemProfessor.getWidth(), campoImagemProfessor.getHeight(), "./fotos/" + professor.getMatricula() +"".concat(".jpg"));
             }
             limparCampos();
             TABELA_PROFESSOR.inserirProfessores(professorRN.buscarTodos());
@@ -861,10 +864,10 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if (!textoMatriculaProfessor.getText().isEmpty() && tabelaPesquisaprofessor.isRowSelected(tabelaPesquisaprofessor.getSelectedRow())) {
             ProfessorRN professorRN = new ProfessorRN();
-            if (professorRN.remover(textoMatriculaProfessor.getText())) {
+            if (professorRN.remover(TABELA_PROFESSOR.delProfessor(tabelaPesquisaprofessor.getSelectedRow()).getMatricula())) {
                 Professor professor = TABELA_PROFESSOR.delProfessor(tabelaPesquisaprofessor.getSelectedRow());
                 GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
-                gerenteDeArquivos.removerImagem("./fotos/" + professor.getMatricula().trim().concat(".jpg"));
+                gerenteDeArquivos.removerImagem("./fotos/" + professor.getMatricula() + "".concat(".jpg"));
                 limparCampos();
             }
         }
@@ -875,7 +878,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             SelecionarDisciplina disciplina = new SelecionarDisciplina(null, true);
             disciplina.buscarDisciplinas(textoMatriculaProfessor.getText());
             disciplina.setVisible(true);
-            listModel.insertElementAt(disciplina.getDisciplina(), listModel.size());
+            listModelDiscipinas.insertElementAt(disciplina.getDisciplina(), listModelDiscipinas.size());
         } else {
             JOptionPane.showMessageDialog(null, "Por favor, selecione um Professor!", "Nenhum Professor selecionado!", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -884,12 +887,12 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         if (jListDisciplinas.getSelectedIndex() > -1) {
-            Disciplina disciplina = listModel.get(jListDisciplinas.getSelectedIndex());
+            Disciplina disciplina = listModelDiscipinas.get(jListDisciplinas.getSelectedIndex());
             System.out.println("d: " + disciplina.getId());
             HorarioRN horario = new HorarioRN();
-            HorarioPK pK = new HorarioPK(textoMatriculaProfessor.getText().trim(), disciplina.getId());
+            HorarioPK pK = new HorarioPK(Long.valueOf(textoMatriculaProfessor.getText()), disciplina.getId());
             horario.removerHorario(pK);
-            listModel.remove(jListDisciplinas.getSelectedIndex());
+            listModelDiscipinas.remove(jListDisciplinas.getSelectedIndex());
 
         }
         // TODO add your handling code here:
@@ -903,13 +906,14 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_campoImagemProfessorMouseClicked
 
     private void tabelaPesquisaprofessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPesquisaprofessorMouseClicked
-        if (tabelaPesquisaprofessor.isRowSelected(tabelaPesquisaprofessor.getSelectedRow())) {
-            Professor professor = TABELA_PROFESSOR.getProfessor(tabelaPesquisaprofessor.getSelectedRow());
+        int index = tabelaPesquisaprofessor.getSelectedRow();
+        if (tabelaPesquisaprofessor.isRowSelected(index)) {
+            Professor professor = TABELA_PROFESSOR.getProfessor(index);
             textoNomeProfessor.setText(professor.getNome());
-            textoMatriculaProfessor.setText(professor.getMatricula());
+            textoMatriculaProfessor.setText(String.valueOf(professor.getMatricula()));
             GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
 
-            if (!gerenteDeArquivos.setImagemJlabel("./fotos/" + professor.getMatricula().trim().concat(".jpg"), campoImagemProfessor)) {
+            if (!gerenteDeArquivos.setImagemJlabel("./fotos/" + professor.getMatricula() +"".concat(".jpg"), campoImagemProfessor)) {
                 campoImagemProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/professor.png")));
             }
 
@@ -918,10 +922,11 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             } else if (professor.getSituacao().equals("INATIVO")) {
                 checkStatus.setSelected(false);
             }
-            listModel.clear();
+
+            listModelDiscipinas.clear();
             if (professor.getHorarios() != null) {
                 for (Horario horario : professor.getHorarios()) {
-                    listModel.addElement(horario.getDisciplina());
+                    listModelDiscipinas.addElement(horario.getDisciplina());
                 }
             }
 
@@ -1047,7 +1052,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     private void limparCampos() {
         textoMatriculaProfessor.setText(null);
         textoNomeProfessor.setText(null);
-        listModel.clear();
+        listModelDiscipinas.clear();
         urlfoto = "";
         checkStatus.setSelected(false);
         campoImagemProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/professor.png")));

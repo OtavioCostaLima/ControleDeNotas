@@ -33,12 +33,9 @@ public class ProfessorRN implements RNgenerico<Professor> {
 
     @Override
     public boolean remover(Long id) {
-        return false;
-    }
-
-    public boolean remover(String matricula) {
         professorDAO = new ProfessorDAO();
-        return professorDAO.remover(matricula);
+        return professorDAO.remover(id);
+
     }
 
     @Override

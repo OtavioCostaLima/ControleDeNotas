@@ -28,11 +28,11 @@ public class TurmaDAO extends DAOGenerico<Turma> {
         return query.getResultList();
     }
 
-    public List<Turma> tumasProfessor(String matricula) {
+    public List<Turma> tumasProfessor(long matriculaProfessor) {
         EntityManager em = ConexaoUtil.getEntityManager();
         String consulta = "SELECT DISTINCT t FROM Horario h JOIN h.professor p JOIN h.turma t WHERE p.matricula=:matriculaP";
         TypedQuery<Turma> query = em.createQuery(consulta, Turma.class);
-        query.setParameter("matriculaP", matricula);
+        query.setParameter("matriculaP", matriculaProfessor);
         return query.getResultList();
     }
 

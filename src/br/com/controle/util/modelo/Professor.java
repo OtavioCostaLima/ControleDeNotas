@@ -1,13 +1,17 @@
 package br.com.controle.util.modelo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -21,20 +25,34 @@ public class Professor implements BeanBase, Serializable {
 
     @Id
     @Column(name = "matricula", nullable = false, unique = true)
-    private String matricula;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long matricula;
 
     @Column(name = "nome", nullable = false)
     private String nome;
 
+    private String cpf;
+    private String rg;
+    private String tituloDeEleitor;
+    private String secao;
+    private String ctps;
+    private String serie;
+    private String rua;
+    private String bairro;
+    private String citade;
+    private String numeroResidencia;
+    private String estadoCivil;
+    private String uf;
+    private String posGraduacao;
+    private String grauInstrucao;
+    private String raca;
+    private String pisPasep;
+    private String orgaoEmissor;
+    private String dataEmissao;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dataNascimento;
+
     private String situacao;
-
-    public String getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "professor")
     private List<Nota> notas;
@@ -42,7 +60,7 @@ public class Professor implements BeanBase, Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "professor")
     private List<Horario> horarios;
 
-     public String getNome() {
+    public String getNome() {
         return nome;
     }
 
@@ -73,6 +91,168 @@ public class Professor implements BeanBase, Serializable {
     public void setHorarios(List<Horario> horarios) {
         this.horarios = horarios;
     }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
+
+    public String getTituloDeEleitor() {
+        return tituloDeEleitor;
+    }
+
+    public void setTituloDeEleitor(String tituloDeEleitor) {
+        this.tituloDeEleitor = tituloDeEleitor;
+    }
+
+    public String getSecao() {
+        return secao;
+    }
+
+    public void setSecao(String secao) {
+        this.secao = secao;
+    }
+
+    public String getCtps() {
+        return ctps;
+    }
+
+    public void setCtps(String ctps) {
+        this.ctps = ctps;
+    }
+
+    public String getSerie() {
+        return serie;
+    }
+
+    public void setSerie(String serie) {
+        this.serie = serie;
+    }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getCitade() {
+        return citade;
+    }
+
+    public void setCitade(String citade) {
+        this.citade = citade;
+    }
+
+    public String getNumeroResidencia() {
+        return numeroResidencia;
+    }
+
+    public void setNumeroResidencia(String numeroResidencia) {
+        this.numeroResidencia = numeroResidencia;
+    }
+
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+
+    public String getPosGraduacao() {
+        return posGraduacao;
+    }
+
+    public void setPosGraduacao(String posGraduacao) {
+        this.posGraduacao = posGraduacao;
+    }
+
+    public String getGrauInstrucao() {
+        return grauInstrucao;
+    }
+
+    public void setGrauInstrucao(String grauInstrucao) {
+        this.grauInstrucao = grauInstrucao;
+    }
+
+    public String getRaca() {
+        return raca;
+    }
+
+    public void setRaca(String raca) {
+        this.raca = raca;
+    }
+
+    public String getPisPasep() {
+        return pisPasep;
+    }
+
+    public void setPisPasep(String pisPasep) {
+        this.pisPasep = pisPasep;
+    }
+
+    public String getOrgaoEmissor() {
+        return orgaoEmissor;
+    }
+
+    public void setOrgaoEmissor(String orgaoEmissor) {
+        this.orgaoEmissor = orgaoEmissor;
+    }
+
+    public String getDataEmissao() {
+        return dataEmissao;
+    }
+
+    public void setDataEmissao(String dataEmissao) {
+        this.dataEmissao = dataEmissao;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public Long getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(long matricula) {
+        this.matricula = matricula;
+    }
+    
+    
 
     @Override
     public int hashCode() {

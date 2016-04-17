@@ -32,12 +32,12 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name = "idTurma",nullable = false)
+    @JoinColumn(name = "idTurma", nullable = false)
     private Turma turma;
 
     private transient String uRLImagem;
 
-    @Column(name = "numeroChamada",nullable = false)
+    @Column(name = "numeroChamada", nullable = false)
     private int numeroChamada;
     /**
      * o Aluno pode está cursando, desistente, reprovado, aprovado"
@@ -48,6 +48,31 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
      * ATIVO/INATIVO
      */
     private String status;
+
+    private String registroNascimento;
+    private String folha;
+    private String livro;
+    private String nacionalidade;
+    private String cor;
+
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dataEmissao;
+
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dataNascimento;
+
+    private String cep;
+    private String rua;
+    private String bairro;
+    private String cidade;
+    private String numeroResidencia;
+
+    private String telefone;
+    private String celular;
+    private String whatsapp;
+    private String email;
+
+    private char sexo;
 
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
@@ -146,6 +171,142 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
 
     public boolean isAtivo() {
         return this.getStatus().equals("ATIVO");
+    }
+
+    public String getRegistroNascimento() {
+        return registroNascimento;
+    }
+
+    public void setRegistroNascimento(String registroNascimento) {
+        this.registroNascimento = registroNascimento;
+    }
+
+    public String getFolha() {
+        return folha;
+    }
+
+    public void setFolha(String folha) {
+        this.folha = folha;
+    }
+
+    public String getLivro() {
+        return livro;
+    }
+
+    public void setLivro(String livro) {
+        this.livro = livro;
+    }
+
+    public String getNacionalidade() {
+        return nacionalidade;
+    }
+
+    public void setNacionalidade(String nacionalidade) {
+        this.nacionalidade = nacionalidade;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    public Date getDataEmissao() {
+        return dataEmissao;
+    }
+
+    public void setDataEmissao(Date dataEmissao) {
+        this.dataEmissao = dataEmissao;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getNumeroResidencia() {
+        return numeroResidencia;
+    }
+
+    public void setNumeroResidencia(String numeroResidencia) {
+        this.numeroResidencia = numeroResidencia;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
+    public String getWhatsapp() {
+        return whatsapp;
+    }
+
+    public void setWhatsapp(String whatsapp) {
+        this.whatsapp = whatsapp;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public char getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(char sexo) {
+        this.sexo = sexo;
     }
 
     @Override

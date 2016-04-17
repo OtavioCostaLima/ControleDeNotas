@@ -2,7 +2,6 @@ package br.com.controle.util.dao;
 
 import br.com.controle.util.ConexaoUtil;
 import br.com.controle.util.modelo.Nota;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
@@ -12,7 +11,7 @@ import javax.persistence.TypedQuery;
  */
 public class NotaDAO extends DAOGenerico<Nota> {
 
-    public Nota getNota(String matriculaProfessor, long idDisciplina, String matriculaAluno, String bimestre) {
+    public Nota getNota(long matriculaProfessor, long idDisciplina, String matriculaAluno, String bimestre) {
         try {
             EntityManager em = ConexaoUtil.getEntityManager();
             String consulta = "SELECT n FROM Nota n WHERE n.bimestre=:bimestre and n.professor.matricula=:matriculaP and n.disciplina.id=:idDisciplina and n.aluno.matricula=:matriculaAluno";

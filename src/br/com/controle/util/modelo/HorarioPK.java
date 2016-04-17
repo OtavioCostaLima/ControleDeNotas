@@ -13,14 +13,14 @@ import javax.persistence.Embeddable;
 public class HorarioPK implements Serializable {
 
     @Column(name = "idProfessor")
-    private String professor;
+    private long professor;
     @Column(name = "idDisciplina")
     private long disciplina;
 
     public HorarioPK() {
     }
 
-    public HorarioPK(String professor, long disciplina) {
+    public HorarioPK(long professor, long disciplina) {
         this.professor = professor;
         this.disciplina = disciplina;
     }

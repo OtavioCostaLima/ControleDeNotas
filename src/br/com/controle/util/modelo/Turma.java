@@ -44,6 +44,9 @@ public class Turma implements BeanBase, Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "turma")
     private List<Falta> faltas;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "turma")
+    private List<Horario> horarios;
+
     public Long getId() {
         return id;
     }
@@ -78,6 +81,14 @@ public class Turma implements BeanBase, Serializable {
 
     public void setAlunos(List<Aluno> alunos) {
         this.alunos = alunos;
+    }
+
+    public List<Horario> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<Horario> horarios) {
+        this.horarios = horarios;
     }
 
     @Override

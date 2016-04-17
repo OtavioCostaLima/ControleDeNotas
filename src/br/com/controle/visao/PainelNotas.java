@@ -532,7 +532,7 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         int indexProfessor = jTbProfessor.getSelectedRow();
         if (jTbAluno.isRowSelected(indexAluno) && jTbProfessor.isRowSelected(indexProfessor)) {
             NotaDAO notaDAO = new NotaDAO();
-            String idProfessor = tabelaProfessor.getProfessor(indexProfessor).getMatricula();
+            long idProfessor = tabelaProfessor.getProfessor(indexProfessor).getMatricula();
             String matriculaAluno = tabelaAluno.getAluno(indexAluno).getMatricula();
 
             long idDisciplina = comboBoxDisciplina.get(comboDisciplina.getSelectedIndex()).getId();
