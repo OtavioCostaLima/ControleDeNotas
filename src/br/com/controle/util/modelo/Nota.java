@@ -1,7 +1,10 @@
 package br.com.controle.util.modelo;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,13 +19,14 @@ import javax.persistence.Table;
 public class Nota implements BeanBase, Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String bimestre;
-    private double provaMensal;
-    private double provaBimestral;
-    private double extra;
-    private double qualitativo;
-    private double media;
+    private Double provaMensal;
+    private Double provaBimestral;
+    private Double extra;
+    private Double qualitativo;
+    private Double media;
 
     @ManyToOne
     @JoinColumn(name = "idDisciplina", nullable = false)
@@ -48,43 +52,43 @@ public class Nota implements BeanBase, Serializable {
         this.bimestre = bimestre;
     }
 
-    public double getProvaMensal() {
+    public Double getProvaMensal() {
         return provaMensal;
     }
 
-    public void setProvaMensal(double provaMensal) {
+    public void setProvaMensal(Double provaMensal) {
         this.provaMensal = provaMensal;
     }
 
-    public double getProvaBimestral() {
+    public Double getProvaBimestral() {
         return provaBimestral;
     }
 
-    public void setProvaBimestral(double provaBimestral) {
+    public void setProvaBimestral(Double provaBimestral) {
         this.provaBimestral = provaBimestral;
     }
 
-    public double getExtra() {
+    public Double getExtra() {
         return extra;
     }
 
-    public void setExtra(double extra) {
+    public void setExtra(Double extra) {
         this.extra = extra;
     }
 
-    public double getQualitativo() {
+    public Double getQualitativo() {
         return qualitativo;
     }
 
-    public void setQualitativo(double qualitativo) {
+    public void setQualitativo(Double qualitativo) {
         this.qualitativo = qualitativo;
     }
 
-    public double getMedia() {
+    public Double getMedia() {
         return media;
     }
 
-    public void setMedia(double media) {
+    public void setMedia(Double media) {
         this.media = media;
     }
 
@@ -110,6 +114,44 @@ public class Nota implements BeanBase, Serializable {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 67 * hash + Objects.hashCode(this.bimestre);
+        hash = 67 * hash + Objects.hashCode(this.disciplina);
+        hash = 67 * hash + Objects.hashCode(this.aluno);
+        hash = 67 * hash + Objects.hashCode(this.professor);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Nota other = (Nota) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.bimestre, other.bimestre)) {
+            return false;
+        }
+        if (!Objects.equals(this.disciplina, other.disciplina)) {
+            return false;
+        }
+        if (!Objects.equals(this.aluno, other.aluno)) {
+            return false;
+        }
+        if (!Objects.equals(this.professor, other.professor)) {
+            return false;
+        }
+        return true;
     }
 
 }

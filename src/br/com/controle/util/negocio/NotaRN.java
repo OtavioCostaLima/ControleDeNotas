@@ -15,10 +15,17 @@ public class NotaRN implements RNgenerico<Nota> {
     NotaDAO notaDAO;
 
     @Override
-    public boolean salvar(Nota t) {
-        notaDAO = new NotaDAO();
-        return notaDAO.salvar(t);
-
+    public boolean salvar(Nota nota) {
+        try {
+            notaDAO = new NotaDAO();
+            if (nota.equals(notaDAO.buscarPorId(nota.getId()))) {
+                return notaDAO.atualizar(nota);
+            }
+            return notaDAO.salvar(nota);
+        } catch (Exception ex) {
+            Logger.getLogger(AlunoRN.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     @Override

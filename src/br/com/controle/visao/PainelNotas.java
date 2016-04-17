@@ -1,6 +1,7 @@
 package br.com.controle.visao;
 
 import br.com.controle.util.dao.DisciplinaDAO;
+import br.com.controle.util.dao.NotaDAO;
 import br.com.controle.util.dao.ProfessorDAO;
 import br.com.controle.util.modelo.Aluno;
 import br.com.controle.util.modelo.Disciplina;
@@ -20,9 +21,10 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author Otavio Costa
  */
 public final class PainelNotas extends javax.swing.JInternalFrame {
-    
-    TabelaAluno tabelaAluno = new TabelaAluno();
-    TabelaProfessor tabelaProfessor = new TabelaProfessor();
+
+    Nota nota = null;
+    private TabelaAluno tabelaAluno = new TabelaAluno();
+    private TabelaProfessor tabelaProfessor = new TabelaProfessor();
     private GenericComboBoxModel<String> boxModelAno;
     private GenericComboBoxModel<Turma> comboBoxTurma;
     GenericComboBoxModel<Disciplina> comboBoxDisciplina;
@@ -30,37 +32,53 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
      * Creates new form PainelNotas
      */
     private static PainelNotas painelNotas;
-    
+
     public void listarAnos() {
         ArrayList<String> anos = (ArrayList<String>) new TurmaRN().listarAnos();
         boxModelAno = new GenericComboBoxModel(anos);
         comboAno.setModel(boxModelAno);
     }
-    
+
     public void listarTurmasPorAno() {
         ArrayList<Turma> turma = (ArrayList<Turma>) new TurmaRN().listarTurmaPorAno(String.valueOf(boxModelAno.getSelectedItem()));
         comboBoxTurma = new GenericComboBoxModel(turma);
         comboTurma.setModel(comboBoxTurma);
     }
-    
+
     private PainelNotas() {
         initComponents();
         ((BasicInternalFrameUI) getUI()).setNorthPane(null);
         listarAnos();
     }
-    
+
     public static PainelNotas getInstancia() {
         if (painelNotas == null) {
             painelNotas = new PainelNotas();
         }
         return painelNotas;
     }
-    
-    private void encapsular() {
-        Nota nota = new Nota();
-        
+
+    private Nota encapsular() {
+        if (nota == null) {
+            nota = new Nota();
+        }
+        int indexAluno = jTbAluno.getSelectedRow();
+        int indexProfessor = jTbProfessor.getSelectedRow();
+
+        if (jTbAluno.isRowSelected(indexAluno) && jTbProfessor.isRowSelected(indexProfessor)) {
+            nota.setAluno(tabelaAluno.getAluno(indexAluno));
+            nota.setDisciplina(comboBoxDisciplina.get(comboDisciplina.getSelectedIndex()));
+            nota.setProfessor(tabelaProfessor.getProfessor(indexProfessor));
+            nota.setExtra(Double.valueOf(jTExtra.getText()));
+            nota.setQualitativo(Double.valueOf(jTQualitativo.getText()));
+            nota.setProvaBimestral(Double.valueOf(notaBimestral.getText()));
+            nota.setProvaMensal(Double.valueOf(notaMensal.getText()));
+            nota.setBimestre(comboBimestre.getSelectedItem().toString());
+            nota.setMedia(Double.valueOf(jTMedia.getText()));
+        }
+        return nota;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -88,14 +106,14 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTExtra = new javax.swing.JTextField();
         notaMensal = new javax.swing.JTextField();
         notaBimestral = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        jTQualitativo = new javax.swing.JTextField();
         comboBimestre = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        jTMedia = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setBorder(null);
@@ -160,6 +178,11 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
 
             }
         ));
+        jTbProfessor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTbProfessorMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTbProfessor);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -284,6 +307,16 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         comboBimestre.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         comboBimestre.setForeground(new java.awt.Color(255, 0, 51));
         comboBimestre.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1° BIMESTRE", "2° BIMESTRE", "3° BIMESTRE", "4° BIMESTRE" }));
+        comboBimestre.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboBimestreItemStateChanged(evt);
+            }
+        });
+        comboBimestre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBimestreActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 0, 0));
@@ -302,21 +335,21 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel9))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTQualitativo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboBimestre, 0, 254, Short.MAX_VALUE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(notaBimestral, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(notaMensal, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(notaMensal, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTExtra, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -328,11 +361,11 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
                         .addGap(10, 10, 10)
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTMedia, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField2, jTextField5, notaBimestral, notaMensal});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTExtra, jTQualitativo, notaBimestral, notaMensal});
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel10, jLabel11, jLabel2, jLabel8, jLabel9});
 
@@ -349,24 +382,24 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(notaBimestral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(notaBimestral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jTExtra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTQualitativo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTMedia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextField2, jTextField5, notaBimestral, notaMensal});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTExtra, jTQualitativo, notaBimestral, notaMensal});
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel10, jLabel11, jLabel2, jLabel8, jLabel9});
 
@@ -451,6 +484,7 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         NotaRN notaRN = new NotaRN();
+        notaRN.salvar(encapsular());
 
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -459,7 +493,7 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
             ArrayList<Disciplina> disciplinas = (ArrayList<Disciplina>) new DisciplinaDAO().getdDsciplinaPorTurma(comboBoxTurma.get(comboTurma.getSelectedIndex()).getId());
             comboBoxDisciplina = new GenericComboBoxModel<>(disciplinas);
             comboDisciplina.setModel(comboBoxDisciplina);
-            
+
             List<Aluno> alunos = comboBoxTurma.get(comboTurma.getSelectedIndex()).getAlunos();
             tabelaAluno.inserirAlunos(alunos);
             jTbAluno.setModel(tabelaAluno);
@@ -477,9 +511,49 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboTurmaActionPerformed
 
     private void jTbAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbAlunoMouseClicked
-     
+        getNotas();
 
     }//GEN-LAST:event_jTbAlunoMouseClicked
+
+    private void comboBimestreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBimestreActionPerformed
+
+    }//GEN-LAST:event_comboBimestreActionPerformed
+
+    private void jTbProfessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbProfessorMouseClicked
+        getNotas();        // TODO add your handling code here:
+    }//GEN-LAST:event_jTbProfessorMouseClicked
+
+    private void comboBimestreItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBimestreItemStateChanged
+        getNotas();        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBimestreItemStateChanged
+
+    private void getNotas() {
+        int indexAluno = jTbAluno.getSelectedRow();
+        int indexProfessor = jTbProfessor.getSelectedRow();
+        if (jTbAluno.isRowSelected(indexAluno) && jTbProfessor.isRowSelected(indexProfessor)) {
+            NotaDAO notaDAO = new NotaDAO();
+            String idProfessor = tabelaProfessor.getProfessor(indexProfessor).getMatricula();
+            String matriculaAluno = tabelaAluno.getAluno(indexAluno).getMatricula();
+
+            long idDisciplina = comboBoxDisciplina.get(comboDisciplina.getSelectedIndex()).getId();
+            nota = notaDAO.getNota(idProfessor, idDisciplina, matriculaAluno, comboBimestre.getSelectedItem().toString());
+
+            if (nota != null) {
+                notaBimestral.setText(nota.getProvaBimestral().toString());
+                notaMensal.setText(nota.getProvaMensal().toString());
+                jTExtra.setText(nota.getExtra().toString());
+                jTQualitativo.setText(nota.getQualitativo().toString());
+                jTMedia.setText(nota.getMedia().toString());
+            } else {
+                notaBimestral.setText("");
+                notaMensal.setText("");
+                jTExtra.setText("");
+                jTQualitativo.setText("");
+                jTMedia.setText("");
+            }
+
+        }        // TODO add your handling code here:
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -507,12 +581,12 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextField jTExtra;
+    private javax.swing.JTextField jTMedia;
+    private javax.swing.JTextField jTQualitativo;
     private javax.swing.JTable jTbAluno;
     private javax.swing.JTable jTbProfessor;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField notaBimestral;
     private javax.swing.JTextField notaMensal;
     // End of variables declaration//GEN-END:variables

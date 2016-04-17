@@ -37,21 +37,20 @@ public abstract class DAOGenerico<T extends BeanBase> {
         return !aux;
     }
 
-    public boolean atualizar(T t) throws Exception {
+    public boolean atualizar(T t) {
         EntityManager em = ConexaoUtil.getEntityManager();
-        boolean aux = false;
         try {
             em.getTransaction().begin();
             em.merge(t);
             em.getTransaction().commit();
-            aux = true;
+            return true;
         } catch (Exception e) {
             em.getTransaction().rollback();
             JOptionPane.showMessageDialog(null, "Erro na classe: " + getTypeClass().getSimpleName() + "\nErro: " + e.getMessage(), "INFORMAÇÃO", JOptionPane.ERROR_MESSAGE);
         } finally {
             em.close();
         }
-        return !aux;
+        return false;
     }
 
     public boolean remover(Long id) {
