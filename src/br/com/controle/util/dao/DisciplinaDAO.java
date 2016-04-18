@@ -12,7 +12,7 @@ import javax.persistence.TypedQuery;
  */
 public class DisciplinaDAO extends DAOGenerico<Disciplina> {
 
-    public List<Disciplina> listarDisciplinasDisponiveis(String matricula) {
+    public List<Disciplina> listarDisciplinasDisponiveis(long matricula) {
         EntityManager entityManager = ConexaoUtil.getEntityManager();
         String consulta = "SELECT d FROM Disciplina d WHERE d not in (SELECT ds FROM Horario h join h.disciplina ds WHERE h.professor.matricula = :idProfessor)";
         TypedQuery<Disciplina> query = entityManager.createQuery(consulta, Disciplina.class);

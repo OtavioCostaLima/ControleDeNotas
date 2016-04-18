@@ -24,7 +24,7 @@ public final class SelecionarDisciplina extends javax.swing.JDialog {
 
     }
 
-    public void buscarDisciplinas(String matriculaprofessor) {
+    public void buscarDisciplinas(long matriculaprofessor) {
         tabelaDisciplina = TabelaDisciplina.getInstancia();
         DisciplinaRN disciplinaRN = new DisciplinaRN();
         tabelaDisciplina.addListaDisciplina(disciplinaRN.listarDisciplinasDisponiveis(matriculaprofessor));

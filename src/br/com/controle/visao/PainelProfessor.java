@@ -1,19 +1,8 @@
 package br.com.controle.visao;
 
-import br.com.controle.util.modelo.Disciplina;
-import br.com.controle.util.modelo.Horario;
-import br.com.controle.util.modelo.HorarioPK;
 import br.com.controle.util.modelo.Professor;
-import br.com.controle.util.modelo.Turma;
-import br.com.controle.util.negocio.HorarioRN;
 import br.com.controle.util.negocio.ProfessorRN;
-import br.com.controle.util.negocio.TurmaRN;
-import br.com.controle.visao.abstractModels.GenericComboBoxModel;
 import br.com.controle.visao.abstractModels.TabelaProfessor;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -22,11 +11,8 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  */
 public class PainelProfessor extends javax.swing.JInternalFrame {
 
-    private GenericComboBoxModel<Turma> boxModelTurma;
     private final TabelaProfessor TABELA_PROFESSOR = new TabelaProfessor();
     private static PainelProfessor painelProfessor;
-    private final DefaultListModel<Disciplina> listModelDiscipinas = new DefaultListModel<>();
-    DefaultListModel<Turma> listModelTurma = new DefaultListModel<>();
     private String urlfoto = "";
 
     /**
@@ -35,10 +21,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     private PainelProfessor() {
         initComponents();
         ((BasicInternalFrameUI) getUI()).setNorthPane(null);
-        jListDisciplinas.setModel(listModelDiscipinas);
-        jLTurma.setModel(listModelTurma);
         tabelaPesquisarProfessor();
-        povoarComboboxTurma();
     }
 
     public static PainelProfessor getInstancia() {
@@ -48,47 +31,14 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         return painelProfessor;
     }
 
-    private void povoarComboboxTurma() {
-        ArrayList<Turma> turma = (ArrayList<Turma>) new TurmaRN().buscarTodos();
-        boxModelTurma = new GenericComboBoxModel(turma);
-        comboTurma.setModel(boxModelTurma);
-    }
-
     private Professor encapsular() {
         Professor professor = new Professor();
-        List<Disciplina> disciplinas;
-        List<Horario> horarios;
-        professor.setMatricula(Long.valueOf(textoMatriculaProfessor.getText()));
         professor.setNome(textoNomeProfessor.getText());
-
         if (checkStatus.isSelected()) {
             professor.setSituacao("ATIVO");
         } else {
             professor.setSituacao("INATIVO");
         }
-
-        if (!listModelDiscipinas.isEmpty()) {
-            disciplinas = new ArrayList<>();
-            horarios = new ArrayList<>();
-            for (int i = 0; i < listModelDiscipinas.getSize(); i++) {
-                disciplinas.add(listModelDiscipinas.get(i));
-            }
-
-            for (Disciplina disciplina : disciplinas) {
-                Horario horario = new Horario();
-                HorarioPK pK = new HorarioPK(professor.getMatricula(), disciplina.getId());
-                horario.setHorarioPK(pK);
-                horario.setDisciplina(disciplina);
-                horario.setProfessor(professor);
-
-                if (comboTurma.getSelectedIndex() > -1) {
-                    horario.setTurma(boxModelTurma.get(comboTurma.getSelectedIndex()));
-                }
-                horarios.add(horario);
-            }
-            professor.setHorarios(horarios);
-        }
-
         return professor;
     }
 
@@ -119,16 +69,6 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         textoMatriculaProfessor = new javax.swing.JTextField();
         checkStatus = new javax.swing.JCheckBox();
         campoImagemProfessor = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jListDisciplinas = new javax.swing.JList();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        comboTurma = new javax.swing.JComboBox();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jLTurma = new javax.swing.JList<Turma>();
-        jButton2 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         btnSalvar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -258,50 +198,6 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             }
         });
 
-        jListDisciplinas.setBorder(javax.swing.BorderFactory.createTitledBorder("Disciplinas"));
-        jScrollPane1.setViewportView(jListDisciplinas);
-
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/line32.png"))); // NOI18N
-        jButton8.setContentAreaFilled(false);
-        jButton8.setFocusable(false);
-        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/add64.png"))); // NOI18N
-        jButton9.setContentAreaFilled(false);
-        jButton9.setFocusable(false);
-        jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel3.setText("Turma:");
-
-        jLTurma.setBorder(javax.swing.BorderFactory.createTitledBorder("Turmas"));
-        jScrollPane3.setViewportView(jLTurma);
-
-        jButton2.setText("ADD");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton6.setText("DEL");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -309,34 +205,16 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(textoMatriculaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(checkStatus)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton6)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(textoNomeProfessor)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(textoMatriculaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(checkStatus)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(textoNomeProfessor))
                 .addGap(18, 18, 18)
                 .addComponent(campoImagemProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -346,32 +224,18 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(campoImagemProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textoMatriculaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(checkStatus)
-                    .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton6))
+                    .addComponent(checkStatus))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(textoNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton8)
-                        .addContainerGap())))
+                .addGap(101, 101, 101))
         );
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -503,7 +367,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -853,7 +717,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         if (professorRN.salvar(professor)) {
             GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
             if (urlfoto != null && !urlfoto.trim().equals("")) {
-                gerenteDeArquivos.gravarImagem(urlfoto, campoImagemProfessor.getWidth(), campoImagemProfessor.getHeight(), "./fotos/" + professor.getMatricula() +"".concat(".jpg"));
+                gerenteDeArquivos.gravarImagem(urlfoto, campoImagemProfessor.getWidth(), campoImagemProfessor.getHeight(), "./fotos/" + professor.getMatricula() + "".concat(".jpg"));
             }
             limparCampos();
             TABELA_PROFESSOR.inserirProfessores(professorRN.buscarTodos());
@@ -873,31 +737,6 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        if (!textoMatriculaProfessor.getText().trim().isEmpty()) {
-            SelecionarDisciplina disciplina = new SelecionarDisciplina(null, true);
-            disciplina.buscarDisciplinas(textoMatriculaProfessor.getText());
-            disciplina.setVisible(true);
-            listModelDiscipinas.insertElementAt(disciplina.getDisciplina(), listModelDiscipinas.size());
-        } else {
-            JOptionPane.showMessageDialog(null, "Por favor, selecione um Professor!", "Nenhum Professor selecionado!", JOptionPane.INFORMATION_MESSAGE);
-        }
-// TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        if (jListDisciplinas.getSelectedIndex() > -1) {
-            Disciplina disciplina = listModelDiscipinas.get(jListDisciplinas.getSelectedIndex());
-            System.out.println("d: " + disciplina.getId());
-            HorarioRN horario = new HorarioRN();
-            HorarioPK pK = new HorarioPK(Long.valueOf(textoMatriculaProfessor.getText()), disciplina.getId());
-            horario.removerHorario(pK);
-            listModelDiscipinas.remove(jListDisciplinas.getSelectedIndex());
-
-        }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
-
     private void campoImagemProfessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoImagemProfessorMouseClicked
         if (evt.getClickCount() == 2) {
             GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
@@ -913,7 +752,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             textoMatriculaProfessor.setText(String.valueOf(professor.getMatricula()));
             GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
 
-            if (!gerenteDeArquivos.setImagemJlabel("./fotos/" + professor.getMatricula() +"".concat(".jpg"), campoImagemProfessor)) {
+            if (!gerenteDeArquivos.setImagemJlabel("./fotos/" + professor.getMatricula() + "".concat(".jpg"), campoImagemProfessor)) {
                 campoImagemProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/professor.png")));
             }
 
@@ -922,14 +761,6 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             } else if (professor.getSituacao().equals("INATIVO")) {
                 checkStatus.setSelected(false);
             }
-
-            listModelDiscipinas.clear();
-            if (professor.getHorarios() != null) {
-                for (Horario horario : professor.getHorarios()) {
-                    listModelDiscipinas.addElement(horario.getDisciplina());
-                }
-            }
-
         }        // TODO add your handling code here:
     }//GEN-LAST:event_tabelaPesquisaprofessorMouseClicked
 
@@ -941,32 +772,6 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSalvar1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        if (comboTurma.getSelectedIndex() >= 0) {
-            Turma turma = boxModelTurma.get(comboTurma.getSelectedIndex());
-            if (!listModelTurma.contains(turma)) {
-                listModelTurma.addElement(turma);
-            } else {
-                JOptionPane.showMessageDialog(null, "Turma já Inserida");
-            }
-
-        }
-
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        if (comboTurma.getSelectedIndex() >= 0) {
-            Turma turma = boxModelTurma.get(comboTurma.getSelectedIndex());
-            if (listModelTurma.contains(turma)) {
-                listModelTurma.removeElement(turma);
-            } else {
-                JOptionPane.showMessageDialog(null, "A Turma não está contida na lista!");
-            }
-
-        }
-    }//GEN-LAST:event_jButton6ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvar;
@@ -974,15 +779,10 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel campoImagemProfessor;
     private javax.swing.JCheckBox checkStatus;
-    private javax.swing.JComboBox comboTurma;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
@@ -990,7 +790,6 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
-    private javax.swing.JList<Turma> jLTurma;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1009,14 +808,12 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList jListDisciplinas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1024,9 +821,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
@@ -1052,7 +847,6 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     private void limparCampos() {
         textoMatriculaProfessor.setText(null);
         textoNomeProfessor.setText(null);
-        listModelDiscipinas.clear();
         urlfoto = "";
         checkStatus.setSelected(false);
         campoImagemProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/professor.png")));

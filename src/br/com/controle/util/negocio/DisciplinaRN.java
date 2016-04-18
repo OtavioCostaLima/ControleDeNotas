@@ -52,7 +52,7 @@ public class DisciplinaRN implements RNgenerico<Disciplina> {
         return disciplinaDAO.buscarTodos();
     }
 
-    public List<Disciplina> listarDisciplinasDisponiveis(String matriculaprofessor) {
+    public List<Disciplina> listarDisciplinasDisponiveis(long matriculaprofessor) {
         disciplinaDAO = new DisciplinaDAO();
         return disciplinaDAO.listarDisciplinasDisponiveis(matriculaprofessor);
     }

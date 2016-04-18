@@ -53,6 +53,8 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
     private String folha;
     private String livro;
     private String nacionalidade;
+
+    @Column(length = 25)
     private String cor;
 
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -61,10 +63,13 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataNascimento;
 
+    @Column(length = 25)
     private String cep;
     private String rua;
     private String bairro;
     private String cidade;
+
+    @Column(length = 10)
     private String numeroResidencia;
 
     private String telefone;

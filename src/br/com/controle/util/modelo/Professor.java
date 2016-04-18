@@ -24,14 +24,16 @@ public class Professor implements BeanBase, Serializable {
     }
 
     @Id
-    @Column(name = "matricula", nullable = false, unique = true)
+    @Column(name = "matricula", nullable = false, unique = true,updatable = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long matricula;
 
     @Column(name = "nome", nullable = false)
     private String nome;
 
+    @Column(length = 25)
     private String cpf;
+    @Column(length = 25)
     private String rg;
     private String tituloDeEleitor;
     private String secao;
@@ -40,15 +42,20 @@ public class Professor implements BeanBase, Serializable {
     private String rua;
     private String bairro;
     private String citade;
+    @Column(length = 25)
     private String numeroResidencia;
     private String estadoCivil;
+    @Column(length = 2)
     private String uf;
     private String posGraduacao;
     private String grauInstrucao;
     private String raca;
     private String pisPasep;
     private String orgaoEmissor;
-    private String dataEmissao;
+
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dataEmissao;
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataNascimento;
 
@@ -228,11 +235,11 @@ public class Professor implements BeanBase, Serializable {
         this.orgaoEmissor = orgaoEmissor;
     }
 
-    public String getDataEmissao() {
+    public Date getDataEmissao() {
         return dataEmissao;
     }
 
-    public void setDataEmissao(String dataEmissao) {
+    public void setDataEmissao(Date dataEmissao) {
         this.dataEmissao = dataEmissao;
     }
 
@@ -251,8 +258,6 @@ public class Professor implements BeanBase, Serializable {
     public void setMatricula(long matricula) {
         this.matricula = matricula;
     }
-    
-    
 
     @Override
     public int hashCode() {

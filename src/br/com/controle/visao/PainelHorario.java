@@ -1,33 +1,98 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.controle.visao;
 
+import br.com.controle.util.modelo.Disciplina;
+import br.com.controle.util.modelo.Horario;
+import br.com.controle.util.modelo.HorarioPK;
+import br.com.controle.util.modelo.Professor;
+import br.com.controle.util.modelo.Turma;
+import br.com.controle.util.negocio.HorarioRN;
+import br.com.controle.util.negocio.ProfessorRN;
+import br.com.controle.util.negocio.TurmaRN;
+import br.com.controle.visao.abstractModels.GenericComboBoxModel;
+import br.com.controle.visao.abstractModels.TabelaProfessor;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
- * @author Suporte Técnico
+ * @author Otavio Costa
  */
 public class PainelHorario extends javax.swing.JInternalFrame {
 
-    private static PainelHorario painelHorario;
+    private GenericComboBoxModel<Turma> boxModelTurma;
+    private final TabelaProfessor TABELA_PROFESSOR = new TabelaProfessor();
+    private static PainelHorario painelProfessor;
+    private final DefaultListModel<Disciplina> listModelDiscipinas = new DefaultListModel<>();
+    DefaultListModel<Turma> listModelTurma = new DefaultListModel<>();
 
     /**
-     * Creates new form PainelHorario
+     * Creates new form PainelProfessor
      */
-    public PainelHorario() {
+    private PainelHorario() {
         initComponents();
         ((BasicInternalFrameUI) getUI()).setNorthPane(null);
+        jListDisciplinas.setModel(listModelDiscipinas);
+        jLTurma.setModel(listModelTurma);
+        tabelaPesquisarProfessor();
+        povoarComboboxTurma();
     }
 
     public static PainelHorario getInstancia() {
-        if (painelHorario == null) {
-            painelHorario = new PainelHorario();
+        if (painelProfessor == null) {
+            painelProfessor = new PainelHorario();
         }
-        return painelHorario;
+        return painelProfessor;
+    }
+
+    private void povoarComboboxTurma() {
+        ArrayList<Turma> turma = (ArrayList<Turma>) new TurmaRN().buscarTodos();
+        boxModelTurma = new GenericComboBoxModel(turma);
+        comboTurma.setModel(boxModelTurma);
+    }
+
+    private Professor encapsular() {
+        Professor professor = new Professor();
+        List<Disciplina> disciplinas;
+        List<Horario> horarios;
+        professor.setNome(textoNomeProfessor.getText());
+
+        if (checkStatus.isSelected()) {
+            professor.setSituacao("ATIVO");
+        } else {
+            professor.setSituacao("INATIVO");
+        }
+
+        if (!listModelDiscipinas.isEmpty()) {
+            disciplinas = new ArrayList<>();
+            horarios = new ArrayList<>();
+            for (int i = 0; i < listModelDiscipinas.getSize(); i++) {
+                disciplinas.add(listModelDiscipinas.get(i));
+            }
+
+            for (Disciplina disciplina : disciplinas) {
+                Horario horario = new Horario();
+                HorarioPK pK = new HorarioPK(professor.getMatricula(), disciplina.getId());
+                horario.setHorarioPK(pK);
+                horario.setDisciplina(disciplina);
+                horario.setProfessor(professor);
+
+                if (comboTurma.getSelectedIndex() > -1) {
+                    horario.setTurma(boxModelTurma.get(comboTurma.getSelectedIndex()));
+                }
+                horarios.add(horario);
+            }
+            professor.setHorarios(horarios);
+        }
+
+        return professor;
+    }
+
+    private void tabelaPesquisarProfessor() {
+        TABELA_PROFESSOR.addListaProfessor(new ProfessorRN().buscarTodos());
+        tabelaPesquisaprofessor.setModel(TABELA_PROFESSOR);
     }
 
     /**
@@ -39,137 +104,40 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<String>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<String>();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<String>();
-        jLabel2 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jPanel5 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        painelCadastroProfessor = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        textoNomeProfessor = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        textoMatriculaProfessor = new javax.swing.JTextField();
+        checkStatus = new javax.swing.JCheckBox();
+        campoImagemProfessor = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jListDisciplinas = new javax.swing.JList();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        comboTurma = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jLTurma = new javax.swing.JList<Turma>();
+        jButton2 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        btnSalvar = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        btnSalvar1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabelaPesquisaprofessor = new javax.swing.JTable();
 
         setBorder(null);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel1.setText("Professor:");
-
-        jList1.setBorder(javax.swing.BorderFactory.createTitledBorder("Turmas"));
-        jScrollPane1.setViewportView(jList1);
-
-        jList2.setBorder(javax.swing.BorderFactory.createTitledBorder("Disciplinas"));
-        jScrollPane2.setViewportView(jList2);
-
-        jButton2.setText("add");
-
-        jButton3.setText("SALVAR");
-
-        jButton4.setText("EXCLUIR");
-
-        jButton5.setText("jButton5");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel2.setText("Turma:");
-
-        jButton7.setText("+");
-
-        jButton8.setText("-");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addComponent(jButton3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton8))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
-                .addContainerGap())
-        );
-
-        jTabbedPane1.addTab("Cadastro", jPanel1);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 796, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 362, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Consulta", jPanel3);
-
-        getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
         jButton1.setBackground(new java.awt.Color(158, 158, 158));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
@@ -183,51 +151,480 @@ public class PainelHorario extends javax.swing.JInternalFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 980, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        getContentPane().add(jPanel5, java.awt.BorderLayout.NORTH);
+
+        jPanel1.setLayout(new java.awt.CardLayout());
+
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+
+        painelCadastroProfessor.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Professor"));
+
+        textoNomeProfessor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+
+        jLabel1.setText("Nome: *");
+
+        jLabel2.setText("Matrícula: *");
+
+        textoMatriculaProfessor.setEditable(false);
+        textoMatriculaProfessor.setBackground(new java.awt.Color(255, 255, 255));
+        textoMatriculaProfessor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+
+        checkStatus.setBackground(new java.awt.Color(255, 255, 255));
+        checkStatus.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        checkStatus.setForeground(new java.awt.Color(204, 0, 0));
+        checkStatus.setText("Ativo");
+        checkStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkStatusActionPerformed(evt);
+            }
+        });
+
+        campoImagemProfessor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        campoImagemProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/professor.png"))); // NOI18N
+        campoImagemProfessor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        campoImagemProfessor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        campoImagemProfessor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        campoImagemProfessor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                campoImagemProfessorMouseClicked(evt);
+            }
+        });
+
+        jListDisciplinas.setBorder(javax.swing.BorderFactory.createTitledBorder("Disciplinas"));
+        jScrollPane1.setViewportView(jListDisciplinas);
+
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/line32.png"))); // NOI18N
+        jButton8.setContentAreaFilled(false);
+        jButton8.setFocusable(false);
+        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/add64.png"))); // NOI18N
+        jButton9.setContentAreaFilled(false);
+        jButton9.setFocusable(false);
+        jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel3.setText("Turma:");
+
+        jLTurma.setBorder(javax.swing.BorderFactory.createTitledBorder("Turmas"));
+        jScrollPane3.setViewportView(jLTurma);
+
+        jButton2.setText("ADD");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("DEL");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 767, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(textoMatriculaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(checkStatus)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton6)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(textoNomeProfessor)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addComponent(campoImagemProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jButton1)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(campoImagemProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textoMatriculaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(checkStatus)
+                    .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton6))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(textoNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton8)
+                        .addContainerGap())))
         );
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+
+        btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnSalvar.setForeground(new java.awt.Color(255, 0, 0));
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/save32px.png"))); // NOI18N
+        btnSalvar.setText("SALVAR");
+        btnSalvar.setContentAreaFilled(false);
+        btnSalvar.setFocusable(false);
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 0, 0));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/erase7.png"))); // NOI18N
+        jButton3.setText("EXCLUIR");
+        jButton3.setContentAreaFilled(false);
+        jButton3.setFocusable(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 0, 0));
+        jButton5.setText("LIMPAR");
+        jButton5.setContentAreaFilled(false);
+        jButton5.setFocusable(false);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        btnSalvar1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnSalvar1.setForeground(new java.awt.Color(255, 0, 0));
+        btnSalvar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/save32px.png"))); // NOI18N
+        btnSalvar1.setText("SALVAR");
+        btnSalvar1.setContentAreaFilled(false);
+        btnSalvar1.setFocusable(false);
+        btnSalvar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvar1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(btnSalvar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5))
+                    .addComponent(btnSalvar1))
+                .addContainerGap(630, Short.MAX_VALUE))
+        );
+
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnSalvar, jButton3, jButton5});
+
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+        );
+
+        tabelaPesquisaprofessor.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        tabelaPesquisaprofessor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaPesquisaprofessorMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tabelaPesquisaprofessor);
+
+        javax.swing.GroupLayout painelCadastroProfessorLayout = new javax.swing.GroupLayout(painelCadastroProfessor);
+        painelCadastroProfessor.setLayout(painelCadastroProfessorLayout);
+        painelCadastroProfessorLayout.setHorizontalGroup(
+            painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
+                .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 987, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        painelCadastroProfessorLayout.setVerticalGroup(
+            painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jTabbedPane1.addTab("Professor", painelCadastroProfessor);
+
+        jPanel1.add(jTabbedPane1, "card3");
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        painelHorario = null;
-        this.dispose();        // TODO add your handling code here:
+        painelProfessor = null;
+        this.dispose();
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void checkStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkStatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkStatusActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        ProfessorRN professorRN = new ProfessorRN();
+        Professor professor = encapsular();
+        if (professorRN.salvar(professor)) {
+            GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
+            if (urlfoto != null && !urlfoto.trim().equals("")) {
+                gerenteDeArquivos.gravarImagem(urlfoto, campoImagemProfessor.getWidth(), campoImagemProfessor.getHeight(), "./fotos/" + professor.getMatricula() + "".concat(".jpg"));
+            }
+            limparCampos();
+            TABELA_PROFESSOR.inserirProfessores(professorRN.buscarTodos());
+
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if (!textoMatriculaProfessor.getText().isEmpty() && tabelaPesquisaprofessor.isRowSelected(tabelaPesquisaprofessor.getSelectedRow())) {
+            ProfessorRN professorRN = new ProfessorRN();
+            if (professorRN.remover(TABELA_PROFESSOR.delProfessor(tabelaPesquisaprofessor.getSelectedRow()).getMatricula())) {
+                Professor professor = TABELA_PROFESSOR.delProfessor(tabelaPesquisaprofessor.getSelectedRow());
+                GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
+                gerenteDeArquivos.removerImagem("./fotos/" + professor.getMatricula() + "".concat(".jpg"));
+                limparCampos();
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        SelecionarDisciplina disciplina = new SelecionarDisciplina(null, true);
+        long id;
+        if (textoMatriculaProfessor.getText().isEmpty()) {
+            id = 0;
+        } else {
+            id = Long.valueOf(textoMatriculaProfessor.getText());
+        }
+
+        disciplina.buscarDisciplinas(id);
+        disciplina.setVisible(true);
+        listModelDiscipinas.insertElementAt(disciplina.getDisciplina(), listModelDiscipinas.size());
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        if (jListDisciplinas.getSelectedIndex() > -1) {
+            Disciplina disciplina = listModelDiscipinas.get(jListDisciplinas.getSelectedIndex());
+            HorarioRN horario = new HorarioRN();
+            HorarioPK pK = new HorarioPK(Long.valueOf(textoMatriculaProfessor.getText()), disciplina.getId());
+            horario.removerHorario(pK);
+            listModelDiscipinas.remove(jListDisciplinas.getSelectedIndex());
+
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void campoImagemProfessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoImagemProfessorMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoImagemProfessorMouseClicked
+
+    private void tabelaPesquisaprofessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPesquisaprofessorMouseClicked
+        int index = tabelaPesquisaprofessor.getSelectedRow();
+        if (tabelaPesquisaprofessor.isRowSelected(index)) {
+            Professor professor = TABELA_PROFESSOR.getProfessor(index);
+            textoNomeProfessor.setText(professor.getNome());
+            textoMatriculaProfessor.setText(String.valueOf(professor.getMatricula()));
+            GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
+
+            if (!gerenteDeArquivos.setImagemJlabel("./fotos/" + professor.getMatricula() + "".concat(".jpg"), campoImagemProfessor)) {
+                campoImagemProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/professor.png")));
+            }
+
+            if (professor.getSituacao().equals("ATIVO")) {
+                checkStatus.setSelected(true);
+            } else if (professor.getSituacao().equals("INATIVO")) {
+                checkStatus.setSelected(false);
+            }
+
+            listModelDiscipinas.clear();
+            if (professor.getHorarios() != null) {
+                for (Horario horario : professor.getHorarios()) {
+                    listModelDiscipinas.addElement(horario.getDisciplina());
+                }
+            }
+
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_tabelaPesquisaprofessorMouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        limparCampos();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalvar1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (comboTurma.getSelectedIndex() >= 0) {
+            Turma turma = boxModelTurma.get(comboTurma.getSelectedIndex());
+            if (!listModelTurma.contains(turma)) {
+                listModelTurma.addElement(turma);
+            } else {
+                JOptionPane.showMessageDialog(null, "Turma já Inserida");
+            }
+
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        if (comboTurma.getSelectedIndex() >= 0) {
+            Turma turma = boxModelTurma.get(comboTurma.getSelectedIndex());
+            if (listModelTurma.contains(turma)) {
+                listModelTurma.removeElement(turma);
+            } else {
+                JOptionPane.showMessageDialog(null, "A Turma não está contida na lista!");
+            }
+
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton btnSalvar1;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel campoImagemProfessor;
+    private javax.swing.JCheckBox checkStatus;
+    private javax.swing.JComboBox comboTurma;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButton9;
+    private javax.swing.JList<Turma> jLTurma;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JList jListDisciplinas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel painelCadastroProfessor;
+    private javax.swing.JTable tabelaPesquisaprofessor;
+    private javax.swing.JTextField textoMatriculaProfessor;
+    private javax.swing.JTextField textoNomeProfessor;
     // End of variables declaration//GEN-END:variables
+
+    private void limparCampos() {
+        textoMatriculaProfessor.setText(null);
+        textoNomeProfessor.setText(null);
+        listModelDiscipinas.clear();
+        urlfoto = "";
+        checkStatus.setSelected(false);
+        campoImagemProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/professor.png")));
+    }
 }
