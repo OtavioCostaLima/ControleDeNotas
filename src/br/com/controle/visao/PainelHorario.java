@@ -24,7 +24,7 @@ public class PainelHorario extends javax.swing.JInternalFrame {
 
     private GenericComboBoxModel<Turma> boxModelTurma;
     private final TabelaProfessor TABELA_PROFESSOR = new TabelaProfessor();
-    private static PainelHorario painelProfessor;
+    private static PainelHorario painelHorario;
     private final DefaultListModel<Disciplina> listModelDiscipinas = new DefaultListModel<>();
     DefaultListModel<Turma> listModelTurma = new DefaultListModel<>();
 
@@ -34,23 +34,34 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     private PainelHorario() {
         initComponents();
         ((BasicInternalFrameUI) getUI()).setNorthPane(null);
-        jListDisciplinas.setModel(listModelDiscipinas);
-        jLTurma.setModel(listModelTurma);
+        meuInitComponents();
+    }
+
+    private void meuInitComponents() {
         tabelaPesquisarProfessor();
         povoarComboboxTurma();
+        jListDisciplinas.setModel(listModelDiscipinas);
+        jLTurma.setModel(listModelTurma);
+
     }
 
     public static PainelHorario getInstancia() {
-        if (painelProfessor == null) {
-            painelProfessor = new PainelHorario();
+        if (painelHorario == null) {
+            painelHorario = new PainelHorario();
         }
-        return painelProfessor;
+        return painelHorario;
     }
 
     private void povoarComboboxTurma() {
         ArrayList<Turma> turma = (ArrayList<Turma>) new TurmaRN().buscarTodos();
         boxModelTurma = new GenericComboBoxModel(turma);
         comboTurma.setModel(boxModelTurma);
+    }
+
+    private Horario novoEncapsular() {
+        HorarioPK horarioPK = new HorarioPK(WIDTH, WIDTH);
+        Horario horario = new Horario();
+        return null;
     }
 
     private Professor encapsular() {
@@ -396,41 +407,43 @@ public class PainelHorario extends javax.swing.JInternalFrame {
                                         .addComponent(jButton2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton6))
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton9)
-                                    .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
-                                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))))
+                                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
+
+        painelCadastroProfessorLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton8, jButton9});
+
         painelCadastroProfessorLayout.setVerticalGroup(
             painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton6))
                 .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
-                                .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2)
-                                    .addComponent(jButton6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(58, 58, 58)
                         .addComponent(jButton8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCadastroProfessorLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton9)
+                            .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane3)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -445,7 +458,7 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        painelProfessor = null;
+        painelHorario = null;
         this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -473,17 +486,17 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        SelecionarDisciplina disciplina = new SelecionarDisciplina(null, true);
-        long id;
-        if (textoMatriculaProfessor.getText().isEmpty()) {
-            id = 0;
-        } else {
-            id = Long.valueOf(textoMatriculaProfessor.getText());
+
+        if (!textoMatriculaProfessor.getText().isEmpty()) {
+            int index = tabelaPesquisaprofessor.getSelectedRow();
+            Long id = TABELA_PROFESSOR.getProfessor(index).getMatricula();
+            SelecionarDisciplina disciplina = new SelecionarDisciplina(null, true);
+
+            disciplina.buscarDisciplinas(id);
+            disciplina.setVisible(true);
+            listModelDiscipinas.insertElementAt(disciplina.getDisciplina(), listModelDiscipinas.size());
         }
 
-        disciplina.buscarDisciplinas(id);
-        disciplina.setVisible(true);
-        listModelDiscipinas.insertElementAt(disciplina.getDisciplina(), listModelDiscipinas.size());
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
 
