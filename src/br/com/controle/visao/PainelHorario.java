@@ -11,7 +11,9 @@ import br.com.controle.util.negocio.TurmaRN;
 import br.com.controle.visao.abstractModels.GenericComboBoxModel;
 import br.com.controle.visao.abstractModels.TabelaProfessor;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -27,6 +29,7 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     private static PainelHorario painelHorario;
     private final DefaultListModel<Disciplina> listModelDiscipinas = new DefaultListModel<>();
     DefaultListModel<Turma> listModelTurma = new DefaultListModel<>();
+    Map<Turma, Disciplina> hashMap = new HashMap<>();
 
     /**
      * Creates new form PainelProfessor
@@ -67,14 +70,15 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     private Professor encapsular() {
         Professor professor = new Professor();
         List<Disciplina> disciplinas;
-        List<Horario> horarios;
-        professor.setNome(textoNomeProfessor.getText());
+        List<Horario> horarios = new ArrayList<>();
+        List<Turma> turmas;
 
-        if (!listModelDiscipinas.isEmpty()) {
+        if (!listModelDiscipinas.isEmpty() && !listModelTurma.isEmpty()) {
             disciplinas = new ArrayList<>();
-            horarios = new ArrayList<>();
+            turmas = new ArrayList<>();
             for (int i = 0; i < listModelDiscipinas.getSize(); i++) {
                 disciplinas.add(listModelDiscipinas.get(i));
+
             }
 
             for (Disciplina disciplina : disciplinas) {
@@ -125,17 +129,16 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         tabelaPesquisaprofessor = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         btnSalvar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        btnSalvar1 = new javax.swing.JButton();
+        jBExclir = new javax.swing.JButton();
+        jBLimpar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListDisciplinas = new javax.swing.JList();
         jScrollPane3 = new javax.swing.JScrollPane();
         jLTurma = new javax.swing.JList<Turma>();
         comboTurma = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jBAddTurma = new javax.swing.JButton();
+        jBremoverTurma = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
 
@@ -275,38 +278,26 @@ public class PainelHorario extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 0, 0));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/erase7.png"))); // NOI18N
-        jButton3.setText("EXCLUIR");
-        jButton3.setContentAreaFilled(false);
-        jButton3.setFocusable(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jBExclir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBExclir.setForeground(new java.awt.Color(255, 0, 0));
+        jBExclir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/erase7.png"))); // NOI18N
+        jBExclir.setText("EXCLUIR");
+        jBExclir.setContentAreaFilled(false);
+        jBExclir.setFocusable(false);
+        jBExclir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jBExclirActionPerformed(evt);
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 0, 0));
-        jButton5.setText("LIMPAR");
-        jButton5.setContentAreaFilled(false);
-        jButton5.setFocusable(false);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jBLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBLimpar.setForeground(new java.awt.Color(255, 0, 0));
+        jBLimpar.setText("LIMPAR");
+        jBLimpar.setContentAreaFilled(false);
+        jBLimpar.setFocusable(false);
+        jBLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        btnSalvar1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnSalvar1.setForeground(new java.awt.Color(255, 0, 0));
-        btnSalvar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/save32px.png"))); // NOI18N
-        btnSalvar1.setText("SALVAR");
-        btnSalvar1.setContentAreaFilled(false);
-        btnSalvar1.setFocusable(false);
-        btnSalvar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvar1ActionPerformed(evt);
+                jBLimparActionPerformed(evt);
             }
         });
 
@@ -316,18 +307,15 @@ public class PainelHorario extends javax.swing.JInternalFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(btnSalvar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5))
-                    .addComponent(btnSalvar1))
+                .addComponent(btnSalvar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBExclir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBLimpar)
                 .addContainerGap(508, Short.MAX_VALUE))
         );
 
-        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnSalvar, jButton3, jButton5});
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnSalvar, jBExclir, jBLimpar});
 
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,10 +323,8 @@ public class PainelHorario extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBExclir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
 
@@ -346,23 +332,28 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jListDisciplinas);
 
         jLTurma.setBorder(javax.swing.BorderFactory.createTitledBorder("Turmas"));
+        jLTurma.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLTurmaMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jLTurma);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setText("Turma:");
 
-        jButton2.setText("ADD");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jBAddTurma.setText("ADD");
+        jBAddTurma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jBAddTurmaActionPerformed(evt);
             }
         });
 
-        jButton6.setText("DEL");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jBremoverTurma.setText("DEL");
+        jBremoverTurma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jBremoverTurmaActionPerformed(evt);
             }
         });
 
@@ -404,9 +395,9 @@ public class PainelHorario extends javax.swing.JInternalFrame {
                                         .addGap(8, 8, 8)
                                         .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton2)
+                                        .addComponent(jBAddTurma)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton6))
+                                        .addComponent(jBremoverTurma))
                                     .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
                                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -430,8 +421,8 @@ public class PainelHorario extends javax.swing.JInternalFrame {
                 .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton6))
+                    .addComponent(jBAddTurma)
+                    .addComponent(jBremoverTurma))
                 .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
                         .addGap(58, 58, 58)
@@ -464,37 +455,38 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        ProfessorRN professorRN = new ProfessorRN();
-        Professor professor = encapsular();
-        if (professorRN.salvar(professor)) {
+        HorarioRN horarioRN = new HorarioRN();
+        Horario horario = novoEncapsular();
+        if (horarioRN.salvar(horario)) {
             limparCampos();
-            TABELA_PROFESSOR.inserirProfessores(professorRN.buscarTodos());
-
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (!textoMatriculaProfessor.getText().isEmpty() && tabelaPesquisaprofessor.isRowSelected(tabelaPesquisaprofessor.getSelectedRow())) {
-            ProfessorRN professorRN = new ProfessorRN();
-            if (professorRN.remover(TABELA_PROFESSOR.delProfessor(tabelaPesquisaprofessor.getSelectedRow()).getMatricula())) {
-                Professor professor = TABELA_PROFESSOR.delProfessor(tabelaPesquisaprofessor.getSelectedRow());
-                GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
-                gerenteDeArquivos.removerImagem("./fotos/" + professor.getMatricula() + "".concat(".jpg"));
-                limparCampos();
-            }
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jBExclirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExclirActionPerformed
+        /*  if (!textoMatriculaProfessor.getText().isEmpty() && tabelaPesquisaprofessor.isRowSelected(tabelaPesquisaprofessor.getSelectedRow())) {
+         ProfessorRN professorRN = new ProfessorRN();
+         if (professorRN.remover(TABELA_PROFESSOR.delProfessor(tabelaPesquisaprofessor.getSelectedRow()).getMatricula())) {
+         Professor professor = TABELA_PROFESSOR.delProfessor(tabelaPesquisaprofessor.getSelectedRow());
+         GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
+         gerenteDeArquivos.removerImagem("./fotos/" + professor.getMatricula() + "".concat(".jpg"));
+         limparCampos();
+         }
+         }*/
+    }//GEN-LAST:event_jBExclirActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-
         if (!textoMatriculaProfessor.getText().isEmpty()) {
             int index = tabelaPesquisaprofessor.getSelectedRow();
             Long id = TABELA_PROFESSOR.getProfessor(index).getMatricula();
-            SelecionarDisciplina disciplina = new SelecionarDisciplina(null, true);
+            SelecionarDisciplina selecionarDisciplina = new SelecionarDisciplina(null, true);
 
-            disciplina.buscarDisciplinas(id);
-            disciplina.setVisible(true);
-            listModelDiscipinas.insertElementAt(disciplina.getDisciplina(), listModelDiscipinas.size());
+            selecionarDisciplina.buscarDisciplinas(id);
+            selecionarDisciplina.setVisible(true);
+            listModelDiscipinas.insertElementAt(selecionarDisciplina.getDisciplina(), listModelDiscipinas.size());
+            hashMap.put(listModelTurma.get(jLTurma.getSelectedIndex()), selecionarDisciplina.getDisciplina());
+            //  hashMap.
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um Professor!", "INFORMAÇÃO", JOptionPane.INFORMATION_MESSAGE);
         }
 
 // TODO add your handling code here:
@@ -538,15 +530,11 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         }        // TODO add your handling code here:
     }//GEN-LAST:event_tabelaPesquisaprofessorMouseClicked
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed
         limparCampos();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jBLimparActionPerformed
 
-    private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalvar1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jBAddTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddTurmaActionPerformed
         if (comboTurma.getSelectedIndex() >= 0) {
             Turma turma = boxModelTurma.get(comboTurma.getSelectedIndex());
             if (!listModelTurma.contains(turma)) {
@@ -557,9 +545,9 @@ public class PainelHorario extends javax.swing.JInternalFrame {
 
         }
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jBAddTurmaActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jBremoverTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBremoverTurmaActionPerformed
         if (comboTurma.getSelectedIndex() >= 0) {
             Turma turma = boxModelTurma.get(comboTurma.getSelectedIndex());
             if (listModelTurma.contains(turma)) {
@@ -567,22 +555,26 @@ public class PainelHorario extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "A Turma não está contida na lista!");
             }
+        }
+    }//GEN-LAST:event_jBremoverTurmaActionPerformed
+
+    private void jLTurmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLTurmaMouseClicked
+        if (!jLTurma.isSelectionEmpty()) {
 
         }
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jLTurmaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton btnSalvar1;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel campoImagemProfessor;
     private javax.swing.JComboBox comboTurma;
+    private javax.swing.JButton jBAddTurma;
+    private javax.swing.JButton jBExclir;
+    private javax.swing.JButton jBLimpar;
+    private javax.swing.JButton jBremoverTurma;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JList<Turma> jLTurma;

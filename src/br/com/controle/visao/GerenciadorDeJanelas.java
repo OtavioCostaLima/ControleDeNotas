@@ -32,7 +32,7 @@ public class GerenciadorDeJanelas<T extends JInternalFrame> {
     }
 
     public static JDesktopPane getDESKTOP_PANE() {
-        if (DESKTOP_PANE==null) {
+        if (DESKTOP_PANE == null) {
             JOptionPane.showMessageDialog(null, "Não extiste um painel de Area de Trabalho disponivel!");
         }
         return DESKTOP_PANE;
