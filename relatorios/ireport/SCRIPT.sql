@@ -1,5 +1,13 @@
+INSERT INTO turma 
+(ano, descricao, sigla, turno) 
+VALUES ('1', 'ANO', 'A', 'MANHÃ'),
+('2', 'ANO', 'A', 'MANHÃ'),
+('2', 'ANO', 'B', 'MANHÃ'),
+('3', 'ANO', 'A', 'MANHÃ');
+
+
 INSERT into ALUNO 
-(id_turma,numero_chamada,matricula,nome_aluno,status) values 
+(idTurma,numerochamada,matricula,nomeAluno,status) values 
 (2,1,'20162A1','ABDO ANTONIO DE BARROS','ATIVO'),
 (2,2,'20162A2','ÁDYLLA MARIA MENDES GOMES','ATIVO'),
 (2,3,'20162A3','ANA BEATRIZ BRAGA E FREITAS','ATIVO'),
@@ -29,9 +37,8 @@ INSERT into ALUNO
 (2,27,'20162A27','RUANA MAYRA ARAUJO','ATIVO'),
 (2,28,'20162A28','SAMUEL VIEIRA DE SOUSA FRANÇA','ATIVO'), 
 (2,29,'20162A29','TAINARA SOARES PEDROSA','ATIVO');
-SELECT * FROM agenda.aluno;
 
-INSERT into ALUNO (id_turma,numero_chamada,matricula,nome_aluno,status) 
+INSERT into ALUNO (idTurma,numerochamada,matricula,nomeAluno,status) 
 values 
 (3,1,'20162B1','CRISLELEY SOARES DA FONSECA','ATIVO'),
 (3,2,'20162B2','EDSON RODRIGUES DE SOUSA JUNIOR','ATIVO'),
@@ -67,7 +74,7 @@ values
 (3,32,'20162B32','CLÉO LOPES SOUSA','ATIVO'),
 (3,33,'20162B33','MARIANA SILVA ANDRADE','ATIVO');
 
-INSERT into ALUNO (id_turma,numero_chamada,matricula,nome_aluno,status) 
+INSERT into ALUNO (idTurma,numerochamada,matricula,nomeAluno,status) 
 values
 (4,1,'20163A1','ADRIANO RAFAEL LEAL NUNES','ATIVO'), 
 (4,2,'20163A2','ALISSON CÂNDIDO COSTA SILVA','ATIVO'),
@@ -132,3 +139,16 @@ values
 (4,61,'20163A61','WESLEY ALENCAR FERNANDES','ATIVO'), 
 (4,62,'20163A62','WILLIAM  BARBOZA DA SILVA','ATIVO');
 
+INSERT INTO agenda.professor
+(matricula,nome,situacao)
+VALUES(
+('1','SIDNEYA','ATIVO'),
+('2','AJOTA','INATIVO'),
+('3','MARCIO CAMARGO','INATIVO'),
+('4','TOMISLAV','ATIVO'),
+('5','HAMILTON','ATIVO'),
+('6','REINALDO','ATIVO'),
+('7','LANESSA','ATIVO'),
+('8','GILVANDO','ATIVO'));
+
+INSERT INTO disciplina VALUES (1,'','PORTUGUES','REPROVA'),(2,'','HISTÓRIA','REPROVA'),(3,'','INGLÊS','REPROVA'),(4,'','GEOGRAFIA','REPROVA'),(5,'','QUÍMICA','REPROVA'),(6,'','ARTES','REPROVA'),(7,'','MUSICA','NÃO REPROVA'),(8,'','ESPANHOL','REPROVA'),(9,'','MATEMÁTICA','REPROVA'),(10,'','DES. GEOMÉTRICO','REPROVA'),(11,'','BIOLOGIA','REPROVA');

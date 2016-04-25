@@ -77,6 +77,7 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
     private String whatsapp;
     private String email;
 
+    @Column(nullable = true)
     private char sexo;
 
     @Temporal(TemporalType.DATE)

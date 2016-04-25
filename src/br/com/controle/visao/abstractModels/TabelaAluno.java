@@ -26,7 +26,9 @@ public class TabelaAluno extends AbstractTableModel {
 
     public void inserirAlunos(List<Aluno> alunos) {
         limparLista();
-        Collections.sort(alunos);
+        if (alunos != null) {
+            Collections.sort(alunos);
+        }
         this.alunos.addAll(alunos);
 
     }
