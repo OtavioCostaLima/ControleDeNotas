@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
  *
  * @author Otavio Costa
  */
-@Entity
+ @Entity
 public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
 
     public Aluno() {
@@ -348,5 +348,5 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
     public int compareTo(Aluno outro) {
         return this.nome.compareTo(outro.getNome());
     }
-
-}
+	
+	}
