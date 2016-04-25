@@ -31,7 +31,7 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
     @Column(name = "nomeAluno")
     private String nome;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idTurma", nullable = false)
     private Turma turma;
 
@@ -78,7 +78,7 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
     private String email;
 
     @Column(nullable = true)
-    private char sexo;
+    private Character sexo;
 
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
@@ -307,11 +307,11 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
         this.email = email;
     }
 
-    public char getSexo() {
+    public Character getSexo() {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
+    public void setSexo(Character sexo) {
         this.sexo = sexo;
     }
 

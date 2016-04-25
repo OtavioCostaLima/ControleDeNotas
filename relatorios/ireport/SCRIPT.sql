@@ -1,9 +1,9 @@
 INSERT INTO turma 
 (ano, descricao, sigla, turno) 
-VALUES ('1', 'ANO', 'A', 'MANHÃ'),
-('2', 'ANO', 'A', 'MANHÃ'),
-('2', 'ANO', 'B', 'MANHÃ'),
-('3', 'ANO', 'A', 'MANHÃ');
+VALUES ('2016','1 ANO','A', 'MANHÃ'),
+('2016','2 ANO', 'A', 'MANHÃ'),
+('2016','2 ANO', 'B', 'MANHÃ'),
+('2016','3 ANO', 'A', 'MANHÃ');
 
 
 INSERT into ALUNO 
@@ -141,7 +141,7 @@ values
 
 INSERT INTO agenda.professor
 (matricula,nome,situacao)
-VALUES(
+VALUES
 ('1','SIDNEYA','ATIVO'),
 ('2','AJOTA','INATIVO'),
 ('3','MARCIO CAMARGO','INATIVO'),
@@ -149,6 +149,6 @@ VALUES(
 ('5','HAMILTON','ATIVO'),
 ('6','REINALDO','ATIVO'),
 ('7','LANESSA','ATIVO'),
-('8','GILVANDO','ATIVO'));
+('8','GILVANDO','ATIVO');
 
 INSERT INTO disciplina VALUES (1,'','PORTUGUES','REPROVA'),(2,'','HISTÓRIA','REPROVA'),(3,'','INGLÊS','REPROVA'),(4,'','GEOGRAFIA','REPROVA'),(5,'','QUÍMICA','REPROVA'),(6,'','ARTES','REPROVA'),(7,'','MUSICA','NÃO REPROVA'),(8,'','ESPANHOL','REPROVA'),(9,'','MATEMÁTICA','REPROVA'),(10,'','DES. GEOMÉTRICO','REPROVA'),(11,'','BIOLOGIA','REPROVA');
