@@ -13,7 +13,6 @@ import br.com.controle.util.modelo.Disciplina;
 import br.com.controle.util.modelo.Turma;
 import br.com.controle.visao.abstractModels.GenericComboBoxModel;
 import br.com.controle.visao.abstractModels.TabelaProfessor;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -179,8 +178,7 @@ public class PainelProtocolo extends javax.swing.JDialog {
                 jCTurma.setSelectedIndex(0);
             }
         }
-        setModelComboDisciplina();
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jCTurmaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCTurmaItemStateChanged
