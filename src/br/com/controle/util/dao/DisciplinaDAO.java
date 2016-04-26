@@ -20,6 +20,15 @@ public class DisciplinaDAO extends DAOGenerico<Disciplina> {
         return query.getResultList();
     }
 
+    public List<Disciplina> listarDisciplinasDisponiveisTurmaProfessor(long matricula, long idTurma) {
+        EntityManager entityManager = ConexaoUtil.getEntityManager();
+        String consulta = "SELECT d FROM Disciplina d WHERE d not in (SELECT ds FROM Horario h join h.disciplina ds WHERE h.professor.matricula = :idProfessor and h.turma.id=:idTurma)";
+        TypedQuery<Disciplina> query = entityManager.createQuery(consulta, Disciplina.class);
+        query.setParameter("idProfessor", matricula);
+        query.setParameter("idTurma", idTurma);
+        return query.getResultList();
+    }
+
     public List<Disciplina> getdDsciplinaTurmaProfessor(long matriculaProfessor, long idTurma) {
         EntityManager em = ConexaoUtil.getEntityManager();
         String consulta = "SELECT d FROM Horario h JOIN h.professor p JOIN h.turma t JOIN h.disciplina d WHERE p.matricula=:matriculaP and t.id=:idTurma";

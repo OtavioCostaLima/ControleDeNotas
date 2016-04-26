@@ -10,6 +10,7 @@ import br.com.controle.util.negocio.ProfessorRN;
 import br.com.controle.util.negocio.TurmaRN;
 import br.com.controle.visao.abstractModels.GenericComboBoxModel;
 import br.com.controle.visao.abstractModels.TabelaProfessor;
+import com.sun.glass.events.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,8 +29,6 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     private final TabelaProfessor TABELA_PROFESSOR = new TabelaProfessor();
     private static PainelHorario painelHorario;
     private final DefaultListModel<Disciplina> listModelDiscipinas = new DefaultListModel<>();
-    DefaultListModel<Turma> listModelTurma = new DefaultListModel<>();
-    Map<Turma, Disciplina> hashMap = new HashMap<>();
 
     /**
      * Creates new form PainelProfessor
@@ -44,8 +43,6 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         tabelaPesquisarProfessor();
         povoarComboboxTurma();
         jListDisciplinas.setModel(listModelDiscipinas);
-        jLTurma.setModel(listModelTurma);
-
     }
 
     public static PainelHorario getInstancia() {
@@ -61,41 +58,36 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         comboTurma.setModel(boxModelTurma);
     }
 
-    private Horario novoEncapsular() {
-        HorarioPK horarioPK = new HorarioPK(WIDTH, WIDTH);
-        Horario horario = new Horario();
-        return null;
-    }
+      private Professor encapsular() {
+        ProfessorRN professorRN = new ProfessorRN();
+        Professor professor = null;
+        int index = tabelaPesquisaprofessor.getSelectedRow();
 
-    private Professor encapsular() {
-        Professor professor = new Professor();
-        List<Disciplina> disciplinas;
-        List<Horario> horarios = new ArrayList<>();
-        List<Turma> turmas;
+        if (tabelaPesquisaprofessor.isRowSelected(index)) {
+            professor = professorRN.buscarPorId(TABELA_PROFESSOR.getProfessor(index).getMatricula());
+            List<Disciplina> disciplinas = new ArrayList<>();
+            List<Horario> horarios = new ArrayList<>();
 
-        if (!listModelDiscipinas.isEmpty() && !listModelTurma.isEmpty()) {
-            disciplinas = new ArrayList<>();
-            turmas = new ArrayList<>();
-            for (int i = 0; i < listModelDiscipinas.getSize(); i++) {
-                disciplinas.add(listModelDiscipinas.get(i));
-
-            }
-
-            for (Disciplina disciplina : disciplinas) {
-                Horario horario = new Horario();
-                HorarioPK pK = new HorarioPK(professor.getMatricula(), disciplina.getId());
-                horario.setHorarioPK(pK);
-                horario.setDisciplina(disciplina);
-                horario.setProfessor(professor);
-
-                if (comboTurma.getSelectedIndex() > -1) {
-                    horario.setTurma(boxModelTurma.get(comboTurma.getSelectedIndex()));
+            if (!listModelDiscipinas.isEmpty()) {
+                for (int i = 0; i < listModelDiscipinas.getSize(); i++) {
+                    disciplinas.add(listModelDiscipinas.get(i));
                 }
-                horarios.add(horario);
-            }
-            professor.setHorarios(horarios);
-        }
 
+                for (Disciplina disciplina : disciplinas) {
+                    Horario horario = new Horario();
+                    HorarioPK pK = new HorarioPK(professor.getMatricula(), disciplina.getId());
+                    horario.setHorarioPK(pK);
+                    horario.setDisciplina(disciplina);
+                    horario.setProfessor(professor);
+
+                    if (comboTurma.getSelectedIndex() > -1) {
+                        horario.setTurma(boxModelTurma.get(comboTurma.getSelectedIndex()));
+                    }
+                    horarios.add(horario);
+                }
+                professor.setHorarios(horarios);
+            }
+        }
         return professor;
     }
 
@@ -133,12 +125,8 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         jBLimpar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListDisciplinas = new javax.swing.JList();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jLTurma = new javax.swing.JList<Turma>();
         comboTurma = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
-        jBAddTurma = new javax.swing.JButton();
-        jBremoverTurma = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
 
@@ -219,6 +207,14 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         tabelaPesquisaprofessor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelaPesquisaprofessorMouseClicked(evt);
+            }
+        });
+        tabelaPesquisaprofessor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tabelaPesquisaprofessorKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tabelaPesquisaprofessorKeyReleased(evt);
             }
         });
         jScrollPane2.setViewportView(tabelaPesquisaprofessor);
@@ -331,31 +327,16 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         jListDisciplinas.setBorder(javax.swing.BorderFactory.createTitledBorder("Disciplinas"));
         jScrollPane1.setViewportView(jListDisciplinas);
 
-        jLTurma.setBorder(javax.swing.BorderFactory.createTitledBorder("Turmas"));
-        jLTurma.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLTurmaMouseClicked(evt);
+        comboTurma.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "turma" }));
+        comboTurma.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboTurmaItemStateChanged(evt);
             }
         });
-        jScrollPane3.setViewportView(jLTurma);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setText("Turma:");
-
-        jBAddTurma.setText("ADD");
-        jBAddTurma.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBAddTurmaActionPerformed(evt);
-            }
-        });
-
-        jBremoverTurma.setText("DEL");
-        jBremoverTurma.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBremoverTurmaActionPerformed(evt);
-            }
-        });
 
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/add64.png"))); // NOI18N
         jButton9.setContentAreaFilled(false);
@@ -393,15 +374,8 @@ public class PainelHorario extends javax.swing.JInternalFrame {
                                     .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addGap(8, 8, 8)
-                                        .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jBAddTurma)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jBremoverTurma))
-                                    .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton9)
@@ -420,22 +394,17 @@ public class PainelHorario extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBAddTurma)
-                    .addComponent(jBremoverTurma))
+                    .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
                         .addGap(58, 58, 58)
-                        .addComponent(jButton8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCadastroProfessorLayout.createSequentialGroup()
+                        .addComponent(jButton8))
+                    .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton9)
-                            .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane3)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -455,9 +424,9 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        HorarioRN horarioRN = new HorarioRN();
-        Horario horario = novoEncapsular();
-        if (horarioRN.salvar(horario)) {
+        ProfessorRN professorRN = new ProfessorRN();
+        Professor professor = encapsular();
+        if (professorRN.salvar(professor)) {
             limparCampos();
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
@@ -475,16 +444,16 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBExclirActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        if (!textoMatriculaProfessor.getText().isEmpty()) {
-            int index = tabelaPesquisaprofessor.getSelectedRow();
-            Long id = TABELA_PROFESSOR.getProfessor(index).getMatricula();
+        int index = tabelaPesquisaprofessor.getSelectedRow();
+        if (tabelaPesquisaprofessor.isRowSelected(index)) {
+            Long matriculaProfessor = TABELA_PROFESSOR.getProfessor(index).getMatricula();
+            Long idTurma = boxModelTurma.get(comboTurma.getSelectedIndex()).getId();
             SelecionarDisciplina selecionarDisciplina = new SelecionarDisciplina(null, true);
-
-            selecionarDisciplina.buscarDisciplinas(id);
+            selecionarDisciplina.buscarDisciplinas(matriculaProfessor, idTurma);
             selecionarDisciplina.setVisible(true);
-            listModelDiscipinas.insertElementAt(selecionarDisciplina.getDisciplina(), listModelDiscipinas.size());
-            hashMap.put(listModelTurma.get(jLTurma.getSelectedIndex()), selecionarDisciplina.getDisciplina());
-            //  hashMap.
+            if (!listModelDiscipinas.contains(selecionarDisciplina.getDisciplina())) {
+                listModelDiscipinas.insertElementAt(selecionarDisciplina.getDisciplina(), listModelDiscipinas.size());
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um Professor!", "INFORMAÇÃO", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -509,6 +478,10 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_campoImagemProfessorMouseClicked
 
     private void tabelaPesquisaprofessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPesquisaprofessorMouseClicked
+        selecionaProfessorNaTabela();
+    }//GEN-LAST:event_tabelaPesquisaprofessorMouseClicked
+
+    private void selecionaProfessorNaTabela() {
         int index = tabelaPesquisaprofessor.getSelectedRow();
         if (tabelaPesquisaprofessor.isRowSelected(index)) {
             Professor professor = TABELA_PROFESSOR.getProfessor(index);
@@ -528,41 +501,25 @@ public class PainelHorario extends javax.swing.JInternalFrame {
             }
 
         }        // TODO add your handling code here:
-    }//GEN-LAST:event_tabelaPesquisaprofessorMouseClicked
+    }
 
     private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed
         limparCampos();        // TODO add your handling code here:
     }//GEN-LAST:event_jBLimparActionPerformed
 
-    private void jBAddTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddTurmaActionPerformed
-        if (comboTurma.getSelectedIndex() >= 0) {
-            Turma turma = boxModelTurma.get(comboTurma.getSelectedIndex());
-            if (!listModelTurma.contains(turma)) {
-                listModelTurma.addElement(turma);
-            } else {
-                JOptionPane.showMessageDialog(null, "Turma já Inserida");
-            }
+    private void comboTurmaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTurmaItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboTurmaItemStateChanged
 
-        }
+    private void tabelaPesquisaprofessorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabelaPesquisaprofessorKeyPressed
+            // TODO add your handling code here:
+    }//GEN-LAST:event_tabelaPesquisaprofessorKeyPressed
 
-    }//GEN-LAST:event_jBAddTurmaActionPerformed
-
-    private void jBremoverTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBremoverTurmaActionPerformed
-        if (comboTurma.getSelectedIndex() >= 0) {
-            Turma turma = boxModelTurma.get(comboTurma.getSelectedIndex());
-            if (listModelTurma.contains(turma)) {
-                listModelTurma.removeElement(turma);
-            } else {
-                JOptionPane.showMessageDialog(null, "A Turma não está contida na lista!");
-            }
-        }
-    }//GEN-LAST:event_jBremoverTurmaActionPerformed
-
-    private void jLTurmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLTurmaMouseClicked
-        if (!jLTurma.isSelectionEmpty()) {
-
-        }
-    }//GEN-LAST:event_jLTurmaMouseClicked
+    private void tabelaPesquisaprofessorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabelaPesquisaprofessorKeyReleased
+  if (evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN) {
+            selecionaProfessorNaTabela();
+        }          // TODO add your handling code here:
+    }//GEN-LAST:event_tabelaPesquisaprofessorKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -570,14 +527,11 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel campoImagemProfessor;
     private javax.swing.JComboBox comboTurma;
-    private javax.swing.JButton jBAddTurma;
     private javax.swing.JButton jBExclir;
     private javax.swing.JButton jBLimpar;
-    private javax.swing.JButton jBremoverTurma;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JList<Turma> jLTurma;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -588,7 +542,6 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel painelCadastroProfessor;
     private javax.swing.JTable tabelaPesquisaprofessor;

@@ -40,7 +40,8 @@ public class ProfessorRN implements RNgenerico<Professor> {
 
     @Override
     public Professor buscarPorId(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          professorDAO = new ProfessorDAO();
+        return professorDAO.buscarPorId(id);
     }
 
     public Professor buscarPorId(String id) {

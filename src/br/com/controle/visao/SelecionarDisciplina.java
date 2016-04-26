@@ -24,10 +24,10 @@ public final class SelecionarDisciplina extends javax.swing.JDialog {
 
     }
 
-    public void buscarDisciplinas(long matriculaprofessor) {
+    public void buscarDisciplinas(long matriculaprofessor, long turma) {
         tabelaDisciplina = TabelaDisciplina.getInstancia();
         DisciplinaRN disciplinaRN = new DisciplinaRN();
-        tabelaDisciplina.addListaDisciplina(disciplinaRN.listarDisciplinasDisponiveis(matriculaprofessor));
+        tabelaDisciplina.addListaDisciplina(disciplinaRN.listarDisciplinasDisponiveisTurmaProfessor(matriculaprofessor,turma));
         jTable1.setModel(tabelaDisciplina);
     }
 
