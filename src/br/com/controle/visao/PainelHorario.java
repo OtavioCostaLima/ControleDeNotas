@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -58,7 +59,7 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         comboTurma.setModel(boxModelTurma);
     }
 
-      private Professor encapsular() {
+    private Professor encapsular() {
         ProfessorRN professorRN = new ProfessorRN();
         Professor professor = null;
         int index = tabelaPesquisaprofessor.getSelectedRow();
@@ -390,7 +391,7 @@ public class PainelHorario extends javax.swing.JInternalFrame {
             painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -488,15 +489,17 @@ public class PainelHorario extends javax.swing.JInternalFrame {
             textoNomeProfessor.setText(professor.getNome());
             textoMatriculaProfessor.setText(String.valueOf(professor.getMatricula()));
             GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
-
             if (!gerenteDeArquivos.setImagemJlabel("./fotos/" + professor.getMatricula() + "".concat(".jpg"), campoImagemProfessor)) {
                 campoImagemProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/professor.png")));
             }
-
-            listModelDiscipinas.clear();
-            if (professor.getHorarios() != null) {
-                for (Horario horario : professor.getHorarios()) {
-                    listModelDiscipinas.addElement(horario.getDisciplina());
+            if (comboTurma.getSelectedIndex() >= 0) {
+                listModelDiscipinas.clear();
+                if (professor.getHorarios() != null) {
+                    for (Horario horario : professor.getHorarios()) {
+                        if (Objects.equals(horario.getTurma().getId(), boxModelTurma.get(comboTurma.getSelectedIndex()).getId())) {
+                            listModelDiscipinas.addElement(horario.getDisciplina());
+                        }
+                    }
                 }
             }
 
@@ -508,15 +511,15 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBLimparActionPerformed
 
     private void comboTurmaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTurmaItemStateChanged
-        // TODO add your handling code here:
+        selecionaProfessorNaTabela();        // TODO add your handling code here:
     }//GEN-LAST:event_comboTurmaItemStateChanged
 
     private void tabelaPesquisaprofessorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabelaPesquisaprofessorKeyPressed
-            // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_tabelaPesquisaprofessorKeyPressed
 
     private void tabelaPesquisaprofessorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabelaPesquisaprofessorKeyReleased
-  if (evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN) {
+        if (evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN) {
             selecionaProfessorNaTabela();
         }          // TODO add your handling code here:
     }//GEN-LAST:event_tabelaPesquisaprofessorKeyReleased

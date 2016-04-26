@@ -15,6 +15,7 @@ import br.com.controle.visao.abstractModels.GenericComboBoxModel;
 import br.com.controle.visao.abstractModels.TabelaProfessor;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,7 +41,7 @@ public class PainelProtocolo extends javax.swing.JDialog {
         jTable1.setModel(tabelaProfessor);
     }
 
-        @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -49,7 +50,7 @@ public class PainelProtocolo extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jCDisciplina = new javax.swing.JComboBox<String>();
+        jCDisciplina = new javax.swing.JComboBox<>();
         jCTurma = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
 
@@ -91,16 +92,6 @@ public class PainelProtocolo extends javax.swing.JDialog {
         jCTurma.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCTurmaItemStateChanged(evt);
-            }
-        });
-        jCTurma.addHierarchyListener(new java.awt.event.HierarchyListener() {
-            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
-                jCTurmaHierarchyChanged(evt);
-            }
-        });
-        jCTurma.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCTurmaActionPerformed(evt);
             }
         });
 
@@ -173,7 +164,7 @@ public class PainelProtocolo extends javax.swing.JDialog {
             parametros.put("idTurma", comboBoxModelTurma.get(jCTurma.getSelectedIndex()).getId());
             parametros.put("idDisciplina", comboBoxDisciplina.get(jCDisciplina.getSelectedIndex()).getId());
             reportUtil.imprimeRelatorio("/relatorios/ireport/RecebimentoProvas.jasper", parametros);
-            
+
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -181,30 +172,29 @@ public class PainelProtocolo extends javax.swing.JDialog {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int index = jTable1.getSelectedRow();
         if (jTable1.isRowSelected(index)) {
-            ArrayList<Turma> turmas = (ArrayList<Turma>) new TurmaDAO().tumasProfessor(tabelaProfessor.getProfessor(index).getMatricula());
+            List<Turma> turmas = new TurmaDAO().tumasProfessor(tabelaProfessor.getProfessor(index).getMatricula());
             comboBoxModelTurma = new GenericComboBoxModel<>(turmas);
             jCTurma.setModel(comboBoxModelTurma);
-            jCTurma.setSelectedIndex(0);
-        }   // TODO add your handling code here:
+            if (jCTurma.getItemCount() > 0) {
+                jCTurma.setSelectedIndex(0);
+            }
+        }
+        setModelComboDisciplina();
+// TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void jCTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCTurmaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCTurmaActionPerformed
-
-    private void jCTurmaHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jCTurmaHierarchyChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCTurmaHierarchyChanged
-
     private void jCTurmaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCTurmaItemStateChanged
+        setModelComboDisciplina();
+    }//GEN-LAST:event_jCTurmaItemStateChanged
+
+    private void setModelComboDisciplina() {
         if (jCTurma.getSelectedIndex() >= 0) {
             int index = jTable1.getSelectedRow();
-            ArrayList<Disciplina> disciplinas = (ArrayList<Disciplina>) new DisciplinaDAO().getdDsciplinaTurmaProfessor(tabelaProfessor.getProfessor(index).getMatricula(), comboBoxModelTurma.get(jCTurma.getSelectedIndex()).getId());
+            List<Disciplina> disciplinas = new DisciplinaDAO().getdDsciplinaTurmaProfessor(tabelaProfessor.getProfessor(index).getMatricula(), comboBoxModelTurma.get(jCTurma.getSelectedIndex()).getId());
             comboBoxDisciplina = new GenericComboBoxModel<>(disciplinas);
             jCDisciplina.setModel(comboBoxDisciplina);
-            jCDisciplina.setSelectedIndex(0);
-        }        // TODO add your handling code here:
-    }//GEN-LAST:event_jCTurmaItemStateChanged
+        }
+    }
 
     private void jCDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCDisciplinaActionPerformed
         // TODO add your handling code here:

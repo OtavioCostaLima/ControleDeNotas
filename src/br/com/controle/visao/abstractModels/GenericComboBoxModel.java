@@ -1,6 +1,7 @@
 package br.com.controle.visao.abstractModels;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.AbstractListModel;
 import javax.swing.ComboBoxModel;
 
@@ -16,7 +17,10 @@ public class GenericComboBoxModel<T> extends AbstractListModel implements ComboB
 
     public GenericComboBoxModel(ArrayList<T> arrayList) {
         listaGenerica = arrayList;
+    }
 
+    public GenericComboBoxModel(List<T> arrayList) {
+        listaGenerica = (ArrayList<T>) arrayList;
     }
 
     @Override
@@ -43,5 +47,11 @@ public class GenericComboBoxModel<T> extends AbstractListModel implements ComboB
     public T get(int selectedIndex) {
         return listaGenerica.get(selectedIndex);
     }
- 
+
+    public void clear() {
+        listaGenerica.clear();
+        fireIntervalRemoved(this, 0, listaGenerica.size());
+
+    }
+
 }
