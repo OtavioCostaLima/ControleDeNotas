@@ -1,6 +1,7 @@
 package br.com.controle.util.modelo;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -53,4 +54,39 @@ public class Falta implements BeanBase, Serializable {
         this.aluno = aluno;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this.disciplina);
+        hash = 41 * hash + Objects.hashCode(this.aluno);
+        hash = 41 * hash + Objects.hashCode(this.turma);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Falta other = (Falta) obj;
+        if (!Objects.equals(this.disciplina, other.disciplina)) {
+            return false;
+        }
+        if (!Objects.equals(this.aluno, other.aluno)) {
+            return false;
+        }
+        if (!Objects.equals(this.turma, other.turma)) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    
 }

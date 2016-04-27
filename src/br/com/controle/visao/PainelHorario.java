@@ -55,7 +55,7 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         ArrayList<Turma> turma = (ArrayList<Turma>) new TurmaRN().buscarTodos();
         boxModelTurma = new GenericComboBoxModel(turma);
         comboTurma.setModel(boxModelTurma);
-        if(comboTurma.getItemCount()>0){
+        if (comboTurma.getItemCount() > 0) {
             comboTurma.setSelectedIndex(0);
         }
     }
@@ -91,6 +91,40 @@ public class PainelHorario extends javax.swing.JInternalFrame {
             }
         }
         return professor;
+    }
+
+    private List<Horario> encapsular1() {
+        HorarioRN professorRN = new HorarioRN();
+        Professor professor = null;
+        List<Horario> horarios =null;
+        int index = tabelaPesquisaprofessor.getSelectedRow();
+
+        if (tabelaPesquisaprofessor.isRowSelected(index)) {
+            professor = professorRN.buscarPorId(TABELA_PROFESSOR.getProfessor(index).getMatricula());
+            List<Disciplina> disciplinas = new ArrayList<>();
+            horarios = new ArrayList<>();
+
+            if (!listModelDiscipinas.isEmpty()) {
+                for (int i = 0; i < listModelDiscipinas.getSize(); i++) {
+                    disciplinas.add(listModelDiscipinas.get(i));
+                }
+
+                for (Disciplina disciplina : disciplinas) {
+                    Horario horario = new Horario();
+                    HorarioPK pK = new HorarioPK(professor.getMatricula(), disciplina.getId());
+                    horario.setHorarioPK(pK);
+                    horario.setDisciplina(disciplina);
+                    horario.setProfessor(professor);
+
+                    if (comboTurma.getSelectedIndex() > -1) {
+                        horario.setTurma(boxModelTurma.get(comboTurma.getSelectedIndex()));
+                    }
+                    horarios.add(horario);
+                }
+                professor.setHorarios(horarios);
+            }
+        }
+        return horarios;
     }
 
     private void tabelaPesquisarProfessor() {
