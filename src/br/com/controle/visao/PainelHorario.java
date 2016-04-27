@@ -94,13 +94,11 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     }
 
     private List<Horario> encapsular1() {
-        HorarioRN professorRN = new HorarioRN();
-        Professor professor = null;
-        List<Horario> horarios =null;
+      //  Professor professor;
+        List<Horario> horarios = null;
         int index = tabelaPesquisaprofessor.getSelectedRow();
-
         if (tabelaPesquisaprofessor.isRowSelected(index)) {
-            professor = professorRN.buscarPorId(TABELA_PROFESSOR.getProfessor(index).getMatricula());
+           // professor = new ProfessorRN().buscarPorId(TABELA_PROFESSOR.getProfessor(index).getMatricula());
             List<Disciplina> disciplinas = new ArrayList<>();
             horarios = new ArrayList<>();
 
@@ -111,17 +109,16 @@ public class PainelHorario extends javax.swing.JInternalFrame {
 
                 for (Disciplina disciplina : disciplinas) {
                     Horario horario = new Horario();
-                    HorarioPK pK = new HorarioPK(professor.getMatricula(), disciplina.getId());
+                    HorarioPK pK = new HorarioPK(TABELA_PROFESSOR.getProfessor(index).getMatricula(), disciplina.getId());
                     horario.setHorarioPK(pK);
-                    horario.setDisciplina(disciplina);
-                    horario.setProfessor(professor);
-
+                   // horario.setDisciplina(disciplina);
+                   // horario.setProfessor(professor);
                     if (comboTurma.getSelectedIndex() > -1) {
                         horario.setTurma(boxModelTurma.get(comboTurma.getSelectedIndex()));
                     }
                     horarios.add(horario);
                 }
-                professor.setHorarios(horarios);
+
             }
         }
         return horarios;
@@ -466,6 +463,7 @@ public class PainelHorario extends javax.swing.JInternalFrame {
             limparCampos();
             tabelaPesquisarProfessor();
         }
+               
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void jBExclirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExclirActionPerformed
