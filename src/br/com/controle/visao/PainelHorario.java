@@ -12,9 +12,7 @@ import br.com.controle.visao.abstractModels.GenericComboBoxModel;
 import br.com.controle.visao.abstractModels.TabelaProfessor;
 import com.sun.glass.events.KeyEvent;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -57,6 +55,9 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         ArrayList<Turma> turma = (ArrayList<Turma>) new TurmaRN().buscarTodos();
         boxModelTurma = new GenericComboBoxModel(turma);
         comboTurma.setModel(boxModelTurma);
+        if(comboTurma.getItemCount()>0){
+            comboTurma.setSelectedIndex(0);
+        }
     }
 
     private Professor encapsular() {
@@ -429,6 +430,7 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         Professor professor = encapsular();
         if (professorRN.salvar(professor)) {
             limparCampos();
+            tabelaPesquisarProfessor();
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 

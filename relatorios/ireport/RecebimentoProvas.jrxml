@@ -13,19 +13,19 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select d.descricao as nomeDisciplina,a.nome_aluno,t.descricao as nomeTurma, p.nome as nomeProfessor, p.matricula from horario h
-join professor p on h.id_professor=p.matricula
-join disciplina d on h.id_disciplina= d.id
-join turma t on  t.id=h.id_turma 
-join aluno a on a.id_turma = t.id where p.matricula=$P{matriculaP} and t.id=$P{idTurma} and d.id=$P{idDisciplina} order by nomeProfessor]]>
+		<![CDATA[select d.descricao as nomeDisciplina,a.nomeAluno,t.descricao as nomeTurma, p.nome as nomeProfessor, p.matricula from horario h
+join professor p on h.idProfessor=p.matricula
+join disciplina d on h.idDisciplina= d.idDisciplina
+join turma t on  t.id=h.idTurma 
+join aluno a on a.idTurma = t.id where p.matricula=$P{matriculaP} and t.id=$P{idTurma} and d.idDisciplina=$P{idDisciplina} order by nomeProfessor]]>
 	</queryString>
 	<field name="nomeDisciplina" class="java.lang.String"/>
-	<field name="nome_aluno" class="java.lang.String">
+	<field name="nomeAluno" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="nomeTurma" class="java.lang.String"/>
 	<field name="nomeProfessor" class="java.lang.String"/>
-	<field name="matricula" class="java.lang.String">
+	<field name="matricula" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -121,7 +121,7 @@ Ensino Médio
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nome_aluno}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nomeAluno}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="329" y="3" width="123" height="20" uuid="05503efb-05c6-45b2-b23a-f54d3a423422"/>

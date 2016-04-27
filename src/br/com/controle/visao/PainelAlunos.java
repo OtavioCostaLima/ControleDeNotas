@@ -1275,7 +1275,8 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                 GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
                 for (Aluno novoAluno : novosAlunos) {
                     if (novoAluno.getuRLImagem() != null && !novoAluno.getuRLImagem().trim().equals("")) {
-                        gerenteDeArquivos.gravarImagem(novoAluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(), "./fotos/" + novoAluno.getMatricula().trim().concat(".jpg"));
+                        gerenteDeArquivos.gravarImagem(novoAluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(), 
+                                "./fotos/" + novoAluno.getMatricula().trim().concat(".jpg"));
                     }
                 }
             }
