@@ -13,7 +13,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select d.descricao as nomeDisciplina,a.nomeAluno,t.descricao as nomeTurma, p.nome as nomeProfessor, p.matricula from horario h
+		<![CDATA[select d.descricao as nomeDisciplina,a.nomeAluno,t.ano,t.sigla,t.turno,t.descricao as nomeTurma, p.nome as nomeProfessor, p.matricula from horario h
 join professor p on h.idProfessor=p.matricula
 join disciplina d on h.idDisciplina= d.idDisciplina
 join turma t on  t.id=h.idTurma 
@@ -21,6 +21,15 @@ join aluno a on a.idTurma = t.id where p.matricula=$P{matriculaP} and t.id=$P{id
 	</queryString>
 	<field name="nomeDisciplina" class="java.lang.String"/>
 	<field name="nomeAluno" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ano" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sigla" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="turno" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="nomeTurma" class="java.lang.String"/>
@@ -135,7 +144,7 @@ Ensino Médio
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nomeTurma}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nomeTurma}+" "+$F{sigla}+" "+$F{turno}+" - "+$F{ano}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="263" y="79" width="293" height="20" uuid="1690697d-279b-41b3-aebe-5d4a5fded6a9"/>
