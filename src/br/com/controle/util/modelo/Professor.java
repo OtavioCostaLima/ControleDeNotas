@@ -269,6 +269,10 @@ public class Professor implements BeanBase, Serializable {
 
     @Override
     public boolean equals(Object obj) {
+        System.out.println("oi");
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
@@ -276,13 +280,12 @@ public class Professor implements BeanBase, Serializable {
             return false;
         }
         final Professor other = (Professor) obj;
-        if (!Objects.equals(this.matricula, other.matricula)) {
-            return false;
-        }
-        if (!Objects.equals(this.nome, other.nome)) {
+        if (this.matricula != other.matricula) {
             return false;
         }
         return true;
     }
+
+  
 
 }

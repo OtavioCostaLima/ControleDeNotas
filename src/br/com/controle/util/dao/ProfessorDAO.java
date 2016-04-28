@@ -6,7 +6,6 @@
 package br.com.controle.util.dao;
 
 import br.com.controle.util.ConexaoUtil;
-import br.com.controle.util.modelo.Disciplina;
 import br.com.controle.util.modelo.Professor;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -17,20 +16,6 @@ import javax.persistence.TypedQuery;
  * @author Otavio Costa
  */
 public class ProfessorDAO extends DAOGenerico<br.com.controle.util.modelo.Professor> {
-
-    @Override
-    public boolean atualizar(Professor professor) {
-        EntityManager em = ConexaoUtil.getEntityManager();
-        em.getTransaction().begin();
-        em.merge(professor);
-        em.getTransaction().commit();
-        return true;
-    }
-
-    public Professor buscarPorId(String id) {
-        EntityManager em = ConexaoUtil.getEntityManager();
-        return em.find(Professor.class, id);
-    }
 
     public List<Professor> getProfessorTurmaDisciplina(long idDisciplina, long idTurma) {
         EntityManager em = ConexaoUtil.getEntityManager();

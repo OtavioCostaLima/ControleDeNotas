@@ -43,7 +43,7 @@ public final class TabelaProfessor extends AbstractTableModel {
         fireTableRowsDeleted(indicde, indicde);
         return professor;
     }
-
+  
     public Professor getProfessor(int index) {
         return professores.get(index);
     }

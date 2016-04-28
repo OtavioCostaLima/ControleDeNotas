@@ -56,7 +56,6 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel5 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -222,20 +221,21 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(campoImagemProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(campoImagemProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textoMatriculaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(checkStatus))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(textoNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textoMatriculaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(checkStatus))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(textoNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(101, 101, 101))
         );
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -726,12 +726,12 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (!textoMatriculaProfessor.getText().isEmpty() && tabelaPesquisaprofessor.isRowSelected(tabelaPesquisaprofessor.getSelectedRow())) {
-            ProfessorRN professorRN = new ProfessorRN();
-            if (professorRN.remover(TABELA_PROFESSOR.delProfessor(tabelaPesquisaprofessor.getSelectedRow()).getMatricula())) {
-                Professor professor = TABELA_PROFESSOR.delProfessor(tabelaPesquisaprofessor.getSelectedRow());
-                GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
-                gerenteDeArquivos.removerImagem("./fotos/" + professor.getMatricula() + "".concat(".jpg"));
+        int index = tabelaPesquisaprofessor.getSelectedRow();
+        if (!textoMatriculaProfessor.getText().isEmpty() && tabelaPesquisaprofessor.isRowSelected(index)) {
+            Professor professor = TABELA_PROFESSOR.getProfessor(index);
+            if (new ProfessorRN().remover(professor.getMatricula())) {
+                TABELA_PROFESSOR.delProfessor(index);
+                new GerenteDeArquivos().removerImagem("./fotos/" + professor.getMatricula() + "".concat(".jpg"));
                 limparCampos();
             }
         }
@@ -745,17 +745,14 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_campoImagemProfessorMouseClicked
 
     private void tabelaPesquisaprofessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPesquisaprofessorMouseClicked
-        int index = tabelaPesquisaprofessor.getSelectedRow();
-        if (tabelaPesquisaprofessor.isRowSelected(index)) {
-            Professor professor = TABELA_PROFESSOR.getProfessor(index);
+        Professor professor;
+        if ((professor = getProfessorSelecionado()) != null) {
             textoNomeProfessor.setText(professor.getNome());
             textoMatriculaProfessor.setText(String.valueOf(professor.getMatricula()));
             GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
-
             if (!gerenteDeArquivos.setImagemJlabel("./fotos/" + professor.getMatricula() + "".concat(".jpg"), campoImagemProfessor)) {
                 campoImagemProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/professor.png")));
             }
-
             if (professor.getSituacao().equals("ATIVO")) {
                 checkStatus.setSelected(true);
             } else if (professor.getSituacao().equals("INATIVO")) {
@@ -776,7 +773,6 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnSalvar1;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel campoImagemProfessor;
     private javax.swing.JCheckBox checkStatus;
     private javax.swing.JButton jButton1;
@@ -851,4 +847,13 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         checkStatus.setSelected(false);
         campoImagemProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/professor.png")));
     }
+
+    private Professor getProfessorSelecionado() {
+        int index = tabelaPesquisaprofessor.getSelectedRow();
+        if (tabelaPesquisaprofessor.isRowSelected(index)) {
+            return TABELA_PROFESSOR.getProfessor(index);
+        }
+        return null;
+    }
+
 }
