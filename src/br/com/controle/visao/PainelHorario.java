@@ -365,7 +365,7 @@ public class PainelHorario extends javax.swing.JInternalFrame {
             selecionarDisciplina.buscarDisciplinas(professor.getMatricula(), turma.getId());
             selecionarDisciplina.setVisible(true);
             Disciplina disciplina;
-            if (!listModelDiscipinas.contains((disciplina = selecionarDisciplina.getDisciplina()))) {
+            if (!listModelDiscipinas.contains((disciplina = selecionarDisciplina.getDisciplina()))&& disciplina !=null) {
                 listModelDiscipinas.insertElementAt(selecionarDisciplina.getDisciplina(), listModelDiscipinas.size());
                 Horario horario = new Horario();
                 horario.setProfessor(professor);
