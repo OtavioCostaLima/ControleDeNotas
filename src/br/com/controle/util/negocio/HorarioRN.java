@@ -2,7 +2,6 @@ package br.com.controle.util.negocio;
 
 import br.com.controle.util.dao.HorarioDAO;
 import br.com.controle.util.modelo.Horario;
-import br.com.controle.util.modelo.HorarioPK;
 import java.util.List;
 
 /**
@@ -12,12 +11,6 @@ import java.util.List;
 public class HorarioRN implements RNgenerico<Horario> {
 
     private HorarioDAO horarioDAO;
-
-    public void removerHorario(HorarioPK pK) {
-        horarioDAO = new HorarioDAO();
-        horarioDAO.removerHorario(pK);
-
-    }
 
     @Override
     public boolean salvar(Horario t) {

@@ -2,7 +2,6 @@ package br.com.controle.visao;
 
 import br.com.controle.util.modelo.Disciplina;
 import br.com.controle.util.modelo.Horario;
-import br.com.controle.util.modelo.HorarioPK;
 import br.com.controle.util.modelo.Professor;
 import br.com.controle.util.modelo.Turma;
 import br.com.controle.util.negocio.HorarioRN;
@@ -12,7 +11,6 @@ import br.com.controle.visao.abstractModels.GenericComboBoxModel;
 import br.com.controle.visao.abstractModels.TabelaProfessor;
 import com.sun.glass.events.KeyEvent;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -39,7 +37,7 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     }
 
     private void meuInitComponents() {
-        tabelaPesquisarProfessor();
+        povoarTabelaPesquisarProfessor();
         povoarComboboxTurma();
         jListDisciplinas.setModel(listModelDiscipinas);
     }
@@ -60,71 +58,32 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         }
     }
 
-    private Professor encapsular() {
-        ProfessorRN professorRN = new ProfessorRN();
-        Professor professor = null;
-        int index = tabelaPesquisaprofessor.getSelectedRow();
-
-        if (tabelaPesquisaprofessor.isRowSelected(index)) {
-            professor = professorRN.buscarPorId(TABELA_PROFESSOR.getProfessor(index).getMatricula());
-            List<Disciplina> disciplinas = new ArrayList<>();
-            List<Horario> horarios = new ArrayList<>();
-
-            if (!listModelDiscipinas.isEmpty()) {
-                for (int i = 0; i < listModelDiscipinas.getSize(); i++) {
-                    disciplinas.add(listModelDiscipinas.get(i));
-                }
-
-                for (Disciplina disciplina : disciplinas) {
-                    Horario horario = new Horario();
-                    HorarioPK pK = new HorarioPK(professor.getMatricula(), disciplina.getId());
-                    horario.setHorarioPK(pK);
-                    horario.setDisciplina(disciplina);
-                    horario.setProfessor(professor);
-
-                    if (comboTurma.getSelectedIndex() > -1) {
-                        horario.setTurma(boxModelTurma.get(comboTurma.getSelectedIndex()));
-                    }
-                    horarios.add(horario);
-                }
-                professor.setHorarios(horarios);
-            }
-        }
-        return professor;
+    /* private List<Horario> encapsular() {
+    Professor professor;
+    List<Horario> horarios = null;
+    
+    if ((professor = getProfessorSelecionado()) != null) {
+    List<Disciplina> disciplinas = new ArrayList<>();
+    horarios = new ArrayList<>();
+    if (!listModelDiscipinas.isEmpty()) {
+    for (int i = 0; i < listModelDiscipinas.getSize(); i++) {
+    disciplinas.add(listModelDiscipinas.get(i));
     }
-
-    private List<Horario> encapsular1() {
-      //  Professor professor;
-        List<Horario> horarios = null;
-        int index = tabelaPesquisaprofessor.getSelectedRow();
-        if (tabelaPesquisaprofessor.isRowSelected(index)) {
-           // professor = new ProfessorRN().buscarPorId(TABELA_PROFESSOR.getProfessor(index).getMatricula());
-            List<Disciplina> disciplinas = new ArrayList<>();
-            horarios = new ArrayList<>();
-
-            if (!listModelDiscipinas.isEmpty()) {
-                for (int i = 0; i < listModelDiscipinas.getSize(); i++) {
-                    disciplinas.add(listModelDiscipinas.get(i));
-                }
-
-                for (Disciplina disciplina : disciplinas) {
-                    Horario horario = new Horario();
-                    HorarioPK pK = new HorarioPK(TABELA_PROFESSOR.getProfessor(index).getMatricula(), disciplina.getId());
-                    horario.setHorarioPK(pK);
-                   // horario.setDisciplina(disciplina);
-                   // horario.setProfessor(professor);
-                    if (comboTurma.getSelectedIndex() > -1) {
-                        horario.setTurma(boxModelTurma.get(comboTurma.getSelectedIndex()));
-                    }
-                    horarios.add(horario);
-                }
-
-            }
-        }
-        return horarios;
+    for (Disciplina disciplina : disciplinas) {
+    Horario horario = new Horario();
+    horario.setDisciplina(disciplina);
+    horario.setProfessor(professor);
+    if (comboTurma.getSelectedIndex() > -1) {
+    horario.setTurma(boxModelTurma.get(comboTurma.getSelectedIndex()));
     }
+    horarios.add(horario);
+    }
+    }
+    }
+    return horarios;
+    }*/
 
-    private void tabelaPesquisarProfessor() {
+    private void povoarTabelaPesquisarProfessor() {
         TABELA_PROFESSOR.addListaProfessor(new ProfessorRN().buscarTodos());
         tabelaPesquisaprofessor.setModel(TABELA_PROFESSOR);
     }
@@ -152,16 +111,13 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         campoImagemProfessor = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelaPesquisaprofessor = new javax.swing.JTable();
-        jPanel6 = new javax.swing.JPanel();
-        btnSalvar = new javax.swing.JButton();
-        jBExclir = new javax.swing.JButton();
-        jBLimpar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListDisciplinas = new javax.swing.JList();
         comboTurma = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
-        jButton9 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        btAdicionar = new javax.swing.JButton();
+        btRemover = new javax.swing.JButton();
+        jBLimpar = new javax.swing.JButton();
 
         setBorder(null);
 
@@ -289,72 +245,8 @@ public class PainelHorario extends javax.swing.JInternalFrame {
                             .addComponent(jLabel1)
                             .addComponent(textoNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)))
                 .addContainerGap())
-        );
-
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-
-        btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnSalvar.setForeground(new java.awt.Color(255, 0, 0));
-        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/save32px.png"))); // NOI18N
-        btnSalvar.setText("SALVAR");
-        btnSalvar.setContentAreaFilled(false);
-        btnSalvar.setFocusable(false);
-        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarActionPerformed(evt);
-            }
-        });
-
-        jBExclir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jBExclir.setForeground(new java.awt.Color(255, 0, 0));
-        jBExclir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/erase7.png"))); // NOI18N
-        jBExclir.setText("EXCLUIR");
-        jBExclir.setContentAreaFilled(false);
-        jBExclir.setFocusable(false);
-        jBExclir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBExclirActionPerformed(evt);
-            }
-        });
-
-        jBLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jBLimpar.setForeground(new java.awt.Color(255, 0, 0));
-        jBLimpar.setText("LIMPAR");
-        jBLimpar.setContentAreaFilled(false);
-        jBLimpar.setFocusable(false);
-        jBLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBLimparActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnSalvar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBExclir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBLimpar)
-                .addContainerGap(508, Short.MAX_VALUE))
-        );
-
-        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnSalvar, jBExclir, jBLimpar});
-
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBExclir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
         );
 
         jListDisciplinas.setBorder(javax.swing.BorderFactory.createTitledBorder("Disciplinas"));
@@ -371,23 +263,34 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setText("Turma:");
 
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/add64.png"))); // NOI18N
-        jButton9.setContentAreaFilled(false);
-        jButton9.setFocusable(false);
-        jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        btAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/add64.png"))); // NOI18N
+        btAdicionar.setContentAreaFilled(false);
+        btAdicionar.setFocusable(false);
+        btAdicionar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                btAdicionarActionPerformed(evt);
             }
         });
 
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/line32.png"))); // NOI18N
-        jButton8.setContentAreaFilled(false);
-        jButton8.setFocusable(false);
-        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/line32.png"))); // NOI18N
+        btRemover.setContentAreaFilled(false);
+        btRemover.setFocusable(false);
+        btRemover.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btRemoverActionPerformed(evt);
+            }
+        });
+
+        jBLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBLimpar.setForeground(new java.awt.Color(255, 0, 0));
+        jBLimpar.setText("LIMPAR");
+        jBLimpar.setContentAreaFilled(false);
+        jBLimpar.setFocusable(false);
+        jBLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimparActionPerformed(evt);
             }
         });
 
@@ -396,28 +299,27 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         painelCadastroProfessorLayout.setHorizontalGroup(
             painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
-                                .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(8, 8, 8)
-                                        .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel3)
+                                .addGap(8, 8, 8)
+                                .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton9)
-                                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addComponent(jBLimpar))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btAdicionar, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btRemover, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)))
                 .addContainerGap())
         );
 
-        painelCadastroProfessorLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton8, jButton9});
+        painelCadastroProfessorLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btAdicionar, btRemover});
 
         painelCadastroProfessorLayout.setVerticalGroup(
             painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -427,18 +329,17 @@ public class PainelHorario extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBLimpar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jButton8))
-                    .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton9)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btAdicionar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btRemover)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Professor", painelCadastroProfessor);
@@ -456,57 +357,48 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        ProfessorRN professorRN = new ProfessorRN();
-        Professor professor = encapsular();
-        if (professorRN.salvar(professor)) {
-            limparCampos();
-            tabelaPesquisarProfessor();
-        }
-               
-    }//GEN-LAST:event_btnSalvarActionPerformed
-
-    private void jBExclirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExclirActionPerformed
-        /*  if (!textoMatriculaProfessor.getText().isEmpty() && tabelaPesquisaprofessor.isRowSelected(tabelaPesquisaprofessor.getSelectedRow())) {
-         ProfessorRN professorRN = new ProfessorRN();
-         if (professorRN.remover(TABELA_PROFESSOR.delProfessor(tabelaPesquisaprofessor.getSelectedRow()).getMatricula())) {
-         Professor professor = TABELA_PROFESSOR.delProfessor(tabelaPesquisaprofessor.getSelectedRow());
-         GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
-         gerenteDeArquivos.removerImagem("./fotos/" + professor.getMatricula() + "".concat(".jpg"));
-         limparCampos();
-         }
-         }*/
-    }//GEN-LAST:event_jBExclirActionPerformed
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        int index = tabelaPesquisaprofessor.getSelectedRow();
-        if (tabelaPesquisaprofessor.isRowSelected(index)) {
-            Long matriculaProfessor = TABELA_PROFESSOR.getProfessor(index).getMatricula();
-            Long idTurma = boxModelTurma.get(comboTurma.getSelectedIndex()).getId();
+    private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
+        Professor professor;
+        if ((professor = getProfessorSelecionado()) != null) {
+            Turma turma = boxModelTurma.get(comboTurma.getSelectedIndex());
             SelecionarDisciplina selecionarDisciplina = new SelecionarDisciplina(null, true);
-            selecionarDisciplina.buscarDisciplinas(matriculaProfessor, idTurma);
+            selecionarDisciplina.buscarDisciplinas(professor.getMatricula(), turma.getId());
             selecionarDisciplina.setVisible(true);
-            if (!listModelDiscipinas.contains(selecionarDisciplina.getDisciplina())) {
+            Disciplina disciplina;
+            if (!listModelDiscipinas.contains((disciplina = selecionarDisciplina.getDisciplina()))) {
                 listModelDiscipinas.insertElementAt(selecionarDisciplina.getDisciplina(), listModelDiscipinas.size());
+                Horario horario = new Horario();
+                horario.setProfessor(professor);
+                horario.setDisciplina(disciplina);
+                horario.setTurma(turma);
+                if (new HorarioRN().salvar(horario)) {
+                   povoarTabelaPesquisarProfessor();
+                }
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um Professor!", "INFORMAÇÃO", JOptionPane.INFORMATION_MESSAGE);
         }
 
 // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_btAdicionarActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
         if (jListDisciplinas.getSelectedIndex() > -1) {
             Disciplina disciplina = listModelDiscipinas.get(jListDisciplinas.getSelectedIndex());
-            HorarioRN horario = new HorarioRN();
-            HorarioPK pK = new HorarioPK(Long.valueOf(textoMatriculaProfessor.getText()), disciplina.getId());
-            horario.removerHorario(pK);
-            listModelDiscipinas.remove(jListDisciplinas.getSelectedIndex());
+            Turma turma = boxModelTurma.get(comboTurma.getSelectedIndex());
+            Professor professor = getProfessorSelecionado();
+            for (Horario horario : professor.getHorarios()) {
+                if (Objects.equals(horario.getDisciplina().getId(), disciplina.getId())
+                        && Objects.equals(horario.getTurma().getId(), turma.getId())) {
+                    new HorarioRN().remover(horario.getId());
+                    listModelDiscipinas.remove(jListDisciplinas.getSelectedIndex());
+                    povoarTabelaPesquisarProfessor();
+                }
+            }
 
         }
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_btRemoverActionPerformed
 
     private void campoImagemProfessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoImagemProfessorMouseClicked
         // TODO add your handling code here:
@@ -517,9 +409,8 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tabelaPesquisaprofessorMouseClicked
 
     private void selecionaProfessorNaTabela() {
-        int index = tabelaPesquisaprofessor.getSelectedRow();
-        if (tabelaPesquisaprofessor.isRowSelected(index)) {
-            Professor professor = TABELA_PROFESSOR.getProfessor(index);
+        Professor professor;
+        if ((professor = getProfessorSelecionado()) != null) {
             textoNomeProfessor.setText(professor.getNome());
             textoMatriculaProfessor.setText(String.valueOf(professor.getMatricula()));
             GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
@@ -560,15 +451,13 @@ public class PainelHorario extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton btAdicionar;
+    private javax.swing.JButton btRemover;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel campoImagemProfessor;
     private javax.swing.JComboBox comboTurma;
-    private javax.swing.JButton jBExclir;
     private javax.swing.JButton jBLimpar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -576,7 +465,6 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -591,5 +479,16 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         textoNomeProfessor.setText(null);
         listModelDiscipinas.clear();
         campoImagemProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/professor.png")));
+        tabelaPesquisaprofessor.clearSelection();
+        povoarTabelaPesquisarProfessor();
+
+    }
+
+    private Professor getProfessorSelecionado() {
+        int index = tabelaPesquisaprofessor.getSelectedRow();
+        if (tabelaPesquisaprofessor.isRowSelected(index)) {
+            return TABELA_PROFESSOR.getProfessor(index);
+        }
+        return null;
     }
 }

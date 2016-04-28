@@ -3,8 +3,10 @@ package br.com.controle.util.modelo;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -17,8 +19,9 @@ import javax.persistence.TemporalType;
 @Entity
 public class Horario implements Serializable, BeanBase {
 
-    @EmbeddedId
-    private HorarioPK horarioPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     private String diaDaSemana;
 
@@ -29,24 +32,16 @@ public class Horario implements Serializable, BeanBase {
     private Date horaTermino;
 
     @ManyToOne
-    @JoinColumn(name = "idProfessor", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "idProfessor", nullable = false)
     private Professor professor;
 
     @ManyToOne
-    @JoinColumn(name = "idDisciplina", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "idDisciplina", nullable = false)
     private Disciplina disciplina;
 
     @ManyToOne
     @JoinColumn(name = "idTurma")
     private Turma turma;
-
-    public HorarioPK getHorarioPK() {
-        return horarioPK;
-    }
-
-    public void setHorarioPK(HorarioPK horarioPK) {
-        this.horarioPK = horarioPK;
-    }
 
     public String getDiaDaSemana() {
         return diaDaSemana;
@@ -96,10 +91,17 @@ public class Horario implements Serializable, BeanBase {
         this.turma = turma;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 19 * hash + Objects.hashCode(this.horarioPK);
         hash = 19 * hash + Objects.hashCode(this.professor);
         hash = 19 * hash + Objects.hashCode(this.disciplina);
         hash = 19 * hash + Objects.hashCode(this.turma);
@@ -108,6 +110,9 @@ public class Horario implements Serializable, BeanBase {
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
@@ -115,7 +120,7 @@ public class Horario implements Serializable, BeanBase {
             return false;
         }
         final Horario other = (Horario) obj;
-        if (!Objects.equals(this.horarioPK, other.horarioPK)) {
+        if (this.id != other.id) {
             return false;
         }
         if (!Objects.equals(this.professor, other.professor)) {
