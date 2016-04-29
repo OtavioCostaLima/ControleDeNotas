@@ -24,7 +24,7 @@ public class Professor implements BeanBase, Serializable {
     }
 
     @Id
-    @Column(name = "matricula", nullable = false, unique = true,updatable = true)
+    @Column(name = "matricula", nullable = false, unique = true, updatable = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long matricula;
 
@@ -269,7 +269,6 @@ public class Professor implements BeanBase, Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        System.out.println("oi");
         if (this == obj) {
             return true;
         }
@@ -285,7 +284,5 @@ public class Professor implements BeanBase, Serializable {
         }
         return true;
     }
-
-  
 
 }

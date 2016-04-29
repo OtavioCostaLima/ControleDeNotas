@@ -33,6 +33,9 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
 
     private Professor encapsular() {
         Professor professor = new Professor();
+        if (!textoMatriculaProfessor.getText().isEmpty()) {
+            professor.setMatricula(Long.valueOf(textoMatriculaProfessor.getText()));
+        }
         professor.setNome(textoNomeProfessor.getText());
         if (checkStatus.isSelected()) {
             professor.setSituacao("ATIVO");
