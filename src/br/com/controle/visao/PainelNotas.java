@@ -6,14 +6,17 @@ import br.com.controle.util.dao.ProfessorDAO;
 import br.com.controle.util.modelo.Aluno;
 import br.com.controle.util.modelo.Disciplina;
 import br.com.controle.util.modelo.Nota;
+import br.com.controle.util.modelo.Professor;
 import br.com.controle.util.modelo.Turma;
 import br.com.controle.util.negocio.NotaRN;
 import br.com.controle.util.negocio.TurmaRN;
 import br.com.controle.visao.abstractModels.GenericComboBoxModel;
 import br.com.controle.visao.abstractModels.TabelaAluno;
 import br.com.controle.visao.abstractModels.TabelaProfessor;
-import java.util.ArrayList;
+import java.awt.Component;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -23,8 +26,8 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 public final class PainelNotas extends javax.swing.JInternalFrame {
 
     Nota nota = null;
-    private TabelaAluno tabelaAluno = new TabelaAluno();
-    private TabelaProfessor tabelaProfessor = new TabelaProfessor();
+    private final TabelaAluno tabelaAluno = new TabelaAluno();
+    private final TabelaProfessor tabelaProfessor = new TabelaProfessor();
     private GenericComboBoxModel<String> boxModelAno;
     private GenericComboBoxModel<Turma> comboBoxTurma;
     GenericComboBoxModel<Disciplina> comboBoxDisciplina;
@@ -34,13 +37,13 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
     private static PainelNotas painelNotas;
 
     public void listarAnos() {
-        ArrayList<String> anos = (ArrayList<String>) new TurmaRN().listarAnos();
+        List<String> anos = new TurmaRN().listarAnos();
         boxModelAno = new GenericComboBoxModel(anos);
         comboAno.setModel(boxModelAno);
     }
 
     public void listarTurmasPorAno() {
-        ArrayList<Turma> turma = (ArrayList<Turma>) new TurmaRN().listarTurmaPorAno(String.valueOf(boxModelAno.getSelectedItem()));
+        List<Turma> turma = new TurmaRN().listarTurmaPorAno(String.valueOf(boxModelAno.getSelectedItem()));
         comboBoxTurma = new GenericComboBoxModel(turma);
         comboTurma.setModel(comboBoxTurma);
     }
@@ -62,21 +65,21 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         if (nota == null) {
             nota = new Nota();
         }
-        int indexAluno = jTbAluno.getSelectedRow();
-        int indexProfessor = jTbProfessor.getSelectedRow();
-
-        if (jTbAluno.isRowSelected(indexAluno) && jTbProfessor.isRowSelected(indexProfessor)) {
-            nota.setAluno(tabelaAluno.getAluno(indexAluno));
+        Professor professor;
+        Aluno aluno;
+        if ((aluno = getAlunoSelecionado()) != null && (professor = getProfessorSelecionado()) != null) {
+            nota.setAluno(aluno);
             nota.setDisciplina(comboBoxDisciplina.get(comboDisciplina.getSelectedIndex()));
-            nota.setProfessor(tabelaProfessor.getProfessor(indexProfessor));
+            nota.setProfessor(professor);
             nota.setExtra(Double.valueOf(jTExtra.getText()));
             nota.setQualitativo(Double.valueOf(jTQualitativo.getText()));
             nota.setProvaBimestral(Double.valueOf(notaBimestral.getText()));
             nota.setProvaMensal(Double.valueOf(notaMensal.getText()));
             nota.setBimestre(comboBimestre.getSelectedItem().toString());
             nota.setMedia(Double.valueOf(jTMedia.getText()));
+            return nota;
         }
-        return nota;
+        return null;
     }
 
     @SuppressWarnings("unchecked")
@@ -121,7 +124,6 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -250,7 +252,6 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboAno, comboDisciplina, comboTurma, jLabel3});
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jButton6.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -293,7 +294,6 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(jTbAluno);
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "NOTAS"));
 
         jLabel2.setText("Mensal");
@@ -303,6 +303,30 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         jLabel9.setText("Extra");
 
         jLabel10.setText("Qualitativo");
+
+        jTExtra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTExtraKeyReleased(evt);
+            }
+        });
+
+        notaMensal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                notaMensalKeyReleased(evt);
+            }
+        });
+
+        notaBimestral.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                notaBimestralKeyReleased(evt);
+            }
+        });
+
+        jTQualitativo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTQualitativoKeyReleased(evt);
+            }
+        });
 
         comboBimestre.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         comboBimestre.setForeground(new java.awt.Color(255, 0, 51));
@@ -483,21 +507,25 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboAnoActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        NotaRN notaRN = new NotaRN();
-        notaRN.salvar(encapsular());
-
+        Nota novaNota = encapsular();
+        if (novaNota != null) {
+            new NotaRN().salvar(novaNota);
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void comboTurmaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTurmaItemStateChanged
-        if (comboTurma.getSelectedIndex() >= 0) {
-            ArrayList<Disciplina> disciplinas = (ArrayList<Disciplina>) new DisciplinaDAO().getdDsciplinaPorTurma(comboBoxTurma.get(comboTurma.getSelectedIndex()).getId());
+        Turma turma = getTurmaSelecionada();
+        if (turma != null) {
+            List<Disciplina> disciplinas = new DisciplinaDAO().getdDsciplinaPorTurma(turma.getId());
             comboBoxDisciplina = new GenericComboBoxModel<>(disciplinas);
             comboDisciplina.setModel(comboBoxDisciplina);
-
-            List<Aluno> alunos = comboBoxTurma.get(comboTurma.getSelectedIndex()).getAlunos();
+            List<Aluno> alunos = turma.getAlunos();
             tabelaAluno.inserirAlunos(alunos);
             jTbAluno.setModel(tabelaAluno);
-            //  comboDisciplina.setSelectedIndex(0);
+            if (comboDisciplina.getItemCount() > 0) {
+                comboDisciplina.setSelectedIndex(0);
+            }
+
         }          // TODO add your handling code here:
     }//GEN-LAST:event_comboTurmaItemStateChanged
 
@@ -527,17 +555,31 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         getNotas();        // TODO add your handling code here:
     }//GEN-LAST:event_comboBimestreItemStateChanged
 
+    private void notaMensalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notaMensalKeyReleased
+        calcularMedia();        // TODO add your handling code here:
+    }//GEN-LAST:event_notaMensalKeyReleased
+
+    private void notaBimestralKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notaBimestralKeyReleased
+        calcularMedia();          // TODO add your handling code here:
+    }//GEN-LAST:event_notaBimestralKeyReleased
+
+    private void jTExtraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTExtraKeyReleased
+        calcularMedia();          // TODO add your handling code here:
+    }//GEN-LAST:event_jTExtraKeyReleased
+
+    private void jTQualitativoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTQualitativoKeyReleased
+        calcularMedia();          // TODO add your handling code here:
+    }//GEN-LAST:event_jTQualitativoKeyReleased
+
     private void getNotas() {
-        int indexAluno = jTbAluno.getSelectedRow();
-        int indexProfessor = jTbProfessor.getSelectedRow();
-        if (jTbAluno.isRowSelected(indexAluno) && jTbProfessor.isRowSelected(indexProfessor)) {
-            NotaDAO notaDAO = new NotaDAO();
-            long idProfessor = tabelaProfessor.getProfessor(indexProfessor).getMatricula();
-            String matriculaAluno = tabelaAluno.getAluno(indexAluno).getMatricula();
-
-            long idDisciplina = comboBoxDisciplina.get(comboDisciplina.getSelectedIndex()).getId();
-            nota = notaDAO.getNota(idProfessor, idDisciplina, matriculaAluno, comboBimestre.getSelectedItem().toString());
-
+        Aluno aluno;
+        Professor professor;
+        if ((aluno = getAlunoSelecionado()) != null && (professor = getProfessorSelecionado()) != null) {
+            long idDisciplina = 0;
+            if (comboDisciplina.getSelectedIndex() >= 0) {
+                idDisciplina = comboBoxDisciplina.get(comboDisciplina.getSelectedIndex()).getId();
+            }
+            nota = new NotaDAO().getNota(professor.getMatricula(), idDisciplina, aluno.getMatricula(), comboBimestre.getSelectedItem().toString());
             if (nota != null) {
                 notaBimestral.setText(nota.getProvaBimestral().toString());
                 notaMensal.setText(nota.getProvaMensal().toString());
@@ -590,4 +632,46 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
     private javax.swing.JTextField notaBimestral;
     private javax.swing.JTextField notaMensal;
     // End of variables declaration//GEN-END:variables
+
+    private Aluno getAlunoSelecionado() {
+        int indexAluno = jTbAluno.getSelectedRow();
+        if (jTbAluno.isRowSelected(indexAluno)) {
+            return tabelaAluno.getAluno(indexAluno);
+        }
+        return null;
+    }
+
+    private Professor getProfessorSelecionado() {
+        int indexProfessor = jTbProfessor.getSelectedRow();
+        if (jTbProfessor.isRowSelected(indexProfessor)) {
+            return tabelaProfessor.getProfessor(indexProfessor);
+        }
+        return null;
+    }
+
+    private Turma getTurmaSelecionada() {
+        int index = comboTurma.getSelectedIndex();
+        if (index >= 0) {
+            return comboBoxTurma.get(index);
+        } else {
+            JOptionPane.showMessageDialog(null, "Turma não encontrada!");
+        }
+        return null;
+    }
+
+    private void calcularMedia() {
+        Double media = 0;
+        JTextField components[] = {notaBimestral, notaMensal, jTExtra, jTQualitativo};
+        for (JTextField component : components) {
+            if (!component.getText().isEmpty()) {
+                double nota = Double.valueOf(component.getText());
+                media += nota;
+            }
+        }
+        if (media != null) {
+            jTMedia.setText("" + media / 2);
+        }
+
+    }
+
 }
