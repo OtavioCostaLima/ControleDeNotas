@@ -76,7 +76,6 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        btnSalvar1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelaPesquisaprofessor = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -166,7 +165,6 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
 
         painelCadastroProfessor.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Professor"));
 
         textoNomeProfessor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
@@ -241,8 +239,6 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSalvar.setForeground(new java.awt.Color(255, 0, 0));
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/save32px.png"))); // NOI18N
@@ -273,6 +269,11 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         jButton4.setText("GERAR CARTEIRINHA");
         jButton4.setContentAreaFilled(false);
         jButton4.setFocusable(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 0, 0));
@@ -285,34 +286,19 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             }
         });
 
-        btnSalvar1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnSalvar1.setForeground(new java.awt.Color(255, 0, 0));
-        btnSalvar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/save32px.png"))); // NOI18N
-        btnSalvar1.setText("SALVAR");
-        btnSalvar1.setContentAreaFilled(false);
-        btnSalvar1.setFocusable(false);
-        btnSalvar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvar1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(btnSalvar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5))
-                    .addComponent(btnSalvar1))
+                .addComponent(btnSalvar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -321,15 +307,13 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addContainerGap())
         );
 
         tabelaPesquisaprofessor.setModel(new javax.swing.table.DefaultTableModel(
@@ -355,13 +339,11 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         painelCadastroProfessorLayout.setHorizontalGroup(
             painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(painelCadastroProfessorLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(painelCadastroProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 987, Short.MAX_VALUE))))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 987, Short.MAX_VALUE))
                 .addContainerGap())
         );
         painelCadastroProfessorLayout.setVerticalGroup(
@@ -370,9 +352,10 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Professor", painelCadastroProfessor);
@@ -669,7 +652,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(75, 108, Short.MAX_VALUE))
+                .addGap(75, 118, Short.MAX_VALUE))
         );
 
         jPanel7Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jComboBox2, jComboBox3, jDateChooser2, jFormattedTextField1, jFormattedTextField2, jLabel15, jLabel16, jLabel17, jLabel18, jLabel19, jLabel20, jLabel21, jLabel22, jLabel23, jLabel24, jLabel25, jTextField10, jTextField11, jTextField12, jTextField13, jTextField14, jTextField15});
@@ -718,7 +701,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         ProfessorRN professorRN = new ProfessorRN();
         Professor professor = encapsular();
         if (professorRN.salvar(professor)) {
-            GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
+            GerenteDeImagens gerenteDeArquivos = new GerenteDeImagens();
             if (urlfoto != null && !urlfoto.trim().equals("")) {
                 gerenteDeArquivos.gravarImagem(urlfoto, campoImagemProfessor.getWidth(), campoImagemProfessor.getHeight(), "./fotos/" + professor.getMatricula() + "".concat(".jpg"));
             }
@@ -734,7 +717,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
             Professor professor = TABELA_PROFESSOR.getProfessor(index);
             if (new ProfessorRN().remover(professor.getMatricula())) {
                 TABELA_PROFESSOR.delProfessor(index);
-                new GerenteDeArquivos().removerImagem("./fotos/" + professor.getMatricula() + "".concat(".jpg"));
+                new GerenteDeImagens().removerImagem("./fotos/" + professor.getMatricula() + "".concat(".jpg"));
                 limparCampos();
             }
         }
@@ -742,7 +725,7 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
 
     private void campoImagemProfessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoImagemProfessorMouseClicked
         if (evt.getClickCount() == 2) {
-            GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
+            GerenteDeImagens gerenteDeArquivos = new GerenteDeImagens();
             urlfoto = gerenteDeArquivos.escolherImagem(campoImagemProfessor);
         }   // TODO add your handling code here:
     }//GEN-LAST:event_campoImagemProfessorMouseClicked
@@ -752,8 +735,8 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         if ((professor = getProfessorSelecionado()) != null) {
             textoNomeProfessor.setText(professor.getNome());
             textoMatriculaProfessor.setText(String.valueOf(professor.getMatricula()));
-            GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
-            if (!gerenteDeArquivos.setImagemJlabel("./fotos/" + professor.getMatricula() + "".concat(".jpg"), campoImagemProfessor)) {
+            GerenteDeImagens gerenteDeArquivos = new GerenteDeImagens();
+            if (!gerenteDeArquivos.setImagemNaJlabel("./fotos/" + professor.getMatricula() + "".concat(".jpg"), campoImagemProfessor)) {
                 campoImagemProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/professor.png")));
             }
             if (professor.getSituacao().equals("ATIVO")) {
@@ -768,14 +751,13 @@ public class PainelProfessor extends javax.swing.JInternalFrame {
         limparCampos();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar1ActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalvar1ActionPerformed
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton btnSalvar1;
     private javax.swing.JLabel campoImagemProfessor;
     private javax.swing.JCheckBox checkStatus;
     private javax.swing.JButton jButton1;

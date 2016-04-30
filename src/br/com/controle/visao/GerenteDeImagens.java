@@ -5,44 +5,54 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
 /**
  *
  * @author Otavio Costa
  */
-public class GerenteDeArquivos {
+public class GerenteDeImagens {
 
-    public boolean setImagemJlabel(String path, JLabel jLabel) {
-        File file = new File(path);
-        if (file.isFile()) {
-            jLabel.setIcon(new ImageIcon(path));
+    private String urlImagem = "";
+
+    public boolean setImagemNaJlabel(String path, JLabel jLabel) {
+        BufferedImage imagem = null;
+        if (new File(path).isFile()) {
+            try {
+                imagem = ImageIO.read(new File(path));
+            } catch (IOException ex) {
+                Logger.getLogger(GerenteDeImagens.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            jLabel.setIcon(new ImageIcon(imagem));
             return true;
         }
         return false;
     }
 
     public void gravarImagem(String path, int width, int height, String novoCaminho) {
-        try {
-            BufferedImage image = ImageIO.read(new File(path));
-            BufferedImage new_img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-            Graphics2D g = new_img.createGraphics();
-            g.drawImage(image, 0, 0, width - 2, height - 2, null);
-            ImageIO.write(new_img, "JPG", new File(novoCaminho));
-
-        } catch (IOException iOException) {
-            System.err.println("Erro: " + iOException.getMessage());
+        if (new File(path).isFile()) {
+            try {
+                BufferedImage image = ImageIO.read(new File(path));
+                BufferedImage new_img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+                Graphics2D g = new_img.createGraphics();
+                g.drawImage(image, 0, 0, width - 2, height - 2, null);
+                ImageIO.write(new_img, "JPG", new File(novoCaminho));
+            } catch (IOException iOException) {
+                JOptionPane.showMessageDialog(null, "Ocorreu um erro au salvar imagem!\nDescrição do erro: " + iOException.getMessage());
+            }
         }
     }
 
     public String escolherImagem(JLabel jLabel) {
         JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
         chooser.setFileFilter(new FileFilter() {
-
             @Override
             public boolean accept(File f) {
                 String caminho = f.getAbsolutePath();
@@ -60,7 +70,7 @@ public class GerenteDeArquivos {
             ImageIcon icone = new ImageIcon(path);
             Image image = icone.getImage().getScaledInstance(jLabel.getWidth() - 2, jLabel.getHeight() - 2, Image.SCALE_DEFAULT);
             jLabel.setIcon(new ImageIcon(image));
-            return chooser.getSelectedFile().getAbsolutePath();
+            return urlImagem = chooser.getSelectedFile().getAbsolutePath();
         }
         return "";
     }
@@ -71,4 +81,13 @@ public class GerenteDeArquivos {
             f.delete();
         }
     }
+
+    public String getUrlImagem() {
+        return urlImagem;
+    }
+
+    public void setUrlImagem(String urlImagem) {
+        this.urlImagem = urlImagem;
+    }
+
 }

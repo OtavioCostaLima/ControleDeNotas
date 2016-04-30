@@ -412,8 +412,8 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         if ((professor = getProfessorSelecionado()) != null) {
             textoNomeProfessor.setText(professor.getNome());
             textoMatriculaProfessor.setText(String.valueOf(professor.getMatricula()));
-            GerenteDeArquivos gerenteDeArquivos = new GerenteDeArquivos();
-            if (!gerenteDeArquivos.setImagemJlabel("./fotos/" + professor.getMatricula() + "".concat(".jpg"), campoImagemProfessor)) {
+            GerenteDeImagens gerenteDeArquivos = new GerenteDeImagens();
+            if (!gerenteDeArquivos.setImagemNaJlabel("./fotos/" + professor.getMatricula() + "".concat(".jpg"), campoImagemProfessor)) {
                 campoImagemProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/professor.png")));
             }
             if (comboTurma.getSelectedIndex() >= 0) {

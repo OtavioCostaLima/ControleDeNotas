@@ -35,7 +35,7 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
     @JoinColumn(name = "idTurma", nullable = false)
     private Turma turma;
 
-    private transient String uRLImagem;
+    private transient String uRLImagem ="";
 
     @Column(name = "numeroChamada", nullable = false)
     private int numeroChamada;
