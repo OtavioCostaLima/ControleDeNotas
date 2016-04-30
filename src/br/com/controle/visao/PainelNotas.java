@@ -660,7 +660,7 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
     }
 
     private void calcularMedia() {
-        Double media = 0;
+        Double media = 0.0;
         JTextField components[] = {notaBimestral, notaMensal, jTExtra, jTQualitativo};
         for (JTextField component : components) {
             if (!component.getText().isEmpty()) {
