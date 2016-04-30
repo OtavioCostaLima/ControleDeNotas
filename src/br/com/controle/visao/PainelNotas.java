@@ -13,7 +13,7 @@ import br.com.controle.util.negocio.TurmaRN;
 import br.com.controle.visao.abstractModels.GenericComboBoxModel;
 import br.com.controle.visao.abstractModels.TabelaAluno;
 import br.com.controle.visao.abstractModels.TabelaProfessor;
-import java.awt.Component;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -292,6 +292,14 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
                 jTbAlunoMouseClicked(evt);
             }
         });
+        jTbAluno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTbAlunoKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTbAlunoKeyReleased(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTbAluno);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "NOTAS"));
@@ -349,6 +357,10 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("MÉDIA");
+
+        jTMedia.setEditable(false);
+        jTMedia.setBackground(new java.awt.Color(255, 255, 255));
+        jTMedia.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -417,15 +429,15 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel10)
                     .addComponent(jTQualitativo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTMedia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTMedia, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTExtra, jTQualitativo, notaBimestral, notaMensal});
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel10, jLabel11, jLabel2, jLabel8, jLabel9});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel10, jLabel2, jLabel8, jLabel9});
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -531,7 +543,10 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
 
     private void comboDisciplinaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboDisciplinaItemStateChanged
         tabelaProfessor.inserirProfessores(new ProfessorDAO().getProfessorTurmaDisciplina(comboBoxDisciplina.get(comboDisciplina.getSelectedIndex()).getId(), comboBoxTurma.get(comboTurma.getSelectedIndex()).getId()));
-        jTbProfessor.setModel(tabelaProfessor);        // TODO add your handling code here:
+        jTbProfessor.setModel(tabelaProfessor);
+        if (jTbProfessor.getRowCount() > 0) {
+            jTbProfessor.setRowSelectionInterval(0, 0);
+        }// TODO add your handling code here:
     }//GEN-LAST:event_comboDisciplinaItemStateChanged
 
     private void comboTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTurmaActionPerformed
@@ -570,6 +585,16 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
     private void jTQualitativoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTQualitativoKeyReleased
         calcularMedia();          // TODO add your handling code here:
     }//GEN-LAST:event_jTQualitativoKeyReleased
+
+    private void jTbAlunoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbAlunoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTbAlunoKeyPressed
+
+    private void jTbAlunoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbAlunoKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN) {
+            getNotas();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jTbAlunoKeyReleased
 
     private void getNotas() {
         Aluno aluno;
@@ -664,14 +689,11 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         JTextField components[] = {notaBimestral, notaMensal, jTExtra, jTQualitativo};
         for (JTextField component : components) {
             if (!component.getText().isEmpty()) {
-                double nota = Double.valueOf(component.getText());
-                media += nota;
+                double novaNota = Double.valueOf(component.getText());
+                media += novaNota;
             }
         }
-        if (media != null) {
-            jTMedia.setText("" + media / 2);
-        }
-
+        jTMedia.setText("" + media / components.length);
     }
 
 }
