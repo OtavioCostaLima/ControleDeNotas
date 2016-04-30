@@ -312,24 +312,28 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
 
         jLabel10.setText("Qualitativo");
 
+        jTExtra.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jTExtra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTExtraKeyReleased(evt);
             }
         });
 
+        notaMensal.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         notaMensal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 notaMensalKeyReleased(evt);
             }
         });
 
+        notaBimestral.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         notaBimestral.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 notaBimestralKeyReleased(evt);
             }
         });
 
+        jTQualitativo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jTQualitativo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTQualitativoKeyReleased(evt);
@@ -424,18 +428,18 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTExtra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jTQualitativo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTMedia, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTExtra, jTQualitativo, notaBimestral, notaMensal});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTExtra, jTMedia, jTQualitativo, notaBimestral, notaMensal});
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel10, jLabel2, jLabel8, jLabel9});
 
@@ -537,7 +541,6 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
             if (comboDisciplina.getItemCount() > 0) {
                 comboDisciplina.setSelectedIndex(0);
             }
-
         }          // TODO add your handling code here:
     }//GEN-LAST:event_comboTurmaItemStateChanged
 
