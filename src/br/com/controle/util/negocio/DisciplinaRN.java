@@ -15,19 +15,17 @@ import java.util.logging.Logger;
  *
  * @author Otavio Costa
  */
-public class DisciplinaRN implements RNgenerico<Disciplina> {
+public class DisciplinaRN implements RNGenerico<Disciplina> {
 
     DisciplinaDAO disciplinaDAO;
 
     @Override
-    public boolean salvar(Disciplina t) {
+    public boolean salvar(Disciplina disciplina) {
         disciplinaDAO = new DisciplinaDAO();
-        try {
-            return disciplinaDAO.salvar(t);
-        } catch (Exception ex) {
-            Logger.getLogger(DisciplinaRN.class.getName()).log(Level.SEVERE, null, ex);
+        if (disciplina.equals(disciplinaDAO.buscarPorId(disciplina.getId()))) {
+            return disciplinaDAO.atualizar(disciplina);
         }
-        return false;
+        return disciplinaDAO.salvar(disciplina);
     }
 
     @Override

@@ -10,7 +10,7 @@ import java.util.logging.Logger;
  *
  * @author Otavio Costa
  */
-public class NotaRN implements RNgenerico<Nota> {
+public class NotaRN implements RNGenerico<Nota> {
 
     NotaDAO notaDAO;
 

@@ -5,9 +5,12 @@
  */
 package br.com.controle.visao;
 
+import br.com.controle.util.modelo.Usuario;
+import br.com.controle.util.negocio.UsuarioRN;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,6 +30,13 @@ public class PainelLogin extends javax.swing.JFrame {
         textPromptUsuario.setForeground(Color.gray);
         TextPrompt textPromptSenha = new TextPrompt("Informe o senha do usuário", campoSenha);
         textPromptSenha.setForeground(Color.gray);
+    }
+
+    public Usuario encapsular() {
+        Usuario usuario = new Usuario();
+        usuario.setNome("");
+        usuario.setSenha("");
+        return usuario;
     }
 
     /**
@@ -66,6 +76,11 @@ public class PainelLogin extends javax.swing.JFrame {
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.setFocusable(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
@@ -127,6 +142,20 @@ public class PainelLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        UsuarioRN usuarioRN = new UsuarioRN();
+        //usuarioRN.buscarTodos();
+        Usuario usuario = usuarioRN.validaUsuario(campoUsuario.getText(), campoSenha.getText());
+        if (usuario != null) {
+            TelaPrincipal telaPrincipal = new TelaPrincipal();
+            telaPrincipal.setVisible(true);
+            telaPrincipal.setLocationRelativeTo(null);
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuário não encontrado!");
+        }
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -143,15 +172,11 @@ public class PainelLogin extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PainelLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PainelLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PainelLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(PainelLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
         //</editor-fold>
 
         /* Create and display the form */

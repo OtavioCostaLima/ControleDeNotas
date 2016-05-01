@@ -16,23 +16,12 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TabelaDisciplina extends AbstractTableModel {
 
-    private static TabelaDisciplina tabelaDisciplina;
     private List<Disciplina> disciplinas = new ArrayList<>();
-    private final String colunas[] = {"id", "Descrição", "Tipo","Comentário"};
-
-    private TabelaDisciplina() {
-
-    }
-
-    public static TabelaDisciplina getInstancia() {
-        if (tabelaDisciplina == null) {
-            tabelaDisciplina = new TabelaDisciplina();
-        }
-        return tabelaDisciplina;
-    }
+    private final String colunas[] = {"id", "Descrição", "Tipo", "Comentário"};
 
     public void addListaDisciplina(List<Disciplina> disciplinas) {
         this.disciplinas = disciplinas;
+        fireTableRowsInserted(getRowCount(), getRowCount() - 1);
     }
 
     public void addDisciplina(Disciplina disciplina) {

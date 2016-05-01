@@ -1,9 +1,12 @@
 package br.com.controle.visao;
 
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.MouseMotionListener;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -17,7 +20,6 @@ public class GerenciadorDeJanelas<T extends JInternalFrame> {
 
     public GerenciadorDeJanelas(JDesktopPane desktopPane) {
         GerenciadorDeJanelas.DESKTOP_PANE = desktopPane;
-
     }
 
     public void openInternalFrame(T janela) {
@@ -28,6 +30,7 @@ public class GerenciadorDeJanelas<T extends JInternalFrame> {
         } else {
             DESKTOP_PANE.add(janela);
             janela.setVisible(true);
+            bloquearIFrames(janela);
         }
     }
 
@@ -45,5 +48,16 @@ public class GerenciadorDeJanelas<T extends JInternalFrame> {
     private void setPosicao() {
         Dimension d = GerenciadorDeJanelas.getDESKTOP_PANE().getSize();
         t.setLocation((d.width - t.getSize().width) / 2, (d.height - t.getSize().height) / 2);
+    }
+
+    private void bloquearIFrames(JInternalFrame jInternalFrame) {
+        BasicInternalFrameUI ui = (BasicInternalFrameUI) jInternalFrame.getUI();
+        Component north = ui.getNorthPane();
+        if (north != null) {
+            MouseMotionListener[] actions = (MouseMotionListener[]) north.getListeners(MouseMotionListener.class);
+            for (MouseMotionListener action : actions) {
+                north.removeMouseMotionListener(action);
+            }
+        }
     }
 }

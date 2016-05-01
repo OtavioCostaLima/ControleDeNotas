@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.controle.visao;
 
 import br.com.controle.util.modelo.Disciplina;
@@ -25,9 +20,9 @@ public final class SelecionarDisciplina extends javax.swing.JDialog {
     }
 
     public void buscarDisciplinas(long matriculaprofessor, long turma) {
-        tabelaDisciplina = TabelaDisciplina.getInstancia();
+        tabelaDisciplina = new TabelaDisciplina();
         DisciplinaRN disciplinaRN = new DisciplinaRN();
-        tabelaDisciplina.addListaDisciplina(disciplinaRN.listarDisciplinasDisponiveisTurmaProfessor(matriculaprofessor,turma));
+        tabelaDisciplina.addListaDisciplina(disciplinaRN.listarDisciplinasDisponiveisTurmaProfessor(matriculaprofessor, turma));
         jTable1.setModel(tabelaDisciplina);
     }
 

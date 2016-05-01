@@ -35,7 +35,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     }
 
     private void meuInitComponents() {
-        ((BasicInternalFrameUI) getUI()).setNorthPane(null);
+        //  ((BasicInternalFrameUI) getUI()).setNorthPane(null);
         TextPrompt textPrompt = new TextPrompt("DIGITE O NOME DO ALUNO", jTextField12);
         textPrompt.changeAlpha(0.5f);
         textPrompt.setForeground(Color.GRAY);
@@ -87,8 +87,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         grupoQuestao4 = new javax.swing.ButtonGroup();
         grupoQuestao5 = new javax.swing.ButtonGroup();
         grupoQuestao6 = new javax.swing.ButtonGroup();
-        jPanel4 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         subJPanelMatricula = new javax.swing.JPanel();
@@ -223,36 +221,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-
-        jButton4.setBackground(new java.awt.Color(158, 158, 158));
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("x");
-        jButton4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 879, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
-        );
-
-        getContentPane().add(jPanel4, java.awt.BorderLayout.NORTH);
-
         jPanel3.setLayout(new java.awt.CardLayout());
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
@@ -325,7 +293,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
 
         comboSituacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CURSANDO", "DESISTENTE", "REPROVADO", "APROVADO" }));
 
-        checkStatus.setBackground(new java.awt.Color(255, 255, 255));
         checkStatus.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         checkStatus.setForeground(new java.awt.Color(204, 0, 0));
         checkStatus.setText("Ativo");
@@ -568,10 +535,9 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField12)))
                 .addGap(144, 144, 144))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMatriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3))
+            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         jPanelMatriculaLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdicionar, btnRemover});
@@ -599,7 +565,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                         .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1208,7 +1174,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                     .addComponent(jRadioButton14))
                 .addGap(104, 104, 104)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelQuestionarioLayout = new javax.swing.GroupLayout(jPanelQuestionario);
@@ -1267,14 +1233,12 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                     }
                 }
             }
-        } else {
-            if (tabelaPesquisaAluno.isRowSelected(index) && !matricula.isEmpty()) {
-                Aluno aluno = encapsulaAluno();
-                if (alunoRN.salvar(aluno)) {
-                    if (!aluno.getuRLImagem().isEmpty()) {
-                        gerenteDeArquivos.gravarImagem(aluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(),
-                                "./fotos/" + aluno.getMatricula().concat(".jpg"));
-                    }
+        } else if (tabelaPesquisaAluno.isRowSelected(index) && !matricula.isEmpty()) {
+            Aluno aluno = encapsulaAluno();
+            if (alunoRN.salvar(aluno)) {
+                if (!aluno.getuRLImagem().isEmpty()) {
+                    gerenteDeArquivos.gravarImagem(aluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(),
+                            "./fotos/" + aluno.getMatricula().concat(".jpg"));
                 }
             }
         }
@@ -1300,7 +1264,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_campoNomeAlunoActionPerformed
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-
+        CADASTRO_ALUNOS = null;
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void comboTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTurmaActionPerformed
@@ -1310,11 +1274,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private void jRadioButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton13ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton13ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        CADASTRO_ALUNOS = null;
-        this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         if (verificaCampos()) {
@@ -1402,7 +1361,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
@@ -1463,7 +1421,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanelAluno;

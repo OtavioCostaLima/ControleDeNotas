@@ -12,7 +12,7 @@ import javax.persistence.EntityManager;
  *
  * @author Otavio Costa
  */
-public class ProfessorRN implements RNgenerico<Professor> {
+public class ProfessorRN implements RNGenerico<Professor> {
 
     ProfessorDAO professorDAO;
 

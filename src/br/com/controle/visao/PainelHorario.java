@@ -32,7 +32,6 @@ public class PainelHorario extends javax.swing.JInternalFrame {
      */
     private PainelHorario() {
         initComponents();
-        ((BasicInternalFrameUI) getUI()).setNorthPane(null);
         meuInitComponents();
     }
 
@@ -82,7 +81,6 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     }
     return horarios;
     }*/
-
     private void povoarTabelaPesquisarProfessor() {
         TABELA_PROFESSOR.addListaProfessor(new ProfessorRN().buscarTodos());
         tabelaPesquisaprofessor.setModel(TABELA_PROFESSOR);
@@ -97,8 +95,6 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel5 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         painelCadastroProfessor = new javax.swing.JPanel();
@@ -119,45 +115,29 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         jBLimpar = new javax.swing.JButton();
 
         setBorder(null);
-
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-
-        jButton1.setBackground(new java.awt.Color(158, 158, 158));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("X");
-        jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jButton1.setFocusable(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        setClosable(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(0, 858, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
-        );
-
-        getContentPane().add(jPanel5, java.awt.BorderLayout.NORTH);
 
         jPanel1.setLayout(new java.awt.CardLayout());
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
 
-        painelCadastroProfessor.setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Professor"));
 
         textoNomeProfessor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
@@ -244,7 +224,7 @@ public class PainelHorario extends javax.swing.JInternalFrame {
                             .addComponent(jLabel1)
                             .addComponent(textoNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -337,7 +317,7 @@ public class PainelHorario extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btRemover)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -350,12 +330,6 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        painelHorario = null;
-        this.dispose();
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
         Professor professor;
         if ((professor = getProfessorSelecionado()) != null) {
@@ -364,14 +338,14 @@ public class PainelHorario extends javax.swing.JInternalFrame {
             selecionarDisciplina.buscarDisciplinas(professor.getMatricula(), turma.getId());
             selecionarDisciplina.setVisible(true);
             Disciplina disciplina;
-            if (!listModelDiscipinas.contains((disciplina = selecionarDisciplina.getDisciplina()))&& disciplina !=null) {
+            if (!listModelDiscipinas.contains((disciplina = selecionarDisciplina.getDisciplina())) && disciplina != null) {
                 listModelDiscipinas.insertElementAt(selecionarDisciplina.getDisciplina(), listModelDiscipinas.size());
                 Horario horario = new Horario();
                 horario.setProfessor(professor);
                 horario.setDisciplina(disciplina);
                 horario.setTurma(turma);
                 if (new HorarioRN().salvar(horario)) {
-                   povoarTabelaPesquisarProfessor();
+                    povoarTabelaPesquisarProfessor();
                 }
             }
         } else {
@@ -448,6 +422,10 @@ public class PainelHorario extends javax.swing.JInternalFrame {
         }          // TODO add your handling code here:
     }//GEN-LAST:event_tabelaPesquisaprofessorKeyReleased
 
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
+        painelHorario = null;        // TODO add your handling code here:
+    }//GEN-LAST:event_formInternalFrameClosing
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdicionar;
@@ -455,14 +433,12 @@ public class PainelHorario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel campoImagemProfessor;
     private javax.swing.JComboBox comboTurma;
     private javax.swing.JButton jBLimpar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JList jListDisciplinas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;

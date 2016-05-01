@@ -2,6 +2,7 @@ package br.com.controle.util.modelo;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,16 +12,22 @@ import javax.persistence.Id;
  *
  * @author Otavio Costa
  */
-@Entity(name = "usuario")
-public class Usuario implements Serializable,BeanBase{
+@Entity
+public class Usuario implements Serializable, BeanBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column()
     private String nome;
+    @Column
     private String senha;
     private String confirmaSenha;
     private String privilegio;
+
+    public Usuario() {
+    }
 
     public long getId() {
         return id;
@@ -91,6 +98,5 @@ public class Usuario implements Serializable,BeanBase{
         }
         return true;
     }
-    
-    
+
 }

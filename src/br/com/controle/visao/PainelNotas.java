@@ -50,7 +50,6 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
 
     private PainelNotas() {
         initComponents();
-        ((BasicInternalFrameUI) getUI()).setNorthPane(null);
         listarAnos();
     }
 
@@ -117,9 +116,26 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jTMedia = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
 
         setBorder(null);
+        setClosable(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
         getContentPane().setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -476,32 +492,17 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
 
         jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton6, jButton7});
 
-        jButton1.setBackground(new java.awt.Color(158, 158, 158));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("X");
-        jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -513,14 +514,43 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        painelNotas = null;
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void comboBimestreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBimestreActionPerformed
 
-    private void comboAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAnoActionPerformed
-        listarTurmasPorAno();        // TODO add your handling code here:
-    }//GEN-LAST:event_comboAnoActionPerformed
+    }//GEN-LAST:event_comboBimestreActionPerformed
+
+    private void comboBimestreItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBimestreItemStateChanged
+        getNotas();        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBimestreItemStateChanged
+
+    private void jTQualitativoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTQualitativoKeyReleased
+        calcularMedia();          // TODO add your handling code here:
+    }//GEN-LAST:event_jTQualitativoKeyReleased
+
+    private void notaBimestralKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notaBimestralKeyReleased
+        calcularMedia();          // TODO add your handling code here:
+    }//GEN-LAST:event_notaBimestralKeyReleased
+
+    private void notaMensalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notaMensalKeyReleased
+        calcularMedia();        // TODO add your handling code here:
+    }//GEN-LAST:event_notaMensalKeyReleased
+
+    private void jTExtraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTExtraKeyReleased
+        calcularMedia();          // TODO add your handling code here:
+    }//GEN-LAST:event_jTExtraKeyReleased
+
+    private void jTbAlunoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbAlunoKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN) {
+            getNotas();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jTbAlunoKeyReleased
+
+    private void jTbAlunoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbAlunoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTbAlunoKeyPressed
+
+    private void jTbAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbAlunoMouseClicked
+        getNotas();
+    }//GEN-LAST:event_jTbAlunoMouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         Nota novaNota = encapsular();
@@ -528,6 +558,14 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
             new NotaRN().salvar(novaNota);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jTbProfessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbProfessorMouseClicked
+        getNotas();        // TODO add your handling code here:
+    }//GEN-LAST:event_jTbProfessorMouseClicked
+
+    private void comboTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTurmaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboTurmaActionPerformed
 
     private void comboTurmaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTurmaItemStateChanged
         Turma turma = getTurmaSelecionada();
@@ -544,6 +582,10 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         }          // TODO add your handling code here:
     }//GEN-LAST:event_comboTurmaItemStateChanged
 
+    private void comboAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAnoActionPerformed
+        listarTurmasPorAno();        // TODO add your handling code here:
+    }//GEN-LAST:event_comboAnoActionPerformed
+
     private void comboDisciplinaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboDisciplinaItemStateChanged
         tabelaProfessor.inserirProfessores(new ProfessorDAO().getProfessorTurmaDisciplina(comboBoxDisciplina.get(comboDisciplina.getSelectedIndex()).getId(), comboBoxTurma.get(comboTurma.getSelectedIndex()).getId()));
         jTbProfessor.setModel(tabelaProfessor);
@@ -552,52 +594,9 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         }// TODO add your handling code here:
     }//GEN-LAST:event_comboDisciplinaItemStateChanged
 
-    private void comboTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTurmaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboTurmaActionPerformed
-
-    private void jTbAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbAlunoMouseClicked
-        getNotas();
-
-    }//GEN-LAST:event_jTbAlunoMouseClicked
-
-    private void comboBimestreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBimestreActionPerformed
-
-    }//GEN-LAST:event_comboBimestreActionPerformed
-
-    private void jTbProfessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbProfessorMouseClicked
-        getNotas();        // TODO add your handling code here:
-    }//GEN-LAST:event_jTbProfessorMouseClicked
-
-    private void comboBimestreItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBimestreItemStateChanged
-        getNotas();        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBimestreItemStateChanged
-
-    private void notaMensalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notaMensalKeyReleased
-        calcularMedia();        // TODO add your handling code here:
-    }//GEN-LAST:event_notaMensalKeyReleased
-
-    private void notaBimestralKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notaBimestralKeyReleased
-        calcularMedia();          // TODO add your handling code here:
-    }//GEN-LAST:event_notaBimestralKeyReleased
-
-    private void jTExtraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTExtraKeyReleased
-        calcularMedia();          // TODO add your handling code here:
-    }//GEN-LAST:event_jTExtraKeyReleased
-
-    private void jTQualitativoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTQualitativoKeyReleased
-        calcularMedia();          // TODO add your handling code here:
-    }//GEN-LAST:event_jTQualitativoKeyReleased
-
-    private void jTbAlunoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbAlunoKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTbAlunoKeyPressed
-
-    private void jTbAlunoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbAlunoKeyReleased
-        if (evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN) {
-            getNotas();
-        }        // TODO add your handling code here:
-    }//GEN-LAST:event_jTbAlunoKeyReleased
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
+        painelNotas = null;        // TODO add your handling code here:
+    }//GEN-LAST:event_formInternalFrameClosing
 
     private void getNotas() {
         Aluno aluno;
@@ -631,7 +630,6 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox comboBimestre;
     private javax.swing.JComboBox comboDisciplina;
     private javax.swing.JComboBox comboTurma;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;

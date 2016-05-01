@@ -8,6 +8,7 @@ package br.com.controle.visao;
 import br.com.controle.util.modelo.Disciplina;
 import br.com.controle.util.negocio.DisciplinaRN;
 import br.com.controle.visao.abstractModels.TabelaDisciplina;
+import java.awt.event.KeyEvent;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -15,45 +16,44 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author Otavio Costa
  */
 public class PainelDisciplina extends javax.swing.JInternalFrame {
-    
+
     private static PainelDisciplina painelDisciplina = null;
     private TabelaDisciplina tabelaDisciplina;
+    private long id;
 
     /**
      * Creates new form PainelDisciplina
      */
     private Disciplina encapsular() {
         Disciplina disciplina = new Disciplina();
+        disciplina.setId(id);
         if (jCheckBoxReprova.isSelected()) {
             disciplina.setTipo("REPROVA");
         } else {
             disciplina.setTipo("NÃO REPROVA");
         }
-        disciplina.setComentario(jTextField2.getText());
+        disciplina.setComentario(campoDescricao.getText());
         disciplina.setDescricao(nomeDiscplina.getText());
         return disciplina;
-        //Joao Paulo Bueno
     }
-    
+
     private PainelDisciplina() {
         initComponents();
-        ((BasicInternalFrameUI) getUI()).setNorthPane(null);
         povoarTabelaDisciplina();
     }
-    
+
     public static PainelDisciplina getInstancia() {
         if (painelDisciplina == null) {
             painelDisciplina = new PainelDisciplina();
         }
         return painelDisciplina;
     }
-    
+
     private void povoarTabelaDisciplina() {
-        DisciplinaRN disciplinaRN = new DisciplinaRN();
-        tabelaDisciplina = TabelaDisciplina.getInstancia();
-        tabelaDisciplina.addListaDisciplina(disciplinaRN.buscarTodos());
+        tabelaDisciplina = new TabelaDisciplina();
+        tabelaDisciplina.addListaDisciplina(new DisciplinaRN().buscarTodos());
         jTableDisciplinas.setModel(tabelaDisciplina);
-        
+
     }
 
     /**
@@ -72,23 +72,38 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
         nomeDiscplina = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        campoDescricao = new javax.swing.JTextField();
         jCheckBoxReprova = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableDisciplinas = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
 
         setBorder(null);
+        setClosable(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jPanel2.setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         nomeDiscplina.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
@@ -97,9 +112,8 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Descrição: *");
 
-        jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        campoDescricao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
 
-        jCheckBoxReprova.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBoxReprova.setSelected(true);
         jCheckBoxReprova.setText("Reprovativa: *");
         jCheckBoxReprova.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
@@ -121,7 +135,7 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
+                            .addComponent(campoDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
                             .addComponent(nomeDiscplina)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jCheckBoxReprova)
@@ -138,7 +152,7 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxReprova, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(16, Short.MAX_VALUE))
@@ -179,6 +193,11 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
         jTableDisciplinas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableDisciplinasMouseClicked(evt);
+            }
+        });
+        jTableDisciplinas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTableDisciplinasKeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(jTableDisciplinas);
@@ -227,7 +246,7 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
                         .addComponent(jButton1)
                         .addComponent(jButton2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
 
@@ -239,75 +258,40 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-
-        jButton3.setBackground(new java.awt.Color(158, 158, 158));
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("X");
-        jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jButton3.setFocusable(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 747, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jButton3)
-                .addGap(0, 0, 0))
-        );
-
-        getContentPane().add(jPanel4, java.awt.BorderLayout.PAGE_START);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        painelDisciplina = null;
-        this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DisciplinaRN disciplinaRN = new DisciplinaRN();
         Disciplina disciplina = encapsular();
-        if (disciplinaRN.salvar(disciplina)) {
-            tabelaDisciplina.addDisciplina(disciplina);
+        if (new DisciplinaRN().salvar(disciplina)) {
             limparCampos();
+            povoarTabelaDisciplina();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (jTableDisciplinas.isRowSelected(jTableDisciplinas.getSelectedRow())) {
-            Disciplina disciplina = tabelaDisciplina.getDisciplina(jTableDisciplinas.getSelectedRow());
-            DisciplinaRN disciplinaRN = new DisciplinaRN();
-            if (disciplinaRN.remover(disciplina.getId())) {
+        Disciplina disciplina = getDisciplinaSelecionada();
+        if (disciplina != null) {
+            if (new DisciplinaRN().remover(disciplina.getId())) {
                 tabelaDisciplina.delDisciplina(jTableDisciplinas.getSelectedRow());
                 limparCampos();
             }
-            
+
         }
-        
+
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTableDisciplinasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDisciplinasMouseClicked
-        if (jTableDisciplinas.isRowSelected(jTableDisciplinas.getSelectedRow())) {
-            
-            Disciplina disciplina = tabelaDisciplina.getDisciplina(jTableDisciplinas.getSelectedRow());
+        getDiscplina();
+    }//GEN-LAST:event_jTableDisciplinasMouseClicked
+
+    private void getDiscplina() {
+        Disciplina disciplina = getDisciplinaSelecionada();
+        if (disciplina != null) {
+            id = disciplina.getId();
             nomeDiscplina.setText(disciplina.getDescricao());
-            jTextField2.setText(disciplina.getComentario());
+            campoDescricao.setText(disciplina.getComentario());
             if (disciplina.getTipo().equals("REPROVA")) {
                 jCheckBoxReprova.setSelected(true);
             } else if (disciplina.getTipo().equals("NÃO REPROVA")) {
@@ -315,17 +299,27 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
             }
         }
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTableDisciplinasMouseClicked
+    }
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         limparCampos();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jTableDisciplinasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableDisciplinasKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN) {
+            getDiscplina();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableDisciplinasKeyReleased
+
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
+        painelDisciplina = null;        // TODO add your handling code here:
+    }//GEN-LAST:event_formInternalFrameClosing
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField campoDescricao;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JCheckBox jCheckBoxReprova;
     private javax.swing.JLabel jLabel1;
@@ -333,17 +327,24 @@ public class PainelDisciplina extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTableDisciplinas;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField nomeDiscplina;
     // End of variables declaration//GEN-END:variables
 
     private void limparCampos() {
         nomeDiscplina.setText(null);
         jCheckBoxReprova.setSelected(true);
-        jTextField2.setText(null);
+        campoDescricao.setText(null);
+        id = 0;
+    }
+
+    private Disciplina getDisciplinaSelecionada() {
+        int index = jTableDisciplinas.getSelectedRow();
+        if (jTableDisciplinas.isRowSelected(index)) {
+            return tabelaDisciplina.getDisciplina(index);
+        }
+        return null;
     }
 }

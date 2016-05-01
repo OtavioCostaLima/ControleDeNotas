@@ -10,7 +10,7 @@ import java.util.logging.Logger;
  *
  * @author Otavio Costa
  */
-public class TurmaRN implements RNgenerico<Turma> {
+public class TurmaRN implements RNGenerico<Turma> {
 
     TurmaDAO turmaDAO = new TurmaDAO();
 

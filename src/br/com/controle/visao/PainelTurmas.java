@@ -4,14 +4,13 @@ import br.com.controle.util.modelo.Turma;
 import br.com.controle.util.negocio.TurmaRN;
 import br.com.controle.visao.abstractModels.TabelaTurma;
 import java.util.List;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
  * @author Otavio Costa
  */
 public class PainelTurmas extends javax.swing.JInternalFrame {
-    
+
     private final TurmaRN TURMA_RN = new TurmaRN();
     private final TabelaTurma TABELA_TURMA = new TabelaTurma();
     private static PainelTurmas PAINEL_TURMAS = new PainelTurmas();
@@ -22,7 +21,6 @@ public class PainelTurmas extends javax.swing.JInternalFrame {
     //pensar em como vincular
     private PainelTurmas() {
         initComponents();
-        ((BasicInternalFrameUI) getUI()).setNorthPane(null);
         List<Turma> turmas = TURMA_RN.buscarTodos();
         TABELA_TURMA.inserirTurmas(turmas);
         tableTurma.setModel(TABELA_TURMA);
@@ -39,7 +37,7 @@ public class PainelTurmas extends javax.swing.JInternalFrame {
         }
         return PAINEL_TURMAS;
     }
-    
+
     private Turma encapsularTurma() {
         Turma turma = new Turma();
         turma.setDescricao(textoTurma.getText());
@@ -49,9 +47,9 @@ public class PainelTurmas extends javax.swing.JInternalFrame {
             turma.setSigla(campoSigla.getText().charAt(0));
         }
         return turma;
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -59,7 +57,6 @@ public class PainelTurmas extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableTurma = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         campoAnoTurma = new com.toedter.calendar.JYearChooser();
         jLabel1 = new javax.swing.JLabel();
@@ -96,17 +93,6 @@ public class PainelTurmas extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tableTurma);
 
-        jButton3.setBackground(new java.awt.Color(158, 158, 158));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("x");
-        jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setText("Turma:");
@@ -176,7 +162,7 @@ public class PainelTurmas extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(comboTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 22, Short.MAX_VALUE))
+                    .addComponent(comboTurno))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -195,23 +181,17 @@ public class PainelTurmas extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 921, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 925, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(21, 21, 21)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -219,12 +199,6 @@ public class PainelTurmas extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        PAINEL_TURMAS = null;
-        this.dispose();
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         Turma turma = encapsularTurma();
@@ -244,7 +218,6 @@ public class PainelTurmas extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JYearChooser campoAnoTurma;
     private javax.swing.JTextField campoSigla;
     private javax.swing.JComboBox comboTurno;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;

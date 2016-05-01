@@ -108,6 +108,10 @@ public class Disciplina implements BeanBase, Serializable {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -119,6 +123,9 @@ public class Disciplina implements BeanBase, Serializable {
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
@@ -129,13 +136,7 @@ public class Disciplina implements BeanBase, Serializable {
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.descricao, other.descricao)) {
-            return false;
-        }
-        if (!Objects.equals(this.tipo, other.tipo)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.descricao, other.descricao);
     }
 
 }

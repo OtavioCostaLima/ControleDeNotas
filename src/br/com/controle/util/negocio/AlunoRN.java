@@ -10,7 +10,7 @@ import java.util.logging.Logger;
  *
  * @author Otavio Costa
  */
-public class AlunoRN implements RNgenerico<Aluno> {
+public class AlunoRN implements RNGenerico<Aluno> {
 
     private AlunoDAO alunoDAO;
 
