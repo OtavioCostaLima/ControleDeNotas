@@ -1,5 +1,6 @@
 package br.com.controle.visao;
 
+import br.com.controle.util.GerenciadorIO;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -51,7 +52,7 @@ public class GerenteDeImagens {
     }
 
     public String escolherImagem(JLabel jLabel) {
-        JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
+        JFileChooser chooser = new JFileChooser(GerenciadorIO.getProperties("ultimoPath"));
         chooser.setFileFilter(new FileFilter() {
             @Override
             public boolean accept(File f) {
@@ -70,6 +71,7 @@ public class GerenteDeImagens {
             ImageIcon icone = new ImageIcon(path);
             Image image = icone.getImage().getScaledInstance(jLabel.getWidth() - 2, jLabel.getHeight() - 2, Image.SCALE_DEFAULT);
             jLabel.setIcon(new ImageIcon(image));
+            GerenciadorIO.getPropriedades("ultimoPath", chooser.getCurrentDirectory().getPath());
             return urlImagem = chooser.getSelectedFile().getAbsolutePath();
         }
         return "";

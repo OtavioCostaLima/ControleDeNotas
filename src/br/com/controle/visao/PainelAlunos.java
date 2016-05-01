@@ -1257,26 +1257,28 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         String matricula = campoMatricula.getText().trim();
         int index = tabelaPesquisaAluno.getSelectedRow();
         AlunoRN alunoRN = new AlunoRN();
-        if (tabelaPesquisaAluno.isRowSelected(index) && !matricula.isEmpty()) {
-            Aluno aluno = encapsulaAluno();
-            if (alunoRN.salvar(aluno)) {
-                if (aluno.getuRLImagem().isEmpty()) {
-                    gerenteDeArquivos.gravarImagem(aluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(),
-                            "./fotos/" + aluno.getMatricula().concat(".jpg"));
-                }
-            }
-        }
         if (!novosAlunos.isEmpty()) {
             Collections.sort(novosAlunos);
             if (alunoRN.salvarAlunos(novosAlunos)) {
                 for (Aluno novoAluno : novosAlunos) {
-                    if (novoAluno.getuRLImagem().isEmpty()) {
+                    if (!novoAluno.getuRLImagem().isEmpty()) {
                         gerenteDeArquivos.gravarImagem(novoAluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(),
                                 "./fotos/" + novoAluno.getMatricula().concat(".jpg"));
                     }
                 }
             }
+        } else {
+            if (tabelaPesquisaAluno.isRowSelected(index) && !matricula.isEmpty()) {
+                Aluno aluno = encapsulaAluno();
+                if (alunoRN.salvar(aluno)) {
+                    if (!aluno.getuRLImagem().isEmpty()) {
+                        gerenteDeArquivos.gravarImagem(aluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(),
+                                "./fotos/" + aluno.getMatricula().concat(".jpg"));
+                    }
+                }
+            }
         }
+
         TABELA_ALUNO.inserirAlunos(alunoRN.buscarTodos());
         limparCampos();
     }//GEN-LAST:event_btnSalvarActionPerformed
