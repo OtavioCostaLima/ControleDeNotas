@@ -50,10 +50,10 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
 
     private PainelNotas() {
         initComponents();
-        notaMensal.setDocument(new TeclasPermitidas());
-        notaBimestral.setDocument(new TeclasPermitidas());
-        jTExtra.setDocument(new TeclasPermitidas());
-        jTQualitativo.setDocument(new TeclasPermitidas());
+        notaMensal.setDocument(new CamposDouble());
+        notaBimestral.setDocument(new CamposDouble());
+        jTExtra.setDocument(new CamposDouble());
+        jTQualitativo.setDocument(new CamposDouble());
         listarAnos();
     }
 

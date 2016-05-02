@@ -8,7 +8,7 @@ import javax.swing.text.PlainDocument;
  *
  * @author Suporte Técnico
  */
-public class TeclasPermitidas extends PlainDocument {
+public class CamposDouble extends PlainDocument {
 
     private final double maiorLimit = 10;
     private final int casasDecimais = 2;
