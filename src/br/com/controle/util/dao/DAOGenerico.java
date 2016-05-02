@@ -16,25 +16,24 @@ public abstract class DAOGenerico<T extends BeanBase> {
 
     public boolean salvar(T t) {
         EntityManager em = ConexaoUtil.getEntityManager();
-        boolean aux = false;
         try {
             em.getTransaction().begin();
             for (T t1 : buscarTodos()) {
                 if (t.equals(t1)) {
-                    aux = true;
+                    em.persist(t);
+                    em.getTransaction().commit();
+                    JOptionPane.showMessageDialog(null, " Salvo com Sucesso!", "INFORMAÇÃO", JOptionPane.INFORMATION_MESSAGE);
+                    return true;
+                } else {
+                    em.getTransaction().rollback();
+                    JOptionPane.showMessageDialog(null, getTypeClass().getSimpleName() + " já Cadastrada!", "INFORMAÇÃO", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
-            if (!aux) {
-                em.persist(t);
-                em.getTransaction().commit();
-            } else {
-                em.getTransaction().rollback();
-                JOptionPane.showMessageDialog(null, getTypeClass().getSimpleName() + " já Cadastrada!", "INFORMAÇÃO", JOptionPane.INFORMATION_MESSAGE);
-            }
+
         } finally {
             em.close();
         }
-        return !aux;
+        return false;
     }
 
     public boolean atualizar(T t) {
@@ -43,6 +42,7 @@ public abstract class DAOGenerico<T extends BeanBase> {
             em.getTransaction().begin();
             em.merge(t);
             em.getTransaction().commit();
+            JOptionPane.showMessageDialog(null, " Alterado com Sucesso!", "INFORMAÇÃO", JOptionPane.INFORMATION_MESSAGE);
             return true;
         } catch (Exception e) {
             em.getTransaction().rollback();
@@ -60,6 +60,7 @@ public abstract class DAOGenerico<T extends BeanBase> {
             em.getTransaction().begin();
             em.remove(t);
             em.getTransaction().commit();
+            JOptionPane.showMessageDialog(null, "Removido com Sucesso!", "INFORMAÇÃO", JOptionPane.INFORMATION_MESSAGE);
             return true;
         } catch (Exception e) {
             em.getTransaction().rollback();
@@ -77,6 +78,7 @@ public abstract class DAOGenerico<T extends BeanBase> {
             em.getTransaction().begin();
             em.remove(t);
             em.getTransaction().commit();
+            JOptionPane.showMessageDialog(null, "Removido com Sucesso!", "INFORMAÇÃO", JOptionPane.INFORMATION_MESSAGE);
             return true;
         } catch (Exception e) {
             em.getTransaction().rollback();

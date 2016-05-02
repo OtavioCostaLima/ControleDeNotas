@@ -14,10 +14,10 @@ import br.com.controle.visao.abstractModels.GenericComboBoxModel;
 import br.com.controle.visao.abstractModels.TabelaAluno;
 import br.com.controle.visao.abstractModels.TabelaProfessor;
 import java.awt.event.KeyEvent;
+import java.text.DecimalFormat;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -50,6 +50,10 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
 
     private PainelNotas() {
         initComponents();
+        notaMensal.setDocument(new TeclasPermitidas());
+        notaBimestral.setDocument(new TeclasPermitidas());
+        jTExtra.setDocument(new TeclasPermitidas());
+        jTQualitativo.setDocument(new TeclasPermitidas());
         listarAnos();
     }
 
@@ -70,12 +74,33 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
             nota.setAluno(aluno);
             nota.setDisciplina(comboBoxDisciplina.get(comboDisciplina.getSelectedIndex()));
             nota.setProfessor(professor);
-            nota.setExtra(Double.valueOf(jTExtra.getText()));
-            nota.setQualitativo(Double.valueOf(jTQualitativo.getText()));
-            nota.setProvaBimestral(Double.valueOf(notaBimestral.getText()));
-            nota.setProvaMensal(Double.valueOf(notaMensal.getText()));
+            if (!jTExtra.getText().isEmpty()) {
+                nota.setExtra(Double.valueOf(jTExtra.getText().replace(",", ".")));
+            } else {
+                nota.setExtra(null);
+            }
+            if (!jTQualitativo.getText().isEmpty()) {
+                nota.setQualitativo(Double.valueOf(jTQualitativo.getText().replace(",", ".")));
+            } else {
+                nota.setQualitativo(null);
+            }
+            if (!notaBimestral.getText().isEmpty()) {
+                nota.setProvaBimestral(Double.valueOf(notaBimestral.getText().replace(",", ".")));
+            } else {
+                nota.setProvaBimestral(null);
+            }
+            if (!notaMensal.getText().isEmpty()) {
+                nota.setProvaMensal(Double.valueOf(notaMensal.getText().replace(",", ".")));
+            } else {
+                nota.setProvaMensal(null);
+            }
+            if (!jTMedia.getText().isEmpty()) {
+                nota.setMedia(Double.valueOf(jTMedia.getText().replace(",", ".")));
+            } else {
+                nota.setMedia(null);
+            }
             nota.setBimestre(comboBimestre.getSelectedItem().toString());
-            nota.setMedia(Double.valueOf(jTMedia.getText()));
+
             return nota;
         }
         return null;
@@ -274,7 +299,6 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         jButton6.setForeground(new java.awt.Color(255, 0, 0));
         jButton6.setText("ADICIONAR");
         jButton6.setContentAreaFilled(false);
-        jButton6.setFocusable(false);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -330,13 +354,20 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
 
         jTExtra.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jTExtra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTExtraKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTExtraKeyReleased(evt);
             }
         });
 
         notaMensal.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        notaMensal.setNextFocusableComponent(notaBimestral);
         notaMensal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                notaMensalKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 notaMensalKeyReleased(evt);
             }
@@ -344,6 +375,9 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
 
         notaBimestral.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         notaBimestral.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                notaBimestralKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 notaBimestralKeyReleased(evt);
             }
@@ -351,6 +385,9 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
 
         jTQualitativo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jTQualitativo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTQualitativoKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTQualitativoKeyReleased(evt);
             }
@@ -465,15 +502,14 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -502,7 +538,7 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -555,7 +591,8 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         Nota novaNota = encapsular();
         if (novaNota != null) {
-            new NotaRN().salvar(novaNota);
+            if (new NotaRN().salvar(novaNota)) {
+            }
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -598,6 +635,31 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         painelNotas = null;        // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameClosing
 
+    private void notaMensalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notaMensalKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            notaBimestral.requestFocus();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_notaMensalKeyPressed
+
+    private void notaBimestralKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notaBimestralKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jTExtra.requestFocus();
+        }         // TODO add your handling code here:
+    }//GEN-LAST:event_notaBimestralKeyPressed
+
+    private void jTExtraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTExtraKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jTQualitativo.requestFocus();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jTExtraKeyPressed
+
+    private void jTQualitativoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTQualitativoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jButton6.requestFocus();
+        } 
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTQualitativoKeyPressed
+
     private void getNotas() {
         Aluno aluno;
         Professor professor;
@@ -608,11 +670,11 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
             }
             nota = new NotaDAO().getNota(professor.getMatricula(), idDisciplina, aluno.getMatricula(), comboBimestre.getSelectedItem().toString());
             if (nota != null) {
-                notaBimestral.setText(nota.getProvaBimestral().toString());
-                notaMensal.setText(nota.getProvaMensal().toString());
-                jTExtra.setText(nota.getExtra().toString());
-                jTQualitativo.setText(nota.getQualitativo().toString());
-                jTMedia.setText(nota.getMedia().toString());
+                notaBimestral.setText(String.valueOf(nota.getProvaBimestral()));
+                notaMensal.setText(String.valueOf(nota.getProvaMensal()));
+                jTExtra.setText(String.valueOf(nota.getExtra()));
+                jTQualitativo.setText(String.valueOf(nota.getQualitativo()));
+                jTMedia.setText(String.valueOf(nota.getMedia()));
             } else {
                 notaBimestral.setText("");
                 notaMensal.setText("");
@@ -690,11 +752,13 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         JTextField components[] = {notaBimestral, notaMensal, jTExtra, jTQualitativo};
         for (JTextField component : components) {
             if (!component.getText().isEmpty()) {
-                double novaNota = Double.valueOf(component.getText());
+                double novaNota = Double.valueOf(component.getText().replace(",", "."));
                 media += novaNota;
             }
         }
-        jTMedia.setText("" + media / components.length);
+        DecimalFormat formato = new DecimalFormat("#.##");
+        //    media = Double.valueOf();
+        jTMedia.setText(String.valueOf(formato.format(media / components.length)).replace(".", ","));
     }
 
 }
