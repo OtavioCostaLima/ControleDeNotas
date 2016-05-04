@@ -10,8 +10,18 @@ import javax.swing.text.PlainDocument;
  */
 public class CamposDouble extends PlainDocument {
 
-    private final double maiorLimit = 10;
-    private final int casasDecimais = 2;
+    private double maiorLimit = 10;
+    private int casasDecimais = 2;
+
+    public CamposDouble(double maiorLimit, int casasDecimais) {
+        super();
+        this.maiorLimit = maiorLimit;
+        this.casasDecimais = casasDecimais;
+    }
+
+    public CamposDouble() {
+        super();
+    }
 
     @Override
     public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
