@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author Otavio Costa
  */
-public class HorarioRN implements RNGenerico<Horario> {
+public class HorarioRN implements GenericoRN<Horario> {
 
     private HorarioDAO horarioDAO;
 

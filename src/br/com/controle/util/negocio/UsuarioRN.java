@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author Otavio Costa
  */
-public class UsuarioRN implements RNGenerico<Usuario> {
+public class UsuarioRN implements GenericoRN<Usuario> {
 
     UsuarioDAO usuarioDAO;
 

@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author Otavio Costa
  */
-public class DisciplinaRN implements RNGenerico<Disciplina> {
+public class DisciplinaRN implements GenericoRN<Disciplina> {
 
     DisciplinaDAO disciplinaDAO;
 
