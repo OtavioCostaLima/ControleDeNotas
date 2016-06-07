@@ -11,19 +11,18 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 /**
  *
  * @author Otavio Costa
- * @param <T>
  */
-public class GerenciadorDeJanelas<T extends JInternalFrame> {
+public class GerenciadorDeJanelas {
 
     private static JDesktopPane DESKTOP_PANE;
-    private T t;
+    private JInternalFrame jInternalFrame;
 
     public GerenciadorDeJanelas(JDesktopPane desktopPane) {
         GerenciadorDeJanelas.DESKTOP_PANE = desktopPane;
     }
 
-    public void openInternalFrame(T janela) {
-        this.t = janela;
+    public void openInternalFrame(JInternalFrame janela) {
+        this.jInternalFrame = janela;
         if (janela.isVisible()) {
             janela.toFront();
             janela.requestFocus();
@@ -47,7 +46,7 @@ public class GerenciadorDeJanelas<T extends JInternalFrame> {
 
     private void setPosicao() {
         Dimension d = GerenciadorDeJanelas.getDESKTOP_PANE().getSize();
-        t.setLocation((d.width - t.getSize().width) / 2, (d.height - t.getSize().height) / 2);
+        jInternalFrame.setLocation((d.width - jInternalFrame.getSize().width) / 2, (d.height - jInternalFrame.getSize().height) / 2);
     }
 
     private void bloquearIFrames(JInternalFrame jInternalFrame) {

@@ -5,10 +5,6 @@
  */
 package br.com.controle.visao;
 
-import java.awt.Component;
-import java.awt.event.MouseMotionListener;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
-
 /**
  *
  * @author Otavio Costa

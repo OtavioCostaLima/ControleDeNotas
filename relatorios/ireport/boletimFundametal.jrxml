@@ -5,82 +5,41 @@
 	<property name="ireport.y" value="0"/>
 	<style name="Crosstab Data Text" hAlign="Center"/>
 	<queryString>
-		<![CDATA[SELECT *,t.descricao as nTurma FROM nota n 
-join professor p on n.matricula_professor=p.matricula 
-join disciplina d on n.id_disciplina=d.id
-join aluno a on n.matricula_aluno=a.matricula
-join turma t on a.id_turma=t.id]]>
+		<![CDATA[SELECT
+     boletim.`mediaGlobal` AS boletim_mediaGlobal, boletim.`notaFiinal` AS boletim_notaFiinal, boletim.`notalTotal` AS boletim_notalTotal,
+     boletim.`provaRecuperacao` AS boletim_provaRecuperacao, boletim.`situacao` AS boletim_situacao, a.`matricula` AS aluno_matricula,
+     a.`nomeAluno` AS aluno_nomeAluno, t.`ano` AS turma_ano, t.`descricao` AS turma_descricao,
+     t.`sigla` AS turma_sigla, t.`turno` AS turma_turno, n.`bimestre` AS nota_bimestre, n.`extra` AS nota_extra,
+     n.`media` AS nota_media, n.`provaBimestral` AS nota_provaBimestral, n.`provaMensal` AS nota_provaMensal, n.`qualitativo` AS nota_qualitativo,
+     p.`matricula` AS professor_matricula, p.`nome` AS professor_nome, d.`descricao` AS disciplina_descricao, d.`tipo` AS disciplina_tipo
+FROM nota n 
+     INNER JOIN `professor` p ON n.`matriculaProfessor` = p.`matricula`
+     INNER JOIN `disciplina` d ON n.`idDisciplina` = d.`idDisciplina`
+     INNER JOIN `aluno` a ON n.`matriculaAluno` = a.`matricula`
+     INNER JOIN `turma` t ON a.`idTurma` = t.`id`
+	 left JOIN `boletim` boletim ON a.`matricula` = boletim.`idAluno`]]>
 	</queryString>
-	<field name="bimestre" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="extra" class="java.lang.Double">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="media" class="java.lang.Double">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="provaBimestral" class="java.lang.Double">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="provaMensal" class="java.lang.Double">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="qualitativo" class="java.lang.Double">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="matricula_professor" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="id_disciplina" class="java.lang.Long">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="matricula_aluno" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="matricula" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="nome" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="situacao" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="id" class="java.lang.Long">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="descricao" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="tipo" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="dataCadastro" class="java.sql.Date">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="nome_aluno" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="numero_chamada" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="status" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="id_turma" class="java.lang.Long">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="ano" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="sigla" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="turno" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="nTurma" class="java.lang.String"/>
+	<field name="boletim_mediaGlobal" class="java.lang.Long"/>
+	<field name="boletim_notaFiinal" class="java.lang.Long"/>
+	<field name="boletim_notalTotal" class="java.lang.Long"/>
+	<field name="boletim_provaRecuperacao" class="java.lang.Long"/>
+	<field name="boletim_situacao" class="java.lang.String"/>
+	<field name="aluno_matricula" class="java.lang.String"/>
+	<field name="aluno_nomeAluno" class="java.lang.String"/>
+	<field name="turma_ano" class="java.lang.String"/>
+	<field name="turma_descricao" class="java.lang.String"/>
+	<field name="turma_sigla" class="java.lang.String"/>
+	<field name="turma_turno" class="java.lang.String"/>
+	<field name="nota_bimestre" class="java.lang.String"/>
+	<field name="nota_extra" class="java.lang.Double"/>
+	<field name="nota_media" class="java.lang.Double"/>
+	<field name="nota_provaBimestral" class="java.lang.Double"/>
+	<field name="nota_provaMensal" class="java.lang.Double"/>
+	<field name="nota_qualitativo" class="java.lang.Double"/>
+	<field name="professor_matricula" class="java.lang.Long"/>
+	<field name="professor_nome" class="java.lang.String"/>
+	<field name="disciplina_descricao" class="java.lang.String"/>
+	<field name="disciplina_tipo" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -93,22 +52,10 @@ join turma t on a.id_turma=t.id]]>
 				</textElement>
 				<text><![CDATA[Colégio Impacto En. Fundamental 2016]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="100" y="12" width="100" height="20" uuid="d5d5bf5f-1e19-416a-ba78-12358c9195f7"/>
-				<textFieldExpression><![CDATA[$F{matricula_aluno}]]></textFieldExpression>
-			</textField>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="56" splitType="Stretch">
-			<textField>
-				<reportElement x="68" y="36" width="274" height="20" uuid="84dee3b1-47a4-4c1b-ad7f-e8793ccac0ff"/>
-				<textFieldExpression><![CDATA[$F{nomeAluno}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="68" y="16" width="274" height="20" uuid="09c9ec6a-5672-4c36-9d25-bc34c6c7d233"/>
-				<textFieldExpression><![CDATA[$F{nTurma}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="0" y="36" width="68" height="20" uuid="a985d82a-6335-4e15-b7bc-67daf07d75c2"/>
 				<text><![CDATA[ALUNO:]]></text>
@@ -117,6 +64,10 @@ join turma t on a.id_turma=t.id]]>
 				<reportElement x="0" y="16" width="68" height="20" uuid="140a0c7e-dd87-4f28-9d10-f7a6d9a1d340"/>
 				<text><![CDATA[Turma:]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="71" y="36" width="658" height="20" uuid="864ccb35-362e-45e0-a38b-6917832951ab"/>
+				<textFieldExpression><![CDATA[$F{aluno_nomeAluno}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -156,40 +107,38 @@ join turma t on a.id_turma=t.id]]>
 				</textElement>
 				<text><![CDATA[MENSAL]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="76" uuid="ded3cd6b-c137-40c0-a7d9-c76f186d237d"/>
+				<textElement verticalAlignment="Middle" rotation="Left">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bimestre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="56" width="100" height="20" uuid="9e9667e8-ad0b-4fc8-9beb-7b8c8917061b"/>
+				<text><![CDATA[disciplina_descricao]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="100" height="20" uuid="cf92eb44-1e06-418d-915a-00b6e7cc27a7"/>
-				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+				<reportElement x="242" y="0" width="27" height="20" uuid="66384f5a-fd0f-4d14-aea4-90f650b9b5c7"/>
+				<textFieldExpression><![CDATA[$F{nota_bimestre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="200" y="0" width="35" height="20" uuid="8fbe5570-2400-451a-bd83-36d880ffc3d4"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{provaMensal}]]></textFieldExpression>
+				<reportElement x="299" y="0" width="43" height="20" uuid="7630ce6f-1642-4d81-8060-04b7829e10fa"/>
+				<textFieldExpression><![CDATA[$F{nota_qualitativo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="242" y="0" width="27" height="20" uuid="b3090079-9b0c-43cf-97ec-21c330268fd1"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{provaBimestral}]]></textFieldExpression>
+				<reportElement x="0" y="0" width="100" height="20" uuid="5ce8d335-dbf8-400f-90e0-5ef185227ce0"/>
+				<textFieldExpression><![CDATA[$F{disciplina_descricao}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="269" y="0" width="30" height="20" uuid="cfed0688-d788-4382-bf4c-a6d4ce41345b"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{extra}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="299" y="0" width="43" height="20" uuid="b8161ee9-694d-4c6a-8ef8-815b68820d10"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{qualitativo}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="342" y="0" width="43" height="20" uuid="27d3ff9e-e128-4e95-b1cd-6d52cf7a4dbf"/>
-				<textFieldExpression><![CDATA[$F{media}]]></textFieldExpression>
+				<reportElement x="100" y="0" width="100" height="20" uuid="5ae18362-c3c4-4416-9096-9054a71a2aab"/>
+				<textFieldExpression><![CDATA[$F{nota_bimestre}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="97" splitType="Immediate"/>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>
