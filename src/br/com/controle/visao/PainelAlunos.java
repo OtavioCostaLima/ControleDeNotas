@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -73,6 +72,29 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         } else {
             aluno.setStatus("INATIVO");
         }
+
+        aluno.setBairro(campoBairro.getText());
+        aluno.setCelular(campoCelular.getText());
+        aluno.setCep(campoCEP.getText());
+        aluno.setCidade(campoCidade.getText());
+        aluno.setCor(String.valueOf(comboCor.getSelectedItem()));
+        aluno.setDataEmissao(JDataEmissao.getDate());
+        aluno.setDataNascimento(JDataNascimento.getDate());
+        aluno.setEmail(campoEmail.getText());
+        aluno.setFolha(campoFolha.getText());
+        aluno.setLivro(campoLivro.getText());
+        aluno.setNacionalidade(String.valueOf(comboNascinalidade.getSelectedItem()));
+        aluno.setRegistroNascimento(campoRegistroNascimento.getText());
+        aluno.setNumeroResidencia(campoNumeroCasa.getText());
+        aluno.setRua(campoRua.getText());
+
+        if (JRM.isSelected()) {
+            aluno.setSexo('M');
+        } else if (JRF.isSelected()) {
+            aluno.setSexo('F');
+        }
+        aluno.setTelefone(campoTelefone.getText());
+        aluno.setWhatsapp(campoWhatsApp.getText());
         return aluno;
     }
 
@@ -125,40 +147,40 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         jComboBox5 = new javax.swing.JComboBox<>();
         jPanelAluno = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        campoFolha = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        campoLivro = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
-        jComboBox1 = new javax.swing.JComboBox();
+        comboCor = new javax.swing.JComboBox();
+        comboNascinalidade = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        campoRegistroNascimento = new javax.swing.JTextField();
         jPanel12 = new javax.swing.JPanel();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        JRF = new javax.swing.JRadioButton();
+        JRM = new javax.swing.JRadioButton();
         jPanel16 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        JDataEmissao = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        JDataNascimento = new com.toedter.calendar.JDateChooser();
         jPanel7 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        campoRua = new javax.swing.JTextField();
+        campoBairro = new javax.swing.JTextField();
+        campoCidade = new javax.swing.JTextField();
+        campoNumeroCasa = new javax.swing.JTextField();
+        campoCEP = new javax.swing.JFormattedTextField();
         jPanel13 = new javax.swing.JPanel();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
+        campoTelefone = new javax.swing.JTextField();
+        campoCelular = new javax.swing.JTextField();
+        campoEmail = new javax.swing.JTextField();
+        campoWhatsApp = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
@@ -592,49 +614,49 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Dados"));
 
-        jTextField1.setForeground(new java.awt.Color(204, 0, 0));
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        campoFolha.setForeground(new java.awt.Color(204, 0, 0));
+        campoFolha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
 
         jLabel18.setText("Folha: *");
 
-        jTextField2.setForeground(new java.awt.Color(204, 0, 0));
-        jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        campoLivro.setForeground(new java.awt.Color(204, 0, 0));
+        campoLivro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
 
         jLabel16.setText("Livro: *");
 
         jLabel8.setText("Cor: *");
 
-        jComboBox2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jComboBox2.setForeground(new java.awt.Color(204, 0, 0));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Branca", "Preta", "Parda", "Amarela", "Indígena", "Outro" }));
+        comboCor.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        comboCor.setForeground(new java.awt.Color(204, 0, 0));
+        comboCor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Branca", "Preta", "Parda", "Amarela", "Indígena", "Outro" }));
 
-        jComboBox1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(255, 0, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Antígua e Barbuda - Antiguano", "Argentina - Argentino", "Bahamas - Bahamense", "Barbados - Barbadiano, barbadense", "Belize - Belizenho", "Bolívia - Boliviano", "Brasil - Brasileiro", "Chile - Chileno", "Colômbia - Colombiano", "Costa Rica - Costarriquenho", "Cuba - Cubano", "Dominica - Dominicano", "Equador - Equatoriano", "El Salvador - Salvadorenho", "Granada - Granadino", "Guatemala - Guatemalteco", "Guiana - Guianês", "Guiana Francesa - Guianense", "Haiti - Haitiano", "Honduras - Hondurenho", "Jamaica - Jamaicano", "México - Mexicano", "Nicarágua - Nicaraguense", "Panamá - Panamenho", "Paraguai - Paraguaio", "Peru - Peruano", "Porto Rico - Portorriquenho", "República Dominicana - Dominicana", "São Cristóvão e Nevis - São-cristovense", "São Vicente e Granadinas - São-vicentino", "Santa Lúcia - Santa-lucense", "Suriname - Surinamês", "Trinidad e Tobago - Trindadense", "Uruguai - Uruguaio", "Venezuela - Venezuelano", "Alemanha - Alemão", "Áustria - Austríaco", "Bélgica - Belga", "Croácia - Croata", "Dinamarca - Dinamarquês", "Eslováquia - Eslovaco", "Eslovênia - Esloveno", "Espanha - Espanhol", "França - Francês", "Grécia - Grego", "Hungria - Húngaro", "Irlanda - Irlandês", "Itália - Italiano", "Noruega - Noruego", "Países Baixos - Holandês", "Polônia - Polonês", "Portugal - Português", "Reino Unido - Britânico", "Inglaterra - Inglês", "País de Gales - Galês", "Escócia - Escocês", "Romênia - Romeno", "Rússia - Russo", "Sérvio - Sérvio", "Suécia - Sueco", "Suíça - Suíço", "Turquia - Turco", "Ucrânia - Ucraniano", "Estados Unidos - Americano", "Canadá - Canadense", "Angola - Angolano", "Moçambique - Moçambicano", "África do Sul - Sul-africano", "Zimbabue - Zimbabuense", "Argélia - Argélia", "Comores - Comorense", "Egito - Egípcio", "Líbia - Líbio", "Marrocos - Marroquino", "Gana - Ganés", "Quênia - Queniano", "Ruanda - Ruandês", "Uganda - Ugandense", "Botsuana - Bechuano", "Costa do Marfim - Marfinense", "Camarões - Camaronense", "Nigéria - Nigeriano", "Somália - Somali", "Austrália - Australiano", "Nova Zelândia - Neozelandês", "Afeganistão - Afegão", "Arábia Saudita - Saudita", "Armênia - Armeno", "Armeno - Bangladesh", "China - Chinês", "Coréia do Norte - Norte-coreano, coreano", "Coréia do Sul - Sul-coreano, coreano", "Índia - Indiano", "Indonésia - Indonésio", "Iraque - Iraquiano", "Irã - Iraniano", "Israel - Israelita", "Japão - Japonês", "Malásia - Malaio", "Nepal - Nepalês", "Omã - Omanense", "Paquistão - Paquistanês", "Palestina - Palestino", "Qatar - Qatarense", "Síria - Sírio", "Sri Lanka - Cingalês", "Tailândia - Tailandês", "Timor-Leste - Timorense, maubere", "Emirados Árabes Unidos - Árabe, emiratense", "Vietnã - Vietnamita", "Iêmen - Iemenita" }));
-        jComboBox1.setSelectedIndex(6);
-        jComboBox1.setToolTipText("");
+        comboNascinalidade.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        comboNascinalidade.setForeground(new java.awt.Color(255, 0, 0));
+        comboNascinalidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Antígua e Barbuda - Antiguano", "Argentina - Argentino", "Bahamas - Bahamense", "Barbados - Barbadiano, barbadense", "Belize - Belizenho", "Bolívia - Boliviano", "Brasil - Brasileiro", "Chile - Chileno", "Colômbia - Colombiano", "Costa Rica - Costarriquenho", "Cuba - Cubano", "Dominica - Dominicano", "Equador - Equatoriano", "El Salvador - Salvadorenho", "Granada - Granadino", "Guatemala - Guatemalteco", "Guiana - Guianês", "Guiana Francesa - Guianense", "Haiti - Haitiano", "Honduras - Hondurenho", "Jamaica - Jamaicano", "México - Mexicano", "Nicarágua - Nicaraguense", "Panamá - Panamenho", "Paraguai - Paraguaio", "Peru - Peruano", "Porto Rico - Portorriquenho", "República Dominicana - Dominicana", "São Cristóvão e Nevis - São-cristovense", "São Vicente e Granadinas - São-vicentino", "Santa Lúcia - Santa-lucense", "Suriname - Surinamês", "Trinidad e Tobago - Trindadense", "Uruguai - Uruguaio", "Venezuela - Venezuelano", "Alemanha - Alemão", "Áustria - Austríaco", "Bélgica - Belga", "Croácia - Croata", "Dinamarca - Dinamarquês", "Eslováquia - Eslovaco", "Eslovênia - Esloveno", "Espanha - Espanhol", "França - Francês", "Grécia - Grego", "Hungria - Húngaro", "Irlanda - Irlandês", "Itália - Italiano", "Noruega - Noruego", "Países Baixos - Holandês", "Polônia - Polonês", "Portugal - Português", "Reino Unido - Britânico", "Inglaterra - Inglês", "País de Gales - Galês", "Escócia - Escocês", "Romênia - Romeno", "Rússia - Russo", "Sérvio - Sérvio", "Suécia - Sueco", "Suíça - Suíço", "Turquia - Turco", "Ucrânia - Ucraniano", "Estados Unidos - Americano", "Canadá - Canadense", "Angola - Angolano", "Moçambique - Moçambicano", "África do Sul - Sul-africano", "Zimbabue - Zimbabuense", "Argélia - Argélia", "Comores - Comorense", "Egito - Egípcio", "Líbia - Líbio", "Marrocos - Marroquino", "Gana - Ganés", "Quênia - Queniano", "Ruanda - Ruandês", "Uganda - Ugandense", "Botsuana - Bechuano", "Costa do Marfim - Marfinense", "Camarões - Camaronense", "Nigéria - Nigeriano", "Somália - Somali", "Austrália - Australiano", "Nova Zelândia - Neozelandês", "Afeganistão - Afegão", "Arábia Saudita - Saudita", "Armênia - Armeno", "Armeno - Bangladesh", "China - Chinês", "Coréia do Norte - Norte-coreano, coreano", "Coréia do Sul - Sul-coreano, coreano", "Índia - Indiano", "Indonésia - Indonésio", "Iraque - Iraquiano", "Irã - Iraniano", "Israel - Israelita", "Japão - Japonês", "Malásia - Malaio", "Nepal - Nepalês", "Omã - Omanense", "Paquistão - Paquistanês", "Palestina - Palestino", "Qatar - Qatarense", "Síria - Sírio", "Sri Lanka - Cingalês", "Tailândia - Tailandês", "Timor-Leste - Timorense, maubere", "Emirados Árabes Unidos - Árabe, emiratense", "Vietnã - Vietnamita", "Iêmen - Iemenita" }));
+        comboNascinalidade.setSelectedIndex(6);
+        comboNascinalidade.setToolTipText("");
 
         jLabel7.setText("Nacionalidade: *");
 
         jLabel19.setText("N° Registro de Nascimento: *");
 
-        jTextField3.setForeground(new java.awt.Color(204, 0, 0));
-        jTextField3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        campoRegistroNascimento.setForeground(new java.awt.Color(204, 0, 0));
+        campoRegistroNascimento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Sexo"));
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
-        grupoSexo.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(204, 0, 0));
-        jRadioButton2.setText("Feminino");
+        JRF.setBackground(new java.awt.Color(255, 255, 255));
+        grupoSexo.add(JRF);
+        JRF.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        JRF.setForeground(new java.awt.Color(204, 0, 0));
+        JRF.setText("Feminino");
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        grupoSexo.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(204, 0, 0));
-        jRadioButton1.setText("Masculino");
+        JRM.setBackground(new java.awt.Color(255, 255, 255));
+        grupoSexo.add(JRM);
+        JRM.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        JRM.setForeground(new java.awt.Color(204, 0, 0));
+        JRM.setText("Masculino");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -643,16 +665,16 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(JRM)
+                    .addComponent(JRF))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addComponent(jRadioButton1)
+                .addComponent(JRM)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton2)
+                .addComponent(JRF)
                 .addContainerGap())
         );
 
@@ -661,11 +683,11 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
 
         jLabel17.setText("Emissão: *");
 
-        jDateChooser2.setForeground(new java.awt.Color(204, 0, 0));
+        JDataEmissao.setForeground(new java.awt.Color(204, 0, 0));
 
         jLabel4.setText("Nascimento: *");
 
-        jDateChooser3.setForeground(new java.awt.Color(204, 0, 0));
+        JDataNascimento.setForeground(new java.awt.Color(204, 0, 0));
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -678,8 +700,8 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JDataEmissao, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel16Layout.setVerticalGroup(
@@ -687,12 +709,12 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JDataEmissao, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -711,14 +733,14 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboNascinalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addComponent(comboCor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoFolha, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(campoRegistroNascimento, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(campoLivro, javax.swing.GroupLayout.Alignment.LEADING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -733,21 +755,21 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                         .addGap(15, 15, 15)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(campoRegistroNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel18)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(campoFolha, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboCor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel7)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(comboNascinalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel8))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -770,17 +792,17 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
 
         jLabel24.setText("N° ");
 
-        jTextField4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        campoRua.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
 
-        jTextField5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        campoBairro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
 
-        jTextField6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        campoCidade.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
 
-        jTextField8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        campoNumeroCasa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
 
-        jFormattedTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        campoCEP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+            campoCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -799,16 +821,16 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jTextField4)
+                        .addComponent(campoRua)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel24)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(campoNumeroCasa, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(campoCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jTextField6)
-                    .addComponent(jTextField5))
+                    .addComponent(campoCidade)
+                    .addComponent(campoBairro))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -817,38 +839,43 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                 .addGap(9, 9, 9)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoRua, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel24)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoNumeroCasa, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTextField4.getAccessibleContext().setAccessibleName("");
-        jTextField5.getAccessibleContext().setAccessibleName("");
-        jTextField6.getAccessibleContext().setAccessibleName("");
+        campoRua.getAccessibleContext().setAccessibleName("");
+        campoBairro.getAccessibleContext().setAccessibleName("");
+        campoCidade.getAccessibleContext().setAccessibleName("");
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Contato"));
 
-        jTextField7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        campoTelefone.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
 
-        jTextField9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        campoCelular.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        campoCelular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoCelularActionPerformed(evt);
+            }
+        });
 
-        jTextField10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        campoEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
 
-        jTextField11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        campoWhatsApp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
 
         jLabel6.setText("Telefone: *");
 
@@ -871,12 +898,12 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel27))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField10)
+                    .addComponent(campoEmail)
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(campoWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -885,18 +912,18 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel26)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel27))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1338,17 +1365,39 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         }        // TODO add your handling code here:
     }//GEN-LAST:event_tabelaPesquisaAlunoKeyReleased
 
+    private void campoCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCelularActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoCelularActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser JDataEmissao;
+    private com.toedter.calendar.JDateChooser JDataNascimento;
+    private javax.swing.JRadioButton JRF;
+    private javax.swing.JRadioButton JRM;
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JTextField campoBairro;
+    private javax.swing.JFormattedTextField campoCEP;
+    private javax.swing.JTextField campoCelular;
+    private javax.swing.JTextField campoCidade;
     private com.toedter.calendar.JDateChooser campoDataCadastro;
+    private javax.swing.JTextField campoEmail;
+    private javax.swing.JTextField campoFolha;
     private javax.swing.JLabel campoImagemAluno;
+    private javax.swing.JTextField campoLivro;
     private javax.swing.JTextField campoMatricula;
     private javax.swing.JTextField campoNomeAluno;
+    private javax.swing.JTextField campoNumeroCasa;
+    private javax.swing.JTextField campoRegistroNascimento;
+    private javax.swing.JTextField campoRua;
+    private javax.swing.JTextField campoTelefone;
+    private javax.swing.JTextField campoWhatsApp;
     private javax.swing.JCheckBox checkStatus;
+    private javax.swing.JComboBox comboCor;
+    private javax.swing.JComboBox comboNascinalidade;
     private javax.swing.JComboBox comboSituacao;
     private javax.swing.JComboBox comboTurma;
     private javax.swing.ButtonGroup grupoQuestao1;
@@ -1368,14 +1417,9 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1427,13 +1471,11 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanelMatricula;
     private javax.swing.JPanel jPanelQuestionario;
     private javax.swing.JPanel jPanelResponsavel;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton10;
     private javax.swing.JRadioButton jRadioButton11;
     private javax.swing.JRadioButton jRadioButton12;
     private javax.swing.JRadioButton jRadioButton13;
     private javax.swing.JRadioButton jRadioButton14;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
@@ -1443,18 +1485,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JPanel subJPanelMatricula;
     private javax.swing.JTable tabelaPesquisaAluno;
     // End of variables declaration//GEN-END:variables

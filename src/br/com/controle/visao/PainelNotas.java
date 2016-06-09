@@ -592,7 +592,7 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         Nota novaNota = encapsular();
         if (novaNota != null) {
             if (new NotaRN().salvar(novaNota)) {
-            }
+                            }
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -656,7 +656,7 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
     private void jTQualitativoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTQualitativoKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             jButton6.requestFocus();
-        } 
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jTQualitativoKeyPressed
 

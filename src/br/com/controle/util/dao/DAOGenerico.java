@@ -19,7 +19,7 @@ public abstract class DAOGenerico<T extends BeanBase> {
         try {
             em.getTransaction().begin();
             for (T t1 : buscarTodos()) {
-                if (t.equals(t1)) {
+                if (!t.equals(t1)) {
                     em.persist(t);
                     em.getTransaction().commit();
                     JOptionPane.showMessageDialog(null, " Salvo com Sucesso!", "INFORMAÇÃO", JOptionPane.INFORMATION_MESSAGE);
