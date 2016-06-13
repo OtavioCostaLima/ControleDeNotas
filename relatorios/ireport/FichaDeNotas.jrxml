@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="158c1edc-e778-4739-a0a5-b0911e20ef38">
-	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.zoom" value="1.3995221406291998"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="450"/>
+	<property name="ireport.y" value="104"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -39,6 +39,46 @@
 		</box>
 	</style>
 	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
@@ -83,7 +123,7 @@
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
-		<band/>
+		<band height="1"/>
 	</background>
 	<title>
 		<band height="67" splitType="Stretch">
@@ -100,12 +140,16 @@
 				</textElement>
 				<text><![CDATA[FICHA DE NOTAS]]></text>
 			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="28" y="0" width="112" height="60" uuid="ff883c4e-8a58-4c3e-a5be-23d59e766c18"/>
+				<imageExpression><![CDATA["Logo_Atual.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="129" splitType="Stretch">
+		<band height="134" splitType="Stretch">
 			<rectangle>
-				<reportElement x="9" y="1" width="539" height="126" uuid="fc24eed6-b5b7-41c3-ba81-03c01a38191d"/>
+				<reportElement x="1" y="2" width="539" height="126" uuid="fc24eed6-b5b7-41c3-ba81-03c01a38191d"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="206" y="1" width="166" height="32" uuid="4952ed2d-e763-4925-b0e9-280deb133996"/>
@@ -116,77 +160,110 @@
 			</staticText>
 		</band>
 	</pageHeader>
-	<columnHeader>
-		<band height="38" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="225" height="37" uuid="dcd76467-869d-4e9a-b479-241f80e8afaf"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[ALUNO]]></text>
-			</staticText>
-			<line>
-				<reportElement x="223" y="0" width="1" height="36" uuid="62f37156-21cf-4ce2-ae26-2cd615dab149"/>
-			</line>
-			<staticText>
-				<reportElement x="225" y="0" width="70" height="37" uuid="50099389-2167-402e-8e6e-1ed58bee3f32"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Nota da Ava. Mensal]]></text>
-			</staticText>
-			<line>
-				<reportElement x="0" y="36" width="555" height="1" uuid="d09face0-1771-4b05-b0d5-1e2a89157e28"/>
-			</line>
-			<staticText>
-				<reportElement x="295" y="2" width="59" height="36" uuid="06302118-ee61-47ec-8fc2-0ad80e83afc0"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Nota da Ava. Bimestral]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="354" y="2" width="45" height="36" uuid="1d44ceea-fa43-4b38-b7c8-fcd5c455cbb8"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Nota do Q.I]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="399" y="2" width="47" height="36" uuid="81ff9633-9985-4975-a22e-5172341e4df1"/>
-				<textElement textAlignment="Center"/>
-				<text><![CDATA[Nota do Qualit.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="446" y="1" width="40" height="36" uuid="3a240930-4516-4d56-ab38-aad36d165aa3"/>
-				<textElement textAlignment="Center"/>
-				<text><![CDATA[Nota da R.O.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="486" y="2" width="69" height="34" uuid="7caf1aed-b082-4184-b7b5-0dc7fcafc185"/>
-				<textElement verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Média Final]]></text>
-			</staticText>
-		</band>
-	</columnHeader>
 	<detail>
-		<band height="17" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="0" width="225" height="17" uuid="74071a30-3461-484f-988e-b458d5a3c48c"/>
-				<textElement textAlignment="Justified" verticalAlignment="Middle">
-					<font fontName="Arial" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{nomeAluno}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="0" y="16" width="555" height="1" uuid="2b628192-5d19-483f-8429-e872d0d567a4"/>
-			</line>
-			<line>
-				<reportElement x="224" y="1" width="1" height="16" uuid="eb3a9f71-0600-4db7-b9c1-ca24c09200a4"/>
-			</line>
+		<band height="140" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table 3" style="table 3" x="0" y="0" width="555" height="140" uuid="d420012b-a429-48e7-a705-abde28062224"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Agenda" uuid="4b2a0e3b-5c0b-40b1-bc41-18fe7e375a29">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="209" uuid="7d483e9e-9148-4602-ba82-cabe67e1f2f1">
+						<jr:columnHeader style="table 3_CH" height="45" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="209" height="45" uuid="9344b0d5-f8c6-45df-a168-80f684e6d4fc"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[ALUNO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 3_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="209" height="18" uuid="df141c95-ead0-4e19-a3b8-d8f936d0bfd6"/>
+								<textElement verticalAlignment="Bottom"/>
+								<textFieldExpression><![CDATA[$F{nomeAluno}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="59" uuid="4b336604-0a3a-4488-b7af-24dcddc0738b">
+						<jr:columnHeader style="table 3_CH" height="45" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="59" height="45" uuid="8d2b3c50-2986-435b-ac6b-8106eaf2b518"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[NOTA DA AVAL. MENSAL]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 3_TD" height="20" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="57" uuid="54287d06-db15-4f34-b92c-1c7442591908">
+						<jr:columnHeader style="table 3_CH" height="45" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="57" height="45" uuid="ad446e92-7fec-4284-9363-bc5f59954c5f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[NOTA DA PROVA MENSAL]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 3_TD" height="20" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="53" uuid="67549186-790c-412d-8451-5e527c9e8541">
+						<jr:columnHeader style="table 3_CH" height="45" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="53" height="45" uuid="cef14036-6ac9-42ca-af60-1ca49727db4e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="10"/>
+								</textElement>
+								<text><![CDATA[NOTA DO Q.I. ]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 3_TD" height="20" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="56" uuid="1d9c1041-5b5e-45ba-bf48-b5d61c1c3a50">
+						<jr:columnHeader style="table 3_CH" height="45" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="56" height="45" uuid="2640136e-6634-488f-ac86-378dd2b828b5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[NOTA DO QUALIT]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 3_TD" height="20" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="60" uuid="76e613dc-3fbc-40d7-a0ad-439c4623ff8b">
+						<jr:columnHeader style="table 3_CH" height="45" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="45" uuid="27c62b04-be46-417a-9328-62fc1f59a513"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[NOTA DA  R.O.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 3_TD" height="20" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="61" uuid="a2707c14-a63f-409f-b4a9-c7d3402c16ef">
+						<jr:columnHeader style="table 3_CH" height="45" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="58" height="45" uuid="478dfa44-f6c6-4b0e-bda9-7681f66d32aa"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[MÉDIA FINAL]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 3_TD" height="20" rowSpan="1"/>
+					</jr:column>
+				</jr:table>
+			</componentElement>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="30">
+			<staticText>
+				<reportElement x="28" y="13" width="160" height="15" uuid="6b7bf492-5b24-4a41-a8e8-898d6876428f"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[ASSINATURA DO PROFESSSOR:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="188" y="28" width="181" height="1" uuid="1b5bd332-aa9f-4a4d-9950-6f68906fd450"/>
+			</line>
+		</band>
 	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
