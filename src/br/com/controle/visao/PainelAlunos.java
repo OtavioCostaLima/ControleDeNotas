@@ -1518,7 +1518,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         checkStatus.setSelected(false);
         campoDataCadastro.setDate(null);
         campoImagemAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/aluno.png")));
-
     }
 
 }
