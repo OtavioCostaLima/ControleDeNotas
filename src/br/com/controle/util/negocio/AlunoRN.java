@@ -56,6 +56,11 @@ public class AlunoRN implements GenericoRN<Aluno> {
         return alunoDAO.buscarTodos();
     }
 
+    public List<Aluno> buscarPorNome(String nome) {
+        alunoDAO = new AlunoDAO();
+        return alunoDAO.buscarPorNome(nome);
+    }
+
     @Override
     public boolean remover(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

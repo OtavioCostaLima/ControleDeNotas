@@ -31,7 +31,7 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
     @Column(name = "nomeAluno")
     private String nome;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "idTurma", nullable = false)
     private Turma turma;
 

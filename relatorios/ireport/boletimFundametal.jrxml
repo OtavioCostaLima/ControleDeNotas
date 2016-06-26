@@ -54,99 +54,127 @@ FROM nota n
 			</staticText>
 		</band>
 	</title>
-	<pageHeader>
-		<band height="56" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="36" width="68" height="20" uuid="a985d82a-6335-4e15-b7bc-67daf07d75c2"/>
-				<text><![CDATA[ALUNO:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="16" width="68" height="20" uuid="140a0c7e-dd87-4f28-9d10-f7a6d9a1d340"/>
-				<text><![CDATA[Turma:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="71" y="36" width="658" height="20" uuid="864ccb35-362e-45e0-a38b-6917832951ab"/>
-				<textFieldExpression><![CDATA[$F{aluno_nomeAluno}]]></textFieldExpression>
-			</textField>
-		</band>
-	</pageHeader>
-	<columnHeader>
-		<band height="76" splitType="Stretch">
-			<staticText>
-				<reportElement x="235" y="0" width="34" height="76" uuid="958c3a40-eee4-47e9-ab46-4670bdfe2b9b"/>
-				<textElement verticalAlignment="Middle" rotation="Left">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[BIMESTRAL]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="269" y="0" width="30" height="76" uuid="0f69ac78-9802-4cb2-a448-68b257a251d2"/>
-				<textElement verticalAlignment="Middle" rotation="Left">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[EXTRA]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="299" y="0" width="43" height="76" uuid="e2f6b358-c951-441b-a875-8de6db9c5a95"/>
-				<textElement verticalAlignment="Middle" rotation="Left">
-					<font size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[QUALITATIVO]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="342" y="0" width="43" height="76" uuid="50c1a402-4659-40db-8445-02c92d8d6289"/>
-				<textElement verticalAlignment="Middle" rotation="Left">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[1° MÉDIA]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="200" y="0" width="35" height="76" uuid="6bed4551-0dac-4f09-9aff-abca4c7cfa3c"/>
-				<textElement verticalAlignment="Middle" rotation="Left">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[MENSAL]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="100" y="0" width="100" height="76" uuid="ded3cd6b-c137-40c0-a7d9-c76f186d237d"/>
-				<textElement verticalAlignment="Middle" rotation="Left">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Bimestre]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="56" width="100" height="20" uuid="9e9667e8-ad0b-4fc8-9beb-7b8c8917061b"/>
-				<text><![CDATA[disciplina_descricao]]></text>
-			</staticText>
-		</band>
-	</columnHeader>
-	<detail>
-		<band height="20" splitType="Stretch">
-			<textField>
-				<reportElement x="242" y="0" width="27" height="20" uuid="66384f5a-fd0f-4d14-aea4-90f650b9b5c7"/>
-				<textFieldExpression><![CDATA[$F{nota_bimestre}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="299" y="0" width="43" height="20" uuid="7630ce6f-1642-4d81-8060-04b7829e10fa"/>
-				<textFieldExpression><![CDATA[$F{nota_qualitativo}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="0" y="0" width="100" height="20" uuid="5ce8d335-dbf8-400f-90e0-5ef185227ce0"/>
-				<textFieldExpression><![CDATA[$F{disciplina_descricao}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="100" y="0" width="100" height="20" uuid="5ae18362-c3c4-4416-9096-9054a71a2aab"/>
-				<textFieldExpression><![CDATA[$F{nota_bimestre}]]></textFieldExpression>
-			</textField>
-		</band>
-	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="177">
+			<crosstab>
+				<reportElement x="0" y="0" width="802" height="177" uuid="c724ea04-8302-45a4-b38a-65a2d1070fdb"/>
+				<crosstabHeaderCell>
+					<cellContents>
+						<box>
+							<pen lineStyle="Solid"/>
+							<topPen lineStyle="Solid"/>
+							<leftPen lineStyle="Solid"/>
+							<bottomPen lineStyle="Solid"/>
+							<rightPen lineStyle="Solid"/>
+						</box>
+					</cellContents>
+				</crosstabHeaderCell>
+				<rowGroup name="disciplina_descricao" width="70" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{disciplina_descricao}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="70" height="25" uuid="9eb2e23f-bc28-4a44-822b-01d15501a347"/>
+								<textFieldExpression><![CDATA[$V{disciplina_descricao}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents backcolor="#BFE1FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="group1" width="62">
+					<bucket/>
+					<crosstabRowHeader>
+						<cellContents/>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="nota_bimestre" height="30" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{nota_bimestre}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="30" uuid="a719a345-77ba-4fb4-a05d-61d78f895dd0"/>
+								<textFieldExpression><![CDATA[$V{nota_bimestre}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents backcolor="#BFE1FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="15860370-697a-476c-8082-53337a0723db"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Total nota_bimestre]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="nota_mediaMeasure" class="java.lang.Integer" calculation="Count">
+					<measureExpression><![CDATA[$F{nota_media}]]></measureExpression>
+				</measure>
+				<crosstabCell width="50" height="25">
+					<cellContents>
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="ec5f511f-c01c-4437-9b51-3b0d5a842083"/>
+							<textFieldExpression><![CDATA[$V{nota_mediaMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell height="25" rowTotalGroup="disciplina_descricao">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="50" columnTotalGroup="nota_bimestre">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="d6baba4a-aced-4d25-9054-47d324059581"/>
+							<textFieldExpression><![CDATA[$V{nota_mediaMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="disciplina_descricao" columnTotalGroup="nota_bimestre">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="group1">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="group1" columnTotalGroup="nota_bimestre">
+					<cellContents/>
+				</crosstabCell>
+			</crosstab>
+		</band>
 	</summary>
 </jasperReport>

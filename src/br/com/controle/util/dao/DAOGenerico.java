@@ -18,18 +18,15 @@ public abstract class DAOGenerico<T extends BeanBase> {
         EntityManager em = ConexaoUtil.getEntityManager();
         try {
             em.getTransaction().begin();
-            for (T t1 : buscarTodos()) {
-                if (!t.equals(t1)) {
-                    em.persist(t);
-                    em.getTransaction().commit();
-                    JOptionPane.showMessageDialog(null, " Salvo com Sucesso!", "INFORMAÇÃO", JOptionPane.INFORMATION_MESSAGE);
-                    return true;
-                } else {
-                    em.getTransaction().rollback();
-                    JOptionPane.showMessageDialog(null, getTypeClass().getSimpleName() + " já Cadastrada!", "INFORMAÇÃO", JOptionPane.INFORMATION_MESSAGE);
-                }
-            }
-
+            em.persist(t);
+            em.getTransaction().commit();
+            JOptionPane.showMessageDialog(null, " Salvo com Sucesso!", "INFORMAÇÃO", JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        } catch (Exception exception) {
+            em.getTransaction().rollback();
+            JOptionPane.showMessageDialog(null, " Erro ao cadastrar " + getTypeClass().getSimpleName(), "ERRO", JOptionPane.INFORMATION_MESSAGE);
+            exception.printStackTrace();
+            // JOptionPane.showMessageDialog(null, getTypeClass().getSimpleName() + " já Cadastrada!", "INFORMAÇÃO", JOptionPane.INFORMATION_MESSAGE);
         } finally {
             em.close();
         }

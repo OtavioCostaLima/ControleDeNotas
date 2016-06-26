@@ -4,7 +4,6 @@ import br.com.controle.util.ConexaoUtil;
 import br.com.controle.util.modelo.Usuario;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 /**

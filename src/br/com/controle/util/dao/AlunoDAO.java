@@ -2,6 +2,7 @@ package br.com.controle.util.dao;
 
 import br.com.controle.util.ConexaoUtil;
 import br.com.controle.util.modelo.Aluno;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
@@ -35,5 +36,14 @@ public class AlunoDAO extends DAOGenerico<Aluno> {
         }
         aluno.setNumeroChamada(++result);
         return result;
+    }
+
+    public List<Aluno> buscarPorNome(String nome) {
+        EntityManager em = ConexaoUtil.getEntityManager();
+        String consulta = "SELECT a FROM Aluno a WHERE nomeAluno like :nome";
+        TypedQuery<Aluno> query = em.createQuery(consulta, Aluno.class);
+        query.setParameter("nome", "" + nome + "%");
+
+        return query.getResultList();
     }
 }
