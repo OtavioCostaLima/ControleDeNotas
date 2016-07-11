@@ -8,11 +8,13 @@ import br.com.controle.util.modelo.Disciplina;
 import br.com.controle.util.modelo.Nota;
 import br.com.controle.util.modelo.Professor;
 import br.com.controle.util.modelo.Turma;
+import br.com.controle.util.negocio.AlunoRN;
 import br.com.controle.util.negocio.NotaRN;
 import br.com.controle.util.negocio.TurmaRN;
 import br.com.controle.visao.abstractModels.GenericComboBoxModel;
 import br.com.controle.visao.abstractModels.TabelaAluno;
 import br.com.controle.visao.abstractModels.TabelaProfessor;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -54,6 +56,9 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         notaBimestral.setDocument(new CamposDouble());
         jTExtra.setDocument(new CamposDouble());
         jTQualitativo.setDocument(new CamposDouble());
+        TextPrompt textPrompt = new TextPrompt("DIGITE O NOME DO ALUNO", jTextField1);
+        textPrompt.changeAlpha(0.5f);
+        textPrompt.setForeground(Color.GRAY);
         listarAnos();
     }
 
@@ -187,6 +192,12 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         comboAno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboAnoActionPerformed(evt);
+            }
+        });
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
             }
         });
 
@@ -592,7 +603,7 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         Nota novaNota = encapsular();
         if (novaNota != null) {
             if (new NotaRN().salvar(novaNota)) {
-                            }
+            }
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -659,6 +670,18 @@ public final class PainelNotas extends javax.swing.JInternalFrame {
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jTQualitativoKeyPressed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        if (comboTurma.getSelectedIndex() >= 0) {
+            if (jTextField1.getText().length() > 0) {
+                tabelaAluno.inserirAlunos(new AlunoRN().buscar(jTextField1.getText(), comboBoxTurma.get(comboTurma.getSelectedIndex()).getId()));
+            } else {
+                List<Aluno> alunos = getTurmaSelecionada().getAlunos();
+                tabelaAluno.inserirAlunos(alunos);
+                jTbAluno.setModel(tabelaAluno);
+            }
+        }     // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1KeyReleased
 
     private void getNotas() {
         Aluno aluno;

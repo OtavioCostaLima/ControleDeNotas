@@ -56,9 +56,24 @@ public class AlunoRN implements GenericoRN<Aluno> {
         return alunoDAO.buscarTodos();
     }
 
-    public List<Aluno> buscarPorNome(String nome) {
+    public List<Aluno> buscar(String nome, long idTurma, String status) {
         alunoDAO = new AlunoDAO();
-        return alunoDAO.buscarPorNome(nome);
+        return alunoDAO.buscar(nome, idTurma, status);
+    }
+
+    public List<Aluno> buscar(long idTurma, String status) {
+        alunoDAO = new AlunoDAO();
+        return alunoDAO.buscar(idTurma, status);
+    }
+
+    public List<Aluno> buscar(String ano, String status) {
+        alunoDAO = new AlunoDAO();
+        return alunoDAO.buscar(ano, status);
+    }
+
+    public List<Aluno> buscar(String nome, long idTurma) {
+        alunoDAO = new AlunoDAO();
+        return alunoDAO.buscar(nome, idTurma);
     }
 
     @Override

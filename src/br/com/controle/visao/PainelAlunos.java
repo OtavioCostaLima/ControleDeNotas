@@ -19,6 +19,8 @@ import javax.swing.JOptionPane;
  */
 public class PainelAlunos extends javax.swing.JInternalFrame {
 
+    private GenericComboBoxModel<Turma> comoModelPesquisaTurma;
+    private GenericComboBoxModel<String> boxModelAno;
     GerenteDeImagens gerenteDeArquivos = new GerenteDeImagens();
     private final List<Aluno> novosAlunos = new ArrayList<>();
     private GenericComboBoxModel<Turma> boxModelTurma;
@@ -40,6 +42,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         textPrompt.setForeground(Color.GRAY);
         povoartabelaAluno();
         povoarComboboxTurma();
+        listarAnos();
     }
 
     private void povoarComboboxTurma() {
@@ -139,12 +142,12 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         btnRemover = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jTextField12 = new javax.swing.JTextField();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        comboBoxPesquisaTurma = new javax.swing.JComboBox<>();
         jLabel31 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jComboBox4 = new javax.swing.JComboBox<>();
         jLabel32 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox<>();
+        comboAno = new javax.swing.JComboBox<>();
         jPanelAluno = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         campoFolha = new javax.swing.JTextField();
@@ -228,12 +231,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         setResizable(true);
         setPreferredSize(new java.awt.Dimension(900, 627));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
@@ -242,6 +239,12 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
             public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
 
@@ -343,7 +346,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(comboTurma, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comboTurma, javax.swing.GroupLayout.Alignment.TRAILING, 0, 670, Short.MAX_VALUE)
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addComponent(campoMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -524,6 +527,15 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField12KeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField12KeyTyped(evt);
+            }
+        });
+
+        comboBoxPesquisaTurma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxPesquisaTurmaActionPerformed(evt);
+            }
         });
 
         jLabel31.setText("Turma:");
@@ -531,10 +543,20 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         jLabel30.setText("Status");
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ATIVO", "INATIVO" }));
+        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox4ActionPerformed(evt);
+            }
+        });
 
         jLabel32.setText("ANO:");
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2016" }));
+        comboAno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2016" }));
+        comboAno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboAnoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelMatriculaLayout = new javax.swing.GroupLayout(jPanelMatricula);
         jPanelMatricula.setLayout(jPanelMatriculaLayout);
@@ -548,23 +570,22 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                         .addGap(10, 10, 10)
                         .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelMatriculaLayout.createSequentialGroup()
                         .addComponent(jLabel32)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboAno, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel31)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboBoxPesquisaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel30)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField12)))
-                .addGap(144, 144, 144))
+                .addContainerGap())
             .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -586,14 +607,14 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelMatriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelMatriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboBoxPesquisaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel31)
                         .addComponent(jLabel32)
-                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel30))
+                        .addComponent(comboAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelMatriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel30)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -602,7 +623,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
 
         jPanelMatriculaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdicionar, btnRemover, jButton1});
 
-        jPanelMatriculaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jComboBox3, jTextField12});
+        jPanelMatriculaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboBoxPesquisaTurma, jTextField12});
 
         javax.swing.GroupLayout subJPanelMatriculaLayout = new javax.swing.GroupLayout(subJPanelMatricula);
         subJPanelMatricula.setLayout(subJPanelMatriculaLayout);
@@ -619,25 +640,18 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
 
         jPanelAluno.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Dados"));
 
-        campoFolha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
-
         jLabel18.setText("Folha: *");
-
-        campoLivro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
 
         jLabel16.setText("Livro: *");
 
         jLabel8.setText("Cor: *");
 
         comboCor.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        comboCor.setForeground(new java.awt.Color(204, 0, 0));
         comboCor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Branca", "Preta", "Parda", "Amarela", "Indígena", "Outro" }));
 
         comboNascinalidade.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        comboNascinalidade.setForeground(new java.awt.Color(255, 0, 0));
         comboNascinalidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Antígua e Barbuda - Antiguano", "Argentina - Argentino", "Bahamas - Bahamense", "Barbados - Barbadiano, barbadense", "Belize - Belizenho", "Bolívia - Boliviano", "Brasil - Brasileiro", "Chile - Chileno", "Colômbia - Colombiano", "Costa Rica - Costarriquenho", "Cuba - Cubano", "Dominica - Dominicano", "Equador - Equatoriano", "El Salvador - Salvadorenho", "Granada - Granadino", "Guatemala - Guatemalteco", "Guiana - Guianês", "Guiana Francesa - Guianense", "Haiti - Haitiano", "Honduras - Hondurenho", "Jamaica - Jamaicano", "México - Mexicano", "Nicarágua - Nicaraguense", "Panamá - Panamenho", "Paraguai - Paraguaio", "Peru - Peruano", "Porto Rico - Portorriquenho", "República Dominicana - Dominicana", "São Cristóvão e Nevis - São-cristovense", "São Vicente e Granadinas - São-vicentino", "Santa Lúcia - Santa-lucense", "Suriname - Surinamês", "Trinidad e Tobago - Trindadense", "Uruguai - Uruguaio", "Venezuela - Venezuelano", "Alemanha - Alemão", "Áustria - Austríaco", "Bélgica - Belga", "Croácia - Croata", "Dinamarca - Dinamarquês", "Eslováquia - Eslovaco", "Eslovênia - Esloveno", "Espanha - Espanhol", "França - Francês", "Grécia - Grego", "Hungria - Húngaro", "Irlanda - Irlandês", "Itália - Italiano", "Noruega - Noruego", "Países Baixos - Holandês", "Polônia - Polonês", "Portugal - Português", "Reino Unido - Britânico", "Inglaterra - Inglês", "País de Gales - Galês", "Escócia - Escocês", "Romênia - Romeno", "Rússia - Russo", "Sérvio - Sérvio", "Suécia - Sueco", "Suíça - Suíço", "Turquia - Turco", "Ucrânia - Ucraniano", "Estados Unidos - Americano", "Canadá - Canadense", "Angola - Angolano", "Moçambique - Moçambicano", "África do Sul - Sul-africano", "Zimbabue - Zimbabuense", "Argélia - Argélia", "Comores - Comorense", "Egito - Egípcio", "Líbia - Líbio", "Marrocos - Marroquino", "Gana - Ganés", "Quênia - Queniano", "Ruanda - Ruandês", "Uganda - Ugandense", "Botsuana - Bechuano", "Costa do Marfim - Marfinense", "Camarões - Camaronense", "Nigéria - Nigeriano", "Somália - Somali", "Austrália - Australiano", "Nova Zelândia - Neozelandês", "Afeganistão - Afegão", "Arábia Saudita - Saudita", "Armênia - Armeno", "Armeno - Bangladesh", "China - Chinês", "Coréia do Norte - Norte-coreano, coreano", "Coréia do Sul - Sul-coreano, coreano", "Índia - Indiano", "Indonésia - Indonésio", "Iraque - Iraquiano", "Irã - Iraniano", "Israel - Israelita", "Japão - Japonês", "Malásia - Malaio", "Nepal - Nepalês", "Omã - Omanense", "Paquistão - Paquistanês", "Palestina - Palestino", "Qatar - Qatarense", "Síria - Sírio", "Sri Lanka - Cingalês", "Tailândia - Tailandês", "Timor-Leste - Timorense, maubere", "Emirados Árabes Unidos - Árabe, emiratense", "Vietnã - Vietnamita", "Iêmen - Iemenita" }));
         comboNascinalidade.setSelectedIndex(6);
         comboNascinalidade.setToolTipText("");
@@ -646,21 +660,14 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
 
         jLabel19.setText("N° Registro de Nascimento: *");
 
-        campoRegistroNascimento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
-
-        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Sexo"));
 
-        JRF.setBackground(new java.awt.Color(255, 255, 255));
         grupoSexo.add(JRF);
         JRF.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        JRF.setForeground(new java.awt.Color(204, 0, 0));
         JRF.setText("Feminino");
 
-        JRM.setBackground(new java.awt.Color(255, 255, 255));
         grupoSexo.add(JRM);
         JRM.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        JRM.setForeground(new java.awt.Color(204, 0, 0));
         JRM.setText("Masculino");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -681,7 +688,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                 .addComponent(JRF))
         );
 
-        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
         jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder("Datas"));
 
         jLabel17.setText("Emissão: *");
@@ -779,7 +785,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Endereço"));
 
         jLabel20.setText("Rua: *");
@@ -792,15 +797,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
 
         jLabel24.setText("N° ");
 
-        campoRua.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
-
-        campoBairro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
-
-        campoCidade.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
-
-        campoNumeroCasa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
-
-        campoCEP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
         try {
             campoCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
@@ -861,21 +857,13 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         campoBairro.getAccessibleContext().setAccessibleName("");
         campoCidade.getAccessibleContext().setAccessibleName("");
 
-        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Contato"));
 
-        campoTelefone.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
-
-        campoCelular.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
         campoCelular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoCelularActionPerformed(evt);
             }
         });
-
-        campoEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
-
-        campoWhatsApp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
 
         jLabel6.setText("Telefone: *");
 
@@ -971,11 +959,11 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6)
                     .addComponent(jButton4))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Aluno", jPanelAluno);
@@ -1348,6 +1336,9 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
             novosAlunos.remove(index);
             TABELA_ALUNO.delAluno(tabelaPesquisaAluno.getSelectedRow());
             limparCampos();
+            if (novosAlunos.isEmpty()) {
+                TABELA_ALUNO.inserirAlunos(new AlunoRN().buscarTodos());
+            }
         }
     }//GEN-LAST:event_btnRemoverActionPerformed
 
@@ -1397,13 +1388,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_campoCelularActionPerformed
 
     private void jTextField12KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField12KeyReleased
-        if (jTextField12.getText().trim().length() > 0) {
-            TABELA_ALUNO.inserirAlunos(new AlunoRN().buscarPorNome(jTextField12.getText()));
-            tabelaPesquisaAluno.setModel(TABELA_ALUNO);
-        } else {
-            TABELA_ALUNO.inserirAlunos(new AlunoRN().buscarTodos());
-            tabelaPesquisaAluno.setModel(TABELA_ALUNO);
-        }      // TODO add your handling code here:
+        consulta();      // TODO add your handling code here:
     }//GEN-LAST:event_jTextField12KeyReleased
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -1413,6 +1398,25 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         jTabbedPane1.setSelectedIndex(2);            // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jTextField12KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField12KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField12KeyTyped
+
+    private void comboAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAnoActionPerformed
+        listarTurmasPorAno();
+        consulta();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboAnoActionPerformed
+
+    private void comboBoxPesquisaTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxPesquisaTurmaActionPerformed
+        consulta();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxPesquisaTurmaActionPerformed
+
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+        consulta();         // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1441,6 +1445,8 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField campoTelefone;
     private javax.swing.JTextField campoWhatsApp;
     private javax.swing.JCheckBox checkStatus;
+    private javax.swing.JComboBox<String> comboAno;
+    private javax.swing.JComboBox<String> comboBoxPesquisaTurma;
     private javax.swing.JComboBox comboCor;
     private javax.swing.JComboBox comboNascinalidade;
     private javax.swing.JComboBox comboSituacao;
@@ -1464,9 +1470,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1542,6 +1546,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         campoMatricula.setText(aluno.getMatricula());
         campoNomeAluno.setText(aluno.getNome());
         comboTurma.setSelectedItem(aluno.getTurma().toString());
+        comboSituacao.setSelectedItem(aluno.getSituacaoAluno());
         checkStatus.setSelected(aluno.isAtivo());
         JDataEmissao.setDate(aluno.getDataEmissao());
         JDataNascimento.setDate(aluno.getDataNascimento());
@@ -1558,13 +1563,16 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         campoRua.setText(aluno.getRua());
         campoTelefone.setText(aluno.getTelefone());
         campoWhatsApp.setText(aluno.getWhatsapp());
-        if (aluno.getSexo().toString().equals("F")) {
-            JRF.setSelected(true);
+        comboNascinalidade.setSelectedItem(aluno.getNacionalidade());
+        comboCor.setSelectedItem(aluno.getCor());
+        if (aluno.getSexo() != null) {
+            if (aluno.getSexo() == 'F') {
+                JRF.setSelected(true);
+            }
+            if (aluno.getSexo() == 'M') {
+                JRM.setSelected(true);
+            }
         }
-        if (aluno.getSexo().toString().equals("M")) {
-            JRM.setSelected(true);
-        }
-
         String rl = "./fotos/" + aluno.getMatricula().trim().concat(".jpg");
         if (!gerenteDeArquivos.setImagemNaJlabel(rl, campoImagemAluno)) {
             campoImagemAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/aluno.png")));
@@ -1610,6 +1618,39 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         grupoQuestao6.clearSelection();
         grupoSexo.clearSelection();
         campoImagemAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/aluno.png")));
+    }
+
+    public void listarAnos() {
+        List<String> anos = new TurmaRN().listarAnos();
+        anos.add(0, "TODOS");
+        boxModelAno = new GenericComboBoxModel(anos);
+        comboAno.setModel(boxModelAno);
+    }
+
+    public void listarTurmasPorAno() {
+        List<Turma> turma;
+        if (comboAno.getSelectedItem().equals("TODOS")) {
+            turma = new TurmaRN().buscarTodos();
+        } else {
+            turma = new TurmaRN().listarTurmaPorAno(String.valueOf(comboAno.getSelectedItem()));
+        }
+        comoModelPesquisaTurma = new GenericComboBoxModel(turma);
+        comboBoxPesquisaTurma.setModel(comoModelPesquisaTurma);
+    }
+
+    private void consulta() {
+        if (comboBoxPesquisaTurma.getSelectedIndex() >= 0 && jTextField12.getText().length() == 0) {
+            TABELA_ALUNO.inserirAlunos(new AlunoRN().buscar(comoModelPesquisaTurma.get(comboBoxPesquisaTurma.getSelectedIndex()).getId(), jComboBox4.getSelectedItem().toString()));
+
+        } else if (comboBoxPesquisaTurma.getSelectedIndex() < 0 && jTextField12.getText().length() == 0 && !comboAno.getSelectedItem().equals("TODOS")) {
+            TABELA_ALUNO.inserirAlunos(new AlunoRN().buscar(comboAno.getSelectedItem().toString(), jComboBox4.getSelectedItem().toString()));
+
+        } else if (comboBoxPesquisaTurma.getSelectedIndex() >= 0 && jTextField12.getText().length() > 0) {
+            TABELA_ALUNO.inserirAlunos(new AlunoRN().buscar(jTextField12.getText(), comoModelPesquisaTurma.get(comboBoxPesquisaTurma.getSelectedIndex()).getId(), jComboBox4.getSelectedItem().toString()));
+
+        } else {
+            TABELA_ALUNO.inserirAlunos(new AlunoRN().buscarTodos());
+        }
     }
 
 }
