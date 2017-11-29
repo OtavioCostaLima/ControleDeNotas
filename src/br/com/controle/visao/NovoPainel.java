@@ -1,105 +1,29 @@
 package br.com.controle.visao;
 
-import br.com.controle.util.modelo.Aluno;
-import br.com.controle.util.modelo.Turma;
-import br.com.controle.util.negocio.AlunoRN;
-import br.com.controle.util.negocio.TurmaRN;
-import br.com.controle.visao.abstractModels.GenericComboBoxModel;
-import br.com.controle.visao.abstractModels.TabelaAluno;
-import java.awt.Color;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author Otavio Costa
  */
-public class PainelAlunos extends javax.swing.JInternalFrame {
+public class NovoPainel extends javax.swing.JInternalFrame {
 
-    private GenericComboBoxModel<Turma> comoModelPesquisaTurma;
-    private GenericComboBoxModel<String> boxModelAno;
-    GerenteDeImagens gerenteDeArquivos = new GerenteDeImagens();
-    private final List<Aluno> novosAlunos = new ArrayList<>();
-    private GenericComboBoxModel<Turma> boxModelTurma;
-    private final TabelaAluno TABELA_ALUNO = new TabelaAluno();
-    private static PainelAlunos CADASTRO_ALUNOS;
-
+ 
     /**
      * Creates new form CadastroAlunos
      */
-    private PainelAlunos() {
+    private NovoPainel() {
         initComponents();
         meuInitComponents();
     }
 
     private void meuInitComponents() {
         //  ((BasicInternalFrameUI) getUI()).setNorthPane(null);
-        TextPrompt textPrompt = new TextPrompt("DIGITE O NOME DO ALUNO", jTextField12);
-        textPrompt.changeAlpha(0.5f);
-        textPrompt.setForeground(Color.GRAY);
-        povoartabelaAluno();
-        povoarComboboxTurma();
-        listarAnos();
+
+
     }
 
-    private void povoarComboboxTurma() {
-        boxModelTurma = new GenericComboBoxModel(new TurmaRN().buscarTodos());
-        comboTurma.setModel(boxModelTurma);
-    }
+   
 
-    public static synchronized PainelAlunos getInstancia() {
-        if (CADASTRO_ALUNOS == null) {
-            CADASTRO_ALUNOS = new PainelAlunos();
-        }
-        return CADASTRO_ALUNOS;
-    }
 
-    private void povoartabelaAluno() {
-        TABELA_ALUNO.addListaAluno(new AlunoRN().buscarTodos());
-        tabelaPesquisaAluno.setModel(TABELA_ALUNO);
-    }
-
-    private Aluno encapsulaAluno() {
-        Aluno aluno = new Aluno();
-        aluno.setMatricula(campoMatricula.getText());
-        aluno.setNome(campoNomeAluno.getText());
-        aluno.setTurma((Turma) boxModelTurma.get(comboTurma.getSelectedIndex()));
-        aluno.setuRLImagem(gerenteDeArquivos.getUrlImagem());
-        aluno.setSituacaoAluno(comboSituacao.getSelectedItem().toString());
-        aluno.setDataCadastro(campoDataCadastro.getDate());
-        if (checkStatus.isSelected()) {
-            aluno.setStatus("ATIVO");
-        } else {
-            aluno.setStatus("INATIVO");
-        }
-
-        aluno.setBairro(campoBairro.getText());
-        aluno.setCelular(campoCelular.getText());
-        aluno.setCep(campoCEP.getText());
-        aluno.setCidade(campoCidade.getText());
-        aluno.setCor(String.valueOf(comboCor.getSelectedItem()));
-        aluno.setDataEmissao(JDataEmissao.getDate());
-        aluno.setDataNascimento(JDataNascimento.getDate());
-        aluno.setEmail(campoEmail.getText());
-        aluno.setFolha(campoFolha.getText());
-        aluno.setLivro(campoLivro.getText());
-        aluno.setNacionalidade(String.valueOf(comboNascinalidade.getSelectedItem()));
-        aluno.setRegistroNascimento(campoRegistroNascimento.getText());
-        aluno.setNumeroResidencia(campoNumeroCasa.getText());
-        aluno.setRua(campoRua.getText());
-
-        if (JRM.isSelected()) {
-            aluno.setSexo('M');
-        } else if (JRF.isSelected()) {
-            aluno.setSexo('F');
-        }
-        aluno.setTelefone(campoTelefone.getText());
-        aluno.setWhatsapp(campoWhatsApp.getText());
-        return aluno;
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -112,12 +36,11 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         grupoQuestao4 = new javax.swing.ButtonGroup();
         grupoQuestao5 = new javax.swing.ButtonGroup();
         grupoQuestao6 = new javax.swing.ButtonGroup();
+        jTextField1 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         subJPanelMatricula = new javax.swing.JPanel();
         jPanelMatricula = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tabelaPesquisaAluno = new javax.swing.JTable();
         jPanel11 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         campoMatricula = new javax.swing.JTextField();
@@ -138,16 +61,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        btnAdicionar = new javax.swing.JButton();
-        btnRemover = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jTextField12 = new javax.swing.JTextField();
-        comboBoxPesquisaTurma = new javax.swing.JComboBox<>();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jLabel32 = new javax.swing.JLabel();
-        comboAno = new javax.swing.JComboBox<>();
         jPanelAluno = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         campoFolha = new javax.swing.JTextField();
@@ -191,6 +104,8 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         jButton4 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jPanelResponsavel = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         jPanelQuestionario = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -225,6 +140,8 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
+        jTextField1.setText("jTextField1");
+
         setBorder(null);
         setClosable(true);
         setForeground(java.awt.Color.white);
@@ -251,37 +168,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         jPanel3.setLayout(new java.awt.CardLayout());
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
-
-        tabelaPesquisaAluno.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Cod. Barras", "Nome", "Turma"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tabelaPesquisaAluno.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaPesquisaAlunoMouseClicked(evt);
-            }
-        });
-        tabelaPesquisaAluno.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tabelaPesquisaAlunoKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                tabelaPesquisaAlunoKeyReleased(evt);
-            }
-        });
-        jScrollPane3.setViewportView(tabelaPesquisaAluno);
 
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Dados da Matricula"));
 
@@ -353,7 +239,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                         .addComponent(jLabel28)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(comboSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(10, 10, 10)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(campoDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -372,7 +258,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -390,12 +276,12 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(campoNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(comboTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(campoImagemAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(308, Short.MAX_VALUE))
         );
 
         jPanel11Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {campoDataCadastro, campoMatricula, checkStatus, jLabel1, jLabel2, jLabel28, jLabel29, jLabel3, jLabel5});
@@ -444,11 +330,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         jButton5.setText("GERAR CARTEIRINHA");
         jButton5.setContentAreaFilled(false);
         jButton5.setFocusable(false);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 102, 102));
@@ -497,140 +378,21 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
 
         jPanel14Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnDeletar, btnSalvar, jButton2, jButton3});
 
-        btnAdicionar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnAdicionar.setForeground(new java.awt.Color(0, 102, 102));
-        btnAdicionar.setText("ADICIONAR");
-        btnAdicionar.setContentAreaFilled(false);
-        btnAdicionar.setFocusable(false);
-        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdicionarActionPerformed(evt);
-            }
-        });
-
-        btnRemover.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnRemover.setForeground(new java.awt.Color(0, 102, 102));
-        btnRemover.setText("REMOVER");
-        btnRemover.setContentAreaFilled(false);
-        btnRemover.setFocusable(false);
-        btnRemover.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoverActionPerformed(evt);
-            }
-        });
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 102, 102));
-        jButton1.setText("LIMPAR");
-        jButton1.setContentAreaFilled(false);
-        jButton1.setFocusable(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jTextField12.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField12KeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField12KeyTyped(evt);
-            }
-        });
-
-        comboBoxPesquisaTurma.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxPesquisaTurmaActionPerformed(evt);
-            }
-        });
-
-        jLabel31.setText("Turma:");
-
-        jLabel30.setText("Status");
-
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ATIVO", "INATIVO" }));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox4ActionPerformed(evt);
-            }
-        });
-
-        jLabel32.setText("ANO:");
-
-        comboAno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2016" }));
-        comboAno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboAnoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanelMatriculaLayout = new javax.swing.GroupLayout(jPanelMatricula);
         jPanelMatricula.setLayout(jPanelMatriculaLayout);
         jPanelMatriculaLayout.setHorizontalGroup(
             jPanelMatriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMatriculaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelMatriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelMatriculaLayout.createSequentialGroup()
-                        .addComponent(btnAdicionar)
-                        .addGap(10, 10, 10)
-                        .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelMatriculaLayout.createSequentialGroup()
-                        .addComponent(jLabel32)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboAno, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel31)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(comboBoxPesquisaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel30)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField12)))
-                .addContainerGap())
             .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
         );
-
-        jPanelMatriculaLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdicionar, btnRemover});
-
         jPanelMatriculaLayout.setVerticalGroup(
             jPanelMatriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMatriculaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelMatriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addGroup(jPanelMatriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnRemover)
-                        .addComponent(btnAdicionar)))
+                .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelMatriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelMatriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(comboBoxPesquisaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel31)
-                        .addComponent(jLabel32)
-                        .addComponent(comboAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelMatriculaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel30)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        jPanelMatriculaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdicionar, btnRemover, jButton1});
-
-        jPanelMatriculaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboBoxPesquisaTurma, jTextField12});
 
         javax.swing.GroupLayout subJPanelMatriculaLayout = new javax.swing.GroupLayout(subJPanelMatricula);
         subJPanelMatricula.setLayout(subJPanelMatriculaLayout);
@@ -973,11 +735,42 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Aluno", jPanelAluno);
+        jTabbedPane1.addTab("Dados", jPanelAluno);
 
         jPanelResponsavel.setBackground(new java.awt.Color(255, 255, 255));
         jPanelResponsavel.setForeground(new java.awt.Color(255, 255, 255));
         jPanelResponsavel.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 845, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(443, Short.MAX_VALUE))
+        );
+
+        jPanelResponsavel.add(jPanel2, "card2");
+
         jTabbedPane1.addTab("Responsável", jPanelResponsavel);
 
         jPanelQuestionario.setBackground(new java.awt.Color(255, 255, 255));
@@ -1268,43 +1061,12 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        String matricula = campoMatricula.getText().trim();
-        int index = tabelaPesquisaAluno.getSelectedRow();
-        AlunoRN alunoRN = new AlunoRN();
-        if (!novosAlunos.isEmpty()) {
-            Collections.sort(novosAlunos);
-            if (alunoRN.salvarAlunos(novosAlunos)) {
-                for (Aluno novoAluno : novosAlunos) {
-                    if (!novoAluno.getuRLImagem().isEmpty()) {
-                        gerenteDeArquivos.gravarImagem(novoAluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(),
-                                "./fotos/" + novoAluno.getMatricula().concat(".jpg"));
-                    }
-                }
-            }
-        } else if (tabelaPesquisaAluno.isRowSelected(index) && !matricula.isEmpty()) {
-            Aluno aluno = encapsulaAluno();
-            if (alunoRN.salvar(aluno)) {
-                if (!aluno.getuRLImagem().isEmpty()) {
-                    gerenteDeArquivos.gravarImagem(aluno.getuRLImagem(), campoImagemAluno.getWidth(), campoImagemAluno.getHeight(),
-                            "./fotos/" + aluno.getMatricula().concat(".jpg"));
-                }
-            }
-        }
 
-        TABELA_ALUNO.inserirAlunos(alunoRN.buscarTodos());
-        limparCampos();
-        novosAlunos.clear();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
-        String matricula = campoMatricula.getText().trim();
-        if (!matricula.isEmpty() && tabelaPesquisaAluno.isRowSelected(tabelaPesquisaAluno.getSelectedRow())) {
-            if (new AlunoRN().remover(matricula)) {
-
-                gerenteDeArquivos.removerImagem("./fotos/" + matricula.concat(".jpg"));
-                limparCampos();
-            }
-        }
+  
+     
 // TODO add your handling code here:
     }//GEN-LAST:event_btnDeletarActionPerformed
 
@@ -1313,109 +1075,33 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_campoNomeAlunoActionPerformed
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        CADASTRO_ALUNOS = null;
+       
     }//GEN-LAST:event_formInternalFrameClosed
-
-    private void comboTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTurmaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboTurmaActionPerformed
 
     private void jRadioButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton13ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton13ActionPerformed
 
-    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        if (verificaCampos()) {
-            Aluno aluno = encapsulaAluno();
-            novosAlunos.add(aluno);
-            TABELA_ALUNO.inserirAlunos(novosAlunos);
-            limparCampos();
-        } else {
-            JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios!");
-        }
-
-// TODO add your handling code here:
-    }//GEN-LAST:event_btnAdicionarActionPerformed
-
-    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        if (tabelaPesquisaAluno.isRowSelected(tabelaPesquisaAluno.getSelectedRow()) && !novosAlunos.isEmpty()) {
-            int index = tabelaPesquisaAluno.getSelectedRow();
-            novosAlunos.remove(index);
-            TABELA_ALUNO.delAluno(tabelaPesquisaAluno.getSelectedRow());
-            limparCampos();
-            if (novosAlunos.isEmpty()) {
-                TABELA_ALUNO.inserirAlunos(new AlunoRN().buscarTodos());
-            }
-        }
-    }//GEN-LAST:event_btnRemoverActionPerformed
-
-    private void tabelaPesquisaAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPesquisaAlunoMouseClicked
-        if (tabelaPesquisaAluno.isRowSelected(tabelaPesquisaAluno.getSelectedRow())) {
-            setAlunoDEnviado(TABELA_ALUNO.getAluno(tabelaPesquisaAluno.getSelectedRow()));
-        }         // TODO add your handling code here:
-    }//GEN-LAST:event_tabelaPesquisaAlunoMouseClicked
-
     private void campoMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoMatriculaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoMatriculaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        limparCampos();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void tabelaPesquisaAlunoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabelaPesquisaAlunoKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tabelaPesquisaAlunoKeyPressed
-
     private void campoImagemAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoImagemAlunoMouseClicked
-        if (evt.getClickCount() == 2) {
-            gerenteDeArquivos.escolherImagem(campoImagemAluno);
-        }         // TODO add your handling code here:
+     
+                // TODO add your handling code here:
     }//GEN-LAST:event_campoImagemAlunoMouseClicked
-
-    private void tabelaPesquisaAlunoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabelaPesquisaAlunoKeyReleased
-        if (evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN) {
-            if (tabelaPesquisaAluno.isRowSelected(tabelaPesquisaAluno.getSelectedRow())) {
-                setAlunoDEnviado(TABELA_ALUNO.getAluno(tabelaPesquisaAluno.getSelectedRow()));
-
-            }
-        }        // TODO add your handling code here:
-    }//GEN-LAST:event_tabelaPesquisaAlunoKeyReleased
 
     private void campoCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCelularActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoCelularActionPerformed
 
-    private void jTextField12KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField12KeyReleased
-        consulta();      // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField12KeyReleased
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        jTabbedPane1.setSelectedIndex(0);        // TODO add your handling code here:
+               // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        jTabbedPane1.setSelectedIndex(2);            // TODO add your handling code here:
+                // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jTextField12KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField12KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField12KeyTyped
-
-    private void comboAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAnoActionPerformed
-        listarTurmasPorAno();
-        consulta();
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboAnoActionPerformed
-
-    private void comboBoxPesquisaTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxPesquisaTurmaActionPerformed
-        consulta();
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxPesquisaTurmaActionPerformed
-
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-        consulta();         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -1425,9 +1111,9 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void comboTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTurmaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_comboTurmaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1435,9 +1121,7 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser JDataNascimento;
     private javax.swing.JRadioButton JRF;
     private javax.swing.JRadioButton JRM;
-    private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnDeletar;
-    private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JTextField campoBairro;
     private javax.swing.JFormattedTextField campoCEP;
@@ -1456,8 +1140,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField campoTelefone;
     private javax.swing.JTextField campoWhatsApp;
     private javax.swing.JCheckBox checkStatus;
-    private javax.swing.JComboBox<String> comboAno;
-    private javax.swing.JComboBox<String> comboBoxPesquisaTurma;
     private javax.swing.JComboBox comboCor;
     private javax.swing.JComboBox comboNascinalidade;
     private javax.swing.JComboBox comboSituacao;
@@ -1469,7 +1151,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup grupoQuestao5;
     private javax.swing.ButtonGroup grupoQuestao6;
     private javax.swing.ButtonGroup grupoSexo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1481,7 +1162,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1505,9 +1185,6 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1526,7 +1203,9 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanelAluno;
@@ -1545,123 +1224,10 @@ public class PainelAlunos extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jRadioButton7;
     private javax.swing.JRadioButton jRadioButton8;
     private javax.swing.JRadioButton jRadioButton9;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel subJPanelMatricula;
-    private javax.swing.JTable tabelaPesquisaAluno;
     // End of variables declaration//GEN-END:variables
 
-    void setAlunoDEnviado(Aluno aluno) {
-        campoDataCadastro.setDate(aluno.getDataCadastro());
-        campoMatricula.setText(aluno.getMatricula());
-        campoNomeAluno.setText(aluno.getNome());
-        comboTurma.setSelectedItem(aluno.getTurma().toString());
-        comboSituacao.setSelectedItem(aluno.getSituacaoAluno());
-        checkStatus.setSelected(aluno.isAtivo());
-        JDataEmissao.setDate(aluno.getDataEmissao());
-        JDataNascimento.setDate(aluno.getDataNascimento());
-        campoBairro.setText(aluno.getBairro());
-        campoCEP.setText(aluno.getCep());
-        campoCelular.setText(aluno.getCelular());
-        campoCidade.setText(aluno.getCidade());
-        campoDataCadastro.setDate(aluno.getDataCadastro());
-        campoEmail.setText(aluno.getEmail());
-        campoFolha.setText(aluno.getFolha());
-        campoLivro.setText(aluno.getLivro());
-        campoNumeroCasa.setText(aluno.getNumeroResidencia());
-        campoRegistroNascimento.setText(aluno.getRegistroNascimento());
-        campoRua.setText(aluno.getRua());
-        campoTelefone.setText(aluno.getTelefone());
-        campoWhatsApp.setText(aluno.getWhatsapp());
-        comboNascinalidade.setSelectedItem(aluno.getNacionalidade());
-        comboCor.setSelectedItem(aluno.getCor());
-        if (aluno.getSexo() != null) {
-            if (aluno.getSexo() == 'F') {
-                JRF.setSelected(true);
-            }
-            if (aluno.getSexo() == 'M') {
-                JRM.setSelected(true);
-            }
-        }
-        String rl = "./fotos/" + aluno.getMatricula().trim().concat(".jpg");
-        if (!gerenteDeArquivos.setImagemNaJlabel(rl, campoImagemAluno)) {
-            campoImagemAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/aluno.png")));
-        }
-    }
-
-    private boolean verificaCampos() {
-        if (campoNomeAluno.getText().isEmpty()) {
-            return false;
-        }
-        if (comboTurma.getSelectedIndex() == -1) {
-            return false;
-        }
-        return !campoNomeAluno.getText().isEmpty();
-    }
-
-    public void limparCampos() {
-        campoMatricula.setText(null);
-        campoNomeAluno.setText(null);
-        comboTurma.setSelectedIndex(0);
-        gerenteDeArquivos.setUrlImagem("");
-        checkStatus.setSelected(false);
-        campoDataCadastro.setDate(null);
-        JDataEmissao.setDate(null);
-        JDataNascimento.setDate(null);
-        campoBairro.setText(null);
-        campoCEP.setText(null);
-        campoCelular.setText(null);
-        campoCidade.setText(null);
-        campoEmail.setText(null);
-        campoFolha.setText(null);
-        campoLivro.setText(null);
-        campoNumeroCasa.setText(null);
-        campoRegistroNascimento.setText(null);
-        campoRua.setText(null);
-        campoTelefone.setText(null);
-        campoWhatsApp.setText(null);
-        grupoQuestao1.clearSelection();
-        grupoQuestao2.clearSelection();
-        grupoQuestao3.clearSelection();
-        grupoQuestao4.clearSelection();
-        grupoQuestao5.clearSelection();
-        grupoQuestao6.clearSelection();
-        grupoSexo.clearSelection();
-        campoImagemAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/controle/visao/icones/aluno.png")));
-    }
-
-    public void listarAnos() {
-        List<String> anos = new TurmaRN().listarAnos();
-        anos.add(0, "TODOS");
-        boxModelAno = new GenericComboBoxModel(anos);
-        comboAno.setModel(boxModelAno);
-    }
-
-    public void listarTurmasPorAno() {
-        List<Turma> turma;
-        if (comboAno.getSelectedItem().equals("TODOS")) {
-            turma = new TurmaRN().buscarTodos();
-        } else {
-            turma = new TurmaRN().listarTurmaPorAno(String.valueOf(comboAno.getSelectedItem()));
-        }
-        comoModelPesquisaTurma = new GenericComboBoxModel(turma);
-        comboBoxPesquisaTurma.setModel(comoModelPesquisaTurma);
-    }
-
-    private void consulta() {
-        if (comboBoxPesquisaTurma.getSelectedIndex() >= 0 && jTextField12.getText().length() == 0) {
-            TABELA_ALUNO.inserirAlunos(new AlunoRN().buscar(comoModelPesquisaTurma.get(comboBoxPesquisaTurma.getSelectedIndex()).getId(), jComboBox4.getSelectedItem().toString()));
-
-        } else if (comboBoxPesquisaTurma.getSelectedIndex() < 0 && jTextField12.getText().length() == 0 && !comboAno.getSelectedItem().equals("TODOS")) {
-            TABELA_ALUNO.inserirAlunos(new AlunoRN().buscar(comboAno.getSelectedItem().toString(), jComboBox4.getSelectedItem().toString()));
-
-        } else if (comboBoxPesquisaTurma.getSelectedIndex() >= 0 && jTextField12.getText().length() > 0) {
-            TABELA_ALUNO.inserirAlunos(new AlunoRN().buscar(jTextField12.getText(), comoModelPesquisaTurma.get(comboBoxPesquisaTurma.getSelectedIndex()).getId(), jComboBox4.getSelectedItem().toString()));
-
-        } else {
-            TABELA_ALUNO.inserirAlunos(new AlunoRN().buscarTodos());
-        }
-    }
 
 }

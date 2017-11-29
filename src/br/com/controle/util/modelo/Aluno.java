@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
  *
  * @author Otavio Costa
  */
- @Entity
+@Entity
 public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
 
     public Aluno() {
@@ -35,7 +35,7 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
     @JoinColumn(name = "idTurma", nullable = false)
     private Turma turma;
 
-    private transient String uRLImagem ="";
+    private transient String uRLImagem = "";
 
     @Column(name = "numeroChamada", nullable = false)
     private int numeroChamada;
@@ -88,6 +88,12 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "aluno")
     private List<Falta> faltas;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "aluno")
+    private List<AlunoAvalicao> alunoAvalicaos;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "aluno")
+    private List<AlunoTurma> alunoTurmas;
 
     public String getMatricula() {
         return matricula;
@@ -315,6 +321,22 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
         this.sexo = sexo;
     }
 
+    public List<AlunoAvalicao> getAlunoAvalicaos() {
+        return alunoAvalicaos;
+    }
+
+    public void setAlunoAvalicaos(List<AlunoAvalicao> alunoAvalicaos) {
+        this.alunoAvalicaos = alunoAvalicaos;
+    }
+
+    public List<AlunoTurma> getAlunoTurmas() {
+        return alunoTurmas;
+    }
+
+    public void setAlunoTurmas(List<AlunoTurma> alunoTurmas) {
+        this.alunoTurmas = alunoTurmas;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -348,5 +370,5 @@ public class Aluno implements BeanBase, Serializable, Comparable<Aluno> {
     public int compareTo(Aluno outro) {
         return this.nome.compareTo(outro.getNome());
     }
-	
-	}
+
+}

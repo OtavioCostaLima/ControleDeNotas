@@ -54,4 +54,10 @@ public class GenericComboBoxModel<T> extends AbstractListModel implements ComboB
 
     }
 
+    public void removerIndex(int index) {
+        listaGenerica.remove(index);
+        fireIntervalRemoved(this, index, index);
+
+    }
+
 }
