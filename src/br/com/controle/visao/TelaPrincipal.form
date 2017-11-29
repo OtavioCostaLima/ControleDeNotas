@@ -125,7 +125,7 @@
               <Color blue="66" green="66" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="SISTEMA IMPACTO"/>
+            <Property name="text" type="java.lang.String" value="CONTROLE DE NOTAS"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
           <Constraints>
